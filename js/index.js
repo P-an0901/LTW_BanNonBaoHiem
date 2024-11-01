@@ -22,12 +22,12 @@ function openModal(type) {
     }
 
         // Sự kiện chuyển đổi giữa đăng ký và đăng nhập
-        document.querySelector('.login-link').addEventListener('click', function () {
-            document.querySelector('.sign-up').style.display = 'none';
-            document.querySelector('.login').style.display = 'block';
-        });
+document.querySelector('.login-link').addEventListener('click', function () {
+document.querySelector('.sign-up').style.display = 'none';
+document.querySelector('.login').style.display = 'block';
+});
 
-        document.querySelector('.signup-link').addEventListener('click', function () {
-            document.querySelector('.login').style.display = 'none';
-            document.querySelector('.sign-up').style.display = 'block';
-        });
+document.querySelector('.signup-link').addEventListener('click', function () {
+document.querySelector('.login').style.display = 'none';
+document.querySelector('.sign-up').style.display = 'block';
+});

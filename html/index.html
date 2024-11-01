@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Cửa hàng Mũ Bảo Hiểm</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -12,10 +13,10 @@
         <div class="header-top">
             <div class="container">
                 <div class="d-flex justify-content-between">
-                    <ul class="list-inline mb-0">
-                        <li class="list-inline-item"><a href="#" class="text-white"><i class="fas fa-phone"></i>0123 456 789 (miễn phí)</a></li>
+                    <ul class="list-inline mb-0" id="sesion-left">
+                        <li class="list-inline-item"><a href="#" class="text-white"><i class="fas fa-phone mr-2"></i>0123 456 789 (miễn phí)</a></li>
                     </ul>
-                    <ul class="list-inline mb-0">
+                    <ul class="list-inline mb-0" id="session_right">
                         <li class="list-inline-item"><a href="#" class="text-white">Giới thiệu</a></li>
                         <li class="list-inline-item"><a href="#" class="text-white">Cửa hàng</a></li>
                         <li class="list-inline-item"><a href="#" class="text-white">Chính sách</a></li>
@@ -34,14 +35,14 @@
                     <div action="" class="form-inline">
                         <form>
                             <input type="text" class="form-control mr-2 pr-5" placeholder="Tìm kiếm sản phẩm..." oninput="">
-                            <button class="btn btn-outline-success mr-3" type="button"><i class="fas fa-filter"></i> Tìm</button>
+                            <button class="btn mr-3" type="button"><i class="fas fa-search"></i> Tìm</button>
                         </form>
                     <ul class="list-inline mb-0">
-                        <li class="list-inline-item pointer" onclick="">
+                        <li class="list-inline-item pointer" onclick="openModal('login')">
                             <i class="fas fa-user"></i>
                             <span>Đăng nhập</span>
                         </li>
-                        <li class="list-inline-item pointer" onclick="">
+                        <li class="list-inline-item pointer" onclick="openModal('signup')">
                             <i class="fas fa-user-plus"></i>
                             <span>Đăng ký</span>
                         </li>
@@ -58,7 +59,7 @@
         <div class="container">
             <ul class="menu-list">
                 <li class="menu-list-item"><a href="" class="menu-link">Trang chủ</a></li>
-                <li class="menu-list-item" onclick=""><a href="#" class="menu-link">Danh Mục</a></li>
+                <li class="menu-list-item" onclick=""><a href="#" class="menu-link">Sản phẩm</a></li>
             </ul>
         </div>
     </nav>
@@ -79,7 +80,7 @@
                             <form action="" class="signup-form">
                                 <div class="form-group">
                                     <label for="fullname" class="form-label">Tên đầy đủ</label>
-                                    <input id="fullname" name="fullname" type="text" placeholder="VD: Nhật Sinh" class="form-control">
+                                    <input id="fullname" name="fullname" type="text" placeholder="VD: Nguyễn Văn A" class="form-control">
                                     <span class="form-message-name form-message"></span>
                                 </div>
                                 <div class="form-group">
@@ -102,7 +103,7 @@
                                     <label class="form-check-label" for="checkbox-signup">Tôi đồng ý với <a href="#" title="chính sách trang web" target="_blank">chính sách trang web</a></label>
                                     <p class="form-message-checkbox form-message"></p>
                                 </div>
-                                <button type="submit" class="btn " id="signup-button">Đăng ký</button>
+                                <button type="submit" class="form-submit " id="signup-button">Đăng ký</button>
                             </form>
                             <p class="change-login">Bạn đã có tài khoản? <a href="#" class="login-link">Đăng nhập ngay</a></p>
                         </div>
@@ -120,7 +121,7 @@
                                     <input id="password-login" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
                                     <span class="form-message-check-login form-message"></span>
                                 </div>
-                                <button type="submit" class="btn " id="login-button">Đăng nhập</button>
+                                <button type="submit" class="form-submit " id="login-button">Đăng nhập</button>
                             </form>
                             <p class="change-login">Bạn chưa có tài khoản? <a href="#" class="signup-link">Đăng kí ngay</a></p>
                         </div>
@@ -129,8 +130,146 @@
             </div>
         </div>
     </div>
+    <div class="pixfort_pix_slider pix_builder_bg" id="section_slider">
+        <div class="container">
+            <div class="sixteen columns">
+                <div id="myCarousel" class="carousel slide" data-interval="false">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+                        <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+                    </ol>
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item">
+                            <img src="../images/poster_2.png" alt="">  
+                        </div>
+                        <div class="item">
+                            <img src="../images/poster.png" alt=""> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-top">
+                    <div class="footer-top-content">
+                        <div class="footer-top-img">
+                            <img src="" alt=""><span>LOGO</span>
+                        </div>
+                        <div class="footer-top-subbox">
+                            <div class="footer-top-subs">
+                                <h2 class="footer-top-subs-title">Đăng ký nhận tin</h2>
+                                <p class="footer-top-subs-text">Nhận thông tin mới nhất từ chúng tôi</p>
+                            </div>
+                            <form class="form-ground">
+                                <input type="email" class="form-ground-input" placeholder="Nhập email của bạn">
+                                <button class="form-ground-btn">
+                                    <span>ĐĂNG KÝ</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-area">
+                <div class="container">
+                    <div class="widget-row">
+                        <div class="widget-row-col-1">
+                            <h3 class="widget-title">Về chúng tôi</h3>
+                            <div class="widget-row-col-content">
+                                <p>Helmet cung cấp các loại nón bảo hiểm tốt, an toàn cho bạn.</p>
+                            </div>
+                            <div class="widget-social">
+                                <div class="widget-social-item">
+                                    <a href="">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                </div>
+                                <div class="widget-social-item">
+                                    <a href="">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-row-col">
+                            <h3 class="widget-title">Liên kết</h3>
+                            <ul class="widget-contact">
+                                <li class="widget-contact-item">
+                                    <a href="">                                  
+                                        <span>Về chúng tôi</span>
+                                    </a>
+                                </li>
+                                <li class="widget-contact-item">
+                                    <a href="">
+                                        <span>Sản phẩm</span>
+                                    </a>
+                                </li>
+                                <li class="widget-contact-item">
+                                    <a href="">                                    
+                                        <span>Điều khoản</span>
+                                    </a>
+                                </li>
+                                <li class="widget-contact-item">
+                                    <a href="">                                   
+                                        <span>Liên hệ</span>
+                                    </a>
+                                </li>
+                                <li class="widget-contact-item">
+                                    <a href="">                                  
+                                        <span>Tin tức</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="widget-row-col-1">
+                            <h3 class="widget-title">Liên hệ</h3>
+                            <div class="contact">
+                                <div class="contact-item">
+                                    <div class="contact-item-icon">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                    </div>
+                                    <div class="contact-content">
+                                        <span>Linh Trung, Thủ Đức, TP Hồ Chí Minh</span>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <div class="contact-item-icon">
+                                        <i class="fa-solid fa-phone"></i>
+                                    </div>
+                                    <div class="contact-content contact-item-phone">
+                                        <span>0123 456 789</span>
+                                        <br>
+                                        <span>0987 654 321</span>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <div class="contact-item-icon">
+                                        <i class="fa-regular fa-envelope"></i>
+                                    </div>
+                                    <div class="contact-content conatct-item-email">
+                                        <span>Paan@domain.com</span><br />
+                                        <span>22130004@domain.com</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <div class="copyright-wrap">
+            <div class="container">
+                <div class="copyright-content">
+                    <p>Copyright 2024 Helmet. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="../js/script.js"></script>
+    <script src="../js/index.js"></script>
 </body>
 </html>
