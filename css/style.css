@@ -20,12 +20,8 @@ header {
     top:0;
     z-index: 6;    
 }
-/* class*/
-.container {
-    width: 1200px;
-    padding: auto;
-    margin: auto;
-}
+
+/* Header*/
 .header-top {
     background-color: #343a40;
     color: white;
@@ -36,43 +32,44 @@ header {
     color: inherit;
 }
 .header-middle{
-    padding: 5px;
+    height: 60px;
     position: sticky;
     z-index: 5;
-    background-color: #eee;
+    background-color: #fff;
+    border-bottom: 2px solid var(--red);
 }
 
 .header-middle .container {
     height: 50px;
-    padding: 5px;
+}
+.header-logo-img {
+    width: 120px;
+    height: 58px;
 }
 .header-middle ul li:hover{
     transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     color: var(--red); 
 }
         
-.header-bottom{ 
+.header-bottom{
     transition: transform 0.6s ease;
     position: sticky;
-    border-top: 1px solid #eee;
     background-color: var(--white);
-    box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
     z-index: 4;
-    height: 53px;
+    height: 52px;
+    background-color: #fff;
 }
 
 .header-bottom.hide{
-    transform: translateY(-53px);
+    transform: translateY(-55px);
 }
         
-/* .header-logo-img {
-    width: 150px;
-} */
 .btn{
     background-color: var(--red);
     color: var(--white);
     border: none;
     box-shadow: none;
+    height: calc(1.5em + .75rem + 2px);
 }
 .btn:hover{
     background-color: #c71a22;
@@ -148,13 +145,43 @@ button.close {
     outline: none;
     border: none;
 }
- 
-.menu-list {
-    display: flex;
-    height: 49px;
-    white-space: nowrap;
-    padding: 0;
+/*tạo menu cho header-bottom*/
+.submenu {
     list-style-type: none;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    top: 105%;
+    left: 0;
+    display: none;
+    background-color: var(--white);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    border-radius: 0 0 5px 5px;
+}
+.submenu li {
+    padding: 10px 20px;
+}
+.submenu li a {
+    text-decoration: none;
+    color: var(--black);
+    font-size: 14px;
+}
+.submenu li{
+    display: block;
+}
+.submenu li:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
+.submenu li:hover a{
+    color: var(--red);
+}
+.menu-list-item{
+    position: relative;
+}
+.menu-list-item:hover .submenu {
+    display: block;
 }
 .menu-link {
     color: var(--black);
@@ -171,32 +198,68 @@ button.close {
     opacity: 1;
 }
 
+/* Hiệu ứng gạch chân khi hover */
 .menu-link::after {
     content: "";
     position: absolute;
     height: 3px;
     visibility: hidden;
     transform: scale(0);
-    opacity: 0;
+    opacity: 1;
     transition: visibility 0.3s, transform 0.3s, opacity 0.3s;
     width: 100%;
     left: 0;
-    bottom: 0;
+    bottom: 2px;
     background-color: var(--red);
     transition: all 0.3s ease;
 }
-#section_slider {
-    height: 100%px;
+
+.menu-link.active {
+    color: var(--white);
+    background-color: var(--red);
 }
-#section_slider  .container{
+
+.header-bottom {
+    transition: transform 0.6s ease;
+    position: sticky;
+    top: 0;
+    background-color: var(--white);
+    z-index: 4;
+    height: 52px;
+}
+
+.header-bottom.hide {
+    transform: translateY(-55px);
+}
+.menu-list {
+    display: flex;
+    height: 49px;
+    white-space: nowrap;
     padding: 0;
-    margin-top: 20px;
+    list-style-type: none;
+    gap: 5px;
+    margin: 0;
+}
+.icon-arrow {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+.menu-list-item:hover .icon-arrow {
+    transform: rotate(180deg); /* Xoay mũi tên lên trên */
+}
+
+
+/* img lớn*/
+#section_slider {
+    height: 50%;
+}
+#section_slider  .container-fluid{
+    padding: 0;
 }
 #section_slider  .carousel-inner .item > img{
     width: 100%;
-    border-radius: 10px;
-    height: 100%;
 }
+
 /* Css footer */
 .footer {
     background-color: #f2f2f2;
@@ -222,7 +285,7 @@ button.close {
 }
 
 .footer-top-img img {
-    width: 240px;
+    width: 200px;
 }
 
 .footer-top-subbox {
@@ -423,3 +486,10 @@ button.close {
     align-items: center;
     justify-content: center;
 }
+.copyright-content p{
+    margin: 0;
+    padding: 10px;
+}
+
+
+

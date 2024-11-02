@@ -1,4 +1,3 @@
-
 const headerNav = document.querySelector(".header-bottom");
 let lastScrollY = window.scrollY;
 
@@ -31,3 +30,30 @@ document.querySelector('.signup-link').addEventListener('click', function () {
 document.querySelector('.login').style.display = 'none';
 document.querySelector('.sign-up').style.display = 'block';
 });
+
+// function openCart() {
+//     showCart();
+//     document.querySelector('.modal-cart').classList.add('open');
+//     body.style.overflow = "hidden";
+// }
+
+// function closeCart() {
+//     document.querySelector('.modal-cart').classList.remove('open');
+//     body.style.overflow = "auto";
+//     updateAmount();
+// }
+const menuLinks = document.querySelectorAll('.menu-link');
+    const submenuItems = document.querySelectorAll('.menu-list-item');
+
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            const hasSubmenu = this.nextElementSibling && this.nextElementSibling.classList.contains('submenu');
+            if (hasSubmenu) {
+            } else {
+                menuLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+            }
+        });
+    });
