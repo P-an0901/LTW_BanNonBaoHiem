@@ -57,11 +57,12 @@ header {
         
 .header-bottom{
     transition: transform 0.6s ease;
-    position: sticky;
     background-color: var(--white);
     z-index: 4;
     height: 52px;
     background-color: #fff;
+    font-weight: bold;
+    
 }
 
 .header-bottom.hide{
@@ -152,24 +153,22 @@ button.close {
 .forgot-password{
     font-size: 14px;
 }
-/*Giỏ hàng*/
-.modal-cart {
-    background-color: rgba(0, 0, 0, 0.6);
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 16;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: flex-end;
-    visibility: hidden;
+/* social login*/
+.social-login {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center;
 }
-.modal-cart.open {
-    visibility: visible;
+.social-buttons {
+    display: flex; 
+    justify-content: center;
+    gap: 10px; 
+}
 
+.social-button {
+    margin: 5px;
+   
 }
 /* Định dạng ban đầu cho giỏ hàng dropdown */
 .cart-container {
@@ -180,7 +179,7 @@ button.close {
     position: absolute;
     top: 100%;
     left: 0;
-    transform: translateX(-40%);
+    transform: translateX(-45%);
     background-color: white;
     border: 2px solid #eee;
     padding: 10px;
@@ -269,7 +268,7 @@ button.close {
     display: block;
 }
 .menu-link {
-    color: var(--black);
+    color: var(--text-color);
     display: inline-block;
     padding: 15px 20px;
     text-transform: uppercase;
@@ -300,21 +299,7 @@ button.close {
 }
 
 .menu-link.active {
-    color: var(--white);
-    background-color: var(--red);
-}
-
-.header-bottom {
-    transition: transform 0.6s ease;
-    position: sticky;
-    top: 0;
-    background-color: var(--white);
-    z-index: 4;
-    height: 52px;
-}
-
-.header-bottom.hide {
-    transform: translateY(-55px);
+    color: var(--red);
 }
 .menu-list {
     display: flex;
@@ -350,7 +335,7 @@ button.close {
     max-width: 1200px;
     margin: auto;
     background-color: #fff;
-    margin-top: 40px;
+    margin-top: 20px;
     padding-top: 20px;
     overflow: hidden;
 }
@@ -359,23 +344,39 @@ button.close {
     display: flex;
     transition: transform 0.5s ease;
     justify-content: center;
+    gap: 30px;
 }
 
 .slider-item {
     margin: 0;
     width: 150px;
-    padding-left: 10px;
+    padding: 10px;
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: space-between;
 }
-.slider-item:hover img,
-.slider-item:hover h5{
-    transform: scale(1.1);
+
+.slider-content {
+    text-align: center; 
 }
 
 .slider-item img {
     width: 80%;
-    height: auto;
+    height: auto; 
     padding-bottom: 5px;
 }
+
+.slider-item h5 {
+    font-size: 20px;
+}
+
+.slider-item:hover img,
+.slider-item:hover h5 {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
 /* Danh sách sản phẩm*/
 
 .product-list {
@@ -452,7 +453,27 @@ button.close {
     margin-bottom: 10px;
 }
 
-
+/* Phân trang*/
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.pagination a {
+    color: #333;
+    padding: 8px 16px;
+    margin: 0 4px;
+    text-decoration: none;
+    background-color: #f4f4f4;
+    border-radius: 4px;
+}
+.pagination a.active {
+    background-color: #B5292F;
+    color: white;
+}
+.pagination a:hover {
+    background-color: #ddd;
+}
 
 
 /* Css footer */
@@ -597,7 +618,7 @@ button.close {
     display: flex;
 }
 
-.widget-social-item {
+.widget-social-item, .social-button  {
     margin: 5px;
     width: 40px;
     height: 40px;
@@ -621,17 +642,16 @@ button.close {
 .widget-contact-item a {
     color: #2C2C2C;
 }
-
 .widget-contact-item:hover i {
     transform: translateX(4px);
 }
-
+.social-button:hover,
 .widget-social-item:hover {
     background-color: var(--red);
     transform: scale(1.1);
     border: none;
 }
-
+.social-button:hover i,
 .widget-social-item:hover i {
     color: #fff;
 }
