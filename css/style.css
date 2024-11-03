@@ -11,6 +11,10 @@ html, body {
     margin: 0;
     padding: 0;
 }
+.container{
+    max-width: 1200px;
+    padding: 0;
+}
 a:hover{
     text-decoration: none;
     color: inherit;
@@ -145,6 +149,87 @@ button.close {
     outline: none;
     border: none;
 }
+.forgot-password{
+    font-size: 14px;
+}
+/*Giỏ hàng*/
+.modal-cart {
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 16;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+    visibility: hidden;
+}
+.modal-cart.open {
+    visibility: visible;
+
+}
+/* Định dạng ban đầu cho giỏ hàng dropdown */
+.cart-container {
+    position: relative;
+}
+
+.cart-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: translateX(-40%);
+    background-color: white;
+    border: 2px solid #eee;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    display: none; /* Ẩn mặc định */
+    z-index: 1;
+    cursor: text;
+}
+
+/* Hiển thị giỏ hàng dropdown khi hover vào giỏ hàng */
+.cart-container:hover .cart-dropdown {
+    display: block;
+}
+
+.cart-dropdown ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cart-dropdown li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+    color: var(--text-color);
+}
+.cart-dropdown li:hover {
+    color: inherit;
+}
+
+.cart-dropdown li:last-child {
+    border-bottom: none;
+}
+.empty-message {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    flex-direction: column; 
+    text-align: center; 
+    padding: 20px;
+    color: var(--text-color);
+}
+
+.empty-message i {
+    font-size: 50px; 
+    color: rgba(224, 224, 224, 0.5); 
+    margin-bottom: 10px; 
+}
+
 /*tạo menu cho header-bottom*/
 .submenu {
     list-style-type: none;
@@ -259,6 +344,116 @@ button.close {
 #section_slider  .carousel-inner .item > img{
     width: 100%;
 }
+
+/**/
+.slider {
+    max-width: 1200px;
+    margin: auto;
+    background-color: #fff;
+    margin-top: 40px;
+    padding-top: 20px;
+    overflow: hidden;
+}
+
+.slider-wrapper {
+    display: flex;
+    transition: transform 0.5s ease;
+    justify-content: center;
+}
+
+.slider-item {
+    margin: 0;
+    width: 150px;
+    padding-left: 10px;
+}
+.slider-item:hover img,
+.slider-item:hover h5{
+    transform: scale(1.1);
+}
+
+.slider-item img {
+    width: 80%;
+    height: auto;
+    padding-bottom: 5px;
+}
+/* Danh sách sản phẩm*/
+
+.product-list {
+    display: flex;
+    margin: auto;
+    width: 100%;
+    margin-top: 10px;
+}
+.product-list .container{
+    background-color: #fff;
+    padding: 5px;
+}
+
+.product-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product-item {
+    padding-bottom: 10px ;
+    width: calc(20% - 8px);
+    margin-right: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: #fff;
+    overflow: hidden;
+    border: 2px solid #eee;
+    border-radius: 10px;
+
+}
+.product-item:nth-child(5n) {
+    margin-right: 0;
+}
+
+
+.product-image {
+    max-width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.buy-button {
+    padding: 8px 30px;
+    background-color: #B5292F; 
+    color: white; 
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s; 
+}
+
+.buy-button:hover {
+    background-color: #A7202C; 
+}
+.product-item:hover{
+    border-color: var(--red);
+}
+.product-item:hover .product-image {
+    transform: scale(1.1); 
+}
+.product-name {
+    display: block; 
+    height: 2.2em; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    line-height: 1.1em; 
+    font-size: 16px;
+    margin: 15px 30px 0;
+}
+
+.product-price {
+    font-size: 15px; 
+    color: #28A745;
+    margin-bottom: 10px;
+}
+
+
+
 
 /* Css footer */
 .footer {
@@ -490,6 +685,7 @@ button.close {
     margin: 0;
     padding: 10px;
 }
+
 
 
 

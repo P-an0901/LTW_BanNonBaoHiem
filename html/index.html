@@ -46,9 +46,18 @@
                                 <i class="fas fa-user-plus"></i>
                                 <span>Đăng ký</span>
                             </li>
-                            <li class="list-inline-item pointer" onclick="openCart()" title="Giỏ hàng">
+                            <li class="list-inline-item pointer cart-container" onclick="openCart()" title="Giỏ hàng">
                                 <i class="fas fa-shopping-cart"></i>
                                 <span class="badge badge-pill badge-danger">0</span>
+                                <div class="cart-dropdown">
+                                    <ul id="cart-items">
+                                        <!-- Nội dung sản phẩm sẽ hiển thị ở đây -->
+                                    </ul>
+                                    <div id="empty-message" class="empty-message">
+                                        <i class="fas fa-shopping-bag"></i> 
+                                        Không có sản phẩm nào.
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -145,10 +154,10 @@
                                     <input id="password-login" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
                                     <span class="form-message-check-login form-message"></span>
                                 </div>
+                                <p class="forgot-password"><a href="#" class="forgot-password-link">Quên mật khẩu?</a></p>
                                 <button type="submit" class="form-submit " id="login-button">Đăng nhập</button>
                             </form>
                             <p class="change-login">Bạn chưa có tài khoản? <a href="#" class="signup-link">Đăng kí ngay</a></p>
-                            <p class="forgot-password"><a href="#" class="forgot-password-link">Quên mật khẩu?</a></p>
                             <div class="social-login">
                                 <p>Đăng nhập bằng:</p>
                                 <button class="social-button" onclick="loginWithFacebook()">
@@ -177,7 +186,7 @@
         </form>
         <p class="change-login">Bạn đã nhớ mật khẩu? <a href="#" class="login-link">Đăng nhập ngay</a></p>
     </div>
-    <!-- <div class="modal-cart">
+    <div class="modal-cart">
         <div class="cart-container">
             <div class="cart-header">
                 <h3 class="cart-header-title"><i class="fa-regular fa-basket-shopping-simple"></i> Giỏ hàng</h3>
@@ -202,28 +211,114 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <div class="pixfort_pix_slider pix_builder_bg" id="section_slider">
         <div class="container-fluid">
             <div class="sixteen columns">
                 <div id="myCarousel" class="carousel slide" data-interval="false">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
+                    <!-- <ol class="carousel-indicators">
                         <li data-target="#myCarousel" data-slide-to="0" class=""></li>
                         <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
-                    </ol>
-                    <!-- Wrapper for slides -->
+                    </ol> -->
                     <div class="carousel-inner">
                         <div class="item">
                             <img src="../images/poster_2.png" alt="">  
                         </div>
-                        <div class="item">
+                        <!-- <div class="item">
                             <img src="../images/poster.png" alt=""> 
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
         </div>
+    <div class="slider">
+        <div class="container">
+        <div class="slider-wrapper">
+            <div class="slider-item">
+                <img src="../images/Royal-M139-V.2.jpg" alt="Nón 3/4">
+                <h5>Nón 3/4</h5>
+            </div>
+            <div class="slider-item">
+                <img src="../images/Fullface-Royal-M136-V.29-red.jpg" alt="Nón Fullface">
+                <h5>Nón Fullface</h5>
+            </div>
+            <div class="slider-item">
+                <img src="../images/1.2-Asia MT-10-Muc-mo.jpg" alt="Nón Nửa Đầu">
+                <h5>Nón Nửa Đầu</h5>
+            </div>
+            <div class="slider-item">
+                <img src="../images/1.2-Asia MT-10-Muc-mo.jpg" alt="Nón Nửa Đầu">
+                <h5>Nón Nửa Đầu</h5>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="product-list">
+        <div class="container">
+        <div class="product-row">
+            <div class="product-item">
+                <img src="../images/Royal-M139-BoomBang.jpg" alt="Sản phẩm 1" class="product-image">
+                <h3 class="product-name">Royal M139 BoomBang</h3>
+                <p class="product-price">Giá: 100.000 VNĐ</p>
+                <button class="buy-button">Mua ngay</button>
+            </div>
+            <div class="product-item">
+                <img src="../images/Royal-M139-Chuot-xuoc-bong.jpg" alt="Sản phẩm 2" class="product-image">
+                <h3 class="product-name">Royal M139 Chuột xước bóng</h3>
+                <p class="product-price">Giá: 200.000 VNĐ</p>
+                <button class="buy-button">Mua ngay</button>
+            </div>
+            <div class="product-item">
+                <img src="../images/Royal-M139-Den-mo.jpg" alt="Sản phẩm 3" class="product-image">
+                <h3 class="product-name">Royal M139 Đen mờ</h3>
+                <p class="product-price">Giá: 150.000 VNĐ</p>
+                <button class="buy-button">Mua ngay</button>
+            </div>
+            <div class="product-item">
+                <img src="../images/Royal-M139-Leopard.jpg" alt="Sản phẩm 4" class="product-image">
+                <h3 class="product-name">Royal M139 Leopard</h3>
+                <p class="product-price">Giá: 250.000 VNĐ</p>
+                <button class="buy-button">Mua ngay</button>
+            </div>
+            <div class="product-item">
+                <img src="../images/Royal-M139-V.1.jpg" alt="Sản phẩm 5" class="product-image">
+                <h3 class="product-name">Royal M139 V.1</h3>
+                <p class="product-price">Giá: 300.000 VNĐ</p>
+                <button class="buy-button">Mua ngay</button>
+            </div>
+            <div class="product-item">
+                <img src="../images/Royal-M139-V.2.jpg" alt="Sản phẩm 6" class="product-image">
+                <h3 class="product-name">Royal M139 V.2</h3>
+                <p class="product-price">Giá: 120.000 VNĐ</p>
+                <button class="buy-button">Mua ngay</button>
+            </div>
+            <div class="product-item">
+                <img src="../images/Royal-M139-V.10-Trang.jpg" alt="Sản phẩm 7" class="product-image">
+                <h3 class="product-name">Royal M139 V.10 Trắng</h3>
+                <p class="product-price">Giá: 130.000 VNĐ</p>
+                <button class="buy-button">Mua ngay</button>
+            </div>
+            <div class="product-item">
+                <img src="../images/Royal-M139-V.5-Trang-den.jpg" alt="Sản phẩm 8" class="product-image">
+                <h3 class="product-name">Royal M139 V.5 Trắng đen</h3>
+                <p class="product-price">Giá: 130.000 VNĐ</p>
+                <button class="buy-button">Mua ngay</button>
+            </div>
+            <div class="product-item">
+                <img src="../images/Royal-M139-V.6-Do-den.jpg" alt="Sản phẩm 9" class="product-image">
+                <h3 class="product-name">Royal M139 V.6 Đỏ đen</h3>
+                <p class="product-price">Giá: 130.000 VNĐ</p>
+                <button class="buy-button">Mua ngay</button>
+            </div>
+            <div class="product-item">
+                <img src="../images/Royal-M139-V.10-Den.jpg" alt="Sản phẩm 10" class="product-image">
+                <h3 class="product-name">Royal M139 V.10 Đen</h3>
+                <p class="product-price">Giá: 130.000 VNĐ</p>
+                <button class="buy-button">Mua ngay</button>
+                </div>
+            </div>
+        </div>
+    </div>
         <footer class="footer">
             <div class="container">
                 <div class="footer-top">
@@ -337,7 +432,7 @@
         <div class="copyright-wrap">
             <div class="container">
                 <div class="copyright-content">
-                    <p>&copy; Copyright 2024 Helmet. All Rights Reserved.</p>
+                    <p>&copy; Copyright 2024 Helmet. Tất cả quyền được bảo lưu.</p>
                 </div>
             </div>
         </div>
