@@ -72,16 +72,18 @@ header {
 .btn{
     background-color: var(--red);
     color: var(--white);
-    border: none;
-    box-shadow: none;
     height: calc(1.5em + .75rem + 2px);
 }
-.btn:hover{
+.btn:hover, .buy-button:hover, .form-ground-btn:hover,  
+.form-submit:hover{
     background-color: #c71a22;
     color: var(--white);
 }
-.btn:focus{
-    box-shadow: none;   
+.btn:focus, .buy-button:focus,
+.form-ground-btn:focus,  .form-submit:focus,
+.pagination button:focus{
+    box-shadow: none;  
+    outline: none;
 
 }
 
@@ -320,31 +322,30 @@ button.close {
 
 
 /* img lớn*/
-#section_slider {
-    height: 50%;
-}
+
 #section_slider  .container-fluid{
     padding: 0;
 }
-#section_slider  .carousel-inner .item > img{
-    width: 100%;
+#section_slider  .carousel-inner .carousel-item  > img{
+    width: 100%; 
+    aspect-ratio: 15 / 6;
 }
 
 /**/
 .slider {
     max-width: 1200px;
     margin: auto;
-    background-color: #fff;
-    margin-top: 20px;
+    margin-top: 10px;
     padding-top: 20px;
     overflow: hidden;
+    border-radius: 10px;
 }
 
 .slider-wrapper {
     display: flex;
     transition: transform 0.5s ease;
     justify-content: center;
-    gap: 30px;
+    gap: 50px;
 }
 
 .slider-item {
@@ -355,24 +356,32 @@ button.close {
     flex-direction: column;
     align-items: center; 
     justify-content: space-between;
+    background-color: #fff;
+    border-radius: 20px;
+    border: 2px solid #eee;
 }
 
 .slider-content {
     text-align: center; 
 }
+.image-container {
+    display: flex;              
+    justify-content: center;     
+    align-items: center;
+    background-color: #fff;                       
+}
 
 .slider-item img {
     width: 80%;
     height: auto; 
-    padding-bottom: 5px;
+    padding-bottom: 10px;
 }
 
 .slider-item h5 {
     font-size: 20px;
 }
 
-.slider-item:hover img,
-.slider-item:hover h5 {
+.slider-item:hover img{
     transform: scale(1.1);
     cursor: pointer;
 }
@@ -429,13 +438,17 @@ button.close {
 }
 
 .buy-button:hover {
-    background-color: #A7202C; 
+    background-color: #28A745;
 }
 .product-item:hover{
     border-color: var(--red);
 }
 .product-item:hover .product-image {
-    transform: scale(1.1); 
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.product-item:hover h3 {
+    cursor: pointer;
 }
 .product-name {
     display: block; 
@@ -459,10 +472,11 @@ button.close {
     justify-content: center;
     margin-top: 20px;
 }
-.pagination a {
+.pagination a,  .pagination button{
     color: #333;
     padding: 8px 16px;
     margin: 0 4px;
+    border: none;
     text-decoration: none;
     background-color: #f4f4f4;
     border-radius: 4px;
@@ -471,7 +485,7 @@ button.close {
     background-color: #B5292F;
     color: white;
 }
-.pagination a:hover {
+.pagination a:hover, .pagination button:hover {
     background-color: #ddd;
 }
 
@@ -559,11 +573,6 @@ button.close {
 .form-ground-btn span {
     margin-right: 10px;
 }
-
-.form-ground-btn:hover {
-    background-color: #c71a22;
-}
-
 .widget-area {
     padding: 60px 0 30px;
 }
