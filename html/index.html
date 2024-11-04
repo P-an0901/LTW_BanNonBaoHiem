@@ -17,7 +17,7 @@
                         <li class="list-inline-item"><a href="#" class="text-white"><i class="fas fa-phone mr-2"></i>0123 456 789 (miễn phí)</a></li>
                     </ul>
                     <ul class="list-inline mb-0" id="session_right">
-                        <li class="list-inline-item"><a href="#" class="text-white">Giới thiệu</a></li>
+                        <li class="list-inline-item"><a href="gioithieu.html" class="text-white">Giới thiệu</a></li>
                         <li class="list-inline-item"><a href="#" class="text-white">Cửa hàng</a></li>
                         <li class="list-inline-item"><a href="#" class="text-white">Chính sách</a></li>
                     </ul>
@@ -159,7 +159,7 @@
                             </form>
                             <p class="change-login">Bạn chưa có tài khoản? <a href="#" class="signup-link">Đăng kí ngay</a></p>
                             <div class="social-login">
-                                <p>Hoặc:</p>
+                                <p>Hoặc</p>
                                 <div class="social-buttons">
                                     <button class="social-button" onclick="loginWithFacebook()">
                                         <i class="fa-brands fa-facebook-f"></i>
@@ -255,74 +255,84 @@
         
     <div class="product-list">
         <div class="container">
-            <div class="product-row">
-                <div class="product-item">
-                    <img src="../images/Royal-M139-BoomBang.jpg" alt="Sản phẩm 1" class="product-image">
-                    <h3 class="product-name">Royal M139 BoomBang</h3>
-                    <p class="product-price">Giá: 100.000 VNĐ</p>
-                    <button class="buy-button">Thêm vào giỏ hàng</button>
+            <div class="pro-lst" id="proSale">
+                <div class="lst-title p-4">
+                    <h3>Khuyến Mãi</h3>
                 </div>
-                <div class="product-item">
-                    <img src="../images/Royal-M139-Chuot-xuoc-bong.jpg" alt="Sản phẩm 2" class="product-image">
-                    <h3 class="product-name">Royal M139 Chuột xước bóng</h3>
-                    <p class="product-price">Giá: 200.000 VNĐ</p>
-                    <button class="buy-button">Thêm vào giỏ hàng</button>
-
+                <div class="product-row">
+                    <div class="product-item">
+                        <img src="../images/Royal-M139-V.2.jpg" alt="Sản phẩm 6" class="product-image">
+                        <h3 class="product-name">Royal M139 V.2</h3>
+                        <p class="product-price">Giá: 120.000 VNĐ</p>
+                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
+                    </div>
+                    <div class="product-item">
+                        <img src="../images/Royal-M139-V.10-Trang.jpg" alt="Sản phẩm 7" class="product-image">
+                        <h3 class="product-name">Royal M139 V.10 Trắng</h3>
+                        <p class="product-price">Giá: 130.000 VNĐ</p>
+                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
+                    </div>
+                    <div class="product-item">
+                        <img src="../images/Royal-M139-V.5-Trang-den.jpg" alt="Sản phẩm 8" class="product-image">
+                        <h3 class="product-name">Royal M139 V.5 Trắng đen</h3>
+                        <p class="product-price">Giá: 130.000 VNĐ</p>
+                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
+                    </div>
+                    <div class="product-item">
+                        <img src="../images/Royal-M139-V.6-Do-den.jpg" alt="Sản phẩm 9" class="product-image">
+                        <h3 class="product-name">Royal M139 V.6 Đỏ đen</h3>
+                        <p class="product-price">Giá: 130.000 VNĐ</p>
+                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
+                    </div>
+                    <div class="product-item">
+                        <img src="../images/Royal-M139-V.10-Den.jpg" alt="Sản phẩm 10" class="product-image">
+                        <h3 class="product-name">Royal M139 V.10 Đen</h3>
+                        <p class="product-price">Giá: 130.000 VNĐ</p>
+                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
+                    </div>
                 </div>
-                <div class="product-item">
-                    <img src="../images/Royal-M139-Den-mo.jpg" alt="Sản phẩm 3" class="product-image">
-                    <h3 class="product-name">Royal M139 Đen mờ</h3>
-                    <p class="product-price">Giá: 150.000 VNĐ</p>
-                    <button class="buy-button">Thêm vào giỏ hàng</button>
-
+                <div class="xem-them p-3 d-flex justify-content-end">
+                    <button class="btn-xem-them">Xem thêm</button>
                 </div>
-                <div class="product-item">
-                    <img src="../images/Royal-M139-Leopard.jpg" alt="Sản phẩm 4" class="product-image">
-                    <h3 class="product-name">Royal M139 Leopard</h3>
-                    <p class="product-price">Giá: 250.000 VNĐ</p>
-                    <button class="buy-button">Thêm vào giỏ hàng</button>
-
+            </div>
+            <div class="pro-lst" id="proNew">
+                <div class="lst-title p-4">
+                    <h3>Sản Phẩm Mới</h3>
                 </div>
-                <div class="product-item">
-                    <img src="../images/Royal-M139-V.1.jpg" alt="Sản phẩm 5" class="product-image">
-                    <h3 class="product-name">Royal M139 V.1</h3>
-                    <p class="product-price">Giá: 300.000 VNĐ</p>
-                    <button class="buy-button">Thêm vào giỏ hàng</button>
-
+                <div class="product-row">
+                    <div class="product-item">
+                        <img src="../images/Royal-M139-BoomBang.jpg" alt="Sản phẩm 1" class="product-image">
+                        <h3 class="product-name">Royal M139 BoomBang</h3>
+                        <p class="product-price">Giá: 100.000 VNĐ</p>
+                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
+                    </div>
+                    <div class="product-item">
+                        <img src="../images/Royal-M139-Chuot-xuoc-bong.jpg" alt="Sản phẩm 2" class="product-image">
+                        <h3 class="product-name">Royal M139 Chuột xước bóng</h3>
+                        <p class="product-price">Giá: 200.000 VNĐ</p>
+                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
+                    </div>
+                    <div class="product-item">
+                        <img src="../images/Royal-M139-Den-mo.jpg" alt="Sản phẩm 3" class="product-image">
+                        <h3 class="product-name">Royal M139 Đen mờ</h3>
+                        <p class="product-price">Giá: 150.000 VNĐ</p>
+                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
+                    </div>
+                    <div class="product-item">
+                        <img src="../images/Royal-M139-Leopard.jpg" alt="Sản phẩm 4" class="product-image">
+                        <h3 class="product-name">Royal M139 Leopard</h3>
+                        <p class="product-price">Giá: 250.000 VNĐ</p>
+                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
+                    </div>
+                    <div class="product-item">
+                        <img src="../images/Royal-M139-V.1.jpg" alt="Sản phẩm 5" class="product-image">
+                        <h3 class="product-name">Royal M139 V.1</h3>
+                        <p class="product-price">Giá: 300.000 VNĐ</p>
+                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
+                    </div>
                 </div>
-                <div class="product-item">
-                    <img src="../images/Royal-M139-V.2.jpg" alt="Sản phẩm 6" class="product-image">
-                    <h3 class="product-name">Royal M139 V.2</h3>
-                    <p class="product-price">Giá: 120.000 VNĐ</p>
-                    <button class="buy-button">Thêm vào giỏ hàng</button>
-
-                </div>
-                <div class="product-item">
-                    <img src="../images/Royal-M139-V.10-Trang.jpg" alt="Sản phẩm 7" class="product-image">
-                    <h3 class="product-name">Royal M139 V.10 Trắng</h3>
-                    <p class="product-price">Giá: 130.000 VNĐ</p>
-                    <button class="buy-button">Thêm vào giỏ hàng</button>
-
-                </div>
-                <div class="product-item">
-                    <img src="../images/Royal-M139-V.5-Trang-den.jpg" alt="Sản phẩm 8" class="product-image">
-                    <h3 class="product-name">Royal M139 V.5 Trắng đen</h3>
-                    <p class="product-price">Giá: 130.000 VNĐ</p>
-                    <button class="buy-button">Thêm vào giỏ hàng</button>
-
-                </div>
-                <div class="product-item">
-                    <img src="../images/Royal-M139-V.6-Do-den.jpg" alt="Sản phẩm 9" class="product-image">
-                    <h3 class="product-name">Royal M139 V.6 Đỏ đen</h3>
-                    <p class="product-price">Giá: 130.000 VNĐ</p>
-                    <button class="buy-button">Thêm vào giỏ hàng</button>
-
-                </div>
-                <div class="product-item">
-                    <img src="../images/Royal-M139-V.10-Den.jpg" alt="Sản phẩm 10" class="product-image">
-                    <h3 class="product-name">Royal M139 V.10 Đen</h3>
-                    <p class="product-price">Giá: 130.000 VNĐ</p>
-                    <button class="buy-button">Thêm vào giỏ hàng</button>
+                <div class="xem-them p-3 d-flex justify-content-end">
+                    <button class="btn-xem-them">Xem thêm</button>
                 </div>
             </div>
             <div class="pagination">

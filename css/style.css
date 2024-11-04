@@ -24,7 +24,14 @@ header {
     top:0;
     z-index: 6;    
 }
-
+.product-fly {
+    width: 50px; /* Kích thước hình ảnh khi bay */
+    height: auto;
+    position: absolute;
+    transition: transform 0.8s ease, opacity 0.8s ease; /* Thời gian bay */
+    z-index: 9999; /* Đặt z-index cao để hình ảnh nằm trên các phần tử khác */
+    opacity: 1; /* Đảm bảo rằng hình ảnh hiển thị */
+}
 /* Header*/
 .header-top {
     background-color: #343a40;
@@ -75,13 +82,13 @@ header {
     height: calc(1.5em + .75rem + 2px);
 }
 .btn:hover, .buy-button:hover, .form-ground-btn:hover,  
-.form-submit:hover{
+.form-submit:hover, .btn-xem-them:hover{
     background-color: #c71a22;
     color: var(--white);
 }
 .btn:focus, .buy-button:focus,
 .form-ground-btn:focus,  .form-submit:focus,
-.pagination button:focus{
+.pagination button:focus, .btn-xem-them:focus{
     box-shadow: none;  
     outline: none;
 
@@ -161,6 +168,10 @@ button.close {
     flex-direction: column; 
     align-items: center; 
     text-align: center;
+}
+.social-login p{
+    font-size: 20px;
+    color: rgb(0, 174, 255);
 }
 .social-buttons {
     display: flex; 
@@ -394,9 +405,12 @@ button.close {
     width: 100%;
     margin-top: 10px;
 }
-.product-list .container{
+
+.product-list .container .pro-lst{
     background-color: #fff;
     padding: 5px;
+    border-radius: 10px;
+    margin-top: 10px;
 }
 
 .product-row {
@@ -464,6 +478,19 @@ button.close {
     font-size: 15px; 
     color: #28A745;
     margin-bottom: 10px;
+}
+.lst-title {
+    color: #ed1c24;
+    display: flex; 
+    align-items: center; 
+    margin: 10px; 
+    border-bottom: 5px solid #ed1c24;
+}
+.lst-title h3{
+    font-family: Oswald, sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 0;
 }
 
 /* Phân trang*/
@@ -545,7 +572,8 @@ button.close {
 }
 
 .form-ground-input,
-.form-ground-btn {
+.form-ground-btn,
+.btn-xem-them{
     height: 40px;
     border-radius: 99px;
     font-size: 16px;
@@ -559,7 +587,7 @@ button.close {
     font-size: 15px;
 }
 
-.form-ground-btn {
+.form-ground-btn, .btn-xem-them {
     margin-left: 10px;
     padding: 0 20px;
     cursor: pointer;

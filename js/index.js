@@ -116,12 +116,5 @@ function changePage(direction) {
         scrollToProductList(event);
     }
 }
-$(document).ready(function () {
-    // Tự động chuyển slide mỗi 3 giây
-    setInterval(function() {
-        $('#myCarousel').carousel('next'); // Chuyển đến slide tiếp theo
-    }, 3000); // Thay đổi 3000 thành thời gian bạn muốn (3 giây ở đây)
-});
-
 
 
