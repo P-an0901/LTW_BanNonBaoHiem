@@ -130,6 +130,13 @@ header {
     cursor: pointer;
     text-transform: uppercase;
 }
+.form-label{
+    color: #000;
+}
+.text-danger {
+    color: red; 
+    font-weight: bold; 
+}
 .form-check-label a, .change-login a{
     color: var(--red);
     margin-left: 5px;
@@ -478,6 +485,11 @@ button.close {
     font-size: 15px; 
     color: #28A745;
     margin-bottom: 10px;
+}
+.product-sale-price{
+    display: none;
+    color: #c71a22;
+    line-height: 0.9;
 }
 .lst-title {
     color: #ed1c24;

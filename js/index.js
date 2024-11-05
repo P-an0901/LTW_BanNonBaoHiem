@@ -96,6 +96,27 @@ function setActivePage(event) {
     event.target.classList.add('active');
     scrollToProductList(event);
 }
+/* Giảm giá*/
+const products = document.querySelectorAll('.product-item');
+let hasDiscount = false;
+
+products.forEach(product => {
+    if (product.dataset.hasDiscount === 'true') {
+        hasDiscount = true;
+        const priceElement = product.querySelector('.product-price');
+        const salePriceElement = product.querySelector('.product-sale-price');
+
+        // Gạch giá gốc và hiển thị giá khuyến mại
+        priceElement.style.textDecoration = 'line-through'; 
+        salePriceElement.style.display = 'block'; 
+    } else {
+        const priceElement = product.querySelector('.product-price');
+        const salePriceElement = product.querySelector('.product-sale-price');
+
+        priceElement.style.textDecoration = 'none'; 
+        salePriceElement.style.display = 'none'; 
+    }
+});
 // Giỏ hàng dưới dạng mảng
 let cart = [];
 
