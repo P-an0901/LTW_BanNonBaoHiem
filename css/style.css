@@ -742,6 +742,41 @@ button.close {
     margin: 0;
     padding: 10px;
 }
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.cart-item-img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.cart-item-name {
+    flex-grow: 1;
+    font-size: 16px;
+}
+
+.cart-item-price {
+    font-size: 14px;
+    color: #333;
+    margin-right: 10px;
+}
+
+.remove-item-btn {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+}
+
+.remove-item-btn i {
+    margin-right: 5px;
+}
 
 
 
