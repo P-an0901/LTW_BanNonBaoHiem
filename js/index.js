@@ -17,6 +17,7 @@ $(document).ready(function(){
         document.querySelector('.cart-dropdown').addEventListener('click', function(event) {
             event.stopPropagation(); // Ngăn không cho sự kiện click lan ra ngoài
         });
+        updateCart();
     })
      // Khi nội dung của modal được tải xong
      $("#modal-container").load("modal.html", function() {

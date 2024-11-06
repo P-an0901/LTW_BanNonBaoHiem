@@ -35,8 +35,16 @@
     background-color: #ddd;
 }
 
-/* .filter-menu {
-    width: 250px;
+/*Lọc*/
+.filter-container{
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.filter-menu {
+    display: flex;
     padding: 15px;
     background-color: #f8f9fa;
     border: 1px solid #ddd;
@@ -74,16 +82,18 @@
     margin-top: 0;
 }
 
-button {
-    width: 100%;
+#filter-btn{
+    width: 200px;
     padding: 10px;
     background-color: #B5292F;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    border-radius: 10px;
 }
 
 button:hover {
     background-color: #a02729;
-} */
+   
+}

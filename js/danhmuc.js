@@ -42,35 +42,35 @@ function changePage(direction) {
         scrollToProductList();
     }
 }
-// // Cập nhật giá khi thay đổi giá trị của thanh range
-// document.getElementById("price-range").addEventListener("input", function() {
-//     var price = this.value;
-//     document.getElementById("price-value").textContent = "Giá: " + price + "đ";
-// });
+// Cập nhật giá khi thay đổi giá trị của thanh range
+document.getElementById("price-range").addEventListener("input", function() {
+    var price = this.value;
+    document.getElementById("price-value").textContent = "Giá: " + price + "đ";
+});
 
-// // Cập nhật lượt mua khi thay đổi giá trị của thanh range
-// document.getElementById("purchase-range").addEventListener("input", function() {
-//     var purchase = this.value;
-//     document.getElementById("purchase-value").textContent = "Lượt mua: " + purchase;
-// });
+// Cập nhật lượt mua khi thay đổi giá trị của thanh range
+document.getElementById("purchase-range").addEventListener("input", function() {
+    var purchase = this.value;
+    document.getElementById("purchase-value").textContent = "Lượt mua: " + purchase;
+});
 
-// // Hàm áp dụng lọc
-// function applyFilters() {
-//     var helmetType = document.getElementById("helmet-type").value;
-//     var helmetSize = document.getElementById("helmet-size").value;
-//     var priceRange = document.getElementById("price-range").value;
-//     var purchaseRange = document.getElementById("purchase-range").value;
-//     var selectedColors = [];
+// Hàm áp dụng lọc
+function applyFilters() {
+    var helmetType = document.getElementById("helmet-type").value;
+    var helmetSize = document.getElementById("helmet-size").value;
+    var priceRange = document.getElementById("price-range").value;
+    var purchaseRange = document.getElementById("purchase-range").value;
+    var selectedColors = [];
 
-//     // Lấy tất cả màu đã chọn
-//     document.querySelectorAll(".filter-color:checked").forEach(function(color) {
-//         selectedColors.push(color.value);
-//     });
+    // Lấy tất cả màu đã chọn
+    document.querySelectorAll(".filter-color:checked").forEach(function(color) {
+        selectedColors.push(color.value);
+    });
 
-//     // In ra kết quả lọc (thực tế bạn có thể gửi dữ liệu này đến server hoặc hiển thị lại sản phẩm)
-//     console.log("Loại nón: " + helmetType);
-//     console.log("Kích thước: " + helmetSize);
-//     console.log("Giá: " + priceRange + "đ");
-//     console.log("Lượt mua: " + purchaseRange);
-//     console.log("Màu sắc: " + selectedColors.join(", "));
-// }
+    // In ra kết quả lọc (thực tế bạn có thể gửi dữ liệu này đến server hoặc hiển thị lại sản phẩm)
+    console.log("Loại nón: " + helmetType);
+    console.log("Kích thước: " + helmetSize);
+    console.log("Giá: " + priceRange + "đ");
+    console.log("Lượt mua: " + purchaseRange);
+    console.log("Màu sắc: " + selectedColors.join(", "));
+}
