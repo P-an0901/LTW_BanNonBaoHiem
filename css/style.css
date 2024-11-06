@@ -19,6 +19,11 @@ a:hover{
     text-decoration: none;
     color: inherit;
 }
+#header-container{
+    position: sticky;
+    top:0;
+    z-index: 7; 
+}
 header {
     position: sticky;
     top:0;
