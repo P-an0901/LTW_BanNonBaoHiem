@@ -502,9 +502,10 @@ button.close {
 }
 /* Css footer */
 .footer {
-    background-color: #f2f2f2;
+    background-color: #2C2C2C;
     margin-top: 30px;
     border-top: 4px solid var(--red);
+    color: #fff;
 }
 .footer-top {
     padding: 20px 0;
@@ -543,7 +544,7 @@ button.close {
 
 .footer-top-subs-text {
     font-size: 15px;
-    color: #888;
+    color: #ffffff;
     font-weight: 500;
     margin-bottom: 0;
     margin-top: 10px;
@@ -596,7 +597,7 @@ button.close {
 .widget-row-col-1,
 .widget-row-col {
     flex: 1; 
-    min-width: 200px; 
+    min-width: 200px;
 }
 
 .widget-row>div{
@@ -660,7 +661,7 @@ button.close {
 }
 
 .widget-contact-item a {
-    color: #2C2C2C;
+    color: #ffffff;
 }
 .widget-contact-item:hover i {
     transform: translateX(4px);
@@ -677,7 +678,7 @@ button.close {
 }
 
 .widget-social-item i {
-    color: #2C2C2C;
+    color: #fff;
 }
 
 .widget-contact i {
