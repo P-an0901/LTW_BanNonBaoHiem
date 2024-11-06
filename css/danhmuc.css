@@ -1,0 +1,89 @@
+/* Thanh điều hướng */
+.breadcrumbs {
+    font-size: 14px;
+    color: #555;
+}
+
+.breadcrumbs a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+/* Phân trang*/
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.pagination a,  .pagination button{
+    color: #333;
+    padding: 8px 16px;
+    margin: 0 4px;
+    border: none;
+    text-decoration: none;
+    background-color: #f4f4f4;
+    border-radius: 4px;
+}
+.pagination a.active {
+    background-color: #B5292F;
+    color: white;
+}
+.pagination a:hover, .pagination button:hover {
+    background-color: #ddd;
+}
+
+/* .filter-menu {
+    width: 250px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.filter-item {
+    margin-bottom: 20px;
+}
+
+.filter-item label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.filter-select, .filter-range {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.filter-colors {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.filter-color {
+    width: 18px;
+    height: 18px;
+    margin-top: 0;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #B5292F;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #a02729;
+} */
