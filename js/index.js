@@ -79,23 +79,7 @@ const menuLinks = document.querySelectorAll('.menu-link');
         });
 });
 
-function scrollToProductList(event) {
-    // Ngăn chặn hành động mặc định của thẻ a
-    event.preventDefault();
 
-    // Cuộn lên đầu container sản phẩm
-    document.querySelector('.slider').scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-    });
-}
-/* Phân trang*/
-function setActivePage(event) {
-
-    document.querySelector('.pagination a.active')?.classList.remove('active');
-    event.target.classList.add('active');
-    scrollToProductList(event);
-}
 /* Giảm giá*/
 const products = document.querySelectorAll('.product-item');
 let hasDiscount = false;
@@ -114,7 +98,7 @@ products.forEach(product => {
         const salePriceElement = product.querySelector('.product-sale-price');
 
         priceElement.style.textDecoration = 'none'; 
-        salePriceElement.style.display = 'none'; 
+        // salePriceElement.style.display = 'none'; 
     }
 });
 // Giỏ hàng dưới dạng mảng
@@ -201,37 +185,3 @@ function updateCart() {
         cartList.appendChild(li);
     });
 }
-function changePage(direction) {
-    // Điều chỉnh trang hiện tại
-}
-
-function setActivePage(event) {
-    // Xử lý khi người dùng click vào một trang cụ thể
-    var links = document.querySelectorAll('.pagination a');
-    links.forEach(function(link) {
-        link.classList.remove('active');
-    });
-    event.target.classList.add('active');
-}
-
-function changePage(direction) {
-    event.preventDefault();
-    // Tìm trang hiện tại
-    const currentPage = document.querySelector('.pagination a.active');
-    let newPage = currentPage;
-
-    if (direction === -1 && currentPage.previousElementSibling) {
-        newPage = currentPage.previousElementSibling;
-    } else if (direction === 1 && currentPage.nextElementSibling) {
-        newPage = currentPage.nextElementSibling;
-    }
-
-    if (newPage && newPage.tagName === 'A' && newPage !== currentPage) {
-        currentPage.classList.remove('active');
-        newPage.classList.add('active');
-
-        scrollToProductList(event);
-    }
-}
-
-

@@ -24,14 +24,6 @@ header {
     top:0;
     z-index: 6;    
 }
-.product-fly {
-    width: 50px; /* Kích thước hình ảnh khi bay */
-    height: auto;
-    position: absolute;
-    transition: transform 0.8s ease, opacity 0.8s ease; /* Thời gian bay */
-    z-index: 9999; /* Đặt z-index cao để hình ảnh nằm trên các phần tử khác */
-    opacity: 1; /* Đảm bảo rằng hình ảnh hiển thị */
-}
 /* Header*/
 .header-top {
     background-color: #343a40;
@@ -268,8 +260,9 @@ button.close {
 }
 .submenu li a {
     text-decoration: none;
-    color: var(--black);
+    color: var(--text-color);
     font-size: 14px;
+    font-weight: normal;
 }
 .submenu li{
     display: block;
@@ -286,6 +279,10 @@ button.close {
 }
 .menu-list-item:hover .submenu {
     display: block;
+}
+.menu-link.has-submenu {
+    cursor: default; /* Đổi con trỏ chuột thành mặc định */
+    pointer-events: none; /* Vô hiệu hóa sự kiện click */
 }
 .menu-link {
     color: var(--text-color);
@@ -405,7 +402,6 @@ button.close {
 }
 
 /* Danh sách sản phẩm*/
-
 .product-list {
     display: flex;
     margin: auto;
@@ -504,31 +500,6 @@ button.close {
     font-weight: 700;
     line-height: 0;
 }
-
-/* Phân trang*/
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-.pagination a,  .pagination button{
-    color: #333;
-    padding: 8px 16px;
-    margin: 0 4px;
-    border: none;
-    text-decoration: none;
-    background-color: #f4f4f4;
-    border-radius: 4px;
-}
-.pagination a.active {
-    background-color: #B5292F;
-    color: white;
-}
-.pagination a:hover, .pagination button:hover {
-    background-color: #ddd;
-}
-
-
 /* Css footer */
 .footer {
     background-color: #f2f2f2;
