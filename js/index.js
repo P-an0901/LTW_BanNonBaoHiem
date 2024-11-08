@@ -1,4 +1,4 @@
-/* Chèn footer*/
+/* Chèn header*/
 $(document).ready(function(){
     $("#header-container").load("header.html", function(){
         const headerNav = document.querySelector(".header-bottom");
@@ -14,6 +14,26 @@ $(document).ready(function(){
                 lastScrollY = window.scrollY;
             });
         }
+        const currentUrl = window.location.pathname;
+        const menuLinks = document.querySelectorAll('.menu-link');
+        
+        // Bỏ lớp 'active' khỏi tất cả các menu links
+        menuLinks.forEach(link => link.classList.remove('active'));
+
+        // Thêm lớp 'active' cho link hiện tại dựa trên URL
+        menuLinks.forEach(link => {
+            if (currentUrl.includes(link.getAttribute('href'))) {
+                link.classList.add('active');
+            }
+        });
+
+        // Thêm sự kiện click để chuyển đổi active khi nhấn vào các liên kết menu
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                menuLinks.forEach(link => link.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
         document.querySelector('.cart-dropdown').addEventListener('click', function(event) {
             event.stopPropagation(); // Ngăn không cho sự kiện click lan ra ngoài
         });
@@ -79,9 +99,6 @@ $(document).ready(function(){
     }
     $("#footer").load("footer.html")
 });
-
-
-
 function loginWithFacebook() {
     // Logic for Facebook login
   }
@@ -92,25 +109,25 @@ function loginWithFacebook() {
 
 /* Giảm giá*/
 const products = document.querySelectorAll('.product-item');
-let hasDiscount = false;
 
 products.forEach(pro => {
-    if (pro.dataset.hasDiscount === 'true') {
-        hasDiscount = true;
-        const priceElement = pro.querySelector('.product-price');
-        const salePriceElement = pro.querySelector('.product-sale-price');
+    const priceElement = pro.querySelector('.product-price');
+    const salePriceElement = pro.querySelector('.product-sale-price');
 
-        // Gạch giá gốc và hiển thị giá khuyến mại
-        priceElement.style.textDecoration = 'line-through'; 
-        salePriceElement.style.display = 'block'; 
-    } else {
-        const priceElement = pro.querySelector('.product-price');
-        const salePriceElement = pro.querySelector('.product-sale-price');
-
-        priceElement.style.textDecoration = 'none'; 
-        // salePriceElement.style.display = 'none'; 
+    // Kiểm tra nếu phần tử giá có tồn tại
+    if (priceElement && salePriceElement) {
+        if (pro.dataset.hasDiscount === 'true') {
+            pro.classList.add('has-discount');
+            priceElement.style.textDecoration = 'line-through'; 
+            salePriceElement.style.display = 'block'; 
+        } else {
+            priceElement.style.textDecoration = 'none';
+            pro.classList.remove('has-discount');
+            //salePriceElement.style.display = 'none'; 
+        }
     }
 });
+
 
 // Giỏ hàng dưới dạng mảng
 let cart = [];
