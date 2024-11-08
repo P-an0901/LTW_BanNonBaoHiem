@@ -451,16 +451,16 @@ button.close {
 
 .buy-button {
     padding: 8px 30px;
-    background-color: #B5292F; 
+    background-color: #d6aa69; 
     color: white; 
     border: none;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 15px;
     transition: background-color 0.3s; 
 }
 
 .buy-button:hover {
-    background-color: #28A745;
+    background-color: #e68027;
 }
 .product-item:hover{
     border-color: var(--red);
@@ -471,6 +471,7 @@ button.close {
 }
 .product-item:hover h3 {
     cursor: pointer;
+    color: #c71a22;
 }
 .product-name {
     display: block; 
@@ -478,19 +479,27 @@ button.close {
     overflow: hidden; 
     text-overflow: ellipsis; 
     line-height: 1.1em; 
-    font-size: 16px;
-    margin: 15px 30px 0;
+    font-size: 19px;
+    margin: 15px 0 0;
+    text-transform: uppercase;
 }
 
 .product-price {
-    font-size: 15px; 
-    color: #28A745;
+    font-size: 14px; 
+    color: var(--text-color);
     margin-bottom: 10px;
 }
 .product-sale-price{
     display: none;
-    color: #c71a22;
+    color: #ed1c24;
     line-height: 0.9;
+    font-weight: bold;
+}
+.product-item:not(.has-discount) .product-price {
+    font-size: 14px;
+    color: var(--black);
+    text-decoration: none;
+    font-weight: bold;
 }
 .lst-title {
     color: #ed1c24;
