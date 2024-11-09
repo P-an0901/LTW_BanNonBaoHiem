@@ -252,7 +252,7 @@ button.close {
     position: absolute;
     padding: 0;
     margin: 0;
-    top: 105%;
+    top: 100%;
     left: 0;
     display: none;
     background-color: var(--white);
@@ -339,6 +339,32 @@ button.close {
 .menu-list-item:hover .icon-arrow {
     transform: rotate(180deg); /* Xoay mũi tên lên trên */
 }
+/*Lên đầu trang*/
+.back-to-top {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    display: none;
+    z-index: 100;
+    background-color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.back-to-top.active {
+    display: flex;
+    opacity: 1;
+    transform: scale(1);
+}
+
+
 
 
 /* img lớn*/
@@ -372,13 +398,17 @@ button.close {
     margin: 0;
     width: 150px;
     padding: 10px;
-    display: flex; 
-    flex-direction: column;
-    align-items: center; 
-    justify-content: space-between;
     background-color: #fff;
     border-radius: 20px;
     border: 2px solid #eee;
+}
+.slider-item a{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-color);
 }
 
 .slider-content {
@@ -476,12 +506,12 @@ button.close {
 .product-name {
     display: block; 
     height: 2.2em; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
+    overflow: hidden;  
     line-height: 1.1em; 
     font-size: 19px;
     margin: 15px 0 0;
     text-transform: uppercase;
+    color: var(--black);
 }
 
 .product-price {

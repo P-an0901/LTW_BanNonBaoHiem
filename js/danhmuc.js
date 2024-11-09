@@ -16,9 +16,23 @@ function setActivePage(event) {
 
     event.target.classList.add('active');
     
+    // Lọc sản phẩm theo trang
+    var pageNumber = event.target.innerText.trim(); // Lấy số trang và loại bỏ khoảng trắng
+    var productItems = document.querySelectorAll('.product-item');
+    
+    productItems.forEach(function(item) {
+        // So sánh trang sản phẩm với trang hiện tại
+        if (item.getAttribute('data-page') === pageNumber) {
+            item.style.display = 'block'; // Hiển thị sản phẩm
+        } else {
+            item.style.display = 'none'; // Ẩn sản phẩm không thuộc trang hiện tại
+        }
+    });
+
     // Cuộn lên đầu danh sách sản phẩm
     scrollToProductList();
 }
+
 
 function changePage(direction) {
     // Tìm trang hiện tại
@@ -33,44 +47,46 @@ function changePage(direction) {
         newPage = currentPage.nextElementSibling;
     }
 
-    // Nếu trang mới hợp lệ, thay đổi active page
+    // Nếu trang mới hợp lệ, thay đổi active page và lọc sản phẩm
     if (newPage && newPage.tagName === 'A' && newPage !== currentPage) {
         currentPage.classList.remove('active');
         newPage.classList.add('active');
-        
+
+        // Lọc sản phẩm theo trang
+        var pageNumber = newPage.innerText.trim(); // Lấy số trang và loại bỏ khoảng trắng
+        var productItems = document.querySelectorAll('.product-item');
+
+        productItems.forEach(function(item) {
+            if (item.getAttribute('data-page') === pageNumber) {
+                item.style.display = 'block'; // Hiển thị sản phẩm thuộc trang này
+            } else {
+                item.style.display = 'none'; // Ẩn sản phẩm không thuộc trang này
+            }
+        });
+
         // Cuộn lên đầu danh sách sản phẩm
         scrollToProductList();
     }
 }
-// Cập nhật giá khi thay đổi giá trị của thanh range
-document.getElementById("price-range").addEventListener("input", function() {
-    var price = this.value;
-    document.getElementById("price-value").textContent = "Giá: " + price + "đ";
-});
+window.onload = function() {
+    var activePage = document.querySelector('.pagination a.active');
+    if (!activePage) {
+        activePage = document.querySelector('.pagination a');
+        if (activePage) {
+            setActivePage({ target: activePage });
+        }
+    }
 
-// Cập nhật lượt mua khi thay đổi giá trị của thanh range
-document.getElementById("purchase-range").addEventListener("input", function() {
-    var purchase = this.value;
-    document.getElementById("purchase-value").textContent = "Lượt mua: " + purchase;
-});
-
-// Hàm áp dụng lọc
-function applyFilters() {
-    var helmetType = document.getElementById("helmet-type").value;
-    var helmetSize = document.getElementById("helmet-size").value;
-    var priceRange = document.getElementById("price-range").value;
-    var purchaseRange = document.getElementById("purchase-range").value;
-    var selectedColors = [];
-
-    // Lấy tất cả màu đã chọn
-    document.querySelectorAll(".filter-color:checked").forEach(function(color) {
-        selectedColors.push(color.value);
+    // Đảm bảo chỉ hiển thị sản phẩm thuộc trang hiện tại
+    var pageNumber = activePage.innerText.trim();
+    var productItems = document.querySelectorAll('.product-item');
+    productItems.forEach(function(item) {
+        if (item.getAttribute('data-page') === pageNumber) {
+            item.style.display = 'block'; // Hiển thị sản phẩm thuộc trang này
+        } else {
+            item.style.display = 'none'; // Ẩn sản phẩm không thuộc trang này
+        }
     });
+};
 
-    // In ra kết quả lọc (thực tế bạn có thể gửi dữ liệu này đến server hoặc hiển thị lại sản phẩm)
-    console.log("Loại nón: " + helmetType);
-    console.log("Kích thước: " + helmetSize);
-    console.log("Giá: " + priceRange + "đ");
-    console.log("Lượt mua: " + purchaseRange);
-    console.log("Màu sắc: " + selectedColors.join(", "));
-}
+

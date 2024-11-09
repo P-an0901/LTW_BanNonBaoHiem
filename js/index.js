@@ -15,25 +15,29 @@ $(document).ready(function(){
             });
         }
         const currentUrl = window.location.pathname;
-        const menuLinks = document.querySelectorAll('.menu-link');
+        const danhMucLink = document.querySelector('.menu-link[href="danhmuc.html"]');
+        const trangChuLink = document.querySelector('.menu-link[href="index.html"]');
         
-        // Bỏ lớp 'active' khỏi tất cả các menu links
-        menuLinks.forEach(link => link.classList.remove('active'));
-
-        // Thêm lớp 'active' cho link hiện tại dựa trên URL
-        menuLinks.forEach(link => {
-            if (currentUrl.includes(link.getAttribute('href'))) {
-                link.classList.add('active');
-            }
-        });
-
-        // Thêm sự kiện click để chuyển đổi active khi nhấn vào các liên kết menu
-        menuLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                menuLinks.forEach(link => link.classList.remove('active'));
-                this.classList.add('active');
+        // Xóa 'active' khỏi tất cả các menu links
+        document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
+        
+        // Kiểm tra URL hiện tại để thêm 'active' cho "Trang chủ" hoặc "Danh Mục Sản phẩm"
+        if (currentUrl.includes("index.html") || currentUrl === "/") {
+            trangChuLink.classList.add('active'); 
+        } else {
+            danhMucLink.classList.add('active'); 
+        }
+        
+        // Xử lý sự kiện click cho tất cả submenu để luôn thêm 'active' cho "Danh Mục Sản phẩm"
+        document.querySelectorAll('.submenu a').forEach(subLink => {
+            subLink.addEventListener('click', function(event) {
+                // Bỏ 'active' khỏi tất cả các menu links
+                document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
+        
+                // Thêm 'active' cho "Danh Mục Sản phẩm"
+                danhMucLink.classList.add('active');
             });
-        });
+        });  
         document.querySelector('.cart-dropdown').addEventListener('click', function(event) {
             event.stopPropagation(); // Ngăn không cho sự kiện click lan ra ngoài
         });
@@ -216,4 +220,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
     cart = storedCart;
     updateCart();
+});
+window.addEventListener("scroll", function() {
+    const backToTopButton = document.querySelector(".back-to-top");
+    if (window.scrollY > 200) {
+        backToTopButton.classList.add("active");
+    } else {
+        backToTopButton.classList.remove("active");
+    }
+});
+document.querySelector(".back-to-top a").addEventListener("click", function(event) {
+    event.preventDefault(); 
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth" 
+    });
 });
