@@ -50,7 +50,37 @@ $(document).ready(function(){
         if (closeButton) {
             closeButton.addEventListener('click', resetModal);
         }
+        // Đăng ký
+        let signupButton = document.getElementById('signup-button');
+        signupButton.addEventListener('click', (event) => {
+            let signupResult = handleSignup(event);
+        
+            if (signupResult == true) {
+                alert('Đăng ký thành công');
+                resetModal();
+                document.querySelector('.sign-up').style.display = 'none';
+                document.querySelector('.login').style.display = 'block';
+            }
+        });
 
+        // Đăng nhập
+        let loginButton = document.getElementById('login-button');
+        loginButton.addEventListener('click', (event) => {
+            let accountFound = handleLogin(event);  
+
+        // Nếu đăng nhập thành công, hiển thị thông báo
+            if (accountFound) {
+                alert('Đăng nhập thành công');
+                resetModal();
+                document.getElementById('login-menu').style.display = 'none';
+                document.getElementById('signup-menu').style.display = 'none';
+                document.getElementById('account-menu').style.display = 'block';
+                document.getElementById('account-name').innerText = accountFound.fullName;
+                $('#signup-login').modal('hide');
+             }else{
+                alert('Tài khoản hoặc mật khẩu không chính xác');
+             }
+        });
         // Sự kiện chuyển đổi giữa đăng ký và đăng nhập
         document.querySelector('.login-link').addEventListener('click', function () {
             document.querySelector('.sign-up').style.display = 'none';

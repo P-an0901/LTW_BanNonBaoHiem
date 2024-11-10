@@ -37,13 +37,17 @@
                             <button class="btn mr-3" type="button"><i class="fas fa-search"></i> Tìm</button>
                         </form>
                         <ul class="list-inline mb-0">
-                            <li class="list-inline-item pointer" onclick="openModal('login')">
+                            <li class="list-inline-item pointer" id="login-menu" onclick="openModal('login')">
                                 <i class="fas fa-user"></i>
                                 <span>Đăng nhập</span>
                             </li>
-                            <li class="list-inline-item pointer" onclick="openModal('signup')">
+                            <li class="list-inline-item pointer" id="signup-menu" onclick="openModal('signup')">
                                 <i class="fas fa-user-plus"></i>
                                 <span>Đăng ký</span>
+                            </li>
+                            <li class="list-inline-item pointer" id="account-menu" style="display:none;">
+                                <i class="fas fa-user-circle"></i>
+                                <span id="account-name">Tài khoản</span>
                             </li>
                             <li class="list-inline-item pointer cart-container" onclick="openCart()" title="Giỏ hàng">
                                 <i class="fas fa-shopping-cart"></i>
