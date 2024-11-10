@@ -8,29 +8,46 @@
     <title>Cửa hàng Mũ Bảo Hiểm</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/detail.css">
+    <link rel="stylesheet" href="../css/danhmuc.css">
 </head>
 <body>
     <div id="header-container"></div>
     <div id="modal-container"></div>
+    <div class="breadcrumb-container">
+        <ul class="breadcrumb">
+          <li><a href="index.html">Trang chủ </a></li>
+          <li><span>/</span></li>
+          <li><a href="#" class="active"> Royal M139 BoomBang</a></li>
+        </ul>
+      </div>
+    <div class="back-to-top active">
+        <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
+    </div>
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal();">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <img class="modal-image" id="modal-image" src="" alt="Hình ảnh lớn">
+        </div>
+    </div>
     <section class="product-detail">
         <div class="container">
-            <h1 class="product-detail-title">Chi Tiết Sản Phẩm</h1>
-    
-            <div class="product-image-container">
-                <div class="main-image-wrapper">
-
-                    <img src="../images/Royal-M139-BoomBang.jpg" alt="Mũ bảo hiểm fullface" class="product-image" id="main-product-image">
-                    <img src="../images/2-Royal-M139-BoomBang.jpg" alt="Mũ bảo hiểm 3/4 đầu" class="product-image-hover">
+            <div class="detail-img-container">
+                <div class="product-image-container">
+                    <div class="main-image-wrapper">
+                        <img src="../images/Royal-M139-BoomBang.jpg" class="product-image" id="main-product-image">
+                        <img src="../images/2-Royal-M139-BoomBang.jpg" class="product-image-hover" id="hover-product-image">
+                    </div>
                 </div>
-            </div>
-
-            <div class="product-thumbnails">
-                <img src="../images/Royal-M139-BoomBang.jpg" alt="Ảnh thu nhỏ 1" class="thumbnail" data-src="../images/Royal-M139-BoomBang.jpg">
-                <img src="../images/2-Royal-M139-BoomBang.jpg" alt="Ảnh thu nhỏ 2" class="thumbnail" data-src="../images/helmet2.jpg">
+                <div class="product-thumbnails">
+                    <img src="../images/Royal-M139-BoomBang.jpg" alt="Ảnh thu nhỏ 1" class="thumbnail" data-src="../images/Royal-M139-BoomBang.jpg">
+                    <img src="../images/2-Royal-M139-BoomBang.jpg" alt="Ảnh thu nhỏ 2" class="thumbnail" data-src="../images/2-Royal-M139-BoomBang.jpg">
+                </div>
             </div>
     
                 <div class="product-info">
-                    <h2>Mũ bảo hiểm fullface</h2>
+                    <h1 class="product-detail-title">Royal M139 BoomBang</h1>
                     <p class="product-price">Giá: 350.000 đ</p>
     
                     <p class="product-description">
@@ -76,6 +93,19 @@
                 </div>
             </div>
         </div>
+        <!-- <h3>Sản phẩm đã xem</h3>
+        <div class="related-products">
+            <div class="related-product-item">
+                    <img src="images/helmet2.jpg" alt="Mũ bảo hiểm 3/4 đầu" class="related-product-image">
+                    <p class="related-product-name">Mũ bảo hiểm 3/4 đầu</p>
+                    <a href="product-detail-1.html" class="related-product-link">Xem Chi Tiết</a>
+            </div>
+                <div class="related-product-item">
+                    <img src="images/helmet3.jpg" alt="Mũ bảo hiểm thể thao" class="related-product-image">
+                    <p class="related-product-name">Mũ bảo hiểm thể thao</p>
+                    <a href="product-detail-3.html" class="related-product-link">Xem Chi Tiết</a>
+                </div>
+            </div> -->
     </section>
     
     
@@ -83,5 +113,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="../js/index.js"></script>
+    <script src="../js/detail.js"></script>
 </body>
 </html>

@@ -356,16 +356,16 @@ button.close {
     opacity: 0;
     transform: scale(0.8);
     transition: opacity 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
 }
-
+.back-to-top:hover a{
+    color: var(--black);
+}
 .back-to-top.active {
     display: flex;
     opacity: 1;
     transform: scale(1);
 }
-
-
-
 
 /* img lớn*/
 

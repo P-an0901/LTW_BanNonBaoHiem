@@ -77,8 +77,6 @@ $(document).ready(function(){
                 document.getElementById('account-menu').style.display = 'block';
                 document.getElementById('account-name').innerText = accountFound.fullName;
                 $('#signup-login').modal('hide');
-             }else{
-                alert('Tài khoản hoặc mật khẩu không chính xác');
              }
         });
         // Sự kiện chuyển đổi giữa đăng ký và đăng nhập
@@ -251,6 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
     cart = storedCart;
     updateCart();
 });
+/*Lên đầu trang */
 window.addEventListener("scroll", function() {
     const backToTopButton = document.querySelector(".back-to-top");
     if (window.scrollY > 200) {
@@ -259,7 +258,7 @@ window.addEventListener("scroll", function() {
         backToTopButton.classList.remove("active");
     }
 });
-document.querySelector(".back-to-top a").addEventListener("click", function(event) {
+document.querySelector(".back-to-top").addEventListener("click", function(event) {
     event.preventDefault(); 
     window.scrollTo({
         top: 0,
