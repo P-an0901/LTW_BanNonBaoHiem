@@ -1,0 +1,32 @@
+// Chọn tất cả các thumbnail và hình lớn
+const thumbnails = document.querySelectorAll('.thumbnail');
+const mainImage = document.getElementById('main-product-image');
+
+// Lắng nghe sự kiện click trên từng thumbnail
+thumbnails.forEach(thumbnail => {
+    thumbnail.addEventListener('click', (e) => {
+        // Lấy đường dẫn của hình thu nhỏ được bấm và thay đổi hình lớn
+        const newSrc = e.target.getAttribute('data-src');
+        mainImage.src = newSrc;
+    });
+});
+
+// Mở modal khi bấm vào hình ảnh lớn
+mainImage.addEventListener('click', () => {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modal-image');
+    modal.style.display = "flex";  // Mở modal
+    modalImage.src = mainImage.src;  // Đặt hình ảnh modal giống với hình lớn
+});
+
+// Đóng modal khi click ra ngoài ảnh
+window.addEventListener('click', (e) => {
+    const modal = document.getElementById('imageModal');
+    if (e.target === modal) {
+        modal.style.display = "none";  // Ẩn modal khi click ra ngoài ảnh
+    }
+});
+function closeModal() {
+    var modal = document.getElementById('imageModal');
+    modal.style.display = 'none'; // Ẩn modal
+}
