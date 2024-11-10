@@ -14,18 +14,29 @@
 }
 
 /* Thanh điều hướng */
-.breadcrumbs {
-    font-size: 14px;
-    color: #555;
+.breadcrumb {
+    font-size: 15px;
+    width: 1250px;
+    margin: 1px auto 0 auto !important;
+    background-color: #e6e6e6 !important;
+    gap: 5px;
 }
 
-.breadcrumbs a {
+.breadcrumb a {
     text-decoration: none;
     color: #007bff;
 }
 
-.breadcrumbs a:hover {
+.breadcrumb a:hover {
     text-decoration: underline;
+}
+.breadcrumb .active {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.breadcrumb .active:hover {
+    text-decoration: none;
 }
 /* Phân trang*/
 .pagination {

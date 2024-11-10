@@ -455,8 +455,20 @@ button.close {
     display: flex;
     flex-wrap: wrap;
 }
+.product-hot-label {
+    position: absolute;
+    top: 0;
+    background-color: red;
+    color: white;
+    padding: 2px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    z-index: 1;
+}
 
 .product-item {
+    position: relative;
     padding-bottom: 10px ;
     width: calc(20% - 8px);
     margin-right: 10px;
