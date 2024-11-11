@@ -30,3 +30,28 @@ function closeModal() {
     var modal = document.getElementById('imageModal');
     modal.style.display = 'none'; // Ẩn modal
 }
+function selectOnlyOne(checkbox) {
+    var checkboxes = document.getElementsByName('size');
+    checkboxes.forEach(function(box) {
+        if (box !== checkbox) {
+            box.checked = false; 
+        }
+    });
+}
+// Giảm số lượng
+function decreaseQuantity() {
+    var quantityInput = document.getElementById("quantity");
+    var quantity = parseInt(quantityInput.value);
+
+    if (quantity > 1) {
+        quantityInput.value = quantity - 1;
+    }
+}
+
+// Tăng số lượng
+function increaseQuantity() {
+    var quantityInput = document.getElementById("quantity");
+    var quantity = parseInt(quantityInput.value);
+
+    quantityInput.value = quantity + 1;
+}
