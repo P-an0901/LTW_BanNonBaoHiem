@@ -17,34 +17,34 @@ $(document).ready(function(){
         const currentUrl = window.location.pathname;
         const danhMucLink = document.querySelector('.menu-link[href="danhmuc.html"]');
         const trangChuLink = document.querySelector('.menu-link[href="index.html"]');
-        
+
         // Xóa 'active' khỏi tất cả các menu links
         document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
-        
+
         // Kiểm tra URL hiện tại để thêm 'active' cho "Trang chủ" hoặc "Danh Mục Sản phẩm"
         if (currentUrl.includes("index.html") || currentUrl === "/") {
-            trangChuLink.classList.add('active'); 
+            trangChuLink.classList.add('active');
         } else {
-            danhMucLink.classList.add('active'); 
+            danhMucLink.classList.add('active');
         }
-        
+
         // Xử lý sự kiện click cho tất cả submenu để luôn thêm 'active' cho "Danh Mục Sản phẩm"
         document.querySelectorAll('.submenu a').forEach(subLink => {
             subLink.addEventListener('click', function(event) {
                 // Bỏ 'active' khỏi tất cả các menu links
                 document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
-        
+
                 // Thêm 'active' cho "Danh Mục Sản phẩm"
                 danhMucLink.classList.add('active');
             });
-        });  
+        });
         document.querySelector('.cart-dropdown').addEventListener('click', function(event) {
             event.stopPropagation(); // Ngăn không cho sự kiện click lan ra ngoài
         });
         updateCart();
     })
-     // Khi nội dung của modal được tải xong
-     $("#modal-container").load("modal.html", function() {
+    // Khi nội dung của modal được tải xong
+    $("#modal-container").load("modal.html", function() {
         // Đảm bảo rằng các sự kiện đã được gán sau khi tải modal
         const closeButton = document.querySelector('.close');
         if (closeButton) {
@@ -54,7 +54,7 @@ $(document).ready(function(){
         let signupButton = document.getElementById('signup-button');
         signupButton.addEventListener('click', (event) => {
             let signupResult = handleSignup(event);
-        
+
             if (signupResult == true) {
                 alert('Đăng ký thành công');
                 resetModal();
@@ -66,9 +66,9 @@ $(document).ready(function(){
         // Đăng nhập
         let loginButton = document.getElementById('login-button');
         loginButton.addEventListener('click', (event) => {
-            let accountFound = handleLogin(event);  
+            let accountFound = handleLogin(event);
 
-        // Nếu đăng nhập thành công, hiển thị thông báo
+            // Nếu đăng nhập thành công, hiển thị thông báo
             if (accountFound) {
                 alert('Đăng nhập thành công');
                 resetModal();
@@ -77,7 +77,7 @@ $(document).ready(function(){
                 document.getElementById('account-menu').style.display = 'block';
                 document.getElementById('account-name').innerText = accountFound.fullName;
                 $('#signup-login').modal('hide');
-             }
+            }
         });
         // Sự kiện chuyển đổi giữa đăng ký và đăng nhập
         document.querySelector('.login-link').addEventListener('click', function () {
@@ -97,8 +97,8 @@ $(document).ready(function(){
         });
 
         document.querySelector('.forgot-password-form .login-link').addEventListener('click', function () {
-            document.querySelector('.forgot-password-form').style.display = 'none'; 
-            document.querySelector('.login').style.display = 'block'; 
+            document.querySelector('.forgot-password-form').style.display = 'none';
+            document.querySelector('.login').style.display = 'block';
         });
     });
 
@@ -119,12 +119,12 @@ $(document).ready(function(){
     function resetModal() {
         const modal = document.querySelector('#signup-login');
         modal.querySelectorAll('input[type="text"], input[type="password"]').forEach(input => {
-            input.value = ''; 
+            input.value = '';
         });
         modal.querySelectorAll('.form-message').forEach(msg => {
             msg.textContent = ''; // Xóa nội dung của các thông báo
         });
-        
+
         modal.querySelector('.sign-up').style.display = 'none';
         modal.querySelector('.forgot-password-form').style.display = 'none';
         modal.querySelector('.login').style.display = 'block';
@@ -133,80 +133,45 @@ $(document).ready(function(){
 });
 function loginWithFacebook() {
     // Logic for Facebook login
-  }
-  
-  function loginWithGoogle() {
-    // Logic for Google login
-  }
-
-/* Giảm giá*/
-const products = document.querySelectorAll('.product-item');
-
-products.forEach(pro => {
-    const priceElement = pro.querySelector('.product-price');
-    const salePriceElement = pro.querySelector('.product-sale-price');
-
-    // Kiểm tra nếu phần tử giá có tồn tại
-    if (priceElement && salePriceElement) {
-        if (pro.dataset.hasDiscount === 'true') {
-            pro.classList.add('has-discount');
-            priceElement.style.textDecoration = 'line-through'; 
-            salePriceElement.style.display = 'block'; 
-        } else {
-            priceElement.style.textDecoration = 'none';
-            pro.classList.remove('has-discount');
-            //salePriceElement.style.display = 'none'; 
-        }
-    }
-});
-
-
-// Giỏ hàng dưới dạng mảng
-let cart = [];
-
-// Hàm thêm sản phẩm vào giỏ hàng
-function addToCart(button) {
-    const productElement = button.closest('.product-item');
-    const productName = productElement.querySelector('.product-name').innerText;
-    const productPrice = productElement.querySelector('.product-price').innerText;
-    const productImage = productElement.querySelector('.product-image').src;
-
-    // Kiểm tra xem sản phẩm đã có trong giỏ hay chưa
-    const productInCart = cart.find(item => item.name === productName);
-    if (productInCart) {
-        alert('Sản phẩm này đã có trong giỏ hàng!');
-        return;
-    }
-
-    // Thêm sản phẩm vào giỏ
-    const product = {
-        name: productName,
-        price: productPrice,
-        image: productImage,
-    };
-    cart.push(product);
-
-    // Cập nhật giỏ hàng
-    updateCart();
 }
 
-// Hàm cập nhật giỏ hàng
-function updateCart() {
-    localStorage.setItem('cart', JSON.stringify(cart));
+function loginWithGoogle() {
+    // Logic for Google login
+}// Giỏ hàng dưới dạng mảng
+let cart = [];
 
-    // Phần tử chứa giỏ hàng
+// Khởi tạo giỏ hàng từ localStorage
+document.addEventListener('DOMContentLoaded', function () {
+    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart = storedCart;
+    updateCartDisplay();
+});
+
+// Hàm trích xuất số từ chuỗi
+function extractNumber(priceString) {
+    return Number(priceString.replace(/[^0-9]/g, ''));
+}
+
+// Hàm tính tổng tiền của giỏ hàng
+function calculateTotal() {
+    return cart.reduce((total, product) => total + extractNumber(product.price), 0);
+}
+
+// Cập nhật giỏ hàng hiển thị và tổng tiền
+function updateCartDisplay() {
     const cartItemsContainer = document.getElementById('cart-items');
     const emptyMessage = document.getElementById('empty-message');
+    const cartTotal = document.getElementById('cart-total');
 
+    // Cập nhật danh sách sản phẩm trong giỏ hàng
     if (cartItemsContainer) {
         cartItemsContainer.innerHTML = '';
 
         if (cart.length > 0) {
             emptyMessage.style.display = 'none';
-
             cart.forEach((product, index) => {
                 const productHTML = `
-                    <li class="cart-item">
+                    <li class="cart-item" id="cart-item-${index}">
                         <img src="${product.image}" alt="${product.name}" class="cart-item-img">
                         <span class="cart-item-name">${product.name}</span>
                         <span class="cart-item-price">${product.price}</span>
@@ -220,42 +185,28 @@ function updateCart() {
         } else {
             emptyMessage.style.display = 'block';
         }
-    } else {
-        console.error('Không tìm thấy phần tử #cart-items');
     }
 
-    // Cập nhật badge giỏ hàng
-    const cartBadge = document.querySelector('.cart-container .badge');
-    if (cartBadge) {
-        cartBadge.textContent = cart.length;
+    // Cập nhật tổng tiền trong giỏ hàng
+    if (cartTotal) {
+        cartTotal.textContent = calculateTotal().toLocaleString() + ' đ';
     }
 }
 
-// Hàm xóa sản phẩm khỏi giỏ
+// Hàm xóa sản phẩm khỏi giỏ hàng và cập nhật hiển thị ngay lập tức
 function removeFromCart(index) {
-    cart.splice(index, 1);
-    updateCart();
+    if (window.confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?')) {
+        cart.splice(index, 1); // Xóa sản phẩm khỏi giỏ hàng
+        saveCart(); // Lưu lại giỏ hàng vào localStorage
+        location.reload();
+    }
 }
 
-// Đọc giỏ hàng từ localStorage khi trang tải
-document.addEventListener('DOMContentLoaded', function() {
-    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart = storedCart;
-    updateCart();
-});
-/*Lên đầu trang */
-window.addEventListener("scroll", function() {
-    const backToTopButton = document.querySelector(".back-to-top");
-    if (window.scrollY > 200) {
-        backToTopButton.classList.add("active");
-    } else {
-        backToTopButton.classList.remove("active");
-    }
-});
-document.querySelector(".back-to-top").addEventListener("click", function(event) {
-    event.preventDefault(); 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth" 
-    });
-});
+// Lưu giỏ hàng vào localStorage
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+function redirectToCheckout() {
+    saveCart(); // Lưu giỏ hàng vào localStorage
+    window.location.href = "checkout.html"; // Chuyển hướng sang trang thanh toán
+}
