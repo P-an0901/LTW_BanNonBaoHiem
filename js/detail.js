@@ -55,3 +55,13 @@ function increaseQuantity() {
 
     quantityInput.value = quantity + 1;
 }
+document.getElementById('toggleDescription').addEventListener('click', function() {
+    var fullDescription = document.querySelector('.full-description');
+    fullDescription.classList.toggle('show');  
+    if (fullDescription.classList.contains('show')) {
+        this.textContent = 'Ẩn';  // Đổi chữ thành 'Xem ít' khi mở rộng
+    } else {
+        this.textContent = 'Xem thêm';  // Đổi lại thành 'Xem thêm' khi thu gọn
+    }
+});
+

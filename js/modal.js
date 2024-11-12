@@ -29,7 +29,7 @@ function handleSignup(event) {
     validateSignup(fullNameUser, phoneUser, passwordUser, passwordConfirmation, checkSignup);
 
     // Nếu thông tin hợp lệ, lưu vào localStorage
-    if (fullNameUser.length >= 3 && phoneUser.length == 10 && passwordUser.length >= 6 && passwordUser === passwordConfirmation && checkSignup) {
+    if (fullNameUser.length >= 6 && phoneUser.length == 10 && passwordUser.length >= 6 && passwordUser === passwordConfirmation && checkSignup) {
         let accounts = JSON.parse(localStorage.getItem('accounts')) || [];
         accounts.push({ fullName: fullNameUser, phone: phoneUser, password: passwordUser });
         localStorage.setItem('accounts', JSON.stringify(accounts));
@@ -42,9 +42,9 @@ function validateSignup(fullNameUser, phoneUser, passwordUser, passwordConfirmat
     if (fullNameUser.length == 0) {
         document.querySelector('.form-message-name').innerHTML = 'Vui lòng nhập họ và tên';
         document.getElementById('fullname').focus();
-    } else if (fullNameUser.length < 3) {
+    } else if (fullNameUser.length < 6) {
         document.getElementById('fullname').value = '';
-        document.querySelector('.form-message-name').innerHTML = 'Vui lòng nhập họ và tên lớn hơn 3 kí tự';
+        document.querySelector('.form-message-name').innerHTML = 'Vui lòng nhập họ và tên lớn hơn 6 kí tự';
     } else {
         document.querySelector('.form-message-name').innerHTML = '';
     }
@@ -77,7 +77,7 @@ function validateSignup(fullNameUser, phoneUser, passwordUser, passwordConfirmat
     }
 
     if (!checkSignup) {
-        document.querySelector('.form-message-checkbox').innerHTML = 'Vui lòng check đăng ký';
+        document.querySelector('.form-message-checkbox').innerHTML = 'Vui lòng kiểm tra đăng ký';
     } else {
         document.querySelector('.form-message-checkbox').innerHTML = '';
     }

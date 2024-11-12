@@ -79,13 +79,13 @@ header {
     height: calc(1.5em + .75rem + 2px);
 }
 .btn:hover, .buy-button:hover, .form-ground-btn:hover,  
-.form-submit:hover, .btn-xem-them:hover{
+.form-submit:hover{
     background-color: #c71a22;
     color: var(--white);
 }
 .btn:focus, .buy-button:focus,
 .form-ground-btn:focus,  .form-submit:focus,
-.pagination button:focus, .btn-xem-them:focus{
+.pagination button:focus{
     box-shadow: none;  
     outline: none;
 
@@ -612,8 +612,7 @@ button.close {
 }
 
 .form-ground-input,
-.form-ground-btn,
-.btn-xem-them{
+.form-ground-btn{
     height: 40px;
     border-radius: 99px;
     font-size: 16px;
@@ -626,8 +625,25 @@ button.close {
     outline: none;
     font-size: 15px;
 }
+.btn-xem-them {
+    width: 120px;
+    margin-right: 10px;
+    color: #B5292F;
+    font-size: 16px;
+    font-weight: bold;
+}
+.btn-xem-them i{
+    background-color: #B5292F;
+    color: #fff;
+    padding:6px 10px;
+    border-radius: 100%;
+}
+.btn-xem-them:hover span{
+    color: #c71a22;
+    text-decoration: underline;
+}
 
-.form-ground-btn, .btn-xem-them {
+.form-ground-btn {
     margin-left: 10px;
     padding: 0 20px;
     cursor: pointer;
