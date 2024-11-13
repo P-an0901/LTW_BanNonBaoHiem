@@ -105,6 +105,12 @@ header {
     color: #808080;
     font-size: 14px;
 }
+.form-message-login {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    display: none;
+}
 .form-title {
     text-align: center;
     padding-bottom: 10px;
@@ -532,16 +538,21 @@ button.close {
     color: var(--black);
 }
 
-.product-price {
-    font-size: 14px; 
-    color: var(--text-color);
-    margin-bottom: 10px;
+.product-price-container {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    gap: 10px;
 }
-.product-sale-price{
-    display: none;
-    color: #ed1c24;
-    line-height: 0.9;
+
+.product-sale-price span {
+    color: red;
     font-weight: bold;
+}
+
+.product-price span {
+    color: var(--text-color);
+    text-decoration: line-through;
 }
 .product-item:not(.has-discount) .product-price {
     font-size: 14px;

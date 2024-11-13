@@ -77,26 +77,34 @@ $(document).ready(function(){
                 document.getElementById('account-menu').style.display = 'block';
                 document.getElementById('account-name').innerText = accountFound.fullName;
                 $('#signup-login').modal('hide');
+             }else{
+                document.querySelector('.form-message-login').innerHTML = 'Kiểm tra lại tài khoản hoặc mật khẩu';
+                document.querySelector('.form-message-login').style.display = 'block';
+                return null;
              }
         });
         // Sự kiện chuyển đổi giữa đăng ký và đăng nhập
         document.querySelector('.login-link').addEventListener('click', function () {
+            resetModal();
             document.querySelector('.sign-up').style.display = 'none';
             document.querySelector('.forgot-password-form').style.display = 'none';
             document.querySelector('.login').style.display = 'block';
         });
 
         document.querySelector('.signup-link').addEventListener('click', function () {
+            resetModal();
             document.querySelector('.login').style.display = 'none';
             document.querySelector('.sign-up').style.display = 'block';
         });
 
         document.querySelector('.forgot-password-link').addEventListener('click', function () {
+            resetModal();
             document.querySelector('.login').style.display = 'none';
             document.querySelector('.forgot-password-form').style.display = 'block';
         });
 
         document.querySelector('.forgot-password-form .login-link').addEventListener('click', function () {
+            resetModal();
             document.querySelector('.forgot-password-form').style.display = 'none'; 
             document.querySelector('.login').style.display = 'block'; 
         });
@@ -128,6 +136,8 @@ $(document).ready(function(){
         modal.querySelector('.sign-up').style.display = 'none';
         modal.querySelector('.forgot-password-form').style.display = 'none';
         modal.querySelector('.login').style.display = 'block';
+        modal.querySelector('.form-message-login').innerHTML = '';
+        modal.querySelector('.form-message-login').style.display = 'none';
     }
     $("#footer").load("footer.html")
 });
@@ -162,7 +172,7 @@ products.forEach(pro => {
 
 
 // Giỏ hàng dưới dạng mảng
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 // Hàm thêm sản phẩm vào giỏ hàng
 function addToCart(button) {
@@ -185,14 +195,14 @@ function addToCart(button) {
         image: productImage,
     };
     cart.push(product);
-
+    localStorage.setItem('cart', JSON.stringify(cart));
     // Cập nhật giỏ hàng
     updateCart();
 }
 
 // Hàm cập nhật giỏ hàng
 function updateCart() {
-    localStorage.setItem('cart', JSON.stringify(cart));
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     // Phần tử chứa giỏ hàng
     const cartItemsContainer = document.getElementById('cart-items');
@@ -217,7 +227,6 @@ function updateCart() {
                 `;
                 cartItemsContainer.innerHTML += productHTML;
             });
-        } else {
         }
     }
     // Cập nhật badge giỏ hàng
@@ -229,8 +238,11 @@ function updateCart() {
 
 // Hàm xóa sản phẩm khỏi giỏ
 function removeFromCart(index) {
+    if (window.confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?')) {
     cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
     updateCart();
+    }
 }
 
 // Đọc giỏ hàng từ localStorage khi trang tải

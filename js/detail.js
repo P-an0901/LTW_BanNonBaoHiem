@@ -55,16 +55,7 @@ function increaseQuantity() {
 
     quantityInput.value = quantity + 1;
 }
-document.getElementById('toggleDescription').addEventListener('click', function() {
-    var fullDescription = document.querySelector('.full-description');
-    fullDescription.classList.toggle('show');  
-    if (fullDescription.classList.contains('show')) {
-        this.textContent = 'Ẩn';  // Đổi chữ thành 'Xem ít' khi mở rộng
-    } else {
-        this.textContent = 'Xem thêm';  // Đổi lại thành 'Xem thêm' khi thu gọn
-    }
-});
-function addToCart2(button) {
+function addToCart2() {
     // Lấy thông tin về sản phẩm
     var productName = document.querySelector(".product-name h1").innerText;
     var productPrice = document.querySelector(".product-price").innerText.replace("Giá: ", "").replace(" đ", "").trim();
@@ -77,14 +68,6 @@ function addToCart2(button) {
         alert("Vui lòng chọn kích thước sản phẩm.");
         return;
     }
-
-    // Kiểm tra thông tin sản phẩm
-    console.log("Sản phẩm:", productName);
-    console.log("Giá:", productPrice);
-    console.log("Số lượng:", quantity);
-    console.log("Kích thước:", productSize);
-    console.log("Hình ảnh:", productImage);
-
     // Giả lập giỏ hàng (có thể lưu vào localStorage hoặc sessionStorage)
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -100,7 +83,20 @@ function addToCart2(button) {
             image: productImage
         });
     }
-    updateCart();
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert("Sản phẩm đã được thêm vào giỏ hàng.");
+    updateCart();
 }
+document.getElementById('toggleDescription').addEventListener('click', function() {
+    const fullDescription = document.querySelector('.full-description');
+    const overlay = document.querySelector('.overlay');
+    
+    if (fullDescription.style.display === 'none' || fullDescription.style.display === '') {
+        fullDescription.style.display = 'block';
+        overlay.style.display = 'none'; // Ẩn lớp phủ mờ khi mở mô tả đầy đủ
+        this.textContent = 'Thu gọn';
+    } else {
+        fullDescription.style.display = 'none';
+        overlay.style.display = 'block'; // Hiển thị lớp phủ mờ khi ẩn mô tả đầy đủ
+        this.textContent = 'Xem thêm';
+    }
+});

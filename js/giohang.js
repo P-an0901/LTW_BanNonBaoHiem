@@ -20,7 +20,7 @@ function calculateTotal() {
 
 // Cập nhật giỏ hàng hiển thị và tổng tiền
 function updateCartDisplay() {
-    const cartItemsContainer = document.getElementById('cart-items');
+    const cartItemsContainer = document.getElementById('cart2-items');
     const emptyMessage = document.getElementById('empty-message');
     const cartTotal = document.getElementById('cart-total');
 

@@ -96,9 +96,14 @@ function handleLogin(event) {
     // Nếu thông tin hợp lệ thì tiến hành tìm tài khoản
     if (phonelog.length === 10 && passlog.length >= 6) {
         let accountFound = accounts.find(account => account.phone === phonelog && account.password === passlog);
-        return accountFound;
+        if (accountFound) {
+            return accountFound;  // Nếu tìm thấy tài khoản hợp lệ, trả về tài khoản
+        } else {
+            document.querySelector('.form-message-login').innerHTML = 'Kiểm tra lại tài khoản hoặc mật khẩu';
+            return null;  // Nếu không tìm thấy tài khoản, trả về null
+        }
     } else {
-        return null; // Nếu không hợp lệ, trả về null
+        return null;  // Nếu không hợp lệ, trả về null
     }
 }
 
