@@ -201,7 +201,7 @@ button.close {
 
 .cart-dropdown {
     position: absolute;
-    top: 120%;
+    top: 100%;
     transform: translateX(-88%);
     background-color: white;
     border: 2px solid #eee;
