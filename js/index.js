@@ -218,12 +218,8 @@ function updateCart() {
                 cartItemsContainer.innerHTML += productHTML;
             });
         } else {
-            emptyMessage.style.display = 'block';
         }
-    } else {
-        console.error('Không tìm thấy phần tử #cart-items');
     }
-
     // Cập nhật badge giỏ hàng
     const cartBadge = document.querySelector('.cart-container .badge');
     if (cartBadge) {
