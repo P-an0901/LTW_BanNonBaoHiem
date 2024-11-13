@@ -36,7 +36,7 @@
                             <input type="text" class="form-control mr-2 pr-5 " placeholder="Tìm kiếm sản phẩm..." oninput="">
                             <button class="btn mr-3" type="button"><i class="fas fa-search"></i> Tìm</button>
                         </form>
-                        <ul class="list-inline mb-0">
+                        <ul class="list-inline mb-0 d-flex">
                             <li class="list-inline-item pointer" id="login-menu" onclick="openModal('login')">
                                 <i class="fas fa-user"></i>
                                 <span>Đăng nhập</span>
@@ -45,9 +45,15 @@
                                 <i class="fas fa-user-plus"></i>
                                 <span>Đăng ký</span>
                             </li>
-                            <li class="list-inline-item pointer" id="account-menu" style="display:none;">
+                            <li class="list-inline-item pointer" id="account-menu" style="display: none; position: relative;">
                                 <i class="fas fa-user-circle"></i>
                                 <span id="account-name">Tài khoản</span>
+                                
+                                <!-- Dropdown menu -->
+                                <ul class="dropdown-menu" style="display: none;">
+                                    <li><a href="#" id="logout">Đăng xuất</a></li>
+                                    <li><a href="#" id="change-password">Đổi mật khẩu</a></li>
+                                </ul>
                             </li>
                             <li class="list-inline-item pointer cart-container" onclick="openCart()" title="Giỏ hàng">
                                 <a href="../html/giohang.html">
@@ -93,11 +99,24 @@
                         Thương Hiệu 
                         <i class="fa-solid fa-chevron-down icon-arrow"></i> <!-- Icon mũi tên -->
                     </a>
-                    <ul class="submenu">
-                        <li><a href="Royal.html">Royal</a></li>
-                        <li><a href="Asia.html">Asia</a></li>
-                        <li><a href="JC.html">JC</a></li>
+                    <ul class="submenu" id="brand-submenu">
+                        <li>
+                            <a href="Royal.html">
+                                <img src="../images/Logo2020-02.png" alt="Roc" class="submenu-icon">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Asia.html">
+                                <img src="../images/Logo2020-03.png" alt="Royal" class="submenu-icon">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="JC.html">
+                                <img src="../images/Logo2020-05.png" alt="JC" class="submenu-icon"> 
+                            </a>
+                        </li>
                     </ul>
+                    
                 </li>
             </ul>
             
@@ -105,6 +124,7 @@
     </nav>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../js/header.js"></script>
 </header>
 </body>
 </html>

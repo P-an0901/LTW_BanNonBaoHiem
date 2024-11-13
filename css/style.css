@@ -291,6 +291,13 @@ button.close {
 .submenu li:hover a{
     color: var(--red);
 }
+.submenu-icon {
+    width: 80px;
+    height: 80px;
+}
+#brand-submenu li{
+    display: inline-block;
+}
 .menu-list-item{
     position: relative;
 }

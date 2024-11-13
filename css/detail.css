@@ -71,26 +71,8 @@
     margin: 0 5px;
 }
 /*Thông số*/
-.session-left ul {
-    padding: 0;
-}
-.session-left ul li{
-    display: flex;  /* Sử dụng Flexbox để căn chỉnh */
-    justify-content: space-between;  /* Khoảng cách đều giữa tên thuộc tính và giá trị */
-    margin-bottom: 10px; 
-}
-.session-left .label{
-    font-weight: bold;
-    margin-right: 5px;
-}
-.label, .value {
-    display: inline-block; 
-}
-.value {
-    flex-grow: 1;  
-}
-.session-left ul li{
-    list-style-type: none;
+.session-left {
+    width: 100%;
 }
 /* Các ảnh nhỏ */
 .product-thumbnails {
