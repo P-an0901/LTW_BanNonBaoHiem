@@ -5,7 +5,7 @@ document.getElementById("account-menu").addEventListener("click", function(event
 });
 
 // Đóng dropdown khi nhấp ra ngoài
-document.addEventListener("click", function(event) {
+document.addEventListener("click", function() {
     const dropdownMenu = document.querySelector("#account-menu .dropdown-menu");
     if (dropdownMenu) {
         dropdownMenu.style.display = "none";
