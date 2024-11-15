@@ -1,10 +1,14 @@
+:root {
+    --red: #B5292F;
+    --lightest-gray: rgb(249, 249, 249);
+}
+
 .container{
+    max-width: 100%;
     display: flex;
     margin: 0;
     padding: 0;
 }
-
-
 .header {
     display: flex;
     align-items: center;
@@ -67,109 +71,6 @@
     font-size: 1.2em;
     color: #555;
 }
-
-.user {
-    position: relative;
-    border-radius: 50%;
-    right: 1rem;
-}
-
-.user .profile {
-    position: relative;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.user .profile img,
-.user .profile i {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.user .profile-cropdown {
-    position: absolute;
-    top: 80px;
-    right: -10px;
-    padding: 10px 20px;
-    background: #fff;
-    width: 200px;
-    box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
-    border-radius: 15px;
-    transition: 0.5s;
-    visibility: hidden;
-    opacity: 0;
-}
-
-.user .profile-cropdown.active {
-    visibility: visible;
-    opacity: 1;
-    box-shadow: 0px 4px 10px rgb(0 0 0 /33%);
-}
-
-.user .profile-cropdown::before {
-    content: "";
-    position: absolute;
-    top: -5px;
-    right: 25px;
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    transform: rotate(45deg);
-}
-
-.user .profile-cropdown h3 {
-    width: 100%;
-    text-align: center;
-    font-size: 19px;
-    font-weight: 500;
-    color: #555;
-    line-height: 1.2rem;
-}
-
-.user .profile-cropdown h3 span {
-    font-size: 14px;
-    color: #cecece;
-    font-weight: 400;
-}
-
-.user .profile-cropdown li {
-    list-style: none;
-    padding: 10px 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-}
-
-.user .profile-cropdown li i {
-    max-width: 20px;
-    margin-right: 20px;
-    opacity: 0.5;
-    transition: 0.5s;
-}
-
-.user .profile-cropdown li:hover i {
-    opacity: 1;
-}
-
-.user .profile-cropdown li a {
-    display: inline-block;
-    text-decoration: none;
-    color: #000;
-    font-weight: 500;
-    transition: 0.5s;
-}
-
-.user .profile-cropdown li:hover a {
-    color: red;
-}
-
 .sidebar {
     flex-shrink: 0;
     overflow: hidden;
@@ -213,12 +114,11 @@
     display: block;
     width: 30px;
     height: 30px;
-    transition: var(--animation-duration) var(--animation-timing-curve);
 }
 
 .sidebar.open .channel-logo {
-    width: 100px;
-    height: 100px;
+    width: 80%;
+    height: auto;
 }
 
 .sidebar .channel-logo>img {
@@ -313,12 +213,6 @@
     margin-bottom: 0.15rem;
     margin-top: 0.5rem;
 }
-
-.channel-name {
-    color: var(--medium-gray);
-    font-size: 0.75rem;
-}
-
 .sidebar .top-sidebar {
     height: 30px;
     transition: height var(--animation-duration) var(--animation-timing-curve);
@@ -332,4 +226,269 @@
     text-align: center;
     width: 100%;
 }
+/* Kiểu dáng chính của nội dung */
+.content {
+    width: 100%;
+    padding: 20px;
+    background-color: #f4f6f8;
+}
 
+/* Kiểu tiêu đề trang */
+.page-title {
+    font-size: 26px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 25px;
+    text-align: center;
+}
+.section {
+    padding: 2rem 2rem 0 1.5rem;
+    display: none;
+    background-color: #fff;
+    position: relative;
+}
+
+.section.active {
+    display: block;
+}
+/* Bố trí các thẻ card trong một lưới */
+.cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* Kiểu dáng cho từng thẻ card */
+.card-single {
+    flex: 1;
+    min-width: 200px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hiệu ứng hover */
+.card-single:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Bố cục nội dung trong thẻ */
+.box {
+    text-align: center;
+}
+
+/* Đặt kiểu cho số liệu */
+.card-single h2 {
+    font-size: 32px;
+    color: #B5292F;
+    margin: 10px 0;
+}
+
+/* Đặt kiểu cho hình ảnh icon */
+.on-box img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+/* Kiểu chữ cho tiêu đề nhỏ */
+.on-box h3 {
+    font-size: 18px;
+    color: #555;
+    margin: 10px 0;
+}
+
+/* Kiểu chữ cho phần mô tả */
+.on-box p {
+    font-size: 14px;
+    color: #777;
+    line-height: 1.4;
+}
+
+/* customer */
+.table {
+    width: 100%;
+    overflow: auto;
+    background: #fff;
+    border-radius: 7px;
+}
+
+.setting {
+    position: absolute;
+    top:-50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+table {
+    border-collapse: collapse;
+}
+
+tr {
+    border-bottom: 1px solid var(--lighter-gray);
+}
+
+thead td {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 500;
+    background: var(--lighter-gray);
+    padding: 15px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+tbody tr td {
+    padding: 10px 15px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.prd-img-tbl {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 99px;
+}
+
+/* Product */
+.product-all {
+    padding: 20px 80px;
+}
+
+.btn-control-large{
+    background-color: var(--red);
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 0 20px;
+    width: auto!important;
+}
+
+.admin-control-right i {
+    margin-right: 5px;
+}
+label a {
+    color: var(--red);
+}
+
+#btn-add-account{
+    background-color: var(--red);
+    height: 30px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 0 20px
+}
+
+
+/* Detail Order */
+.admin-control {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.admin-control-center {
+    flex: 1;
+}
+
+.admin-control-right {
+    display: flex;
+}
+
+.admin-control-right button {
+    width: 40px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.admin-control-right button:hover {
+    background-color: var(--red);
+    color:#fff
+}
+
+.form-search {
+    display: flex;
+    justify-content: center;
+}
+
+.search-btn {
+    border: none;
+    outline: none;
+    font-size: 20px;
+    height: 40px;
+    padding: 0 15px;
+    color: var(--text-color);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+.form-search-input {
+    height: 40px;
+    outline: none;
+    border: none;
+    background-color: #f0f0f0;
+    padding: 10px 20px;
+    padding-left: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 75%;
+}
+
+.fillter-date {
+    display: flex;
+}
+
+.fillter-date>div:first-child {
+    margin-right: 20px;
+}
+
+.fillter-date>div>label {
+    margin-right: 10px;
+    font-size: 15px;
+}
+.order-statistical{
+    display: flex;
+    margin: 30px 0;
+    column-gap: 20px;
+}
+
+.order-statistical-item{
+    box-shadow: 0px 1px 5px 2px #f1f1f1;
+    width: 32.1%;   
+    display: flex;
+    padding: 20px 40px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.order-statistical-item-icon i{
+    font-size: 45px;
+    margin-right: 25px;
+    color: var(--red);
+}
+
+.order-statistical-item-content-desc{
+    margin-bottom: 6px;
+    font-size: 14px;
+    color:#888
+}
+.page-title {
+    color: var(--lightest-gray);
+    background-color: var(--red);
+    text-align: center;
+    border-radius: 2rem;
+    padding: 0.5rem;
+    text-transform: uppercase;
+}
