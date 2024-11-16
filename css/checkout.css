@@ -1,5 +1,8 @@
-.container {
-    max-width: 800px;
+.checkout-container {
+    max-width: 1200px;
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px auto;
 }
 
 .checkout-page {

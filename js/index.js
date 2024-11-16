@@ -24,23 +24,11 @@ $(document).ready(function(){
         // Kiểm tra URL hiện tại để thêm 'active' cho "Trang chủ" hoặc "Danh Mục Sản phẩm"
         if (currentUrl.includes("index.html") || currentUrl === "/") {
             trangChuLink.classList.add('active'); 
-        } else {
+        } else if (currentUrl.includes("giohang.html")) {
+            document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
+        } else  {
             danhMucLink.classList.add('active'); 
         }
-        
-        // Xử lý sự kiện click cho tất cả submenu để luôn thêm 'active' cho "Danh Mục Sản phẩm"
-        document.querySelectorAll('.submenu a').forEach(subLink => {
-            subLink.addEventListener('click', function(event) {
-                // Bỏ 'active' khỏi tất cả các menu links
-                document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
-        
-                // Thêm 'active' cho "Danh Mục Sản phẩm"
-                danhMucLink.classList.add('active');
-            });
-        });  
-        document.querySelector('.cart-dropdown').addEventListener('click', function(event) {
-            event.stopPropagation(); // Ngăn không cho sự kiện click lan ra ngoài
-        });
         updateCart();
     })
      // Khi nội dung của modal được tải xong

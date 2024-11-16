@@ -274,6 +274,7 @@ button.close {
 }
 .submenu li {
     padding: 10px 20px;
+    
 }
 .submenu li a {
     text-decoration: none;
@@ -858,7 +859,5 @@ button.close {
 .remove-item-btn i {
     margin-right: 5px;
 }
-
-
 
 

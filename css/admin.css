@@ -2,92 +2,33 @@
     --red: #B5292F;
     --lightest-gray: rgb(249, 249, 249);
 }
-
+button{
+    border: none;
+}
+button:focus{
+    border: none;
+    outline: none;
+}
+button:hover{
+    color: #c71a22;
+}
 .container{
     max-width: 100%;
     display: flex;
     margin: 0;
     padding: 0;
 }
-.header {
-    display: flex;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    background-color: white;
-    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-    padding: 0 0.5rem;
-    height: var(--header-height);
-    justify-content: space-between;
-    width: 100%;
-    height: 60px;
-    display: none;
-}
-
-.menu-icon-btn {
-    background: none;
-    border: none;
-    padding: 0;
-}
-
-.menu-icon {
-    font-size: 30px;
-    color: var(--medium-gray);
-    cursor: pointer;
-    padding-left: 1rem;
-}
-
-.menu-icon:hover {
-    color: var(--dark-gray);
-}
-
-.search {
-    position: relative;
-    width: 400px;
-    margin: 0 10px;
-}
-
-.search label {
-    position: relative;
-    width: 100%;
-}
-
-.search label input {
-    width: 100%;
-    height: 40px;
-    border-radius: 5px;
-    padding: 5px 20px;
-    padding-left: 45px;
-    font-size: 15px;
-    outline: none;
-    border: none;
-    background-color: var(--lighter-gray);
-}
-
-.search label i {
-    position: absolute;
-    top: 0;
-    left: 10px;
-    font-size: 1.2em;
-    color: #555;
-}
 .sidebar {
-    flex-shrink: 0;
-    overflow: hidden;
     width: 75px;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     height: 100vh;
-    /* height: calc(100vh - var(--header-height)); */
     padding-top: 5rem;
     align-items: center;
-    justify-content: stretch;
     transition: width var(--animation-duration) var(--animation-timing-curve);
     position: sticky;
-    left: 0;
-    top: 0;
-    /* top: var(--header-height); */
+
 }
 
 .sidebar .hidden-sidebar {
@@ -235,13 +176,15 @@
 
 /* Kiểu tiêu đề trang */
 .page-title {
-    font-size: 26px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 25px;
+    color: var(--lightest-gray);
+    background-color: var(--red);
     text-align: center;
+    border-radius: 2rem;
+    padding: 0.5rem;
+    text-transform: uppercase;
 }
 .section {
+    height: 100%;
     padding: 2rem 2rem 0 1.5rem;
     display: none;
     background-color: #fff;
@@ -483,12 +426,4 @@ label a {
     margin-bottom: 6px;
     font-size: 14px;
     color:#888
-}
-.page-title {
-    color: var(--lightest-gray);
-    background-color: var(--red);
-    text-align: center;
-    border-radius: 2rem;
-    padding: 0.5rem;
-    text-transform: uppercase;
 }
