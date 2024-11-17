@@ -66,7 +66,7 @@ $(document).ready(function(){
                 document.getElementById('account-name').innerText = accountFound.fullName;
                 $('#signup-login').modal('hide');
              }else{
-                document.querySelector('.form-message-login').innerHTML = 'Kiểm tra lại email hoặc mật khẩu';
+                
                 document.querySelector('.form-message-login').style.display = 'block';
                 return null;
              }

@@ -9,11 +9,3 @@ for(let i = 0; i < sidebars.length; i++) {
         sections[i].classList.add("active");
     };
 }
-
-const closeBtn = document.querySelectorAll('.section');
-console.log(closeBtn[0])
-for(let i=0;i<closeBtn.length;i++){
-    closeBtn[i].addEventListener('click',(e) => {
-        sidebar.classList.add("open");
-    })
-}

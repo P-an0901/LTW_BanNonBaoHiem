@@ -60,6 +60,9 @@
 .pagination a:hover, .pagination button:hover {
     background-color: #ddd;
 }
+#page-numbers{
+    margin-top: 8px;
+}
 
 /*Lọc*/
 .filter-container{

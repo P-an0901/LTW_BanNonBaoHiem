@@ -34,6 +34,8 @@ function handleSignup(event) {
         accounts.push({ fullName: fullNameUser, email: emailUser, password: passwordUser });  // Sử dụng email thay vì phone
         localStorage.setItem('accounts', JSON.stringify(accounts));
         return true;
+    }else{
+        document.querySelector('.form-message-login').innerHTML = 'Kiểm tra lại email hoặc mật khẩu';
     }
 }
 
