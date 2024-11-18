@@ -8,30 +8,51 @@ let currentPage = 1;
 // Lắng nghe sự kiện thay đổi lựa chọn trong dropdown
 helmetTypeSelect.addEventListener('change', function() {
     const selectedType = this.value;
-    const titleElement = document.getElementById('product-list-title');
-
-    // Thay đổi tiêu đề dựa trên lựa chọn lọc
-    if (selectedType === 'all') {
-        titleElement.textContent = "Tất cả sản phẩm";
-    } else if (selectedType === 'mu34') {
-        titleElement.textContent = "Mũ bảo hiểm 3/4";
-    } else if (selectedType === 'bicycle') {
-        titleElement.textContent = "Mũ bảo hiểm xe đạp";
-    } else if (selectedType === 'half') {
-        titleElement.textContent = "Mũ bảo hiểm nửa đầu";
-    } else if (selectedType === 'fullface') {
-        titleElement.textContent = "Mũ bảo hiểm fullface";
-    } else if (selectedType === 'child') {
-        titleElement.textContent = "Mũ bảo hiểm trẻ em";
-    }
-
+    updatePageTitle(selectedType);  // Gọi hàm để cập nhật tiêu đề
     currentPage = 1;
     filterProductsByType(selectedType);
+
+    // Cập nhật URL để giữ tham số lọc
+    const newURL = window.location.pathname + "?category=" + selectedType;
+    window.history.pushState({ path: newURL }, '', newURL);
 });
+function getCategoryFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('category') || 'all'; // Nếu không có tham số thì mặc định là 'all'
+}
 
 window.onload = function() {
-    filterProductsByType('all');
+    const selectedCategory = getCategoryFromURL();
+    filterProductsByType(selectedCategory);
+    helmetTypeSelect.value = selectedCategory;
+    updatePageTitle(selectedCategory); 
 };
+function updatePageTitle(selectedType) {
+    const titleElement = document.getElementById('product-list-title');
+    switch (selectedType) {
+        case 'all':
+            titleElement.textContent = "Tất cả sản phẩm";
+            break;
+        case 'mu34':
+            titleElement.textContent = "Mũ bảo hiểm 3/4";
+            break;
+        case 'bicycle':
+            titleElement.textContent = "Mũ bảo hiểm xe đạp";
+            break;
+        case 'half':
+            titleElement.textContent = "Mũ bảo hiểm nửa đầu";
+            break;
+        case 'fullface':
+            titleElement.textContent = "Mũ bảo hiểm fullface";
+            break;
+        case 'child':
+            titleElement.textContent = "Mũ bảo hiểm trẻ em";
+            break;
+        default:
+            titleElement.textContent = "Tất cả sản phẩm";
+            break;
+    }
+}
 
 // Hàm lọc sản phẩm theo loại nón
 function filterProductsByType(type) {
