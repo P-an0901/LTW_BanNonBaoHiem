@@ -89,23 +89,22 @@ function validateSignup(fullNameUser, emailUser, passwordUser, passwordConfirmat
 function handleLogin(event) {
     event.preventDefault();
 
-    let emailLog = document.getElementById('email-login').value;  // Đổi 'phone' thành 'email'
+    let emailLog = document.getElementById('email-login').value;
     let passlog = document.getElementById('password-login').value;
-    let accounts = JSON.parse(localStorage.getItem('accounts'));
+    let accounts = JSON.parse(localStorage.getItem('accounts')) || [];
 
     validateLogin(emailLog, passlog);
 
-    // Nếu thông tin hợp lệ thì tiến hành tìm tài khoản
     if (emailLog.length > 0 && passlog.length >= 6) {
-        let accountFound = accounts.find(account => account.email === emailLog && account.password === passlog);  // Sử dụng email thay vì phone
+        let accountFound = accounts.find(account => account.email === emailLog && account.password === passlog);
+
         if (accountFound) {
-            return accountFound;  // Nếu tìm thấy tài khoản hợp lệ, trả về tài khoản
+            // Lưu thông tin người dùng đã đăng nhập vào localStorage
+            localStorage.setItem('loggedInUser', JSON.stringify(accountFound));
+           return accountFound;
         } else {
             document.querySelector('.form-message-login').innerHTML = 'Kiểm tra lại tài khoản hoặc mật khẩu';
-            return null;  // Nếu không tìm thấy tài khoản, trả về null
         }
-    } else {
-        return null;  // Nếu không hợp lệ, trả về null
     }
 }
 
