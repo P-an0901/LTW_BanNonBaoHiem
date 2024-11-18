@@ -1,6 +1,7 @@
 /* Chèn header*/
 $(document).ready(function(){
     $("#header-container").load("header.html", function(){
+        checkStatus();
         const headerNav = document.querySelector(".header-bottom");
         if (headerNav) {
             let lastScrollY = window.scrollY;
@@ -60,10 +61,7 @@ $(document).ready(function(){
             if (accountFound) {
                 alert('Đăng nhập thành công');
                 resetModal();
-                document.getElementById('login-menu').style.display = 'none';
-                document.getElementById('signup-menu').style.display = 'none';
-                document.getElementById('account-menu').style.display = 'block';
-                document.getElementById('account-name').innerText = accountFound.fullName;
+                checkStatus();
                 $('#signup-login').modal('hide');
              }else{
                 

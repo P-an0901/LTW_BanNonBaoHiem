@@ -6,7 +6,8 @@ function addSampleAccount() {
         accounts.push({
             fullName: 'Nguyen Van A',
             email: 'paan@gmail.com',
-            password: '123456'
+            password: '123456',
+            role:'admin'
         });
         // Lưu tài khoản vào localStorage
         localStorage.setItem('accounts', JSON.stringify(accounts));
@@ -97,7 +98,6 @@ function handleLogin(event) {
 
     if (emailLog.length > 0 && passlog.length >= 6) {
         let accountFound = accounts.find(account => account.email === emailLog && account.password === passlog);
-
         if (accountFound) {
             // Lưu thông tin người dùng đã đăng nhập vào localStorage
             localStorage.setItem('loggedInUser', JSON.stringify(accountFound));
