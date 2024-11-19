@@ -32,10 +32,14 @@
                         </a>
                     </div>
                     <div action="" class="form-inline">
-                        <form class=" d-flex flex-grow-1">
-                            <input type="text" class="form-control mr-2 pr-5 " placeholder="Tìm kiếm sản phẩm..." oninput="">
-                            <button class="btn mr-3" type="button"><i class="fas fa-search"></i> Tìm</button>
-                        </form>
+                        
+                     <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Tìm kiếm..." autocomplete="off">
+                        <ul id="searchResults" class="hidden"></ul>
+                     </div>
+                
+                    <ul id="product-list">
+                    </ul>
                         <ul class="list-inline mb-0 d-flex">
                             <li class="list-inline-item pointer" id="login-menu" onclick="openModal('login')">
                                 <i class="fas fa-user"></i>
