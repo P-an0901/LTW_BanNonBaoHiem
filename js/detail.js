@@ -100,3 +100,20 @@ document.getElementById('toggleDescription').addEventListener('click', function(
         this.textContent = 'Xem thêm';
     }
 });
+const products = [
+    { id: 1, name: "Royal M139 BOOMBANG", price: "650.000 đ", img: "../images/BOOMBANG" },
+];
+// Lấy `id` từ URL
+const params = new URLSearchParams(window.location.search);
+const productId = params.get("id");
+
+// Tìm sản phẩm
+const product = products.find(p => p.id == productId);
+
+if (product) {
+    document.getElementById("productImg").src = product.img;
+    document.getElementById("productName").textContent = product.name;
+    document.getElementById("productPrice").textContent = product.price;
+} else {
+    document.body.innerHTML = "<h1>Sản phẩm không tồn tại</h1>";
+}
