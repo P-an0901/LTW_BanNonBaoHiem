@@ -52,7 +52,7 @@ const searchInput = document.getElementById("searchInput");
 const searchResults = document.getElementById("searchResults");
 
 // Mock dữ liệu
-const products = [
+const productseach = [
     { name: "Royal M139 BOOMBANG", price: "650.000 đ", img: "../images/BOOMBANG",url: "detail.html?id=1" },
     { name: "Royal M139 CHUỘT XƯỚC", price: "200.000 đ", img: "#" },
     { name: "Royal M139 ĐEN MỜ", price: "150.000 đ", img: "#" },
@@ -83,24 +83,27 @@ const products = [
 ];
 
 searchInput.addEventListener("input", () => {
-    const query = searchInput.value.toLowerCase();
+    const query = searchInput.value.toLowerCase().trim();
     searchResults.innerHTML = "";
 
     if (query) {
-        const filteredProducts = products.filter(product =>
-            product.name.toLowerCase().includes(query)
+        const filteredProducts = productseach.filter(pross =>
+            pross.name.toLowerCase().includes(query)
         );
 
         if (filteredProducts.length > 0) {
-            filteredProducts.forEach(product => {
+            filteredProducts.forEach(pross => {
                 const li = document.createElement("li");
                 li.innerHTML = `
-                    <img src="${product.img}" alt="${product.name}">
+                    <img src="${pross.img}" alt="${pross.name}">
                     <div>
-                        <p>${product.name}</p>
-                        <p>${product.price}</p>
+                        <p>${pross.name}</p>
+                        <p>${pross.price}</p>
                     </div>
                 `;
+                li.addEventListener("click", () => {
+                    window.location.href = pross.url; // Chuyển hướng khi click
+                });
                 searchResults.appendChild(li);
             });
             searchResults.classList.remove("hidden");
@@ -112,9 +115,9 @@ searchInput.addEventListener("input", () => {
     }
 });
 
+// Đóng dropdown khi click bên ngoài
 document.addEventListener("click", (e) => {
     if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
         searchResults.classList.add("hidden");
     }
 });
-
