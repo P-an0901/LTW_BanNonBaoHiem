@@ -53,7 +53,7 @@ const searchResults = document.getElementById("searchResults");
 
 // Mock dữ liệu
 const productseach = [
-    { name: "Royal M139 BOOMBANG", price: "650.000 đ", img: "../images/BOOMBANG",url: "detail.html?id=1" },
+    { name: "Royal M139 BOOMBANG", price: "650.000 đ", img: "../images/BOOMBANG",url: "../html/detail.html" },
     { name: "Royal M139 CHUỘT XƯỚC", price: "200.000 đ", img: "#" },
     { name: "Royal M139 ĐEN MỜ", price: "150.000 đ", img: "#" },
     { name: "Royal M139 LEOPARD", price: "250.000 đ", img: "#" },
