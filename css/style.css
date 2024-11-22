@@ -2,22 +2,22 @@
     --white: #fff;
     --black: #000;
     --text-color: #333;
-    --red: #B5292F;
+    --red: #B5292F !important;
     --shadow-color: rgb(0 0 0 / 10%);
 }
 html, body {
-    background-color: #e6e6e6;
+    background-color: #e6e6e6 !important;
     font-family: Tahoma, sans-serif;
     margin: 0;
     padding: 0;
 }
 .container{
-    max-width: 1200px;
+    max-width: 1200px !important;
     padding: 0;
 }
 a:hover{
-    text-decoration: none;
-    color: inherit;
+    text-decoration: none !important;
+    color: inherit !important;
 }
 #header-container{
     position: sticky;
@@ -36,8 +36,8 @@ header {
     padding: 10px 0;
 }
 #session_right li a:hover{
-    text-decoration: underline;
-    color: inherit;
+    text-decoration: underline !important;
+    color: inherit !important;
 }
 .header-middle{
     height: 60px;
@@ -66,7 +66,7 @@ header {
     height: 52px;
     background-color: #fff;
     font-weight: bold;
-    
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
 }
 
 .header-bottom.hide{
@@ -74,20 +74,20 @@ header {
 }
         
 .btn{
-    background-color: var(--red);
-    color: var(--white);
-    height: calc(1.5em + .75rem + 2px);
+    background-color: var(--red) !important;
+    color: var(--white) !important;
+    height: calc(1.5em + .75rem + 2px) !important;
 }
-.btn:hover, .buy-button:hover, .form-ground-btn:hover,  
+.btn:hover, .form-ground-btn:hover,  
 .form-submit:hover{
-    background-color: #c71a22;
+    background-color: #c71a22 !important;
     color: var(--white);
 }
 .btn:focus, .buy-button:focus,
 .form-ground-btn:focus,  .form-submit:focus,
 .pagination button:focus{
-    box-shadow: none;  
-    outline: none;
+    box-shadow: none !important;  
+    outline: none !important;
 
 }
 
