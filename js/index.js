@@ -23,7 +23,7 @@ $(document).ready(function(){
         document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
         
         // Kiểm tra URL hiện tại để thêm 'active' cho "Trang chủ" hoặc "Danh Mục Sản phẩm"
-        if (currentUrl.includes("index.html") || currentUrl === "/") {
+        if (currentUrl.includes("index.html") || currentUrl === "") {
             trangChuLink.classList.add('active'); 
         } else if (currentUrl.includes("taikhoan.html") || currentUrl.includes("giohang.html") || currentUrl.includes("gioithieu.html")) {
             document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
@@ -205,6 +205,8 @@ function updateCart() {
                     <li class="cart-item">
                         <img src="${product.image}" alt="${product.name}" class="cart-item-img">
                         <span class="cart-item-name">${product.name}</span>
+                        <span class="cart-item-size mr-2">${product && product.size ? product.size : ''}</span>
+                        <span class="cart-item-quantity mr-2">${product && product.quantity ? product.quantity : ''}</span>
                         <span class="cart-item-price">${product.price}</span>
                         <button class="remove-item-btn" onclick="removeFromCart(${index})">
                             <i class="fas fa-trash"></i> Xóa

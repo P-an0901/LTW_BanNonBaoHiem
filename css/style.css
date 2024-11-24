@@ -213,7 +213,7 @@ button.close {
     border: 2px solid #eee;
     padding: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    width: 350px;
+    width: 360px;
     display: none; /* Ẩn mặc định */
     z-index: 1;
     cursor: text;

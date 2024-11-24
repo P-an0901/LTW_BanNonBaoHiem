@@ -4,8 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (loggedInUser) {
         // Hiển thị thông tin cá nhân
-        document.getElementById("account-fullname").textContent = loggedInUser.fullName || "Không rõ";
+        document.getElementById("account-fullname").textContent = loggedInUser.fullName;
         document.getElementById("account-email").textContent = loggedInUser.email || "Không rõ";
+        document.getElementById("account-phone").textContent = loggedInUser.email || "Không rõ";
+        document.getElementById("account-address").textContent = loggedInUser.email || "Không rõ";
 
         // Hiển thị lịch sử đơn hàng
         const orderHistory = document.getElementById("order-history");
