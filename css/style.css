@@ -83,7 +83,7 @@ header {
     background-color: #c71a22 !important;
     color: var(--white);
 }
-.btn:focus, .buy-button:focus,
+.btn:focus, .buy-button:focus,.size-button:focus,
 .form-ground-btn:focus,  .form-submit:focus,
 .pagination button:focus{
     box-shadow: none !important;  
@@ -533,17 +533,45 @@ button.close {
 }
 .product-item:hover h3 {
     cursor: pointer;
-    color: #c71a22;
+
+}
+.select-size {
+    display: flex;
+    justify-content: center;
+    gap: 20px; 
+    z-index: 10;
+    z-index: 1;
+    position: relative; 
+    background-color: #fff;
+}
+
+.select-size .size-button {
+    border: 2px solid #ccc; 
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    width: 30px;
+    justify-content: center;
+}
+.select-size  .size-button.selected {
+    border-color: #B5292F !important;
+}
+
+.select-size  .size-button:hover {
+    border-color: #B5292F;
 }
 .product-name {
     display: block; 
-    height: 2.2em; 
+    height: 2.2em;
     overflow: hidden;  
     line-height: 1.1em; 
     font-size: 19px;
     margin: 15px 0 0;
     text-transform: uppercase;
     color: var(--black);
+    background-color: #fff;
 }
 
 .product-price-container {

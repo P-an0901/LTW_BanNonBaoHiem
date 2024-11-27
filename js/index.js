@@ -19,7 +19,6 @@ $(document).ready(function(){
         const danhMucLink = document.querySelector('.menu-link[href="danhmuc.html"]');
         const trangChuLink = document.querySelector('.menu-link[href="index.html"]');
         
-        // Xóa 'active' khỏi tất cả các menu links
         document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
         
         // Kiểm tra URL hiện tại để thêm 'active' cho "Trang chủ" hoặc "Danh Mục Sản phẩm"
@@ -134,6 +133,15 @@ function loginWithFacebook() {
   function loginWithGoogle() {
     // Logic for Google login
   }
+// Lấy tất cả các nút button với class 'size-button'
+const buttons = document.querySelectorAll('.size-button');
+
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        buttons.forEach(btn => btn.classList.remove('selected'));
+        button.classList.add('selected');
+    });
+});
 
 /* Giảm giá*/
 const products = document.querySelectorAll('.product-item');
@@ -167,10 +175,16 @@ function addToCart(button) {
     const productPrice = productElement.querySelector('.product-price').innerText;
     const productImage = productElement.querySelector('.product-image').src;
 
+    const selectedSizeButton = productElement.querySelector('.size-button.selected');
+    if (!selectedSizeButton) {
+        alert('Vui lòng chọn kích thước!');
+        return;
+    }
+    const productSize = selectedSizeButton.getAttribute('data-value');
     // Kiểm tra xem sản phẩm đã có trong giỏ hay chưa
-    const productInCart = cart.find(item => item.name === productName);
+    const productInCart = cart.find(item => item.name === productName && item.size === productSize);
     if (productInCart) {
-        alert('Sản phẩm này đã có trong giỏ hàng!');
+        alert('Sản phẩm này với kích thước này đã có trong giỏ hàng!');
         return;
     }
 
@@ -179,6 +193,7 @@ function addToCart(button) {
         name: productName,
         price: productPrice,
         image: productImage,
+        size: productSize,
     };
     cart.push(product);
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -205,8 +220,8 @@ function updateCart() {
                     <li class="cart-item">
                         <img src="${product.image}" alt="${product.name}" class="cart-item-img">
                         <span class="cart-item-name">${product.name}</span>
-                        <span class="cart-item-size mr-2">${product && product.size ? product.size : ''}</span>
-                        <span class="cart-item-quantity mr-2">${product && product.quantity ? product.quantity : ''}</span>
+                        <span class="cart-item-size mr-2">${product.size}</span>
+                        <span class="cart-item-quantity mr-2">${product.quantity ? product.quantity : '1'}</span>
                         <span class="cart-item-price">${product.price}</span>
                         <button class="remove-item-btn" onclick="removeFromCart(${index})">
                             <i class="fas fa-trash"></i> Xóa
