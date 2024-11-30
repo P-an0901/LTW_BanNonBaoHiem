@@ -15,8 +15,6 @@ function addSampleAccount() {
     }
 }
 addSampleAccount();
-
-
 // Hàm xử lý đăng ký
 function handleSignup(event) {
     event.preventDefault();
@@ -115,8 +113,6 @@ function validateSignup(fullNameUser, usernameUser, emailUser, passwordUser, pas
         document.querySelector('.form-message-checkbox').innerHTML = '';
     }
 }
-
-
 // Hàm xử lý đăng nhập
 function handleLogin(event) {
     event.preventDefault();
@@ -138,9 +134,6 @@ function handleLogin(event) {
         }
     }
 }
-
-
-
 // Hàm kiểm tra và hiển thị thông báo lỗi trong đăng nhập
 function validateLogin(usernameLog, passlog) {
     // Kiểm tra username

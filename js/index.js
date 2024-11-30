@@ -1,6 +1,3 @@
-/* Chèn header*/
-$(document).ready(function(){
-    $("#header-container").load("html/header.html", function(){
         checkStatus();
         const headerNav = document.querySelector(".header-bottom");
         if (headerNav) {
@@ -30,9 +27,8 @@ $(document).ready(function(){
             danhMucLink.classList.add('active'); 
         }
         updateCart();
-    })
+
      // Khi nội dung của modal được tải xong
-     $("#modal-container").load("html/modal.html", function() {
         // Đảm bảo rằng các sự kiện đã được gán sau khi tải modal
         const closeButton = document.querySelector('.close');
         if (closeButton) {
@@ -93,7 +89,6 @@ $(document).ready(function(){
             document.querySelector('.forgot-password-form').style.display = 'none'; 
             document.querySelector('.login').style.display = 'block'; 
         });
-    });
 
     // Hàm mở modal với các loại form: login, signup
     window.openModal = function(type) {
@@ -124,8 +119,7 @@ $(document).ready(function(){
         modal.querySelector('.form-message-login').innerHTML = '';
         modal.querySelector('.form-message-login').style.display = 'none';
     }
-    $("#footer").load("html/footer.html")
-});
+
 function loginWithFacebook() {
     // Logic for Facebook login
   }
@@ -142,7 +136,36 @@ buttons.forEach(button => {
         button.classList.add('selected');
     });
 });
+function checkStatus() {
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
+    if (loggedInUser) {
+        document.getElementById("account-menu").style.display = "block";
+        document.getElementById("login-menu").style.display = "none";
+        document.getElementById("signup-menu").style.display = "none";
+        document.getElementById("account-name").textContent = loggedInUser.fullName || "Tài khoản";
+        if (loggedInUser.role === 'admin') {
+            document.getElementById('admin-page').style.display = 'block';
+        } else {
+            document.getElementById('admin-page').style.display = 'none';
+        }
+    } else {
+        document.getElementById("account-menu").style.display = "none";
+        document.getElementById("login-menu").style.display = "block";
+        document.getElementById("signup-menu").style.display = "block";
+    }
+}
+function logout() {
+    // Xóa thông tin người dùng khỏi localStorage
+    localStorage.removeItem("loggedInUser");
+
+    // Cập nhật lại trạng thái giao diện
+    checkStatus();
+
+    // Thông báo và chuyển hướng
+    alert("Bạn đã đăng xuất thành công!");
+    window.location.href = "index.html";
+}
 /* Giảm giá*/
 const products = document.querySelectorAll('.product-item');
 
