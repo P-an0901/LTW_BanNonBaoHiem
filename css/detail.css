@@ -212,6 +212,16 @@
 .related-product-btn{
     font-size: 14px;
 }
+.star {
+    font-size: 16px;
+    color: black;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.star.filled {
+    color: gold; 
+}
 /* Khung cho phần bình luận */
 .comment-form {
     background-color: #f9f9f9;

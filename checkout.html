@@ -67,7 +67,7 @@
                                   <li><a href="#" id="change-password">Đổi mật khẩu</a></li>
                               </ul>
                           </li>
-                          <li class="list-inline-item pointer cart-container" onclick="openCart()" title="Giỏ hàng">
+                          <li class="list-inline-item pointer cart-container" title="Giỏ hàng">
                               <a href="giohang.html">
                                   <i class="fas fa-shopping-cart"></i>
                                   <span class="badge badge-pill badge-danger">0</span>
@@ -80,6 +80,14 @@
                                       <i class="fas fa-shopping-bag"></i>
                                       Không có sản phẩm nào.
                                   </div>
+                                  <div class="cart-sum">
+                                    <div class="cart-total">
+                                        <span>Tổng tiền:</span>
+                                        <span id="total-price">0</span>
+                                    </div>
+                                        <button class="checkout-btn"><a href="checkout.html"></a>
+                                            Xem chi tiết</button>
+                                </div>
                               </div>
                           </li>
                       </ul>
@@ -105,7 +113,7 @@
                       <li><a href="danhmuc.html?category=bicycle">Mũ bảo hiểm xe đạp</a></li>
                   </ul>
               </li>
-              <li class="menu-list-item"><a href="#" class="menu-link">Khuyến mãi</a></li>
+              <li class="menu-list-item"><a href="khuyenmai.html" class="menu-link">Khuyến mãi</a></li>
               <li class="menu-list-item">
                   <a href="#" class="menu-link has-submenu">
                       Thương Hiệu 
@@ -204,7 +212,7 @@
                           <div class="form-group">
                               <label for="username-login" class="form-label">Tên đăng nhập</span></label>
                               <input id="username-login" name="username" type="text" placeholder="Nhập username" class="form-control">
-                              <span class="form-message-username form-message"></span>
+                              <span class="form-message-username-check-login form-message"></span>
                           </div>                                                             
                           <div class="form-group">
                               <label for="password-login" class="form-label">Mật khẩu</label>

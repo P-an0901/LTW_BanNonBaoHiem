@@ -67,7 +67,7 @@ function validateSignup(fullNameUser, usernameUser, emailUser, passwordUser, pas
 
     // Kiểm tra username
     if (usernameUser.length == 0) {
-        document.querySelector('.form-message-username').innerHTML = 'Vui lòng nhập username';
+        document.querySelector('.form-message-username').innerHTML = 'Vui lòng nhập tên đăng nhập';
         document.getElementById('username').focus();
     } else if (usernameUser.length < 6) {
         document.getElementById('username').value = '';
@@ -130,7 +130,7 @@ function handleLogin(event) {
             localStorage.setItem('loggedInUser', JSON.stringify(accountFound));
             return accountFound;
         } else {
-            document.querySelector('.form-message-login').innerHTML = 'Kiểm tra lại username hoặc mật khẩu';
+            document.querySelector('.form-message-login').innerHTML = 'Kiểm tra lại tên đăng nhập hoặc mật khẩu';
         }
     }
 }
@@ -138,9 +138,9 @@ function handleLogin(event) {
 function validateLogin(usernameLog, passlog) {
     // Kiểm tra username
     if (usernameLog.length == 0) {
-        document.querySelector('.form-message-username').innerHTML = 'Vui lòng nhập vào username';
+        document.querySelector('.form-message-username-check-login').innerHTML = 'Vui lòng nhập vào tên đăng nhập';
     } else {
-        document.querySelector('.form-message-username').innerHTML = '';
+        document.querySelector('.form-message-username-check-login').innerHTML = '';
     }
 
     // Kiểm tra mật khẩu
