@@ -35,17 +35,6 @@
     object-fit: contain; 
     margin: auto; 
 }
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 30px;
-    color: #fff;
-    cursor: pointer;
-    z-index: 10; 
-}
 /*Tiêu đề*/
 .product-info h1{
     margin: 0;
@@ -222,6 +211,16 @@
 }
 .related-product-btn{
     font-size: 14px;
+}
+.star {
+    font-size: 16px;
+    color: black;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.star.filled {
+    color: gold; 
 }
 /* Khung cho phần bình luận */
 .comment-form {
