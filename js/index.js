@@ -15,12 +15,15 @@
         const currentUrl = window.location.pathname;
         const danhMucLink = document.querySelector('.menu-link[href="danhmuc.html"]');
         const trangChuLink = document.querySelector('.menu-link[href="index.html"]');
+        const khuyenMaiLink = document.querySelector('.menu-link[href="khuyenmai.html"]');
         
         document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
         
         // Kiểm tra URL hiện tại để thêm 'active' cho "Trang chủ" hoặc "Danh Mục Sản phẩm"
         if (currentUrl.includes("index.html") || currentUrl === "") {
             trangChuLink.classList.add('active'); 
+        }else if (currentUrl.includes("khuyenmai.html")) {
+            khuyenMaiLink.classList.add('active');
         } else if (currentUrl.includes("taikhoan.html") || currentUrl.includes("giohang.html") || currentUrl.includes("gioithieu.html")) {
             document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
         } else  {
@@ -223,7 +226,9 @@ function addToCart(button) {
     // Cập nhật giỏ hàng
     updateCart();
 }
-
+function extractNumber(priceString) {
+    return Number(priceString.replace(/[^0-9]/g, ''));
+}
 // Hàm cập nhật giỏ hàng
 function updateCart() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -231,13 +236,15 @@ function updateCart() {
     // Phần tử chứa giỏ hàng
     const cartItemsContainer = document.getElementById('cart-items');
     const emptyMessage = document.getElementById('empty-message');
+    const cartSum = document.querySelector('.cart-sum');
+    const cartTotal = document.getElementById('total-price');
 
     if (cartItemsContainer) {
         cartItemsContainer.innerHTML = '';
 
         if (cart.length > 0) {
             emptyMessage.style.display = 'none';
-
+            cartSum.style.display = 'block';
             cart.forEach((product, index) => {
                 const productHTML = `
                     <li class="cart-item">
@@ -253,12 +260,25 @@ function updateCart() {
                 `;
                 cartItemsContainer.innerHTML += productHTML;
             });
+        }else{
+            emptyMessage.style.display = 'flex';
+            cartSum.style.display = 'none';
         }
     }
     // Cập nhật badge giỏ hàng
     const cartBadge = document.querySelector('.cart-container .badge');
     if (cartBadge) {
         cartBadge.textContent = cart.length;
+    }
+    if (cartTotal) {
+        let total = 0;
+        cart.forEach(product => {
+        const price = extractNumber(product.price);  
+        if (!isNaN(price)) {  
+            total += price;
+        }
+    });
+        cartTotal.textContent = total.toLocaleString() + ' đ';
     }
 }
 

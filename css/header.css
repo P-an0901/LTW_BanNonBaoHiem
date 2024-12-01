@@ -178,10 +178,12 @@ button.close {
 .cart-container {
     position: relative;
 }
-.cart-container a{
+
+.cart-container a {
     color: #000;
 }
-.cart-container a:hover{
+
+.cart-container a:hover {
     transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     color: var(--red); 
 }
@@ -189,18 +191,51 @@ button.close {
 .cart-dropdown {
     position: absolute;
     top: 100%;
+    border-radius: 10px;
     transform: translateX(-88%);
     background-color: white;
     border: 2px solid #eee;
-    padding: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     width: 360px;
-    display: none; /* Ẩn mặc định */
+    display: none;
     z-index: 1;
     cursor: text;
+    max-height: 300px; 
+    overflow-y: auto; 
+}
+.cart-sum {
+    position: sticky;
+    bottom: 0;
+    margin: 0;
+    background-color: white; 
+    padding: 10px;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); 
+    z-index: 2; 
 }
 
-/* Hiển thị giỏ hàng dropdown khi hover vào giỏ hàng */
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.cart-actions {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.checkout-btn{
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    background-color: #d6aa69;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
 .cart-container:hover .cart-dropdown {
     display: block;
 }
@@ -216,6 +251,7 @@ button.close {
     border-bottom: 1px solid #ddd;
     color: var(--text-color);
 }
+
 .cart-dropdown li:hover {
     color: inherit;
 }
@@ -223,6 +259,7 @@ button.close {
 .cart-dropdown li:last-child {
     border-bottom: none;
 }
+
 .empty-message {
     display: flex; 
     align-items: center; 
@@ -238,6 +275,7 @@ button.close {
     color: rgba(224, 224, 224, 0.5); 
     margin-bottom: 10px; 
 }
+
 
 /*tạo menu cho header-bottom*/
 .submenu {
