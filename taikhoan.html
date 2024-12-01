@@ -8,6 +8,7 @@
     <link rel="stylesheet" href=" css/style.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href=" css/danhmuc.css">
+    <link rel="stylesheet" href=" css/taikhoan.css">
     <title>Thông tin tài khoản</title>
 </head>
 <body>
@@ -263,8 +264,7 @@
 <div class="back-to-top active">
     <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
 </div>
-<div class="container">
-    <h2 class="tk-title">Thông tin tài khoản</h2>
+<div class="container" id="container-user">
 
     <!-- Thông tin và thao tác với tài khoản -->
     <div class="card mb-4">
@@ -272,11 +272,19 @@
             <h4>Thông tin tài khoản</h4>
         </div>
         <div class="card-body">
-            <!-- Thông tin cá nhân -->
-            <p><strong>Họ và tên:</strong> <span id="account-fullname"></span></p>
-            <p><strong>Email:</strong> <span id="account-email"></span></p>
-            <p><strong>Số điện thoại:</strong> <span id="account-phone"></span></p>
-            <p><strong>Địa chỉ:</strong> <span id="account-address"></span></p>
+            <!-- Thông tin cá nhân và ảnh -->
+            <div class="d-flex align-items-center">
+                <!-- Ảnh người dùng -->
+                <img src="images/Royal M139 Cờ VN.jpg" alt="Avatar" class="avatar-img me-3" />
+                
+                <!-- Thông tin cá nhân -->
+                <div>
+                    <p><strong>Họ và tên:</strong> <span id="account-fullname"></span></p>
+                    <p><strong>Email:</strong> <span id="account-email"></span></p>
+                    <p><strong>Số điện thoại:</strong> <span id="account-phone"></span></p>
+                    <p><strong>Địa chỉ:</strong> <span id="account-address"></span></p>
+                </div>
+            </div>
             
             <!-- Thao tác với tài khoản -->
             <div class="d-flex justify-content-between flex-column flex-sm-row">
@@ -298,26 +306,157 @@
     <!-- Lịch sử đơn hàng -->
     <div class="card">
         <div class="card-header bg-success text-white">
+            <h4>Đơn hàng hiện tại</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Mã đơn</th>
+                        <th>Sản phẩm</th>
+                        <th>Tổng tiền</th>
+                        <th>Phương thức thanh toán</th>
+                        <th>Địa chỉ</th>
+                        <th>Ngày giao dự kiến</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#12345</td>
+                        <td>
+                            <ul>
+                                <li>Nón bảo hiểm 3/4 - Đen nhám (Số lượng: 1)</li>
+                                <li>Nón bảo hiểm fullface - Xanh dương (Số lượng: 1)</li>
+                            </ul>
+                        </td>
+                        <td>500.000 VNĐ</td>
+                        <td>Chuyển khoản ngân hàng</td>
+                        <td>123 Đường ABC, Quận 1, TP.HCM</td>
+                        <td>Chưa rõ</td>
+                        <td>Đang xử lý</td>
+                        <td>
+                            <button class="btn btn-sm " style="width: 80px;" onclick="toggleDetails(this)">Chi tiết</button>
+                            <button class="btn btn-danger btn-sm" style="width: 80px;">Hủy đơn</button>
+                        </td>
+                    </tr>
+                    <tr id="order-details-1" class="order-details">
+                        <td colspan="8">
+                            <div class="order-detail-container">
+                                <h5>Chi tiết đơn hàng #12345</h5>
+                                <div class="order-detail-content">
+                                    <p><strong>Sản phẩm:</strong></p>
+                                    <ul>
+                                        <li>Nón bảo hiểm 3/4 - Đen nhám (Số lượng: 1)</li>
+                                        <li>Nón bảo hiểm fullface - Xanh dương (Số lượng: 1)</li>
+                                    </ul>
+                                    <p><strong>Phương thức thanh toán:</strong> Chuyển khoản ngân hàng</p>
+                                    <p><strong>Địa chỉ giao hàng:</strong> 123 Đường ABC, Quận 1, TP.HCM</p>
+                                    <p><strong>Số điện thoại:</strong> 0901234567</p>
+                                    <p><strong>Trạng thái:</strong> Đang xử lý</p>
+                                </div>
+                                <div class="order-detail-actions">
+                                    <button class="btn btn-warning btn-sm">Chỉnh sửa</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card mt-4">
+        <div class="card-header bg-primary text-white">
             <h4>Lịch sử đơn hàng</h4>
         </div>
         <div class="card-body">
-            <ul id="order-history" class="list-group">
-                <!-- Lịch sử đơn hàng sẽ được hiển thị tại đây -->
-                <!-- <li class="list-group-item">Không có đơn hàng nào.</li> -->
-                <li class="list-group-item">
-                    <h5>Đơn hàng #12345</h5>
-                    <p><strong>Ngày đặt hàng:</strong> 27/11/2024</p>
-                    <p><strong>Tổng số tiền:</strong> 500.000 VNĐ</p>
-                    <ul>
-                        <li>Nón bảo hiểm 3/4 - Đen nhám (Số lượng: 1)</li>
-                        <li>Nón bảo hiểm fullface - Xanh dương (Số lượng: 1)</li>
-                    </ul>
-                    <p><strong>Trạng thái:</strong> Đã giao hàng</p>
-                </li>
-            </ul>
+            <table class="table table-bordered" id="order-history">
+                <thead>
+                    <tr>
+                        <th>Mã đơn</th>
+                        <th>Sản phẩm</th>
+                        <th>Tổng tiền</th>
+                        <th>Phương thức thanh toán</th>
+                        <th>Địa chỉ</th>
+                        <th>Ngày giao</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="extra-order">
+                        <td>#12344</td>
+                        <td>
+                            <ul>
+                                <li>Nón bảo hiểm 3/4 - Đen bóng (Số lượng: 1)</li>
+                            </ul>
+                        </td>
+                        <td>450.000 VNĐ</td>
+                        <td>Tiền mặt</td>
+                        <td>123 Đường XYZ, Quận 3, TP.HCM</td>
+                        <td>10-11-2024</td>
+                        <td>Đã giao</td>
+                        <td>
+                            <button class="btn btn-info btn-sm" style="width: 80px;">Chi tiết</button>
+                        </td>
+                    </tr>
+                    <tr class="extra-order">
+                        <td>#12344</td>
+                        <td>
+                            <ul>
+                                <li>Nón bảo hiểm 3/4 - Đen bóng (Số lượng: 1)</li>
+                            </ul>
+                        </td>
+                        <td>450.000 VNĐ</td>
+                        <td>Tiền mặt</td>
+                        <td>123 Đường XYZ, Quận 3, TP.HCM</td>
+                        <td>10-11-2024</td>
+                        <td>Đã giao</td>
+                        <td>
+                            <button class="btn btn-info btn-sm" style="width: 80px;">Chi tiết</button>
+                        </td>
+                    </tr>
+                    <tr class="extra-order">
+                        <td>#12344</td>
+                        <td>
+                            <ul>
+                                <li>Nón bảo hiểm 3/4 - Đen bóng (Số lượng: 1)</li>
+                            </ul>
+                        </td>
+                        <td>450.000 VNĐ</td>
+                        <td>Tiền mặt</td>
+                        <td>123 Đường XYZ, Quận 3, TP.HCM</td>
+                        <td>10-11-2024</td>
+                        <td>Đã giao</td>
+                        <td>
+                            <button class="btn btn-info btn-sm" style="width: 80px;">Chi tiết</button>
+                        </td>
+                    </tr>
+                    <tr class="extra-order">
+                        <td>#12344</td>
+                        <td>
+                            <ul>
+                                <li>Nón bảo hiểm 3/4 - Đen bóng (Số lượng: 1)</li>
+                            </ul>
+                        </td>
+                        <td>450.000 VNĐ</td>
+                        <td>Tiền mặt</td>
+                        <td>123 Đường XYZ, Quận 3, TP.HCM</td>
+                        <td>10-11-2024</td>
+                        <td>Đã giao</td>
+                        <td>
+                            <button class="btn btn-info btn-sm" style="width: 80px;">Chi tiết</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="load-more" class="btn btn-primary btn-sm">Xem thêm</button>
+            <button id="hide-extra" class="btn btn-secondary btn-sm" style="display: none;">Ẩn bớt</button>
         </div>
     </div>
 </div>
+    
 
 
 <!-- Footer -->
@@ -443,6 +582,6 @@
 <script src="js/index.js"></script>
 <script src="js/modal.js"></script>
 <script src="js/header.js"></script>
-<script src=" js/taikhoan.js"></script>
+<script src="js/taikhoan.js"></script>
 </body>
 </html>
