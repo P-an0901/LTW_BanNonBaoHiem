@@ -37,3 +37,17 @@
     padding: 8px 16px;
     font-size: 16px;
 }
+.qr-container {
+    text-align: center; /* Căn giữa ảnh và input */
+    margin-top: 10px; /* Khoảng cách trên */
+}
+
+.qr-code-img {
+    width: 300px;
+    height: 300px; /* Đảm bảo ảnh vuông */
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}

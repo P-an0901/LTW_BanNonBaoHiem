@@ -299,8 +299,32 @@
           <button class="btn btn-primary" id="card-payment">Thanh toán bằng thẻ</button>
           <button class="btn btn-primary" id="e-wallet-payment">Thanh toán qua ví điện tử</button>
         </div>
+          <!-- Form thanh toán ví điện tử -->
+          <form id="e-wallet-payment-form" style="display: none;">
+              <h6>Chọn ví điện tử để thanh toán</h6>
+              <div class="form-group">
+                  <label for="momo-payment">Momo</label>
+                  <input type="radio" id="momo-payment" name="e-wallet" value="momo">
+                  <img id="momo-image" src="images/momo.jpg" alt="QR Momo" class="qr-code-img" style="display: none;">
+              </div>
+              <div class="form-group">
+                  <label for="zalopay-payment">ZaloPay</label>
+                  <input type="radio" id="zalopay-payment" name="e-wallet" value="zalopay">
+                  <img id="zalopay-image" src="zalopay-qr.png" alt="QR ZaloPay" class="qr-code-img" style="display: none;">
+              </div>
+              <div class="form-group">
+                  <label for="viettel-money-payment">Viettel Money</label>
+                  <input type="radio" id="viettel-money-payment" name="e-wallet" value="viettel-money">
+                  <img id="viettel-money-image" src="viettel-money-qr.png" alt="QR Viettel Money" class="qr-code-img" style="display: none;">
+              </div>
+              <div class="form-group">
+                  <label for="vnpay-payment">VNPay</label>
+                  <input type="radio" id="vnpay-payment" name="e-wallet" value="vnpay">
+                  <img id="vnpay-image" src="vnpay-qr.png" alt="QR VNPay" class="qr-code-img" style="display: none;">
+              </div>
+          </form>
 
-        <form id="card-payment-form" style="display: none;">
+          <form id="card-payment-form" style="display: none;">
           <div class="form-group">
             <label for="card-name">Tên trên thẻ</label>
             <input type="text" id="card-name" name="card-name" class="form-control">
