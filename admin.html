@@ -146,6 +146,7 @@
             </div>
             <!-- Product -->
             <div class="section product-all">
+                <h1 class="section-title">Quản Lý Sản Phẩm</h1>
                 <div class="admin-control">
                     <div class="admin-control-first">
                         <select name="the-loai" id="the-loai">
@@ -173,8 +174,16 @@
                         <button class="btn-control-large" id="btn-add-product"><i class="fa-solid fa-plus"></i> Thêm sản phẩm mới</button> 
                         <button class="btn-control-large" id="btn-add-category"><i class="fa-solid fa-plus"></i> Thêm danh mục</button> 
                         <button class="btn-control-large" id="btn-add-brand"><i class="fa-solid fa-plus"></i> Thêm thương hiệu</button> 
+
+                        <button class="btn-control-large" id="btn-add-size"><i class="fa-solid fa-plus"></i> Thêm size</button> 
                     </div>
                 </div>
+                <ul class="tabs">
+                    <li class="tab-item active" data-tab="product-list">Danh sách sản phẩm</li>
+                    <li class="tab-item" data-tab="variant-list">Mục Khác</li>
+                </ul>
+                <div id="product-list" class="tab-content active">
+
                 <div>
                     <h2>Danh sách sản phẩm</h2>
                     <table id="product-table" style="width:100%">
@@ -205,33 +214,43 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Sản phẩm 2</td>
+
+                                <td>Royal M125K</td>
                                 <td>Royal</td>
                                 <td>Mũ 3/4</td>
                                 <td>01-12-2024</td>
-                                <td><button class="variant-btn" data-id="1"><i class="fa-solid fa-cogs"></i></button></td>
+                                <td><button class="variant-btn" data-id="2"><i class="fa-solid fa-cogs"></i></button></td>
+
+                                
                                 <td><button class="details-btn" data-id="2"><i class="fa-solid fa-eye"></i></button></td>
                                 <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
                                 <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Sản phẩm 3</td>
-                                <td>Royal</td>
-                                <td>Mũ 3/4</td>
+
+                                <td>Asia MT-10</td>
+                                <td>Asia</td>
+                                <td>Mũ 1/2</td>
                                 <td>01-12-2024</td>
-                                <td><button class="variant-btn" data-id="1"><i class="fa-solid fa-cogs"></i></button></td>
+                                <td><button class="variant-btn" data-id="3"><i class="fa-solid fa-cogs"></i></button></td>
+
+                               
                                 <td><button class="details-btn" data-id="3"><i class="fa-solid fa-eye"></i></button></td>
                                 <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
                                 <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                             </tr>
                             <tr>
                                 <td>4</td>
-                                <td>Sản phẩm 3</td>
-                                <td>Royal</td>
-                                <td>Mũ 3/4</td>
+
+                                <td>Andes 126K</td>
+                                <td>Andes</td>
+                                <td>Mũ 1/2</td>
                                 <td>01-12-2024</td>
-                                <td><button class="variant-btn" data-id="1"><i class="fa-solid fa-cogs"></i></button></td>
+                                <td><button class="variant-btn" data-id="4"><i class="fa-solid fa-cogs"></i></button></td>
+
+                               
+
                                 <td><button class="details-btn" data-id="4"><i class="fa-solid fa-eye"></i></button></td>
                                 <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
                                 <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
@@ -246,11 +265,19 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
+
+                                <th>ID sản phẩm</th>
+
+
                                 <th>Tên biến thể</th>
                                 <th>Hình ảnh</th>
                                 <th>Màu sắc</th>
                                 <th>Giá</th>
                                 <th>Chi tiết</th>
+
+                                <th>Thêm ảnh</th>
+
+
                                 <th>Sửa</th>
                                 <th>Xóa</th>
                             </tr>
@@ -260,7 +287,107 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="p-size-table" id="p-size-table">
+                    <h4 id="p-size-title">Kích thước biến thể sản phẩm</h4>
+                    <button class="btn-control-large m-2" id="btn-add-p-size"><i class="fa-solid fa-plus"></i> Thêm kích thước biến thể</button> 
+                    <table id="p-size-content" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên biến thể</th>
+                                <th>Kích cỡ</th>
+                                <th>Tồn kho</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Royal M139 Trắng</td>
+                                <td>M</td>
+                                <td>10</td>
+                                <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                                <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <div id="variant-list" class="tab-content">
+                <!-- Quản lý thương hiệu -->
+                <h4>Quản lý Thương hiệu</h4>
+                <table id="brand-table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên thương hiệu</th>
+                            <th>Hình Ảnh</th>
+                            <th>Sửa</th>
+                            <th>Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Royal</td>
+                            <td><img src="images/Logo2020-03.png" alt="royal" width="50"></td>
+                            <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                            <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Asia</td>
+                            <td><img src="images/Logo2020-01-1.png" alt="Asia" width="50"></td>
+                            <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                            <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+        
+                <!-- Quản lý danh mục -->
+                <h4>Quản lý Danh mục</h4>
+                <table id="category-table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên danh mục</th>
+                            <th>Sửa</th>
+                            <th>Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td>1</td>
+                        <td>Mũ 3/4</td>
+                        <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                        <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                    </tbody>
+                </table>
+        
+                <!-- Quản lý Size -->
+                <h4>Quản lý Size</h4>
+                <table id="size-table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên</th>
+                            <th>Sửa</th>
+                            <th>Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td>1</td>
+                        <td>M</td>
+                        <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                        <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+      
+
             <div class="section promotion">
                 <div class="admin-control">
                     <div class="admin-control-first">
@@ -268,11 +395,13 @@
                                 <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span> 
                                 <input id="form-search-product" type="text" class="form-search-input" placeholder="Tìm kiếm tên sản phẩm..." oninput="">
                             </form>
+
                     </div>
                     <div class="admin-control-right">
                         <button class="btn-control-large" id="btn-cancel-product"><i class="fa-solid fa-rotate-right"></i> Làm mới</button> 
                         <button class="btn-control-large" id="btn-add-product"><i class="fa-solid fa-plus"></i> Thêm Khuyến Mãi</button> 
                     </div>
+
                 </div>
                 <div>
                     <h2>Danh sách Khuyến Mãi</h2>
@@ -290,7 +419,41 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+
+                            <tr>
+                                <td>1</td>
+                                <td>Giảm giá Đầu tháng</td>
+                                <th>10</th>
+                                <th>01-12-2024</th>
+                                <th>10-12-2024</th>
+                                <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                                <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h2>Danh sách Khuyến Mãi</h2>
+                    <button class="btn-control-large m-2" id="btn-add-product"><i class="fa-solid fa-plus"></i> Thêm Khuyến Mãi cho biến thể sản phẩm</button> 
+                    <table id="promotion-table" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>ID Khuyến Mãi</th>
+                                <th>ID Biến Thể Sản Phẩm</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <th>1</th>
+                                <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                                <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                            </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -552,7 +715,6 @@
                         <i class="fa-solid fa-dollar-sign fa-2x"></i>
                     </div>
                 </div>
-                    
                 <div class="table">
                     <table>
                         <thead>
@@ -592,6 +754,125 @@
         </div>
         </main>
     </div>
+    <!-- Modal thêm sản phẩm -->
+    <div class="modal" id="addProductModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span>&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title">Thêm Sản Phẩm</h2>
+              <form id="addProductForm">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="productId">ID Sản Phẩm</label>
+                    <input type="text" class="form-control" id="productId" name="productId">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="productName">Tên Sản Phẩm</label>
+                    <input type="text" class="form-control" id="productName" name="productName">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="productDescription">Miêu Tả</label>
+                  <textarea class="form-control" id="productDescription" name="productDescription" rows="4"></textarea>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="brand">Thương Hiệu</label>
+                    <select class="form-control" id="brand" name="brand">
+                      <option value="">Chọn Thương Hiệu</option>
+                      <option value="brand1">Royal</option>
+                      <option value="brand2">Asia</option>
+                      <option value="brand3">Andes</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="category">Danh Mục</label>
+                    <select class="form-control" id="category" name="category">
+                      <option value="">Chọn Danh Mục</option>
+                      <option value="category1">Mũ 3/4</option>
+                      <option value="category2">Fullface</option>
+                      <option value="category3">Mũ 1/2</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="createdDate">Ngày Tạo</label>
+                  <input type="date" class="form-control" id="createdDate" name="createdDate">
+                </div>
+                <button type="submit" class="btn btn-addO">Thêm Sản Phẩm</button>
+              </form>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+
+<!-- Modal Thêm Thương Hiệu -->
+<div class="modal" id="addBrandModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span>&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <h2 class="modal-title">Thêm Thương Hiệu</h2>
+        <form id="addBrandForm">
+          <div class="form-group col-md-6">
+            <label for="brandId">ID Thương Hiệu</label>
+            <input type="text" class="form-control" id="brandId" name="brandId" placeholder="Nhập ID thương hiệu" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="brandName">Tên Thương Hiệu</label>
+            <input type="text" class="form-control" id="brandName" name="brandName" placeholder="Nhập tên thương hiệu" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="brandImage">Chọn Hình Ảnh</label>
+            <input type="file" class="form-control-file" id="brandImage" name="brandImage" accept="image/*">
+          </div>
+          
+          <button type="submit" class="btn btn-addO">Thêm Thương Hiệu</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="addCategoryModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title">Thêm Danh Mục</h2>
+                <form id="addCategoryForm">
+                    <div class="form-group col-md-6">
+                        <label for="categoryId">ID Danh Mục</label>
+                        <input type="text" class="form-control" id="categoryId" name="categoryId" placeholder="Nhập ID danh mục" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="categoryName">Tên Danh Mục</label>
+                        <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Nhập tên danh mục" required>
+                    </div> 
+                    <button type="submit" class="btn btn-addO">Thêm Danh Mục</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+  
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
