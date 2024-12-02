@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/header.css">
   <link rel="stylesheet" href="css/danhmuc.css">
+    <link rel="stylesheet" href="css/giohang.css">
   <link rel="icon" href="images/HELMET.png">
   <title>Giỏ hàng</title>
 </head>
@@ -271,14 +272,11 @@
         <!-- Các sản phẩm trong giỏ hàng sẽ được hiển thị ở đây -->
 
       </ul>
-      <div id="empty-message" class="empty-message">
-        <i class="fas fa-shopping-bag"></i>
-        Không có sản phẩm nào trong giỏ hàng.
-      </div>
+
       <div class="cart-summary">
         <p>Tổng cộng: <span id="cart-total" >0 đ</span></p>
-        <button id="checkout-btn" class="btn btn-primary" onclick="redirectToCheckout()">Thanh toán</button>
-
+        <button id="checkout-btn2" onclick="redirectToCheckout()">Thanh toán</button>
+          <button id="clear-cart-btn" onclick="clearCart()">Xóa hết sản phẩm</button>
       </div>
     </div>
   </div>
