@@ -35,6 +35,8 @@ function updateCartDisplay() {
                         <img src="${product.image}" alt="${product.name}" class="cart-item-img">
                         <span class="cart-item-name">${product.name}</span>
                         <span class="cart-item-price">${product.price}</span>
+                         <span class="cart-item-size mr-2">Kích thước: ${product.size}</span>
+                        <span class="cart-item-quantity mr-2">Số lượng: ${product.quantity ? product.quantity : '1'}</span>
                         <button class="remove-item-btn" onclick="removeFromCart(${index})">
                             <i class="fas fa-trash"></i> Xóa
                         </button>
@@ -67,4 +69,15 @@ function saveCart() {
 function redirectToCheckout() {
     saveCart(); // Lưu giỏ hàng vào localStorage
     window.location.href = "checkout.html"; // Chuyển hướng sang trang thanh toán
+}
+// Hàm xóa hết sản phẩm trong giỏ hàng
+function clearCart() {
+    // Xóa giỏ hàng trong localStorage
+    localStorage.removeItem('cart');
+
+    // Cập nhật lại mảng giỏ hàng trong JavaScript (nếu có)
+    carts = [];
+
+    // Cập nhật giao diện giỏ hàng
+    location.reload()
 }
