@@ -2,19 +2,21 @@
 document.getElementById('card-payment').addEventListener('click', function (e) {
     e.preventDefault();
     document.getElementById('card-payment-form').style.display = 'block';
+    setSelectedButton(this);
 });
 // Hiển thị form thanh toán ví điện tử khi chọn phương thức thanh toán ví điện tử
 document.getElementById('e-wallet-payment').addEventListener('click', function (e) {
     e.preventDefault();
     document.getElementById('e-wallet-payment-form').style.display = 'block';
     document.getElementById('card-payment-form').style.display = 'none';
+    setSelectedButton(this);
 });
 
 // Ẩn form thanh toán bằng thẻ khi chọn phương thức khác
 document.getElementById('cash-payment').addEventListener('click', function (e) {
     e.preventDefault();
     document.getElementById('card-payment-form').style.display = 'none';
-
+    setSelectedButton(this);
 });
 // Ẩn form thanh toán khi chọn phương thức thanh toán khác
 document.getElementById('card-payment').addEventListener('click', function (e) {
@@ -142,3 +144,14 @@ document.getElementById('place-order-btn').addEventListener('click', function ()
 
 });
 
+// Hàm giúp thêm lớp selected cho nút được chọn
+function setSelectedButton(button) {
+    // Loại bỏ lớp selected từ tất cả các nút
+    let buttons = document.querySelectorAll('.btn2');
+    buttons.forEach(function(btn) {
+        btn.classList.remove('selected');
+    });
+
+    // Thêm lớp selected cho nút được chọn
+    button.classList.add('selected');
+}

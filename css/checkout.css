@@ -1,39 +1,165 @@
+/* Container chính */
 .checkout-container {
     max-width: 1200px;
-    background-color: #fff;
-    padding: 10px;
-    margin: 10px auto;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9; /* Màu nền nhẹ nhàng */
+    border-radius: 8px; /* Bo tròn các góc */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Thêm bóng mờ */
 }
 
+/* Các phần của trang checkout */
 .checkout-page {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    font-size: 14px; /* Giảm kích thước chữ */
+    font-size: 15px; /* Tăng kích thước chữ một chút */
 }
 
+/* Tiêu đề chính */
+.checkout-container h3 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333; /* Màu chữ tối */
+    margin-bottom: 30px;
+}
+
+/* Mỗi sản phẩm trong đơn hàng */
 .order-item {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f1f1f1; /* Thêm nền nhẹ */
+    border-radius: 5px; /* Bo tròn các góc */
 }
 
 .order-item-img {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+    object-fit: cover;
+    border-radius: 5px; /* Thêm bo tròn cho ảnh */
 }
 
 .order-item-name {
     flex: 1;
-    font-size: 14px;
+    font-size: 16px;
+    color: #555; /* Màu chữ nhẹ nhàng */
 }
 
 .order-item-price {
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #28a745; /* Màu xanh lá cho giá */
 }
 
+/* Các label trong form */
+label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Nút "Đặt hàng" */
 #place-order-btn {
-    padding: 8px 16px;
+    padding: 12px 20px;
+    font-size: 18px;
+    width: 100%;
+    border: none;
+    background-color: #28a745; /* Màu xanh lá */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#place-order-btn:hover {
+    background-color: #218838; /* Thêm hiệu ứng hover */
+}
+
+/* Các nhóm input (form group) */
+.form-group {
+    margin-bottom: 20px; /* Khoảng cách giữa các trường nhập liệu */
+}
+
+/* Ảnh QR */
+.qr-container {
+    text-align: center;
+    margin-top: 20px; /* Khoảng cách trên */
+}
+
+.qr-code-img {
+    width: 250px; /* Giữ kích thước ảnh QR vừa phải */
+    height: 250px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border-radius: 8px; /* Bo tròn các góc ảnh */
+}
+
+/* Cải thiện giao diện cho radio button */
+input[type="radio"] {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+input[type="radio"]:checked + img {
+    display: block;
+}
+
+input[type="radio"]:not(:checked) + img {
+    display: none;
+}
+
+/* Style cho các input */
+input[type="text"], input[type="number"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
     font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus {
+    border-color: #28a745; /* Hiệu ứng khi focus vào input */
+    outline: none;
+}
+
+/* Thêm hiệu ứng cho các nút radio */
+input[type="radio"]:checked {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+/* Mặc định các nút thanh toán */
+.btn2 {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;  /* Màu nền mặc định */
+    color: white;
+    border: 1px solid #007bff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    border-radius: 5px;  /* Làm bo tròn góc của nút */
+}
+
+.btn2:hover {
+    background-color: #0056b3;  /* Màu nền khi hover */
+}
+
+/* Khi nút được chọn (active) */
+.btn2.selected {
+    background-color: #28a745;  /* Màu nền khi được chọn (Xanh lá) */
+    border-color: #218838;  /* Màu viền khi được chọn */
+    color: white;  /* Màu chữ */
+    transform: scale(1.05);  /* Tạo hiệu ứng phóng to */
+}
+
+/* Hiệu ứng hover cho nút khi đã được chọn */
+.btn2.selected:hover {
+    background-color: #218838;  /* Màu nền khi hover và đã chọn */
+    border-color: #1e7e34;  /* Màu viền khi hover */
 }
