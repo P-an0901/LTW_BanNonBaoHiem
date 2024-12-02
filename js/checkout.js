@@ -3,17 +3,37 @@ document.getElementById('card-payment').addEventListener('click', function (e) {
     e.preventDefault();
     document.getElementById('card-payment-form').style.display = 'block';
 });
+// Hiển thị form thanh toán ví điện tử khi chọn phương thức thanh toán ví điện tử
+document.getElementById('e-wallet-payment').addEventListener('click', function (e) {
+    e.preventDefault();
+    document.getElementById('e-wallet-payment-form').style.display = 'block';
+    document.getElementById('card-payment-form').style.display = 'none';
+});
 
 // Ẩn form thanh toán bằng thẻ khi chọn phương thức khác
 document.getElementById('cash-payment').addEventListener('click', function (e) {
     e.preventDefault();
     document.getElementById('card-payment-form').style.display = 'none';
-});
 
-document.getElementById('e-wallet-payment').addEventListener('click', function (e) {
+});
+// Ẩn form thanh toán khi chọn phương thức thanh toán khác
+document.getElementById('card-payment').addEventListener('click', function (e) {
     e.preventDefault();
-    document.getElementById('card-payment-form').style.display = 'none';
-}); document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('e-wallet-payment-form').style.display = 'none';
+});
+// Hiển thị ảnh QR khi chọn ví điện tử
+document.getElementById('momo-payment').addEventListener('click', function () {
+    document.getElementById('momo-image').style.display = 'block';
+    document.getElementById('zalopay-image').style.display = 'none';
+    document.getElementById('viettel-money-image').style.display = 'none';
+    document.getElementById('vnpay-image').style.display = 'none';
+});
+document.getElementById('zalopay-payment').addEventListener('click', function () {
+    document.getElementById('momo-image').style.display = 'none';
+    document.getElementById('viettel-money-qr').style.display = 'none';
+    document.getElementById('vnpay-qr').style.display = 'none';
+});
+ document.addEventListener("DOMContentLoaded", function() {
     // Lấy giỏ hàng từ localStorage
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -109,6 +129,10 @@ document.getElementById('place-order-btn').addEventListener('click', function ()
                 return;
             }
         }
+
+
+
+
 
         // Nếu tất cả thông tin hợp lệ, tiếp tục xử lý đặt hàng
 

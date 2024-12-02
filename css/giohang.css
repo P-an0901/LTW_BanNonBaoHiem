@@ -1,0 +1,79 @@
+/* Khung tổng kết giỏ hàng */
+.cart-summary {
+    background-color: #f9f9f9; /* Màu nền sáng */
+    padding: 20px; /* Khoảng cách bên trong */
+    border-radius: 12px; /* Bo tròn các góc */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng mờ nhẹ */
+    margin-top: 20px; /* Khoảng cách trên */
+    text-align: center; /* Căn giữa nội dung */
+}
+
+/* Phần tổng cộng */
+.cart-summary p {
+    font-size: 18px; /* Kích thước chữ */
+    font-weight: bold; /* Chữ đậm */
+    color: #333; /* Màu chữ đen */
+    margin-bottom: 20px; /* Khoảng cách dưới */
+}
+
+/* Tổng tiền */
+#cart-total {
+    color: #FF5C5C; /* Màu đỏ tươi */
+    font-size: 20px; /* Kích thước chữ lớn */
+    font-weight: bold; /* Chữ đậm */
+}
+
+/* Nút thanh toán */
+#checkout-btn2 {
+    background-color: #4CAF50; /* Màu xanh lá cây tươi */
+    color: white; /* Chữ trắng */
+    padding: 12px 20px; /* Khoảng cách bên trong */
+    border: none; /* Xóa đường viền */
+    border-radius: 8px; /* Bo tròn góc */
+    font-size: 16px; /* Kích thước chữ */
+    font-weight: bold; /* Chữ đậm */
+    cursor: pointer; /* Khi rê chuột vào, con trỏ đổi thành tay */
+    transition: background-color 0.3s, transform 0.2s; /* Hiệu ứng khi hover */
+    margin-bottom: 15px; /* Khoảng cách dưới */
+}
+
+/* Hiệu ứng hover cho nút thanh toán */
+#checkout-btn2:hover {
+    background-color: #45a049; /* Đổi sang màu xanh lá đậm khi hover */
+    transform: scale(1.05); /* Tăng kích thước nhẹ khi hover */
+}
+
+/* Hiệu ứng khi nút thanh toán được nhấn */
+#checkout-btn2:active {
+    transform: scale(0.98); /* Thu nhỏ nút khi nhấn */
+}
+
+/* Nút xóa hết sản phẩm */
+#clear-cart-btn {
+    background-color: #FF5C5C; /* Màu đỏ tươi */
+    color: white; /* Chữ trắng */
+    padding: 12px 20px; /* Khoảng cách bên trong */
+    border: none; /* Xóa đường viền */
+    border-radius: 8px; /* Bo tròn góc */
+    font-size: 16px; /* Kích thước chữ */
+    font-weight: bold; /* Chữ đậm */
+    cursor: pointer; /* Khi rê chuột vào, con trỏ đổi thành tay */
+    transition: background-color 0.3s, transform 0.2s; /* Hiệu ứng khi hover */
+}
+
+/* Hiệu ứng hover cho nút xóa hết sản phẩm */
+#clear-cart-btn:hover {
+    background-color: #FF3333; /* Đổi sang màu đỏ đậm khi hover */
+    transform: scale(1.05); /* Tăng kích thước nhẹ khi hover */
+}
+
+/* Hiệu ứng khi nút xóa hết sản phẩm được nhấn */
+#clear-cart-btn:active {
+    transform: scale(0.98); /* Thu nhỏ nút khi nhấn */
+}
+
+/* Hiệu ứng focus cho các nút */
+#checkout-btn2:focus, #clear-cart-btn:focus {
+    outline: none; /* Xóa viền focus mặc định */
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.8); /* Thêm bóng sáng khi nút được chọn */
+}
