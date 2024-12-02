@@ -160,7 +160,7 @@ button:hover{
 }
 
 .sidebar.open .top-sidebar {
-    height: 125px;
+    height: 80px;
 }
 
 .sidebar .top-sidebar .hidden-sidebar {
@@ -300,8 +300,66 @@ tbody tr td {
 }
 
 /* Product */
+table {
+    width: 100%;
+    margin-bottom: 40px; 
+}
+th {
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    text-align: left; 
+    background-color: #f4f4f4; 
+}
+td {
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    text-align: left; 
+}
+#product-table {
+    border: 1px solid #ddd;
+}
+
+#product-table th, #product-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#product-table th {
+    background-color: #f4f4f4;
+}
+
+
+#variant-table th, #variant-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#variant-table th {
+    background-color: #f4f4f4;
+}
+#variant-section {
+    margin-top: 30px; 
+}
+#variant-content{
+    border: 1px solid #ddd;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+.admin-control select, .form-search-input {
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
 .product-all {
-    padding: 20px 80px;
+    padding: 20px 20px;
 }
 
 .btn-control-large{

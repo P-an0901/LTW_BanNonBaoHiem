@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/admin.css">
     <title>Admin</title>
@@ -29,6 +30,12 @@
                         <a href="#" class="sidebar-link">
                             <div class="sidebar-icon"><i class="fa-solid fa-tag"></i></div>
                             <div class="hidden-sidebar">Sản phẩm</div>
+                        </a>
+                    </li>
+                    <li class="sidebar-list-item tab-content">
+                        <a href="#" class="sidebar-link">
+                            <div class="sidebar-icon"><i class="fa-solid fa-percent"></i></div>
+                            <div class="hidden-sidebar">Khuyến Mãi</div>
                         </a>
                     </li>
                     <li class="sidebar-list-item tab-content">
@@ -140,7 +147,7 @@
             <!-- Product -->
             <div class="section product-all">
                 <div class="admin-control">
-                    <div class="admin-control-left">
+                    <div class="admin-control-first">
                         <select name="the-loai" id="the-loai">
                             <option>Tất cả</option>
                             <option>3/4 đầu</option>
@@ -156,58 +163,137 @@
                             <option>JC</option>
                             <!-- <option>Nón Sơn</option> -->
                         </select>
-                    </div>
-                    <div class="admin-control-center">
-                        <form action="" class="form-search">
-                            <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span> 
-                            <input id="form-search-product" type="text" class="form-search-input" placeholder="Tìm kiếm tên sản phẩm..." oninput="">
-                        </form>
+                            <form action="" class="form-search">
+                                <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span> 
+                                <input id="form-search-product" type="text" class="form-search-input" placeholder="Tìm kiếm tên sản phẩm..." oninput="">
+                            </form>
                     </div>
                     <div class="admin-control-right">
                         <button class="btn-control-large" id="btn-cancel-product"><i class="fa-solid fa-rotate-right"></i> Làm mới</button> 
                         <button class="btn-control-large" id="btn-add-product"><i class="fa-solid fa-plus"></i> Thêm sản phẩm mới</button> 
+                        <button class="btn-control-large" id="btn-add-category"><i class="fa-solid fa-plus"></i> Thêm danh mục</button> 
+                        <button class="btn-control-large" id="btn-add-brand"><i class="fa-solid fa-plus"></i> Thêm thương hiệu</button> 
                     </div>
                 </div>
-                <div class="table">
-                    <table width="100%">
+                <div>
+                    <h2>Danh sách sản phẩm</h2>
+                    <table id="product-table" style="width:100%">
                         <thead>
                             <tr>
-                                <td>STT</th>
-                                <td>Tên sản phẩm</th>
-                                <td>Giá</th>
-                                <td>Trạng thái</th>
-                                <td>Thao tác</th>
+                                <th>STT</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Thương hiệu</th>
+                                <th>Danh mục</th>
+                                <th>Ngày thêm</th>
+                                <th>Biến thể</th>
+                                <th>Chi tiết</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
                             </tr>
                         </thead>
-                        <tbody id="show-product">
+                        <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Sản phẩm 1</td>
-                                <td>200,000 VND</td>
-                                <td>Còn hàng</td>
-                                <td><button>Chi tiết</button></td>
+                                <td>Royal M139</td>
+                                <td>Royal</td>
+                                <td>Mũ 3/4</td>
+                                <td>01-12-2024</td>
+                                <td><button class="variant-btn" data-id="1"><i class="fa-solid fa-cogs"></i></button></td>
+                                <td><button class="details-btn" data-id="1"><i class="fa-solid fa-eye"></i></button></td>
+                                <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                                <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td>Sản phẩm 2</td>
-                                <td>350,000 VND</td>
-                                <td>Hết hàng</td>
-                                <td><button>Chi tiết</button></td>
+                                <td>Royal</td>
+                                <td>Mũ 3/4</td>
+                                <td>01-12-2024</td>
+                                <td><button class="variant-btn" data-id="1"><i class="fa-solid fa-cogs"></i></button></td>
+                                <td><button class="details-btn" data-id="2"><i class="fa-solid fa-eye"></i></button></td>
+                                <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                                <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td>Sản phẩm 3</td>
-                                <td>500,000 VND</td>
-                                <td>Còn hàng</td>
-                                <td><button>Chi tiết</button></td>
+                                <td>Royal</td>
+                                <td>Mũ 3/4</td>
+                                <td>01-12-2024</td>
+                                <td><button class="variant-btn" data-id="1"><i class="fa-solid fa-cogs"></i></button></td>
+                                <td><button class="details-btn" data-id="3"><i class="fa-solid fa-eye"></i></button></td>
+                                <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                                <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Sản phẩm 3</td>
+                                <td>Royal</td>
+                                <td>Mũ 3/4</td>
+                                <td>01-12-2024</td>
+                                <td><button class="variant-btn" data-id="1"><i class="fa-solid fa-cogs"></i></button></td>
+                                <td><button class="details-btn" data-id="4"><i class="fa-solid fa-eye"></i></button></td>
+                                <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                                <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                
-                    <div class="page-nav">
-                        <ul class="page-nav-list"></ul>
+                <div class="variant-table" id="variant-table">
+                    <h4 id="variant-title">Biến thể sản phẩm</h4>
+                    <button class="btn-control-large m-2" id="btn-add-product_variant"><i class="fa-solid fa-plus"></i> Thêm biến thể</button> 
+                    <table id="variant-content" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên biến thể</th>
+                                <th>Hình ảnh</th>
+                                <th>Màu sắc</th>
+                                <th>Giá</th>
+                                <th>Chi tiết</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Nội dung biến thể sẽ được cập nhật tại đây -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="section promotion">
+                <div class="admin-control">
+                    <div class="admin-control-first">
+                            <form action="" class="form-search">
+                                <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span> 
+                                <input id="form-search-product" type="text" class="form-search-input" placeholder="Tìm kiếm tên sản phẩm..." oninput="">
+                            </form>
                     </div>
+                    <div class="admin-control-right">
+                        <button class="btn-control-large" id="btn-cancel-product"><i class="fa-solid fa-rotate-right"></i> Làm mới</button> 
+                        <button class="btn-control-large" id="btn-add-product"><i class="fa-solid fa-plus"></i> Thêm Khuyến Mãi</button> 
+                    </div>
+                </div>
+                <div>
+                    <h2>Danh sách Khuyến Mãi</h2>
+                    <table id="promotion-table" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên Khuyến mãi</th>
+                                <th>Miêu tả</th>
+                                <th>Phần trăm giảm</th>
+                                <th>Ngày Bắt đầu</th>
+                                <th>Ngày Kết Thúc</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <!-- Account -->
             <div class="section">
@@ -508,6 +594,7 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script src="js/admin.js"></script>
 </body>
 </html>
