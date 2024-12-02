@@ -16,7 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const dataTable = new DataTable(table1, {
         "paging": true,
         "searching": false, 
+
         "ordering": false,  
+
         "info": false,  
         "lengthChange": false, 
         "pageLength": 3,    
@@ -27,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Dữ liệu mẫu cho biến thể
     const variantData = {
         1: [
+
             { id: 1, idp: 1, name: "Royal M139 Trắng", color: "Trắng", price: "100,000 VND", image: "images/Royal-M139-V.10-Trang.jpg" },
             { id: 2, idp: 1,name: "Royal M139 Trắng Đen", color: "Trắng Đen", price: "150,000 VND", image: "images/Royal-M139-V.5-Trang-den.jpg" },
         ],
@@ -36,13 +39,17 @@ document.addEventListener('DOMContentLoaded', function () {
         3: [
             { id: 1, idp: 3,name: "Asia MT-10 Đỏ Mờ", color: "Đỏ Mờ", price: "300,000 VND", image: "images/1.2-Asia MT-10-Do-mo.jpg" },
             { id: 2, idp: 3,name: "Asia MT-10 Mực Mờ", color: "Mực Mờ", price: "250,000 VND", image: "images/1.2-Asia MT-10-Muc-mo.jpg" },
+
+       
         ],
     };
     const table2 = document.getElementById("variant-content");
             const variantDataTable = new DataTable(table2, {
                 "paging": true,
                 "searching": false, 
+
                 "ordering": false,  
+
                 "info": false,  
                 "lengthChange": false,
                 "pageLength": 3,    
@@ -60,13 +67,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${index + 1}</td>
+
                     <td>${variant.idp}</td>
+
                     <td>${variant.name}</td>
                     <td><img src="${variant.image}" alt="${variant.name}" width="50"></td>
                     <td>${variant.color}</td>
                     <td>${variant.price}</td>
                     <td><button class="details-btn" data-id="3"><i class="fa-solid fa-eye"></i></button></td>
+
                     <td><button class="addImage-btn"><i class="fa-solid fa-plus"></i></button></td>
+
                     <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
                     <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                 `;
@@ -78,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
 document.addEventListener('DOMContentLoaded', function() {
     // Lấy các nút
     const btnAddProduct = document.getElementById('btn-add-product');
@@ -128,5 +140,6 @@ document.querySelectorAll(".tab-item").forEach(tab => {
         document.getElementById(target).classList.add("active");
     });
 });
+
 
 
