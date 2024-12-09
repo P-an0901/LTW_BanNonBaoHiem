@@ -4,7 +4,7 @@
     --text-color: #333;
     --red: #B5292F !important;
     --shadow-color: rgb(0 0 0 / 10%);
-    --lightest-gray: rgb(249, 249, 249);
+    --light-gray: rgb(249, 249, 249);
 }
 html, body {
     font-family: Tahoma, sans-serif;
@@ -32,7 +32,6 @@ button:focus{
     height: 100vh;
     padding-top: 5rem;
     align-items: center;
-    transition: width var(--animation-duration) var(--animation-timing-curve);
     position: sticky;
     top: 0;
 }
@@ -41,7 +40,6 @@ button:focus{
     opacity: 0;
     width: 0;
     height: 0;
-    transition: opacity var(--animation-duration) var(--animation-timing-curve);
 }
 
 .sidebar.open .hidden-sidebar {
@@ -132,11 +130,11 @@ button:focus{
 
 .sidebar-list-item.active {
     color: var(--red);
-    background-color: var(--lightest-gray);
+    background-color: var(--light-gray);
 }
 
 .sidebar-list-item:hover {
-    background-color: var(--lightest-gray);
+    background-color: var(--light-gray);
 }
 
 .sidebar-list-item.active::before {
@@ -154,7 +152,7 @@ button:focus{
 }
 
 .your-channel {
-    color: var(--dark-gray);
+    color: #000000;
     font-size: 1rem;
     font-weight: bold;
     margin-bottom: 0.15rem;
@@ -162,7 +160,6 @@ button:focus{
 }
 .sidebar .top-sidebar {
     height: 30px;
-    transition: height var(--animation-duration) var(--animation-timing-curve);
 }
 
 .sidebar.open .top-sidebar {
@@ -182,7 +179,7 @@ button:focus{
 
 /* Kiểu tiêu đề trang */
 .page-title {
-    color: var(--lightest-gray);
+    color: var(--light-gray);
     background-color: var(--red);
     text-align: center;
     border-radius: 2rem;
@@ -191,8 +188,7 @@ button:focus{
 }
 .section-title{
     text-align: center;
-    border-radius: 2rem;
-    padding: 0.5rem;
+    padding-bottom: 0.5rem;
     text-transform: uppercase;
 }
 .section {
@@ -285,14 +281,14 @@ table {
 }
 
 tr {
-    border-bottom: 1px solid var(--lighter-gray);
+    border-bottom: 1px solid var(--light-gray);
 }
 
 thead td {
     font-size: 16px;
     text-transform: uppercase;
     font-weight: 500;
-    background: var(--lighter-gray);
+    background: var(--light-gray);
     padding: 15px;
     text-align: center;
     white-space: nowrap;

@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="LTW_BanNonBaoHiem:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>LTW_BanNonBaoHiem</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="LTW_BanNonBaoHiem-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="LTW_BanNonBaoHiem:war exploded" />
+    </root>
+  </artifact>
+</component>

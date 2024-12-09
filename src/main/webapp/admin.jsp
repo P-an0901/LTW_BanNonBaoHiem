@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -141,7 +142,7 @@
                             <option>Nón trẻ em</option>
                             <option>Nón xe đạp</option>
                         </select>
-                        <select name="brand" id="brand">
+                        <select name="brand">
                             <option>Tất cả</option>
                             <option>Royal</option>
                             <option>Asia</option>
@@ -154,11 +155,10 @@
                             </form>
                     </div>
                     <div class="admin-control-right">
-                        <button class="btn-control-large" id="btn-cancel-product"><i class="fa-solid fa-rotate-right"></i> Làm mới</button> 
+                        <button class="btn-control-large" id="btn-cancel-product"><i class="fa-solid fa-rotate-right"></i> Làm mới</button>
                         <button class="btn-control-large" id="btn-add-product"><i class="fa-solid fa-plus"></i> Thêm sản phẩm mới</button> 
                         <button class="btn-control-large" id="btn-add-category"><i class="fa-solid fa-plus"></i> Thêm danh mục</button> 
                         <button class="btn-control-large" id="btn-add-brand"><i class="fa-solid fa-plus"></i> Thêm thương hiệu</button> 
-
                         <button class="btn-control-large" id="btn-add-size"><i class="fa-solid fa-plus"></i> Thêm size</button> 
                     </div>
                 </div>
@@ -349,7 +349,7 @@
                     </tbody>
                 </table>
                 <!-- Quản lý Size -->
-                <h4>Quản lý Size</h4>
+                <h4>Quản lý Kích Thước</h4>
                 <table id="size-table" style="width:100%">
                     <thead>
                         <tr>
@@ -369,6 +369,7 @@
             </div>
         </div>
             <div class="section promotion">
+                <h1 class="section-title">Quản Lý Khuyến Mãi</h1>
                 <div class="admin-control">
                     <div class="admin-control-left">
                             <form action="" class="form-search">
@@ -387,8 +388,8 @@
                             <label for="time-end">Đến</label>
                             <input type="date" class="form-control-date" id="time-end" onchange="">
                         </div>
-                        <button class="btn-control-large" id="btn-cancel-product"><i class="fa-solid fa-rotate-right"></i> Làm mới</button> 
-                        <button class="btn-control-large" id="btn-add-product"><i class="fa-solid fa-plus"></i> Thêm Khuyến Mãi</button> 
+                        <button class="btn-control-large" id="btn-cancel-promotion"><i class="fa-solid fa-rotate-right"></i> Làm mới</button>
+                        <button class="btn-control-large" id="btn-add-promotion"><i class="fa-solid fa-plus"></i> Thêm Khuyến Mãi</button>
                     </div>
 
                 </div>
@@ -411,6 +412,7 @@
                             <tr>
                                 <td>1</td>
                                 <td>Giảm giá Đầu tháng</td>
+                                <td>Giảm giá sốc!</td>
                                 <td>10</th>
                                 <td>01-12-2024</th>
                                 <td>10-12-2024</th>
@@ -421,9 +423,9 @@
                     </table>
                 </div>
                 <div>
-                    <h2>Danh sách Biến thể sản phẩm Khuyến Mãi</h2>
-                    <button class="btn-control-large m-2" id="btn-add-product"><i class="fa-solid fa-plus"></i> Thêm Khuyến Mãi cho biến thể sản phẩm</button> 
-                    <table id="promotion-table" style="width:100%">
+                    <h2>Danh sách Áp dụng Khuyến Mãi</h2>
+                    <button class="btn-control-large m-2" id="btn-add-promotion2"><i class="fa-solid fa-plus"></i> Thêm Khuyến Mãi cho biến thể sản phẩm</button>
+                    <table id="promotion-table2" style="width:100%">
                         <thead>
                             <tr>
                                 <th>STT</th>
@@ -448,6 +450,7 @@
             </div>
             <!-- Account -->
             <div class="section user">
+                <h1 class="section-title">Quản Lý Người Dùng</h1>
                 <div class="admin-control">
                     <div class="admin-control-center">
                         <form action="" class="form-search">
@@ -514,6 +517,7 @@
         </div>
         <!-- Order -->
         <div class="section">
+            <h1 class="section-title">Quản Lý Đơn Hàng</h1>
             <div class="admin-control">
                 <div class="admin-control-left">
                     <select name="tinh-trang" id="tinh-trang" onchange="">
@@ -532,14 +536,16 @@
                     <form action="" class="fillter-date">
                         <div>
                             <label for="time-start">Từ</label>
-                            <input type="date" class="form-control-date" id="time-start" onchange="">
+                            <input type="date" class="form-control-date" id="time-start2" onchange="">
                         </div>
                         <div>
                             <label for="time-end">Đến</label>
-                            <input type="date" class="form-control-date" id="time-end" onchange="">
+                            <input type="date" class="form-control-date" id="time-end2" onchange="">
                         </div>
                     </form>      
-                    <button class="btn-reset-order" onclick=""><i class="fa-solid fa-sync-alt"></i></button>               
+                    <button class="btn-reset-order" onclick=""><i class="fa-solid fa-sync-alt"></i></button>     
+                    <button class="btn-control-large" id="btn-add-order"><i class="fa-solid fa-plus"></i>Đơn Hàng</button>  
+                    <button class="btn-control-large" id="btn-add-payment_method"><i class="fa-solid fa-plus"></i>Phương Thức Thanh Toán</button>            
                 </div>
             </div>
             <h2>Danh Sách Đơn Hàng</h2>
@@ -593,6 +599,7 @@
             </div>
         </div>
         <div class="section">
+            <h1 class="section-title">Thống Kê</h1>
             <div class="admin-control">
                 <div class="admin-control-left">
                     <select name="the-loai-tk" id="the-loai-tk" onchange="">
@@ -832,7 +839,7 @@
                         <tr>
                             <th>Thông số</th>
                             <th>Giá trị</th>
-                            <th>Hành động</th>
+                            <th>Thao tác</th>
                         </tr>
                     </thead>
                 <tbody>
@@ -874,7 +881,7 @@
   
         <!-- Body Modal -->
         <div class="modal-body">
-            <h2 class="modal-title">Thêm Người Dùng</h4>
+            <h2 class="modal-title">Thêm Người Dùng</h2>
           <form id="addUserForm">
             <div class="form-row">
               <div class="form-group col-md-6">
@@ -894,7 +901,7 @@
               </div>
               <div class="form-group col-md-6">
                 <label for="password">Xác nhận mật khẩu</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" id="password2" name="password" required>
               </div>
               <div class="form-group col-md-6">
                 <label for="phone">Số Điện Thoại</label>
@@ -938,10 +945,6 @@
       </div>
     </div>
   </div>
-  
-  
-
-
   
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
