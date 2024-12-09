@@ -95,11 +95,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnAddProduct = document.getElementById('btn-add-product');
     const btnAddBrand = document.getElementById('btn-add-brand');
     const btnAddCategory = document.getElementById('btn-add-category');
+    const btnAddUser = document.getElementById('btn-add-user');
     
     // Lấy các modal
     const addProductModal = document.getElementById('addProductModal');
     const addBrandModal = document.getElementById('addBrandModal');
     const addCategoryModal = document.getElementById('addCategoryModal');
+    const productDetailModal = document.getElementById('productDetailModal');
+    const addUserModal = document.getElementById('addUserModal');
     
     // Mở modal khi nhấn nút
     btnAddProduct.addEventListener('click', function() {
@@ -112,6 +115,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     btnAddCategory.addEventListener('click', function() {
         addCategoryModal.style.display = 'block';
+    });
+    btnAddUser.addEventListener('click', function() {
+        addUserModal.style.display = 'block';
+    });
+    const detailsBtns = document.querySelectorAll('.pdetails-btn'); 
+    detailsBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            const productId = btn.getAttribute('data-id'); 
+            console.log('ID Sản Phẩm:', productId); 
+            const productIdDisplay = document.getElementById('product-id-display');
+            productIdDisplay.textContent = `ID sản phẩm: ${productId}`; 
+            productDetailModal.style.display = 'block';
+        });
     });
 
     // Đóng modal khi nhấn nút đóng (×)

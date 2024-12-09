@@ -13,18 +13,18 @@
             });
         }
         const currentUrl = window.location.pathname;
-        const danhMucLink = document.querySelector('.menu-link[href="danhmuc.html"]');
-        const trangChuLink = document.querySelector('.menu-link[href="index.html"]');
-        const khuyenMaiLink = document.querySelector('.menu-link[href="khuyenmai.html"]');
+        const danhMucLink = document.querySelector('.menu-link[href="danhmuc.jsp"]');
+        const trangChuLink = document.querySelector('.menu-link[href="index.jsp"]');
+        const khuyenMaiLink = document.querySelector('.menu-link[href="khuyenmai.jsp"]');
         
         document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
         
         // Kiểm tra URL hiện tại để thêm 'active' cho "Trang chủ" hoặc "Danh Mục Sản phẩm"
-        if (currentUrl.includes("index.html") || currentUrl === "") {
+        if (currentUrl.includes("index.jsp") || currentUrl === "") {
             trangChuLink.classList.add('active'); 
-        }else if (currentUrl.includes("khuyenmai.html")) {
+        }else if (currentUrl.includes("khuyenmai.jsp")) {
             khuyenMaiLink.classList.add('active');
-        } else if (currentUrl.includes("taikhoan.html") || currentUrl.includes("giohang.html") || currentUrl.includes("gioithieu.html")) {
+        } else if (currentUrl.includes("taikhoan.jsp") || currentUrl.includes("giohang.jsp") || currentUrl.includes("gioithieu.jsp")) {
             document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
         } else  {
             danhMucLink.classList.add('active'); 
@@ -167,7 +167,7 @@ function logout() {
 
     // Thông báo và chuyển hướng
     alert("Bạn đã đăng xuất thành công!");
-    window.location.href = "index.html";
+    window.location.href = "index.jsp";
 }
 /* Giảm giá*/
 const products = document.querySelectorAll('.product-item');

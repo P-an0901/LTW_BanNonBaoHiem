@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,12 +49,6 @@
                         <a href="#" class="sidebar-link">
                             <div class="sidebar-icon"><i class="fa-solid fa-cart-shopping"></i></div>
                             <div class="hidden-sidebar">Đơn hàng</div>
-                        </a>
-                    </li>
-                    <li class="sidebar-list-item tab-content">
-                        <a href="#" class="sidebar-link">
-                            <div class="sidebar-icon"><i class="fa-solid fa-headset"></i></div> <!-- Biểu tượng hỗ trợ -->
-                            <div class="hidden-sidebar">Hỗ trợ</div> <!-- Tên mục -->
                         </a>
                     </li>
                     <li class="sidebar-list-item tab-content">
@@ -132,16 +127,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Hỗ trợ -->
-                    <div class="card-single">
-                        <div class="box">
-                            <h2 id="support-tickets">5</h2>
-                            <div class="on-box">
-                                <h3>Yêu cầu hỗ trợ</h3>
-                                <p>Số lượng yêu cầu hỗ trợ của khách hàng cần được xử lý trong thời gian gần đây.</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!-- Product -->
@@ -157,7 +142,7 @@
                             <option>Nón trẻ em</option>
                             <option>Nón xe đạp</option>
                         </select>
-                        <select name="brand" id="brand">
+                        <select name="brand">
                             <option>Tất cả</option>
                             <option>Royal</option>
                             <option>Asia</option>
@@ -170,11 +155,10 @@
                             </form>
                     </div>
                     <div class="admin-control-right">
-                        <button class="btn-control-large" id="btn-cancel-product"><i class="fa-solid fa-rotate-right"></i> Làm mới</button> 
+                        <button class="btn-control-large" id="btn-cancel-product"><i class="fa-solid fa-rotate-right"></i> Làm mới</button>
                         <button class="btn-control-large" id="btn-add-product"><i class="fa-solid fa-plus"></i> Thêm sản phẩm mới</button> 
                         <button class="btn-control-large" id="btn-add-category"><i class="fa-solid fa-plus"></i> Thêm danh mục</button> 
                         <button class="btn-control-large" id="btn-add-brand"><i class="fa-solid fa-plus"></i> Thêm thương hiệu</button> 
-
                         <button class="btn-control-large" id="btn-add-size"><i class="fa-solid fa-plus"></i> Thêm size</button> 
                     </div>
                 </div>
@@ -208,7 +192,7 @@
                                 <td>Mũ 3/4</td>
                                 <td>01-12-2024</td>
                                 <td><button class="variant-btn" data-id="1"><i class="fa-solid fa-cogs"></i></button></td>
-                                <td><button class="details-btn" data-id="1"><i class="fa-solid fa-eye"></i></button></td>
+                                <td><button class="pdetails-btn" data-id="1"><i class="fa-solid fa-eye"></i></button></td>
                                 <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
                                 <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                             </tr>
@@ -222,7 +206,7 @@
                                 <td><button class="variant-btn" data-id="2"><i class="fa-solid fa-cogs"></i></button></td>
 
                                 
-                                <td><button class="details-btn" data-id="2"><i class="fa-solid fa-eye"></i></button></td>
+                                <td><button class="pdetails-btn" data-id="2"><i class="fa-solid fa-eye"></i></button></td>
                                 <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
                                 <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                             </tr>
@@ -236,7 +220,7 @@
                                 <td><button class="variant-btn" data-id="3"><i class="fa-solid fa-cogs"></i></button></td>
 
                                
-                                <td><button class="details-btn" data-id="3"><i class="fa-solid fa-eye"></i></button></td>
+                                <td><button class="pdetails-btn" data-id="3"><i class="fa-solid fa-eye"></i></button></td>
                                 <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
                                 <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                             </tr>
@@ -251,7 +235,7 @@
 
                                
 
-                                <td><button class="details-btn" data-id="4"><i class="fa-solid fa-eye"></i></button></td>
+                                <td><button class="pdetails-btn" data-id="4"><i class="fa-solid fa-eye"></i></button></td>
                                 <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
                                 <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                             </tr>
@@ -364,9 +348,8 @@
                         <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                     </tbody>
                 </table>
-        
                 <!-- Quản lý Size -->
-                <h4>Quản lý Size</h4>
+                <h4>Quản lý Kích Thước</h4>
                 <table id="size-table" style="width:100%">
                     <thead>
                         <tr>
@@ -385,21 +368,28 @@
                 </table>
             </div>
         </div>
-
-      
-
             <div class="section promotion">
+                <h1 class="section-title">Quản Lý Khuyến Mãi</h1>
                 <div class="admin-control">
-                    <div class="admin-control-first">
+                    <div class="admin-control-left">
                             <form action="" class="form-search">
                                 <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span> 
-                                <input id="form-search-product" type="text" class="form-search-input" placeholder="Tìm kiếm tên sản phẩm..." oninput="">
+                                <input id="form-search-promotion" type="text" class="form-search-input" placeholder="Tìm kiếm khuyến mãi.." oninput="">
+                                
                             </form>
 
                     </div>
                     <div class="admin-control-right">
-                        <button class="btn-control-large" id="btn-cancel-product"><i class="fa-solid fa-rotate-right"></i> Làm mới</button> 
-                        <button class="btn-control-large" id="btn-add-product"><i class="fa-solid fa-plus"></i> Thêm Khuyến Mãi</button> 
+                        <div>
+                            <label for="time-start">Từ</label>
+                            <input type="date" class="form-control-date" id="time-start" onchange="">
+                        </div>
+                        <div>
+                            <label for="time-end">Đến</label>
+                            <input type="date" class="form-control-date" id="time-end" onchange="">
+                        </div>
+                        <button class="btn-control-large" id="btn-cancel-promotion"><i class="fa-solid fa-rotate-right"></i> Làm mới</button>
+                        <button class="btn-control-large" id="btn-add-promotion"><i class="fa-solid fa-plus"></i> Thêm Khuyến Mãi</button>
                     </div>
 
                 </div>
@@ -419,13 +409,13 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             <tr>
                                 <td>1</td>
                                 <td>Giảm giá Đầu tháng</td>
-                                <th>10</th>
-                                <th>01-12-2024</th>
-                                <th>10-12-2024</th>
+                                <td>Giảm giá sốc!</td>
+                                <td>10</th>
+                                <td>01-12-2024</th>
+                                <td>10-12-2024</th>
                                 <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
                                 <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                             </tr>
@@ -433,9 +423,9 @@
                     </table>
                 </div>
                 <div>
-                    <h2>Danh sách Khuyến Mãi</h2>
-                    <button class="btn-control-large m-2" id="btn-add-product"><i class="fa-solid fa-plus"></i> Thêm Khuyến Mãi cho biến thể sản phẩm</button> 
-                    <table id="promotion-table" style="width:100%">
+                    <h2>Danh sách Áp dụng Khuyến Mãi</h2>
+                    <button class="btn-control-large m-2" id="btn-add-promotion2"><i class="fa-solid fa-plus"></i> Thêm Khuyến Mãi cho biến thể sản phẩm</button>
+                    <table id="promotion-table2" style="width:100%">
                         <thead>
                             <tr>
                                 <th>STT</th>
@@ -449,7 +439,7 @@
                             <tr>
                                 <td>1</td>
                                 <td>1</td>
-                                <th>1</th>
+                                <td>1</th>
                                 <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
                                 <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                             </tr>
@@ -459,72 +449,75 @@
                 </div>
             </div>
             <!-- Account -->
-            <div class="section">
+            <div class="section user">
+                <h1 class="section-title">Quản Lý Người Dùng</h1>
                 <div class="admin-control">
-                <div class="admin-control-left">
-                    <select name="tinh-trang-user" id="tinh-trang-user">
-                        <option value="2">Tất cả</option>
-                        <option value="1">Hoạt động</option>
-                        <option value="0">Bị khóa</option>
-                    </select>
+                    <div class="admin-control-center">
+                        <form action="" class="form-search">
+                            <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input id="form-search-user" type="text" class="form-search-input" placeholder="Tìm kiếm khách hàng..." oninput="">
+                        </form>
+                    </div>
+                    <div class="admin-control-right">
+                        <form action="" class="fillter-date">
+                            <div>
+                                <label for="time-start">Từ</label>
+                                <input type="date" class="form-control-date" id="time-start-user" onchange="">
+                            </div>
+                            <div>
+                                <label for="time-end">Đến</label>
+                                <input type="date" class="form-control-date" id="time-end-user" onchange="">
+                            </div>
+                        </form>      
+                        <button class="btn-reset-order" onclick=""><i class="fa-solid fa-arrow-rotate-right"></i></button>     
+                        <button id="btn-add-user" class="btn-control-large"><i class="fa-solid fa-plus"></i> <span>Thêm Người Dùng</span></button>          
+                    </div>
                 </div>
-                <div class="admin-control-center">
-                    <form action="" class="form-search">
-                        <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input id="form-search-user" type="text" class="form-search-input" placeholder="Tìm kiếm khách hàng..." oninput="">
-                    </form>
-                </div>
-                <div class="admin-control-right">
-                    <form action="" class="fillter-date">
-                        <div>
-                            <label for="time-start">Từ</label>
-                            <input type="date" class="form-control-date" id="time-start-user" onchange="">
-                        </div>
-                        <div>
-                            <label for="time-end">Đến</label>
-                            <input type="date" class="form-control-date" id="time-end-user" onchange="">
-                        </div>
-                    </form>      
-                    <button class="btn-reset-order" onclick=""><i class="fa-solid fa-arrow-rotate-right"></i></button>     
-                    <button id="btn-add-user" class="btn-control-large"><i class="fa-solid fa-plus"></i> <span>Thêm khách hàng</span></button>          
-                </div>
-            </div>
+            <div>
+            <h2>Danh Sách Người Dùng</h2>
             <div class="table">
                 <table width="100%">
                     <thead>
                         <tr>
-                            <td>STT</td>
-                            <td>Họ và tên</td>
-                            <td>Liên hệ</td>
-                            <td>Ngày tham gia</td>
-                            <td>Tình trạng</td>
-                            <td></td>
+                            <th>STT</td>
+                            <th>Họ và tên</td>
+                            <th>Liên hệ</td>
+                            <th>Ngày tham gia</td>
+                            <th>Quyền Hạn</td>
+                            <th>Chi tiết</th>
+                            <th>Sửa</th>
+                            <th>Xóa</th>
                         </tr>
                     </thead>
                     <tbody id="show-user">
                     <tr>
-                        <td>2</td>
+                        <td>1</td>
                         <td>Trần Thị B</td>
                         <td>0123456789</td>
                         <td>2024-10-15</td>
-                        <td>Đã nghỉ</td>
-                        <td><button>Chi tiết</button></td>
+                        <td>Admin</td>
+                        <td><button class="udetails-btn" data-id="1"><i class="fa-solid fa-eye"></i></button></td>
+                        <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                        <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                     </tr>
                     <tr>
-                        <td>3</td>
+                        <td>2</td>
                         <td>Phạm Văn C</td>
                         <td>0981234567</td>
                         <td>2024-09-30</td>
-                        <td>Đang hoạt động</td>
-                        <td><button>Chi tiết</button></td>
+                        <td>Khách hàng</td>
+                        <td><button class="udetails-btn" data-id="2"><i class="fa-solid fa-eye"></i></button></td>
+                        <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                        <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                     </tr>
                 </tbody>
                 </table>
             </div>
-            <!-- </div> -->
+        </div>
         </div>
         <!-- Order -->
         <div class="section">
+            <h1 class="section-title">Quản Lý Đơn Hàng</h1>
             <div class="admin-control">
                 <div class="admin-control-left">
                     <select name="tinh-trang" id="tinh-trang" onchange="">
@@ -543,26 +536,31 @@
                     <form action="" class="fillter-date">
                         <div>
                             <label for="time-start">Từ</label>
-                            <input type="date" class="form-control-date" id="time-start" onchange="">
+                            <input type="date" class="form-control-date" id="time-start2" onchange="">
                         </div>
                         <div>
                             <label for="time-end">Đến</label>
-                            <input type="date" class="form-control-date" id="time-end" onchange="">
+                            <input type="date" class="form-control-date" id="time-end2" onchange="">
                         </div>
                     </form>      
-                    <button class="btn-reset-order" onclick=""><i class="fa-solid fa-sync-alt"></i></button>               
+                    <button class="btn-reset-order" onclick=""><i class="fa-solid fa-sync-alt"></i></button>     
+                    <button class="btn-control-large" id="btn-add-order"><i class="fa-solid fa-plus"></i>Đơn Hàng</button>  
+                    <button class="btn-control-large" id="btn-add-payment_method"><i class="fa-solid fa-plus"></i>Phương Thức Thanh Toán</button>            
                 </div>
             </div>
+            <h2>Danh Sách Đơn Hàng</h2>
             <div class="table">
                 <table width="100%">
                     <thead>
                         <tr>
-                            <td>Mã đơn</td>
-                            <td>Khách hàng</td>
-                            <td>Ngày đặt</td>
-                            <td>Tổng tiền</td>
-                            <td>Trạng thái</td>
-                            <td>Thao tác</td>
+                            <th>Mã đơn</td>
+                            <th>Khách hàng</td>
+                            <th>Ngày đặt</td>
+                            <th>Tổng tiền</td>
+                            <th>Trạng thái</td>
+                            <th>Chi tiết</th>
+                            <th>Sửa</th>
+                            <th>Xóa</th>
                         </tr>
                     </thead>
                     <tbody id="showOrder">
@@ -572,7 +570,9 @@
                             <td>2024-11-01</td>
                             <td>500,000 VND</td>
                             <td>Đang xử lý</td>
-                            <td><button>Chi tiết</button></td>
+                            <td><button class="details-btn" data-id="3"><i class="fa-solid fa-eye"></i></button></td>
+                            <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                            <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                         </tr>
                         <tr>
                             <td>#002</td>
@@ -580,7 +580,9 @@
                             <td>2024-11-02</td>
                             <td>1,000,000 VND</td>
                             <td>Hoàn thành</td>
-                            <td><button>Chi tiết</button></td>
+                            <td><button class="details-btn" data-id="3"><i class="fa-solid fa-eye"></i></button></td>
+                            <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                            <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                         </tr>
                         <tr>
                             <td>#003</td>
@@ -588,65 +590,16 @@
                             <td>2024-11-03</td>
                             <td>750,000 VND</td>
                             <td>Đang xử lý</td>
-                            <td><button>Chi tiết</button></td>
+                            <td><button class="details-btn" data-id="3"><i class="fa-solid fa-eye"></i></button></td>
+                            <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                            <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="section support-all">
-            <div class="admin-control">
-                <div class="admin-control-left">
-                    <select name="tinh-trang-ho-tro" id="tinh-trang-ho-tro">
-                        <option value="2">Tất cả</option>
-                        <option value="1">Đang xử lý</option>
-                        <option value="0">Hoàn thành</option>
-                    </select>
-                </div>
-                <div class="admin-control-center">
-                    <form action="" class="form-search">
-                        <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input id="form-search-support" type="text" class="form-search-input" placeholder="Tìm kiếm yêu cầu hỗ trợ..." oninput="">
-                    </form>
-                </div>
-                <div class="admin-control-right">
-                    <button class="btn-reset-order" onclick=""><i class="fa-solid fa-arrow-rotate-right"></i></button>     
-                    <button id="btn-add-support" class="btn-control-large"><i class="fa-solid fa-plus"></i> <span>Thêm yêu cầu hỗ trợ</span></button>          
-                </div>
-            </div>
-            <div class="table">
-                <table width="100%">
-                    <thead>
-                        <tr>
-                            <td>STT</td>
-                            <td>Họ và tên</td>
-                            <td>Yêu cầu</td>
-                            <td>Ngày gửi</td>
-                            <td>Tình trạng</td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <tbody id="show-support"></tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Nguyễn Văn A</td>
-                        <td>Yêu cầu hỗ trợ kỹ thuật</td>
-                        <td>2024-11-01</td>
-                        <td>Đang xử lý</td>
-                        <td><button>Chi tiết</button></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Trần Thị B</td>
-                        <td>Yêu cầu hỗ trợ tài khoản</td>
-                        <td>2024-11-02</td>
-                        <td>Hoàn thành</td>
-                        <td><button>Chi tiết</button></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
         <div class="section">
+            <h1 class="section-title">Thống Kê</h1>
             <div class="admin-control">
                 <div class="admin-control-left">
                     <select name="the-loai-tk" id="the-loai-tk" onchange="">
@@ -869,9 +822,129 @@
         </div>
     </div>
 </div>
-
-
-
+<!-- Modal chi tiết sản phẩm -->
+<div id="productDetailModal" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2>Chi tiết kỹ thuật sản phẩm</h2>
+                <div id="product-id-display"></div>
+                <table id="details-table">
+                    <thead>
+                        <tr>
+                            <th>Thông số</th>
+                            <th>Giá trị</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                <tbody>
+                    <tr>
+                        <td>Trọng lượng</td>
+                        <td>1.2kg</td>
+                        <td>
+                            <button class="edit-btn"><i class="fa-solid fa-pen"></i> Sửa</button>
+                            <button class="delete-btn"><i class="fa-solid fa-trash"></i> Xóa</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Chất liệu</td>
+                        <td>Nhựa ABS</td>
+                        <td>
+                            <button class="edit-btn"><i class="fa-solid fa-pen"></i> Sửa</button>
+                            <button class="delete-btn"><i class="fa-solid fa-trash"></i> Xóa</button>
+                        </td>
+                    </tr>
+          
+                </tbody>
+            </table>
+            <button id="add-detail-btn"><i class="fa-solid fa-plus"></i> Thêm thông số</button>
+        </div>
+    </div>
+  </div>
+</div>
+  <!-- Modal Thêm Người Dùng -->
+  <div class="modal" id="addUserModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        
+        <!-- Header Modal -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span>&times;</span>
+          </button>
+        </div>
+  
+        <!-- Body Modal -->
+        <div class="modal-body">
+            <h2 class="modal-title">Thêm Người Dùng</h2>
+          <form id="addUserForm">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="username">Tên Người Dùng</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+            </div>
+  
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="password">Mật Khẩu</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="password">Xác nhận mật khẩu</label>
+                <input type="password" class="form-control" id="password2" name="password" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="phone">Số Điện Thoại</label>
+                <input type="tel" class="form-control" id="phone" name="phone">
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="birthday">Ngày Sinh</label>
+              <input type="date" class="form-control" id="birthday" name="birthday">
+            </div>
+  
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="image">Ảnh Đại Diện</label>
+                <input type="file" class="form-control-file" id="image" name="image">
+              </div>
+            </div>
+  
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="address">Địa Chỉ</label>
+                <textarea class="form-control" id="address" name="address" rows="3"></textarea>
+              </div>
+            </div>
+  
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="role">Vai Trò</label>
+                <select class="form-control" id="role" name="role">
+                  <option value="0">Khách Hàng</option>
+                  <option value="1">Quản Trị Viên</option>
+                </select>
+              </div>
+            </div>
+  
+            <!-- Nút Thêm Người Dùng -->
+            <button type="submit" class="btn btn-addO">Thêm Người Dùng</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
   
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
