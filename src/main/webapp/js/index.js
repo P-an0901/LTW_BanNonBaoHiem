@@ -12,23 +12,8 @@
                 lastScrollY = window.scrollY;
             });
         }
-        const currentUrl = window.location.pathname;
-        const danhMucLink = document.querySelector('.menu-link[href="danhmuc.jsp"]');
-        const trangChuLink = document.querySelector('.menu-link[href="index.jsp"]');
-        const khuyenMaiLink = document.querySelector('.menu-link[href="khuyenmai.jsp"]');
-        
-        document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
-        
-        // Kiểm tra URL hiện tại để thêm 'active' cho "Trang chủ" hoặc "Danh Mục Sản phẩm"
-        if (currentUrl.includes("index.jsp") || currentUrl === "") {
-            trangChuLink.classList.add('active'); 
-        }else if (currentUrl.includes("khuyenmai.jsp")) {
-            khuyenMaiLink.classList.add('active');
-        } else if (currentUrl.includes("taikhoan.jsp") || currentUrl.includes("giohang.jsp") || currentUrl.includes("gioithieu.jsp")) {
-            document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
-        } else  {
-            danhMucLink.classList.add('active'); 
-        }
+
+
         updateCart();
 
      // Khi nội dung của modal được tải xong
