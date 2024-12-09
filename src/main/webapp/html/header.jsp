@@ -83,7 +83,9 @@
   <nav class="header-bottom">
     <div class="container">
       <ul class="menu-list">
-        <li class="menu-list-item"><a href="index.jsp" class="menu-link active">Trang chủ</a></li>
+        <li class="menu-list-item">
+          <a href="${pageContext.request.contextPath}/" class="menu-link ${activePage == 'home' ? 'active' : ''}">Trang chủ</a>
+        </li>
         <li class="menu-list-item">
           <a href="danhmuc.jsp" class="menu-link has-submenu">
             Danh Mục Sản phẩm
