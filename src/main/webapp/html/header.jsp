@@ -87,20 +87,21 @@
           <a href="${pageContext.request.contextPath}/" class="menu-link ${activePage == 'home' ? 'active' : ''}">Trang chủ</a>
         </li>
         <li class="menu-list-item">
-          <a href="danhmuc.jsp" class="menu-link has-submenu">
+          <a href="${pageContext.request.contextPath}/danhmuc" class="menu-link has-submenu ${activePage == 'danhmuc' ? 'active' : ''}">
             Danh Mục Sản phẩm
             <i class="fa-solid fa-chevron-down icon-arrow"></i> <!-- Icon mũi tên -->
           </a>
           <ul class="submenu">
-            <li><a href="danhmuc.jsp?category=all"><strong>Tất cả sản phẩm</strong></a></li>
-            <li><a href="danhmuc.jsp?category=mu34">Mũ bảo hiểm 3/4 đầu</a></li>
-            <li><a href="danhmuc.jsp?category=fullface">Mũ bảo hiểm fullface</a></li>
-            <li><a href="danhmuc.jsp?category=half">Mũ bảo hiểm nửa đầu</a></li>
-            <li><a href="danhmuc.jsp?category=child">Mũ bảo hiểm trẻ em</a></li>
-            <li><a href="danhmuc.jsp?category=bicycle">Mũ bảo hiểm xe đạp</a></li>
+            <li><a href="${pageContext.request.contextPath}/danhmuc?category=all"><strong>Tất cả sản phẩm</strong></a></li>
+            <li><a href="${pageContext.request.contextPath}/danhmuc?category=mu34">Mũ bảo hiểm 3/4 đầu</a></li>
+            <li><a href="${pageContext.request.contextPath}/danhmuc?category=fullface">Mũ bảo hiểm fullface</a></li>
+            <li><a href="${pageContext.request.contextPath}/danhmuc?category=half">Mũ bảo hiểm nửa đầu</a></li>
+            <li><a href="${pageContext.request.contextPath}/danhmuc?category=child">Mũ bảo hiểm trẻ em</a></li>
+            <li><a href="${pageContext.request.contextPath}/danhmuc?category=bicycle">Mũ bảo hiểm xe đạp</a></li>
           </ul>
         </li>
-        <li class="menu-list-item"><a href="khuyenmai.jsp" class="menu-link">Khuyến mãi</a></li>
+        <li class="menu-list-item"><a href="${pageContext.request.contextPath}/khuyenmai" class="menu-link ${activePage == 'khuyenmai' ? 'active' : ''}">
+          Khuyến mãi</a></li>
         <li class="menu-list-item">
           <a href="#" class="menu-link has-submenu">
             Thương Hiệu

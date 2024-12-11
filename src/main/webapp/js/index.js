@@ -12,12 +12,8 @@
                 lastScrollY = window.scrollY;
             });
         }
-
-
         updateCart();
 
-     // Khi nội dung của modal được tải xong
-        // Đảm bảo rằng các sự kiện đã được gán sau khi tải modal
         const closeButton = document.querySelector('.close');
         if (closeButton) {
             closeButton.addEventListener('click', resetModal);
@@ -282,6 +278,7 @@ document.addEventListener('DOMContentLoaded', function() {
     cart = storedCart;
     updateCart();
 });
+
 /*Lên đầu trang */
 window.addEventListener("scroll", function() {
     const backToTopButton = document.querySelector(".back-to-top");
