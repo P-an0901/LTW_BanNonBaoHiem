@@ -43,29 +43,32 @@ public class BrandDao {
         return jdbi.withHandle(handle -> {
             return handle.createQuery(sql)
                     .bind(0, id)
-                    .mapTo(Brand.class)
+                    .mapToBean(Brand.class)
                     .findOne()
                     .orElse(null);
         });
     }
-    public void updateBrand(int id, String name, String imageUrl) {
+    public boolean updateBrand(int id, String name, String imageUrl) {
         String sql = "UPDATE brands SET name = ?, imageUrl = ? WHERE id = ?";
-        jdbi.useHandle(handle -> {
+        return jdbi.withHandle(handle -> {
             Update update = handle.createUpdate(sql);
             update.bind(0, name);
             update.bind(1, imageUrl);
             update.bind(2, id);
-            update.execute();
+            int rowsAffected = update.execute();
+            return rowsAffected > 0;
         });
     }
-    public void deleteBrand(int id) {
+    public boolean deleteBrand(int id) {
         String sql = "DELETE FROM brands WHERE id = ?";
-        jdbi.useHandle(handle -> {
+        return jdbi.withHandle(handle -> {
             Update update = handle.createUpdate(sql);
             update.bind(0, id);
-            update.execute();
+            int rowsAffected = update.execute();
+            return rowsAffected > 0;
         });
     }
+
 
 }
 

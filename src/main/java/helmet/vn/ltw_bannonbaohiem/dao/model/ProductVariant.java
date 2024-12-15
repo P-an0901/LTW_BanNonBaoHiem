@@ -8,16 +8,18 @@ public class ProductVariant {
     private String color;
     private double price;
     private String image;
+    private boolean isActive;
 
     public ProductVariant() {}
 
-    public ProductVariant(int id, String name, int productId, String color, double price, String image) {
+    public ProductVariant(int id, String name, int productId, String color, double price, String image, boolean isActive) {
         this.id = id;
         this.name = name;
         this.productId = productId;
         this.color = color;
         this.price = price;
         this.image = image;
+        this.isActive = isActive;
     }
 
     public int getId() {
@@ -66,6 +68,14 @@ public class ProductVariant {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }
 
