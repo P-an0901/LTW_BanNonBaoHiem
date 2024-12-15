@@ -1,15 +1,15 @@
-const sidebars = document.querySelectorAll(".sidebar-list-item.tab-content");
-const sections = document.querySelectorAll(".section");
-
-for (let i = 0; i < sidebars.length; i++) {
-    sidebars[i].onclick = function () {
-        document.querySelector(".sidebar-list-item.active")?.classList.remove("active");
-        document.querySelector(".section.active")?.classList.remove("active");
-
-        sidebars[i].classList.add("active");
-        sections[i].classList.add("active");
-    };
-}
+// const sidebars = document.querySelectorAll(".sidebar-list-item.tab-content");
+// const sections = document.querySelectorAll(".section");
+//
+// for (let i = 0; i < sidebars.length; i++) {
+//     sidebars[i].onclick = function () {
+//         document.querySelector(".sidebar-list-item.active")?.classList.remove("active");
+//         document.querySelector(".section.active")?.classList.remove("active");
+//
+//         sidebars[i].classList.add("active");
+//         sections[i].classList.add("active");
+//     };
+// }
 document.addEventListener("DOMContentLoaded", function () {
     const table1 = document.getElementById("product-table");
     const table2 = document.getElementById("variant-content");
@@ -93,32 +93,34 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function() {
     // Lấy các nút
     const btnAddProduct = document.getElementById('btn-add-product');
-    const btnAddBrand = document.getElementById('btn-add-brand');
     const btnAddCategory = document.getElementById('btn-add-category');
     const btnAddUser = document.getElementById('btn-add-user');
-    
+
     // Lấy các modal
     const addProductModal = document.getElementById('addProductModal');
-    const addBrandModal = document.getElementById('addBrandModal');
     const addCategoryModal = document.getElementById('addCategoryModal');
-    const productDetailModal = document.getElementById('productDetailModal');
     const addUserModal = document.getElementById('addUserModal');
-    
-    // Mở modal khi nhấn nút
-    btnAddProduct.addEventListener('click', function() {
-        addProductModal.style.display = 'block';
-    });
 
-    btnAddBrand.addEventListener('click', function() {
-        addBrandModal.style.display = 'block';
-    });
+    // Kiểm tra và thêm sự kiện vào các nút nếu chúng tồn tại
+    if (btnAddProduct && addProductModal) {
+        btnAddProduct.addEventListener('click', function() {
+            addProductModal.style.display = 'block';
+        });
+    }
 
-    btnAddCategory.addEventListener('click', function() {
-        addCategoryModal.style.display = 'block';
-    });
-    btnAddUser.addEventListener('click', function() {
-        addUserModal.style.display = 'block';
-    });
+    if (btnAddCategory && addCategoryModal) {
+        btnAddCategory.addEventListener('click', function() {
+            addCategoryModal.style.display = 'block';
+        });
+    }
+
+    if (btnAddUser && addUserModal) {
+        btnAddUser.addEventListener('click', function() {
+            addUserModal.style.display = 'block';
+        });
+    }
+});
+
     const detailsBtns = document.querySelectorAll('.pdetails-btn'); 
     detailsBtns.forEach(function(btn) {
         btn.addEventListener('click', function() {
@@ -128,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
             productIdDisplay.textContent = `ID sản phẩm: ${productId}`; 
             productDetailModal.style.display = 'block';
         });
-    });
+
 
     // Đóng modal khi nhấn nút đóng (×)
     const closeButtons = document.querySelectorAll('.close');
@@ -156,6 +158,20 @@ document.querySelectorAll(".tab-item").forEach(tab => {
         document.getElementById(target).classList.add("active");
     });
 });
+function openEditModal(id, name, imageUrl) {
+    // Cập nhật giá trị của các trường trong form modal
+    document.getElementById('brandName').value = name;
+    document.getElementById('brandImage').value = '';
+
+    // Mở modal
+    $('#brandModal').modal('show');
+}
+$(document).ready(function() {
+    $("#btn-add-brand").click(function() {
+        $("#brandModal").modal('show');
+    });
+});
+
 
 
 

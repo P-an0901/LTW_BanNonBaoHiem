@@ -55,7 +55,7 @@
             <div class="container">
                 <div class="slider-wrapper">
                     <div class="slider-item">
-                        <a href="danhmuc.html?category=mu34">
+                        <a href="./danhmuc?category=mu34">
                             <div class="image-container">
                                 <img src=" images/Royal-M139-V.2.jpg" alt="Nón 3/4 đầu">
                             </div>
@@ -63,7 +63,7 @@
                         </a>
                     </div>
                     <div class="slider-item">
-                        <a href="danhmuc.html?category=fullface">
+                        <a href="./danhmuc?category=fullface">
                             <div class="image-container">
                                 <img src=" images/Fullface-Royal-M136-V.29-red.jpg" alt="Nón Fullface">
                             </div>
@@ -71,7 +71,7 @@
                         </a>
                     </div>
                     <div class="slider-item">
-                        <a href="danhmuc.html?category=half">
+                        <a href="./danhmuc?category=half">
                             <div class="image-container">
                                 <img src=" images/1.2-Asia MT-10-Muc-mo.jpg" alt="Nón Nửa Đầu">
                             </div>
@@ -79,7 +79,7 @@
                         </a>
                     </div>
                     <div class="slider-item">
-                        <a href="danhmuc.html?category=child">
+                        <a href="./danhmuc?category=child">
                             <div class="image-container">
                                 <img src=" images/OKFaM2congchua-12.jpg" alt="Nón Trẻ Em">
                             </div>
@@ -87,7 +87,7 @@
                         </a>
                     </div>
                     <div class="slider-item">
-                        <a href=" danhmuc.html?category=bicycle">
+                        <a href="./danhmuc?category=bicycle">
                             <div class="image-container">
                                 <img src=" images/mu-xe-dap.jpg" alt="Nón Xe Đạp">
                             </div>

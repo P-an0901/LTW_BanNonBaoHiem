@@ -6,6 +6,9 @@
     --shadow-color: rgb(0 0 0 / 10%);
     --light-gray: rgb(249, 249, 249);
 }
+.modal-backdrop {
+    z-index: 0 !important;
+}
 html, body {
     font-family: Tahoma, sans-serif;
     margin: 0;
@@ -112,7 +115,7 @@ button:focus{
     display: flex;
     width: 100%;
     padding: 0.5rem 0;
-    color: var(--light-gray);
+    color: var(--text-color);
     text-decoration: none;
     align-items: center;
     padding-left: 25px;
@@ -129,7 +132,7 @@ button:focus{
 }
 
 .sidebar-list-item.active {
-    color: var(--red);
+    color: var(--red) !important;
     background-color: var(--light-gray);
 }
 
@@ -137,7 +140,7 @@ button:focus{
     background-color: var(--light-gray);
 }
 
-.sidebar-list-item.active::before {
+.sidebar-list-item.active::before{
     content: "";
     background-color: var(--red);
     height: 100%;
@@ -194,13 +197,13 @@ button:focus{
 .section {
     height: 100%;
     padding: 2rem 2rem 0 1.5rem;
-    display: none;
+    display: none !important;
     background-color: #fff;
     position: relative;
 }
 
 .section.active {
-    display: block;
+    display: block !important;
 }
 /* Bố trí các thẻ card trong một lưới */
 .cards {

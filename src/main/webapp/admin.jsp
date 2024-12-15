@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,63 +8,41 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin.css">
     <title>Admin</title>
 </head>
 <body>
     <div class="container">
         <aside class="sidebar open">
             <div class="top-sidebar">
-                <a href="#" class="channel-logo"><img src="images/HELMET.png" alt="Channel Logo"></a>
+                <a href="#" class="channel-logo"><img src="${pageContext.request.contextPath}/images/HELMET.png" alt="Channel Logo"></a>
                 <div class="hidden-sidebar your-channel">
                     <img src="" style="height: 30px;" alt="">
                 </div>
             </div>
+            <c:set var="tabs" value="home,product,promotion,user,order,statistic" />
             <div class="middle-sidebar">
                 <ul class="sidebar-list">
-                    <li class="sidebar-list-item tab-content active">
-                        <a href="#" class="sidebar-link">
-                            <div class="sidebar-icon"><i class="fa-solid fa-house"></i></div>
-                            <div class="hidden-sidebar">Trang tổng quan</div>
-                        </a>
-                    </li>
-                    <li class="sidebar-list-item tab-content">
-                        <a href="#" class="sidebar-link">
-                            <div class="sidebar-icon"><i class="fa-solid fa-tag"></i></div>
-                            <div class="hidden-sidebar">Sản phẩm</div>
-                        </a>
-                    </li>
-                    <li class="sidebar-list-item tab-content">
-                        <a href="#" class="sidebar-link">
-                            <div class="sidebar-icon"><i class="fa-solid fa-percent"></i></div>
-                            <div class="hidden-sidebar">Khuyến Mãi</div>
-                        </a>
-                    </li>
-                    <li class="sidebar-list-item tab-content">
-                        <a href="#" class="sidebar-link">
-                            <div class="sidebar-icon"><i class="fa-solid fa-users"></i></div>
-                            <div class="hidden-sidebar">Khách hàng</div>
-                        </a>
-                    </li>
-                    <li class="sidebar-list-item tab-content">
-                        <a href="#" class="sidebar-link">
-                            <div class="sidebar-icon"><i class="fa-solid fa-cart-shopping"></i></div>
-                            <div class="hidden-sidebar">Đơn hàng</div>
-                        </a>
-                    </li>
-                    <li class="sidebar-list-item tab-content">
-                        <a href="#" class="sidebar-link">
-                            <div class="sidebar-icon"><i class="fa-solid fa-chart-line"></i></div>
-                            <div class="hidden-sidebar">Thống kê</div>
-                        </a>
-                    </li>
-                    
+                    <c:forEach var="tab" items="${tabs.split(',')}">
+                        <li class="sidebar-list-item tab-content ${tab == activeTab ? 'active' : ''}">
+                            <a href="${pageContext.request.contextPath}/admin/${tab}" class="sidebar-link">
+                                <div class="sidebar-icon">
+                                    <i class="fa-solid ${tab == 'home' ? 'fa-house' : (tab == 'product' ? 'fa-tag' :
+                                    (tab == 'promotion' ? 'fa-percent' : (tab == 'user' ? 'fa-users' :
+                                    (tab == 'order' ? 'fa-cart-shopping' : 'fa-chart-line'))))}"></i>
+                                </div>
+                                <div class="hidden-sidebar">${tab == 'home' ? 'Trang tổng quan' :
+                                (tab == 'product' ? 'Sản Phẩm' : (tab == 'promotion' ? 'Khuyến Mãi' :
+                                (tab == 'user' ? 'Khách hàng' : (tab == 'order' ? 'Đơn hàng' : 'Thống kê'))))}</div>
+                            </a>
+                        </li>
+                    </c:forEach>
                 </ul>
             </div>
             <div class="bottom-sidebar">
                 <ul class="sidebar-list">
                     <li class="sidebar-list-item user-logout">
-                        <a href="index.html" class="sidebar-link">
+                        <a href="/" class="sidebar-link">
                             <div class="sidebar-icon"><i class="fa-solid fa-chevron-left"></i></div>
                             <div class="hidden-sidebar">Trang chủ</div>
                         </a>
@@ -84,9 +63,12 @@
             </div>
         </aside>
         <main class="content">
+            <c:choose>
+            <c:when test="${activeTab == 'home'}">
             <div class="section active">
                 <h1 class="page-title">Helmet Admin Dashboard</h1>
                 <div class="cards">
+
                     <!-- Khách hàng -->
                     <div class="card-single">
                         <div class="box">
@@ -129,8 +111,10 @@
                     </div>
                 </div>
             </div>
+            </c:when>
+                <c:when test="${activeTab == 'product'}">
             <!-- Product -->
-            <div class="section product-all">
+            <div class="section product-all active">
                 <h1 class="section-title">Quản Lý Sản Phẩm</h1>
                 <div class="admin-control">
                     <div class="admin-control-first">
@@ -144,12 +128,11 @@
                         </select>
                         <select name="brand">
                             <option>Tất cả</option>
-                            <option>Royal</option>
-                            <option>Asia</option>
-                            <option>JC</option>
-                            <!-- <option>Nón Sơn</option> -->
+                            <c:forEach var="brand" items="${brands}">
+                                <option>${brand.name}</option>
+                            </c:forEach>
                         </select>
-                            <form action="" class="form-search">
+                            <form action="brandSearch" class="form-search">
                                 <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span> 
                                 <input id="form-search-product" type="text" class="form-search-input" placeholder="Tìm kiếm tên sản phẩm..." oninput="">
                             </form>
@@ -158,7 +141,7 @@
                         <button class="btn-control-large" id="btn-cancel-product"><i class="fa-solid fa-rotate-right"></i> Làm mới</button>
                         <button class="btn-control-large" id="btn-add-product"><i class="fa-solid fa-plus"></i> Thêm sản phẩm mới</button> 
                         <button class="btn-control-large" id="btn-add-category"><i class="fa-solid fa-plus"></i> Thêm danh mục</button> 
-                        <button class="btn-control-large" id="btn-add-brand"><i class="fa-solid fa-plus"></i> Thêm thương hiệu</button> 
+                        <button type="button" class="btn-control-large" id="btn-add-brand"><i class="fa-solid fa-plus" ></i> Thêm thương hiệu</button>
                         <button class="btn-control-large" id="btn-add-size"><i class="fa-solid fa-plus"></i> Thêm size</button> 
                     </div>
                 </div>
@@ -185,60 +168,20 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <%-- Lặp qua danh sách sản phẩm và hiển thị thông tin --%>
+                        <c:forEach var="product" items="${products}">
                             <tr>
-                                <td>1</td>
-                                <td>Royal M139</td>
-                                <td>Royal</td>
-                                <td>Mũ 3/4</td>
-                                <td>01-12-2024</td>
-                                <td><button class="variant-btn" data-id="1"><i class="fa-solid fa-cogs"></i></button></td>
-                                <td><button class="pdetails-btn" data-id="1"><i class="fa-solid fa-eye"></i></button></td>
-                                <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
-                                <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                                <td>${product.id}</td>
+                                <td>${product.name}</td>
+                                <td>${product.brand.name}</td>
+                                <td>${product.category.name}</td>
+                                <td>${product.createdAt}</td>
+                                <td><button class="variant-btn" data-id="${product.id}"><i class="fa-solid fa-cogs"></i></button></td>
+                                <td><button class="pdetails-btn" data-id="${product.id}"><i class="fa-solid fa-eye"></i></button></td>
+                                <td><button class="edit-btn" data-id="${product.id}"><i class="fa-solid fa-pen"></i></button></td>
+                                <td><button class="delete-btn" data-id="${product.id}"><i class="fa-solid fa-trash"></i></button></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-
-                                <td>Royal M125K</td>
-                                <td>Royal</td>
-                                <td>Mũ 3/4</td>
-                                <td>01-12-2024</td>
-                                <td><button class="variant-btn" data-id="2"><i class="fa-solid fa-cogs"></i></button></td>
-
-                                
-                                <td><button class="pdetails-btn" data-id="2"><i class="fa-solid fa-eye"></i></button></td>
-                                <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
-                                <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-
-                                <td>Asia MT-10</td>
-                                <td>Asia</td>
-                                <td>Mũ 1/2</td>
-                                <td>01-12-2024</td>
-                                <td><button class="variant-btn" data-id="3"><i class="fa-solid fa-cogs"></i></button></td>
-
-                               
-                                <td><button class="pdetails-btn" data-id="3"><i class="fa-solid fa-eye"></i></button></td>
-                                <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
-                                <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-
-                                <td>Andes 126K</td>
-                                <td>Andes</td>
-                                <td>Mũ 1/2</td>
-                                <td>01-12-2024</td>
-                                <td><button class="variant-btn" data-id="4"><i class="fa-solid fa-cogs"></i></button></td>
-
-                               
-
-                                <td><button class="pdetails-btn" data-id="4"><i class="fa-solid fa-eye"></i></button></td>
-                                <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
-                                <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
-                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -313,20 +256,33 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <c:if test="${empty brands}">
                         <tr>
-                            <td>1</td>
-                            <td>Royal</td>
-                            <td><img src="images/Logo2020-03.png" alt="royal" width="50"></td>
-                            <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
-                            <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                            <td colspan="5" style="text-align: center; font-style: italic;">Không có dữ liệu</td>
                         </tr>
+                    </c:if>
+                    <c:forEach var="brand" items="${brands}">
                         <tr>
-                            <td>2</td>
-                            <td>Asia</td>
-                            <td><img src="images/Logo2020-01-1.png" alt="Asia" width="50"></td>
-                            <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
-                            <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                            <td>${brand.id}</td>
+                            <td>${brand.name}</td>
+                            <td><img src="${pageContext.request.contextPath}/${brand.imageUrl}" alt="${brand.name}" width="50"></td>
+                            <td>
+                                <!-- Nút sửa, liên kết tới trang chỉnh sửa thương hiệu -->
+                                <button class="edit-btn" onclick="openEditModal(${brand.id}, '${brand.name}', '${brand.imageUrl}')">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <!-- Nút xóa, liên kết tới servlet xử lý xóa -->
+                                <form action="deleteBrand" method="post" style="display:inline;">
+                                    <input type="hidden" name="id" value="${brand.id}" />
+                                    <button type="submit" class="delete-btn">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
         
@@ -368,11 +324,13 @@
                 </table>
             </div>
         </div>
-            <div class="section promotion">
+                </c:when>
+                <c:when test="${activeTab == 'promotion'}">
+            <div class="section promotion active">
                 <h1 class="section-title">Quản Lý Khuyến Mãi</h1>
                 <div class="admin-control">
                     <div class="admin-control-left">
-                            <form action="" class="form-search">
+                            <form action="promotionSearch" class="form-search">
                                 <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span> 
                                 <input id="form-search-promotion" type="text" class="form-search-input" placeholder="Tìm kiếm khuyến mãi.." oninput="">
                                 
@@ -448,18 +406,20 @@
                     </table>
                 </div>
             </div>
+                </c:when>
+            <c:when test="${activeTab == 'user'}">
             <!-- Account -->
-            <div class="section user">
+            <div class="section user active">
                 <h1 class="section-title">Quản Lý Người Dùng</h1>
                 <div class="admin-control">
                     <div class="admin-control-center">
-                        <form action="" class="form-search">
+                        <form action="userSearch" class="form-search">
                             <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span>
                             <input id="form-search-user" type="text" class="form-search-input" placeholder="Tìm kiếm khách hàng..." oninput="">
                         </form>
                     </div>
                     <div class="admin-control-right">
-                        <form action="" class="fillter-date">
+                        <form action="dateSearch" class="fillter-date">
                             <div>
                                 <label for="time-start">Từ</label>
                                 <input type="date" class="form-control-date" id="time-start-user" onchange="">
@@ -516,7 +476,9 @@
         </div>
         </div>
         <!-- Order -->
-        <div class="section">
+            </c:when>
+            <c:when test="${activeTab == 'order'}">
+        <div class="section active">
             <h1 class="section-title">Quản Lý Đơn Hàng</h1>
             <div class="admin-control">
                 <div class="admin-control-left">
@@ -527,13 +489,13 @@
                     </select>
                 </div>
                 <div class="admin-control-center">
-                    <form action="" class="form-search">
+                    <form action="orderSearch" class="form-search">
                         <span class="search-btn"><i class="fa-solid fa-search"></i></span>
                         <input id="form-search-order" type="text" class="form-search-input" placeholder="Tìm kiếm mã đơn, khách hàng...">
                     </form>
                 </div>
                 <div class="admin-control-right">
-                    <form action="" class="fillter-date">
+                    <form action="dateSearch" class="fillter-date">
                         <div>
                             <label for="time-start">Từ</label>
                             <input type="date" class="form-control-date" id="time-start2" onchange="">
@@ -598,7 +560,9 @@
                 </table>
             </div>
         </div>
-        <div class="section">
+            </c:when>
+            <c:when test="${activeTab == 'statistic'}">
+        <div class="section active">
             <h1 class="section-title">Thống Kê</h1>
             <div class="admin-control">
                 <div class="admin-control-left">
@@ -619,13 +583,13 @@
                     </select>
                 </div>
                 <div class="admin-control-center">
-                    <form action="" class="form-search">
+                    <form action="tksearch" class="form-search">
                         <span class="search-btn"><i class="fa-solid fa-search"></i></span>
                         <input id="form-search-tk" type="text" class="form-search-input" placeholder="Tìm kiếm nón..." oninput="">
                     </form>
                 </div>
                 <div class="admin-control-right">
-                    <form action="" class="fillter-date">
+                    <form action="s" class="fillter-date">
                         <div>
                             <label for="time-start">Từ</label>
                             <input type="date" class="form-control-date" id="time-start-tk" onchange="">
@@ -705,6 +669,8 @@
                 </div>
             </div>
         </div>
+            </c:when>
+            </c:choose>
         </main>
     </div>
     <!-- Modal thêm sản phẩm -->
@@ -734,16 +700,16 @@
                   <textarea class="form-control" id="productDescription" name="productDescription" rows="4"></textarea>
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="brand">Thương Hiệu</label>
-                    <select class="form-control" id="brand" name="brand">
-                      <option value="">Chọn Thương Hiệu</option>
-                      <option value="brand1">Royal</option>
-                      <option value="brand2">Asia</option>
-                      <option value="brand3">Andes</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
+                    <div class="form-group col-md-6">
+                        <label for="brand">Thương Hiệu</label>
+                        <select class="form-control " id="brand" name="brand">
+                            <option value="">Chọn Thương Hiệu</option>
+                            <c:forEach var="brand" items="${brands}">
+                                <option value="${brand.id}">${brand.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
                     <label for="category">Danh Mục</label>
                     <select class="form-control" id="category" name="category">
                       <option value="">Chọn Danh Mục</option>
@@ -766,7 +732,7 @@
       </div>
 
 <!-- Modal Thêm Thương Hiệu -->
-<div class="modal" id="addBrandModal">
+<div class="modal" id="brandModal">
     <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -776,22 +742,19 @@
       </div>
       <div class="modal-body">
         <h2 class="modal-title">Thêm Thương Hiệu</h2>
-        <form id="addBrandForm">
-          <div class="form-group col-md-6">
-            <label for="brandId">ID Thương Hiệu</label>
-            <input type="text" class="form-control" id="brandId" name="brandId" placeholder="Nhập ID thương hiệu" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="brandName">Tên Thương Hiệu</label>
-            <input type="text" class="form-control" id="brandName" name="brandName" placeholder="Nhập tên thương hiệu" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="brandImage">Chọn Hình Ảnh</label>
-            <input type="file" class="form-control-file" id="brandImage" name="brandImage" accept="image/*">
-          </div>
-          
-          <button type="submit" class="btn btn-addO">Thêm Thương Hiệu</button>
-        </form>
+          <form action="${pageContext.request.contextPath}/admin/product" method="POST">
+              <input type="hidden" name="type" value="brand">
+              <input type="hidden" name="action" value="addBrand">
+              <div class="form-group col-md-6">
+                  <label for="brandName">Tên Thương Hiệu</label>
+                  <input type="text" class="form-control" id="brandName" name="brandName" placeholder="Nhập tên thương hiệu" required>
+              </div>
+              <div class="form-group col-md-6">
+                  <label for="brandImage">Chọn Hình Ảnh</label>
+                  <input type="text" class="form-control" id="brandImage" name="brandImage" required>
+              </div>
+              <button type="submit" class="btn btn-addO">Thêm Thương Hiệu</button>
+          </form>
       </div>
     </div>
   </div>
@@ -949,6 +912,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-    <script src="js/admin.js"></script>
+    <script src="${pageContext.request.contextPath}/js/admin.js"></script>
 </body>
 </html>
