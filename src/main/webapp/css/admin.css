@@ -551,7 +551,7 @@ button.close {
     margin-bottom: 15px;
   }
   
-  .btn-addO {
+  .btn-addO, btn-editO {
     width: 100%;
     background-color: #B5292F;
     color: white;

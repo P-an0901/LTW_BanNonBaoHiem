@@ -9,6 +9,9 @@ public class Category {
         this.name = name;
     }
 
+    public Category() {
+    }
+
     public String getName() {
         return name;
     }
@@ -23,5 +26,13 @@ public class Category {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

@@ -9,6 +9,8 @@ public class Brand {
         this.name = name;
         this.imageUrl = imageUrl;
     }
+    public Brand() {
+    }
 
     public int getId() {
         return id;
@@ -32,5 +34,14 @@ public class Brand {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "Brand{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
     }
 }

@@ -158,19 +158,34 @@ document.querySelectorAll(".tab-item").forEach(tab => {
         document.getElementById(target).classList.add("active");
     });
 });
-function openEditModal(id, name, imageUrl) {
-    // Cập nhật giá trị của các trường trong form modal
-    document.getElementById('brandName').value = name;
-    document.getElementById('brandImage').value = '';
-
-    // Mở modal
-    $('#brandModal').modal('show');
-}
 $(document).ready(function() {
+
+    // Open Add Brand Form
     $("#btn-add-brand").click(function() {
+        // Show Add Brand form and hide Edit Brand form
+        $("#addBrandForm").show();
+        $("#editBrandForm").hide();
+        $("#modalTitle").text('Thêm Thương Hiệu'); // Set modal title to "Add Brand"
         $("#brandModal").modal('show');
     });
+
+    // Open Edit Brand Form
+    window.openEditModal = function(id, name, imageUrl) {
+        // Set values in the Edit form
+        $('#editBrandName').val(name);
+        $('#editBrandImage').val(imageUrl);
+        $('#brandId').val(id);
+
+        $("#addBrandForm").hide();
+        $("#editBrandForm").show();
+        $("#modalTitle").text('Cập Nhật Thương Hiệu');
+        $("#brandModal").modal('show');
+    };
+
 });
+
+
+
 
 
 

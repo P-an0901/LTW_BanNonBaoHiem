@@ -15,8 +15,7 @@ public class BrandService {
 
     public boolean deleteBrand(int id) {
         if(brandDao.getBrandById(id) != null){
-            brandDao.deleteBrand(id);
-            return true;
+            return brandDao.deleteBrand(id);
         }
         return false;
     }
@@ -32,8 +31,7 @@ public class BrandService {
 
     public boolean updateBrand(int id, String name, String imageUrl) {
         if(brandDao.getBrandById(id) != null){
-            brandDao.updateBrand(id, name, imageUrl);
-            return true;
+            return brandDao.updateBrand(id, name, imageUrl);
         }
         return false;
     }

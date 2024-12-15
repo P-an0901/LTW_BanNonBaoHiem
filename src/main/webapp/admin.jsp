@@ -65,6 +65,7 @@
         <main class="content">
             <c:choose>
             <c:when test="${activeTab == 'home'}">
+                <p>${products}</p>
             <div class="section active">
                 <h1 class="page-title">Helmet Admin Dashboard</h1>
                 <div class="cards">
@@ -274,7 +275,7 @@
                             </td>
                             <td>
                                 <!-- Nút xóa, liên kết tới servlet xử lý xóa -->
-                                <form action="deleteBrand" method="post" style="display:inline;">
+                                <form action="${pageContext.request.contextPath}/deleteBrand" method="POST" style="display:inline;">
                                     <input type="hidden" name="id" value="${brand.id}" />
                                     <button type="submit" class="delete-btn">
                                         <i class="fa-solid fa-trash"></i>
@@ -684,12 +685,8 @@
             </div>
             <div class="modal-body">
                 <h2 class="modal-title">Thêm Sản Phẩm</h2>
-              <form id="addProductForm">
+              <form id=${pageContext.request.contextPath}/admin/product">
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="productId">ID Sản Phẩm</label>
-                    <input type="text" class="form-control" id="productId" name="productId">
-                  </div>
                   <div class="form-group col-md-6">
                     <label for="productName">Tên Sản Phẩm</label>
                     <input type="text" class="form-control" id="productName" name="productName">
@@ -713,15 +710,11 @@
                     <label for="category">Danh Mục</label>
                     <select class="form-control" id="category" name="category">
                       <option value="">Chọn Danh Mục</option>
-                      <option value="category1">Mũ 3/4</option>
+                      <option value="1">Mũ 3/4</option>
                       <option value="category2">Fullface</option>
                       <option value="category3">Mũ 1/2</option>
                     </select>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label for="createdDate">Ngày Tạo</label>
-                  <input type="date" class="form-control" id="createdDate" name="createdDate">
                 </div>
                 <button type="submit" class="btn btn-addO">Thêm Sản Phẩm</button>
               </form>
@@ -732,33 +725,51 @@
       </div>
 
 <!-- Modal Thêm Thương Hiệu -->
-<div class="modal" id="brandModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span>&times;</span>
-          </button>
-      </div>
-      <div class="modal-body">
-        <h2 class="modal-title">Thêm Thương Hiệu</h2>
-          <form action="${pageContext.request.contextPath}/admin/product" method="POST">
-              <input type="hidden" name="type" value="brand">
-              <input type="hidden" name="action" value="addBrand">
-              <div class="form-group col-md-6">
-                  <label for="brandName">Tên Thương Hiệu</label>
-                  <input type="text" class="form-control" id="brandName" name="brandName" placeholder="Nhập tên thương hiệu" required>
-              </div>
-              <div class="form-group col-md-6">
-                  <label for="brandImage">Chọn Hình Ảnh</label>
-                  <input type="text" class="form-control" id="brandImage" name="brandImage" required>
-              </div>
-              <button type="submit" class="btn btn-addO">Thêm Thương Hiệu</button>
-          </form>
-      </div>
+    <div class="modal" id="brandModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Modal Title -->
+                    <h2 class="modal-title" id="modalTitle">Thêm Thương Hiệu</h2>
+
+                    <!-- Add Brand Form (Initially visible) -->
+                    <form id="addBrandForm" action="${pageContext.request.contextPath}/addBrand" method="POST">
+                        <input type="hidden" name="action" value="addBrand">
+                        <div class="form-group col-md-6">
+                            <label for="brandName">Tên Thương Hiệu</label>
+                            <input type="text" class="form-control" id="brandName" name="brandName" placeholder="Nhập tên thương hiệu" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="brandImage">Chọn Hình Ảnh</label>
+                            <input type="text" class="form-control" id="brandImage" name="brandImage" required>
+                        </div>
+                        <button type="submit" class="btn btn-addO">Thêm Thương Hiệu</button>
+                    </form>
+
+                    <!-- Edit Brand Form (Initially hidden) -->
+                    <form id="editBrandForm" action="${pageContext.request.contextPath}/editBrand" method="POST" style="display:none;">
+                        <input type="hidden" name="action" value="editBrand">
+                        <input type="hidden" id="brandId" name="brandId" value="">
+                        <div class="form-group col-md-6">
+                            <label for="editBrandName">Tên Thương Hiệu</label>
+                            <input type="text" class="form-control" id="editBrandName" name="brandName" placeholder="Nhập tên thương hiệu" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="editBrandImage">Chọn Hình Ảnh</label>
+                            <input type="text" class="form-control" id="editBrandImage" name="brandImage" required>
+                        </div>
+                        <button type="submit" class="btn btn-editO">Cập Nhật Thương Hiệu</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+
 
 <div class="modal" id="addCategoryModal">
     <div class="modal-dialog">
