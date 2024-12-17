@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -249,6 +251,7 @@
                 <table id="brand-table" style="width:100%">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>STT</th>
                             <th>Tên thương hiệu</th>
                             <th>Hình Ảnh</th>
@@ -264,18 +267,19 @@
                     </c:if>
                     <c:forEach var="brand" items="${brands}">
                         <tr>
+                            <td><input type="checkbox" name="selectedBrands" value="${brand.id}"></td>
                             <td>${brand.id}</td>
                             <td>${brand.name}</td>
-                            <td><img src="${pageContext.request.contextPath}/${brand.imageUrl}" alt="${brand.name}" width="50"></td>
+                            <td><img src="${pageContext.request.contextPath}/${fn:escapeXml(brand.imageUrl)}" alt="${brand.name}" width="50"></td>
                             <td>
                                 <!-- Nút sửa, liên kết tới trang chỉnh sửa thương hiệu -->
-                                <button class="edit-btn" onclick="openEditModal(${brand.id}, '${brand.name}', '${brand.imageUrl}')">
+                                <button class="edit-btn" onclick="openEditModal(${brand.id}, '${brand.name}', '${pageContext.request.contextPath}/${brand.imageUrl}')">
                                     <i class="fa-solid fa-pen"></i>
                                 </button>
                             </td>
                             <td>
-                                <!-- Nút xóa, liên kết tới servlet xử lý xóa -->
-                                <form action="${pageContext.request.contextPath}/deleteBrand" method="POST" style="display:inline;">
+                                <form action="${pageContext.request.contextPath}/delete-tab-product" method="POST" style="display:inline;">
+                                    <input type="hidden" name="action" value="deleteBrand">
                                     <input type="hidden" name="id" value="${brand.id}" />
                                     <button type="submit" class="delete-btn">
                                         <i class="fa-solid fa-trash"></i>
@@ -685,17 +689,18 @@
             </div>
             <div class="modal-body">
                 <h2 class="modal-title">Thêm Sản Phẩm</h2>
-              <form id=${pageContext.request.contextPath}/admin/product">
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="productName">Tên Sản Phẩm</label>
-                    <input type="text" class="form-control" id="productName" name="productName">
+              <form id=${pageContext.request.contextPath}/add-tab-product">
+                  <input type="hidden" name="action" value="addProduct">
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="productName">Tên Sản Phẩm</label>
+                        <input type="text" class="form-control" id="productName" name="productName">
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label for="productDescription">Miêu Tả</label>
-                  <textarea class="form-control" id="productDescription" name="productDescription" rows="4"></textarea>
-                </div>
+                  <div class="form-group">
+                    <label for="productDescription">Miêu Tả</label>
+                    <textarea class="form-control" id="productDescription" name="productDescription" rows="4"></textarea>
+                  </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="brand">Thương Hiệu</label>
@@ -710,9 +715,9 @@
                     <label for="category">Danh Mục</label>
                     <select class="form-control" id="category" name="category">
                       <option value="">Chọn Danh Mục</option>
-                      <option value="1">Mũ 3/4</option>
-                      <option value="category2">Fullface</option>
-                      <option value="category3">Mũ 1/2</option>
+                        <c:forEach var="cate" items="${categories}">
+                            <option value="${cate.id}">${cate.name}</option>
+                        </c:forEach>
                     </select>
                   </div>
                 </div>
@@ -738,7 +743,7 @@
                     <h2 class="modal-title" id="modalTitle">Thêm Thương Hiệu</h2>
 
                     <!-- Add Brand Form (Initially visible) -->
-                    <form id="addBrandForm" action="${pageContext.request.contextPath}/addBrand" method="POST">
+                    <form id="addBrandForm" action="${pageContext.request.contextPath}/add-tab-product" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="action" value="addBrand">
                         <div class="form-group col-md-6">
                             <label for="brandName">Tên Thương Hiệu</label>
@@ -746,22 +751,25 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="brandImage">Chọn Hình Ảnh</label>
-                            <input type="text" class="form-control" id="brandImage" name="brandImage" required>
+                            <input type="file" class="form-control" id="brandImage" name="brandImage" required>
                         </div>
                         <button type="submit" class="btn btn-addO">Thêm Thương Hiệu</button>
                     </form>
 
-                    <!-- Edit Brand Form (Initially hidden) -->
-                    <form id="editBrandForm" action="${pageContext.request.contextPath}/editBrand" method="POST" style="display:none;">
+                    <form id="editBrandForm" action="${pageContext.request.contextPath}/edit-tab-product" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="action" value="editBrand">
                         <input type="hidden" id="brandId" name="brandId" value="">
                         <div class="form-group col-md-6">
                             <label for="editBrandName">Tên Thương Hiệu</label>
                             <input type="text" class="form-control" id="editBrandName" name="brandName" placeholder="Nhập tên thương hiệu" required>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="editBrandImage">Chọn Hình Ảnh</label>
-                            <input type="text" class="form-control" id="editBrandImage" name="brandImage" required>
+                        <div class="form-group">
+                            <label for="editBrandImage">Hình ảnh hiện tại:</label>
+                            <img id="brandImagePreview" src="" alt="Hình ảnh thương hiệu" style="width: 100px;">
+                        </div>
+                        <div class="form-group">
+                            <label for="editBrandImage">Tải lên hình ảnh mới:</label>
+                            <input type="file" id="editBrandImage" name="brandImage" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-editO">Cập Nhật Thương Hiệu</button>
                     </form>
