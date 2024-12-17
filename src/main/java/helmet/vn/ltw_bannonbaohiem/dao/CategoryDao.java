@@ -15,7 +15,7 @@ public class CategoryDao {
     }
 
     public boolean addBCate(String name) {
-        String sql = "INSERT INTO categoríes (name) VALUES (?)";
+        String sql = "INSERT INTO categories (name) VALUES (?)";
         try {
             return jdbi.withHandle(handle -> {
                 Update update = handle.createUpdate(sql);
@@ -30,7 +30,7 @@ public class CategoryDao {
     }
 
     public List<Category> getAllCate() {
-        String sql = "SELECT * FROM categoríes";
+        String sql = "SELECT * FROM categories";
         return jdbi.withHandle(handle -> {
             return handle.createQuery(sql)
                     .mapToBean(Category.class)
@@ -38,7 +38,7 @@ public class CategoryDao {
         });
     }
     public Category getCateById(int id) {
-        String sql = "SELECT * FROM categoríes WHERE id = ?";
+        String sql = "SELECT * FROM categories WHERE id = ?";
         return jdbi.withHandle(handle -> {
             return handle.createQuery(sql)
                     .bind(0, id)
@@ -47,21 +47,23 @@ public class CategoryDao {
                     .orElse(null);
         });
     }
-    public void updateCate(int id, String name) {
-        String sql = "UPDATE categoríes SET name = ? WHERE id = ?";
-        jdbi.useHandle(handle -> {
+    public boolean updateCate(int id, String name) {
+        String sql = "UPDATE categories SET name = ? WHERE id = ?";
+        return jdbi.withHandle(handle -> {
             Update update = handle.createUpdate(sql);
             update.bind(0, name);
-            update.bind(2, id);
-            update.execute();
+            update.bind(1, id);
+            int rowsAffected = update.execute();
+            return rowsAffected > 0;
         });
     }
-    public void deleteCate(int id) {
-        String sql = "DELETE FROM categoríes WHERE id = ?";
-        jdbi.useHandle(handle -> {
+    public boolean deleteCate(int id) {
+        String sql = "DELETE FROM categories WHERE id = ?";
+        return jdbi.withHandle(handle -> {
             Update update = handle.createUpdate(sql);
             update.bind(0, id);
-            update.execute();
+            int row = update.execute();
+            return row > 0;
         });
     }
 }

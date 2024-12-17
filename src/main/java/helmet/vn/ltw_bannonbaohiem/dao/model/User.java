@@ -14,16 +14,13 @@ public class User {
     private String image;
     private String address;
     private int role;
+    private boolean isActive;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public User() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
     public User(int id, String username, String email, String password, String fullName,
-                LocalDateTime birthday, String phone, String image, String address, int role) {
+                LocalDateTime birthday, String phone, String image, String address, int role,
+                boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -34,11 +31,14 @@ public class User {
         this.image = image;
         this.address = address;
         this.role = role;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+        this.isActive = isActive;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    // Getter và Setter
+    public User() {
+    }
+
     public int getId() {
         return id;
     }
@@ -119,6 +119,14 @@ public class User {
         this.role = role;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -133,13 +141,5 @@ public class User {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public void updateUser(String username, String fullName, String phone, String address) {
-        this.username = username;
-        this.fullName = fullName;
-        this.phone = phone;
-        this.address = address;
-        this.updatedAt = LocalDateTime.now();
     }
 }

@@ -5,7 +5,6 @@ public class Sizes {
     private int id;
     private String name;
 
-    // Constructor
     public Sizes() {}
 
     public Sizes(int id, String name) {

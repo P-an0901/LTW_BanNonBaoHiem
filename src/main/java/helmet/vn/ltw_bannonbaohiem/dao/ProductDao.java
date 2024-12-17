@@ -18,31 +18,31 @@ public class ProductDao {
 
     public List<Product> getAllPro() {
         return jdbi.withHandle(handle -> {
-            String query = "SELECT p.id AS product_id, p.name AS product_name, p.description, " +
-                    "p.brand_id, p.category_id, p.created_at, p.updated_at, " +
-                    "b.id AS brand_id, b.name AS brand_name, " +
-                    "c.id AS category_id, c.name AS category_name " +
+            String query = "SELECT p.id AS pid, p.name AS pname, p.description, " +
+                    "p.brandId, p.categoryId, p.createdAt, p.updatedAt, " +
+                    "b.id AS bid, b.name AS bname, " +
+                    "c.id AS cateId, c.name AS catename " +
                     "FROM products p " +
-                    "JOIN brands b ON p.brand_id = b.id " +
-                    "JOIN categories c ON p.category_id = c.id";
+                    "JOIN brands b ON p.brandId = b.id " +
+                    "JOIN categories c ON p.categoryId = c.id";
 
             return handle.createQuery(query)
                     .map((rs, ctx) -> {
                         Product product = new Product();
-                        product.setId(rs.getInt("product_id"));
-                        product.setName(rs.getString("product_name"));
+                        product.setId(rs.getInt("pid"));
+                        product.setName(rs.getString("pname"));
                         product.setDescription(rs.getString("description"));
-                        product.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
-                        product.setUpdatedAt(rs.getTimestamp("updated_at").toLocalDateTime());
+                        product.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
+                        product.setUpdatedAt(rs.getTimestamp("updatedAt").toLocalDateTime());
 
                         Brand brand = new Brand();
-                        brand.setId(rs.getInt("brand_id"));
-                        brand.setName(rs.getString("brand_name"));
+                        brand.setId(rs.getInt("bid"));
+                        brand.setName(rs.getString("bname"));
                         product.setBrand(brand);
 
                         Category category = new Category();
-                        category.setId(rs.getInt("category_id"));
-                        category.setName(rs.getString("category_name"));
+                        category.setId(rs.getInt("cateId"));
+                        category.setName(rs.getString("catename"));
                         product.setCategory(category);
 
                         return product;

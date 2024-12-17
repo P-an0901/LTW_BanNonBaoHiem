@@ -25,24 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Dữ liệu mẫu cho biến thể
-    const variantData = {
-        1: [
 
-            { id: 1, idp: 1, name: "Royal M139 Trắng", color: "Trắng", price: "100,000 VND", image: "images/Royal-M139-V.10-Trang.jpg" },
-            { id: 2, idp: 1,name: "Royal M139 Trắng Đen", color: "Trắng Đen", price: "150,000 VND", image: "images/Royal-M139-V.5-Trang-den.jpg" },
-        ],
-        2: [
-            { id: 1, idp: 2,name: "Royal M125K Chuột Mờ", color: "Chuột Mờ", price: "200,000 VND", image: "images/1-Royal M125K Chuột Mờ.png" },
-        ],
-        3: [
-            { id: 1, idp: 3,name: "Asia MT-10 Đỏ Mờ", color: "Đỏ Mờ", price: "300,000 VND", image: "images/1.2-Asia MT-10-Do-mo.jpg" },
-            { id: 2, idp: 3,name: "Asia MT-10 Mực Mờ", color: "Mực Mờ", price: "250,000 VND", image: "images/1.2-Asia MT-10-Muc-mo.jpg" },
-
-       
-        ],
-    };
     const table2 = document.getElementById("variant-content");
             const variantDataTable = new DataTable(table2, {
                 "paging": true,
@@ -55,40 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 "pageLength": 3,    
             });
 
-    // Xử lý khi nhấn nút Chi tiết
-    document.querySelectorAll('.variant-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            const productId = this.getAttribute('data-id');
-            const variants = variantData[productId] || [];
 
-            const variantTableBody = document.querySelector('#variant-content tbody');
-            variantTableBody.innerHTML = ''; 
-            variants.forEach((variant, index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-
-                    <td>${variant.idp}</td>
-
-                    <td>${variant.name}</td>
-                    <td><img src="${variant.image}" alt="${variant.name}" width="50"></td>
-                    <td>${variant.color}</td>
-                    <td>${variant.price}</td>
-                    <td><button class="details-btn" data-id="3"><i class="fa-solid fa-eye"></i></button></td>
-
-                    <td><button class="addImage-btn"><i class="fa-solid fa-plus"></i></button></td>
-
-                    <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
-                    <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
-                `;
-                variantTableBody.appendChild(row);
-            });
-            variantDataTable.clear();
-            variantDataTable.rows.add(variantTableBody.rows); 
-            variantDataTable.draw();
-        });
-    });
-});
 
 document.addEventListener('DOMContentLoaded', function() {
     // Lấy các nút
@@ -160,21 +110,17 @@ document.querySelectorAll(".tab-item").forEach(tab => {
 });
 $(document).ready(function() {
 
-    // Open Add Brand Form
     $("#btn-add-brand").click(function() {
-        // Show Add Brand form and hide Edit Brand form
         $("#addBrandForm").show();
         $("#editBrandForm").hide();
-        $("#modalTitle").text('Thêm Thương Hiệu'); // Set modal title to "Add Brand"
+        $("#modalTitle").text('Thêm Thương Hiệu');
         $("#brandModal").modal('show');
     });
 
-    // Open Edit Brand Form
     window.openEditModal = function(id, name, imageUrl) {
-        // Set values in the Edit form
-        $('#editBrandName').val(name);
-        $('#editBrandImage').val(imageUrl);
-        $('#brandId').val(id);
+        document.getElementById("brandId").value = id;
+        document.getElementById("editBrandName").value = name;
+        document.getElementById("brandImagePreview").src = imageUrl;
 
         $("#addBrandForm").hide();
         $("#editBrandForm").show();
