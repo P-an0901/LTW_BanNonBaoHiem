@@ -70,7 +70,7 @@
                     <span>Tổng tiền:</span>
                     <span id="total-price">0</span>
                   </div>
-                  <button class="checkout-btn"><a href="checkout."></a>
+                  <button class="checkout-btn"><a href="checkout.jsp"></a>
                     Xem chi tiết</button>
                 </div>
               </div>

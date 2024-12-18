@@ -308,7 +308,7 @@ button.close {
     background-color: #eee;
     cursor: pointer;
 }
-.submenu li:hover a{
+.submenu li:hover, .submenu li a:hover{
     color: var(--red);
 }
 .submenu-icon {

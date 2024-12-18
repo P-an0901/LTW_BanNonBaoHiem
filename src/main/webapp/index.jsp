@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "f" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -177,7 +180,7 @@
                     </div>
                 </div>
                 <div class="xem-them p-3 d-flex justify-content-end">
-                    <a href="khuyenmai.html" class="btn-xem-them d-flex align-items-center justify-content-between">
+                    <a href="khuyenmai.jsp" class="btn-xem-them d-flex align-items-center justify-content-between">
                         <span>Xem thêm</span>
                         <i class="fas fa-chevron-right"></i>
                     </a>
@@ -256,22 +259,26 @@
                     <h3>Mua Nhiều</h3>
                 </div>
                 <div class="product-row">
+                    <c:forEach var="proV" items="${proVariants}">
                     <div class="product-item">
                         <div class="product-hot-label">Mua nhiều</div> 
-                        <a href="detail.html">
-                            <img src=" images/Royal-M139-BoomBang.jpg" alt="Sản phẩm 1" class="product-image">
+                        <a href="${pageContext.request.contextPath}/detail?pvId=${proV.id}">
+                            <img src="${pageContext.request.contextPath}/${fn:escapeXml(proV.image)}" alt="${proV.name}" class="product-image">
                         </a>
                         <div class="select-size">
-                            <button class="size-button selected" data-value="M">M</button>
-                            <button class="size-button" data-value="L">L</button>
-                            <button class="size-button" data-value="XL">XL</button>
+                            <c:forEach var="productSize" items="${proV.listPSize}">
+                                <button class="size-button" data-value="${productSize.size.name}">
+                                        ${productSize.size.name}
+                                </button>
+                            </c:forEach>
                         </div> 
-                        <a href="detail.html">
-                            <h3 class="product-name">Royal M139 BoomBang</h3>
+                        <a href="detail.jsp">
+                            <h3 class="product-name">${proV.name}</h3>
                         </a>
-                        <p class="product-price">Giá: 650.000 đ</p>
+                        <p class="product-price">Giá: <f:formatNumber value="${proV.price}"/> đ</p>
                         <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
                     </div>
+                    </c:forEach>
                     <div class="product-item">
                         <div class="product-hot-label">Mua nhiều</div> 
                         <img src=" images/Mũ bảo hiểm Fullface Royal M141K Đen Bóng.png" alt="Sản phẩm 2" class="product-image">

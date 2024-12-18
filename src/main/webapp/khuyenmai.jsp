@@ -21,7 +21,7 @@
 <jsp:include page="html/modal.jsp" />
 <div class="breadcrumb-container">
     <ul class="breadcrumb">
-      <li><a href="index.html">Trang chủ </a></li>
+      <li><a href="index.jsp">Trang chủ </a></li>
          <li><span>/</span></li>
       <li><a href="#" class="active"> Khuyến Mãi</a></li>
     </ul>

@@ -44,7 +44,7 @@
             <div class="bottom-sidebar">
                 <ul class="sidebar-list">
                     <li class="sidebar-list-item user-logout">
-                        <a href="/" class="sidebar-link">
+                        <a href="${pageContext.request.contextPath}/" class="sidebar-link">
                             <div class="sidebar-icon"><i class="fa-solid fa-chevron-left"></i></div>
                             <div class="hidden-sidebar">Trang chủ</div>
                         </a>
@@ -142,7 +142,7 @@
                     </div>
                     <div class="admin-control-right">
                         <button class="btn-control-large" id="btn-cancel-product"><i class="fa-solid fa-rotate-right"></i> Làm mới</button>
-                        <button class="btn-control-large" id="btn-add-product"><i class="fa-solid fa-plus"></i> Thêm sản phẩm mới</button> 
+                        <button type="button" class="btn-control-large" id="btn-add-product"><i class="fa-solid fa-plus"></i> Thêm sản phẩm mới</button>
                         <button class="btn-control-large" id="btn-add-category"><i class="fa-solid fa-plus"></i> Thêm danh mục</button> 
                         <button type="button" class="btn-control-large" id="btn-add-brand"><i class="fa-solid fa-plus" ></i> Thêm thương hiệu</button>
                         <button class="btn-control-large" id="btn-add-size"><i class="fa-solid fa-plus"></i> Thêm size</button> 
@@ -190,30 +190,55 @@
                 </div>
                 <div class="variant-table" id="variant-table">
                     <h4 id="variant-title">Biến thể sản phẩm</h4>
-                    <button class="btn-control-large m-2" id="btn-add-product_variant"><i class="fa-solid fa-plus"></i> Thêm biến thể</button> 
+                    <button type="button" class="btn-control-large m-2" id="btn-add-product_variant" ><i class="fa-solid fa-plus"></i> Thêm biến thể</button>
                     <table id="variant-content" style="width:100%">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>STT</th>
-
                                 <th>ID sản phẩm</th>
-
-
                                 <th>Tên biến thể</th>
                                 <th>Hình ảnh</th>
                                 <th>Màu sắc</th>
                                 <th>Giá</th>
                                 <th>Chi tiết</th>
-
-                                <th>Thêm ảnh</th>
-
-
                                 <th>Sửa</th>
                                 <th>Xóa</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Nội dung biến thể sẽ được cập nhật tại đây -->
+                        <c:if test="${empty proVariants}">
+                            <tr>
+                                <td colspan="5" style="text-align: center; font-style: italic;">Không có dữ liệu</td>
+                            </tr>
+                        </c:if>
+                        <c:forEach var="proV" items="${proVariants}">
+                            <tr>
+                                <td><input type="checkbox" name="selectedProV" value="${proV.id}"></td>
+                                <td>${proV.id}</td>
+                                <td>${proV.productId}</td>
+                                <td>${proV.name}</td>
+                                <td><img src="${pageContext.request.contextPath}/${fn:escapeXml(proV.image)}" alt="${proV.name}" width="50"></td>
+                                <td>${proV.color}</td>
+                                <td>${proV.price}</td>
+                                <td><button class="pvdetails-btn" data-id="${proV.id}"><i class="fa-solid fa-eye"></i></button></td>
+
+                                <td>
+                                    <button class="edit-btn" onclick="openEditModal(${proV.id}, '${proV.name}', '${pageContext.request.contextPath}/${proV.image}')">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <form action="${pageContext.request.contextPath}/delete-tab-product" method="POST" style="display:inline;">
+                                        <input type="hidden" name="action" value="deleteProduct">
+                                        <input type="hidden" name="id" value="${proV.id}" />
+                                        <button type="submit" class="delete-btn">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -303,10 +328,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <td>1</td>
-                        <td>Mũ 3/4</td>
+                    <c:if test="${empty categories}">
+                        <tr>
+                            <td colspan="5" style="text-align: center; font-style: italic;">Không có dữ liệu</td>
+                        </tr>
+                    </c:if>
+                    <c:forEach var="cate" items="${categories}">
+                    <tr>
+                        <td>${cate.id}</td>
+                        <td>${cate.name}</td>
                         <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
                         <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                    <tr>
+                    </c:forEach>
                     </tbody>
                 </table>
                 <!-- Quản lý Size -->
@@ -321,10 +355,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <td>1</td>
-                        <td>M</td>
-                        <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
-                        <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                    <c:if test="${empty sizes}">
+                        <tr>
+                            <td colspan="5" style="text-align: center; font-style: italic;">Không có dữ liệu</td>
+                        </tr>
+                    </c:if>
+                    <c:forEach var="size" items="${sizes}">
+                        <tr>
+                            <td>${size.id}</td>
+                            <td>${size.name}</td>
+                            <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                            <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
@@ -689,7 +732,7 @@
             </div>
             <div class="modal-body">
                 <h2 class="modal-title">Thêm Sản Phẩm</h2>
-              <form id=${pageContext.request.contextPath}/add-tab-product">
+              <form action="${pageContext.request.contextPath}/add-tab-product" method="POST" enctype="multipart/form-data">
                   <input type="hidden" name="action" value="addProduct">
                   <div class="form-row">
                     <div class="form-group col-md-6">
@@ -804,6 +847,72 @@
         </div>
     </div>
 </div>
+    <div class="modal" id="addVariantModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addVariantModalLabel">Thêm biến thể sản phẩm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <form action="${pageContext.request.contextPath}/add-tab-product" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="action" value="addProductVariant">
+                        <div class="mb-3">
+                            <label for="productParent" class="form-label">Sản phẩm mẹ</label>
+                            <select class="form-select" id="productParent" name="product_id" required>
+                                <option value="" disabled selected>Chọn sản phẩm</option>
+                                <c:forEach var="product" items="${products}">
+                                    <option value="${product.id}">${product.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+
+                        <!-- Tên biến thể -->
+                        <div class="mb-3">
+                            <label for="variantName" class="form-label">Tên biến thể</label>
+                            <input type="text" class="form-control" id="variantName" name="name" placeholder="Nhập tên biến thể" required>
+                        </div>
+
+                        <!-- Màu sắc -->
+                        <div class="mb-3">
+                            <label for="variantColor" class="form-label">Màu sắc</label>
+                            <input type="text" class="form-control" id="variantColor" name="color" placeholder="Nhập màu sắc" required>
+                        </div>
+
+                        <!-- Giá -->
+                        <div class="mb-3">
+                            <label for="variantPrice" class="form-label">Giá</label>
+                            <input type="number" class="form-control" id="variantPrice" name="price" placeholder="Nhập giá" required>
+                        </div>
+
+                        <!-- Hình ảnh -->
+                        <div class="mb-3">
+                            <label for="variantImage" class="form-label">Hình ảnh</label>
+                            <input type="file" class="form-control" id="variantImage" name="image" accept="image/*">
+                        </div>
+
+                        <!-- Trạng thái -->
+                        <div class="mb-3">
+                            <label for="variantActive" class="form-label">Trạng thái</label>
+                            <select class="form-select" id="variantActive" name="is_active" required>
+                                <option value="1" selected>Hoạt động</option>
+                                <option value="0">Không hoạt động</option>
+                            </select>
+                        </div>
+
+                        <!-- Nút Lưu -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-primary">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 <!-- Modal chi tiết sản phẩm -->
 <div id="productDetailModal" class="modal">
     <div class="modal-dialog">
