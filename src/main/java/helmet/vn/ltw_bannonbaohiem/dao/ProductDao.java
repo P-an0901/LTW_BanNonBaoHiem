@@ -5,6 +5,7 @@ import helmet.vn.ltw_bannonbaohiem.dao.model.Brand;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Category;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Product;
 import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.core.statement.Update;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,18 +51,52 @@ public class ProductDao {
                     .list();
         });
     }
-
-
-
-
     public Product getProById(int id) {
-        String sql = "SELECT * FROM products WHERE id = ?";
+        String sql = "SELECT p.*, b.*, c.* FROM products p JOIN brands b ON p.brandId = b.id " +
+                "JOIN categories c ON c.id = p.categoryId " +
+                "WHERE p.id = ?";
         return jdbi.withHandle(handle -> {
             return handle.createQuery(sql)
                     .bind(0, id)
-                    .mapTo(Product.class)
+                    .map((rs, ctx) -> {
+                        Product product = new Product();
+                        product.setId(rs.getInt("p.id"));
+                        product.setName(rs.getString("p.name"));
+                        product.setDescription(rs.getString("p.description"));
+
+                        Brand brand = new Brand();
+                        brand.setId(rs.getInt("b.id"));
+                        brand.setName(rs.getString("b.name"));
+
+                        Category category = new Category();
+                        category.setId(rs.getInt("c.id"));
+                        category.setName(rs.getString("c.name"));
+
+                        product.setBrand(brand);
+                        product.setCategory(category);
+
+                        return product;
+                    })
                     .findOne()
                     .orElse(null);
         });
+    }
+    public boolean addProduct(String name, String description, int brandId, int cateid){
+        String sql = "INSERT INTO products(name, description, brandId, categoryId)" +
+                "VALUES (?, ?, ?, ?)";
+        try{
+            return jdbi.withHandle(handle -> {
+                Update update = handle.createUpdate(sql);
+                update.bind(0, name);
+                update.bind(1, description);
+                update.bind(2, brandId);
+                update.bind(3, cateid);
+                int rowsAffected = update.execute();
+                return rowsAffected > 0;
+            });
+        }catch (Exception e ){
+            e.printStackTrace();
+            return false;
+        }
     }
 }

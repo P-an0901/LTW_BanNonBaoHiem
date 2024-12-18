@@ -12,7 +12,6 @@
 // }
 document.addEventListener("DOMContentLoaded", function () {
     const table1 = document.getElementById("product-table");
-    const table2 = document.getElementById("variant-content");
     const dataTable = new DataTable(table1, {
         "paging": true,
         "searching": false, 
@@ -26,17 +25,17 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-    const table2 = document.getElementById("variant-content");
-            const variantDataTable = new DataTable(table2, {
-                "paging": true,
-                "searching": false, 
-
-                "ordering": false,  
-
-                "info": false,  
-                "lengthChange": false,
-                "pageLength": 3,    
-            });
+    // const table2 = document.getElementById("variant-content");
+    //         const variantDataTable = new DataTable(table2, {
+    //             "paging": true,
+    //             "searching": false,
+    //
+    //             "ordering": false,
+    //
+    //             "info": false,
+    //             "lengthChange": false,
+    //             "pageLength": 3,
+    //         });
 
 
 
@@ -51,12 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const addCategoryModal = document.getElementById('addCategoryModal');
     const addUserModal = document.getElementById('addUserModal');
 
-    // Kiểm tra và thêm sự kiện vào các nút nếu chúng tồn tại
-    if (btnAddProduct && addProductModal) {
-        btnAddProduct.addEventListener('click', function() {
-            addProductModal.style.display = 'block';
-        });
-    }
 
     if (btnAddCategory && addCategoryModal) {
         btnAddCategory.addEventListener('click', function() {
@@ -109,6 +102,13 @@ document.querySelectorAll(".tab-item").forEach(tab => {
     });
 });
 $(document).ready(function() {
+    $('#btn-add-product_variant').click(function () {
+        $('#addVariantModal').modal('show')
+    });
+
+    $('#btn-add-product').click(function () {
+        $('#addProductModal').modal('show')
+    });
 
     $("#btn-add-brand").click(function() {
         $("#addBrandForm").show();

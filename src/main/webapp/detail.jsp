@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -21,11 +24,11 @@
 <jsp:include page="html/modal.jsp" />
     <div class="breadcrumb-container">
         <ul class="breadcrumb">
-          <li><a href="index.html">Trang chủ </a></li>
+          <li><a href="index.jsp">Trang chủ </a></li>
           <li><span>/</span></li>
-          <li><a href="danhmuc.html">Danh mục </a></li>
+          <li><a href="danhmuc.jsp">Danh mục </a></li>
           <li><span>/</span></li>
-          <li><a href="#" class="active"> Royal M139 BoomBang</a></li>
+          <li><a href="#" class="active">${productVariant.name}</a></li>
         </ul>
     </div>
     <div class="back-to-top active">
@@ -45,7 +48,7 @@
                 <!-- Hình ảnh sản phẩm -->
                 <div class="col-md-4 detail-img-container">
                     <div class="main-image-wrapper">
-                        <img src="images/Royal-M139-BoomBang.jpg" class="product-image" id="main-product-image">
+                        <img src="${productVariant.image}" class="product-image" id="main-product-image">
                     </div>
                     <div class="product-thumbnails">
                         <img src="images/Royal-M139-BoomBang.jpg" class="thumbnail" data-src="images/Royal-M139-BoomBang.jpg">
@@ -56,11 +59,11 @@
                 <!-- Thông tin sản phẩm -->
                 <div class="col-md-8 product-info">
                     <div class="product-name">
-                        <h1 >Royal M139 BoomBang</h1>
+                        <h1 >${productVariant.name}</h1>
                     </div>
                     <div class="product-details">
-                        <span>Thương hiệu: </span><a href="Royal.html" class="product-brand">Royal</a>
-                        <span> | Loại nón: </span><a href="Royal.html" class="product-type">Nón bảo hiểm 3/4 đầu</a>
+                        <span>Thương hiệu: </span><a href="Royal.html" class="product-brand">${product.brand.name}</a>
+                        <span> | Loại nón: </span><a href="Royal.html" class="product-type">${product.category.name}</a>
                         <div class="rating mt-1">
                             <img src="images/stars.original.png" class="stars">
                             <span class="number-rated">( 99 lượt đánh giá.)</span>
@@ -69,7 +72,7 @@
                     <div class="d-flex justify-content-between">
                         <div class=" col-md-6 session-left p-0">
                             <!-- Thông số kỹ thuật -->
-                            <p class="product-price">Giá: 650.000 đ</p>
+                            <p class="product-price">Giá: ${productVariant.price} đ</p>
                             <table class="session-left">
                                 <tbody>
                                     <tr>
@@ -140,18 +143,12 @@
                             <div class="product-options">
                                 <label for="size">Kích thước:</label>
                                 <div id="size" class="form-group mb-3 pl-2">
-                                    <label>
-                                        <input type="checkbox" name="size" value="M" class="checkbox-size" onclick="selectOnlyOne(this)">
-                                        M
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" name="size" value="L" class="checkbox-size" onclick="selectOnlyOne(this)">
-                                        L
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" name="size" value="XL" class="checkbox-size" onclick="selectOnlyOne(this)">
-                                        XL
-                                    </label>
+                                    <c:forEach var="size" items="${sizes}">
+                                        <label>
+                                            <input type="checkbox" name="size" value="${size.id}" class="checkbox-size" onclick="selectOnlyOne(this)">
+                                                ${size.size.name}
+                                        </label>
+                                    </c:forEach>
                                 </div>
                                 <label for="quantity">Số lượng:</label>
                                 <div class="quantity-selector">

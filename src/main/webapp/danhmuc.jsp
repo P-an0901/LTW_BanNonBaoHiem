@@ -18,18 +18,17 @@
 
 <!-- Load modal -->
 <jsp:include page="html/modal.jsp" />
-    <div class="breadcrumb-container">
-        <ul class="breadcrumb">
-          <li><a href="index.jsp">Trang chủ </a></li>
-             <li><span>/</span></li>
-          <li><a href="#" class="active"> Danh mục sản phẩm</a></li>
-        </ul>
-    </div>
-    <div class="back-to-top active">
-        <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
-    </div>
-    
-<div id="modal-container"></div>
+<div class="breadcrumb-container">
+    <ul class="breadcrumb">
+        <li><a href="index.jsp">Trang chủ </a></li>
+        <li><span>/</span></li>
+        <li><a href="#" class="active"> Danh mục sản phẩm</a></li>
+    </ul>
+</div>
+<div class="back-to-top active">
+    <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
+</div>
+
     <div class="product-list">
         <div class="filter-container">
             <h3>Lọc sản phẩm</h3>
@@ -126,7 +125,7 @@
                 </div>
                 <div class="product-row" id="danhmuc-pro">
                     <div class="product-item" data-type="mu34">
-                        <a href="detail.html">
+                        <a href="detail.jsp">
                             <img src="images/Royal-M139-BoomBang.jpg" alt="Sản phẩm 1" class="product-image">
                         </a>
                         <div class="select-size">

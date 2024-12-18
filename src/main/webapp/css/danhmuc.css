@@ -1,3 +1,4 @@
+
 #danhmuc-pro .product-item {
     width: calc(25% - 10px);
 }
@@ -6,8 +7,12 @@
 }
 #prolst{
     background-color: #fff;
-    max-width: 1250px;
     border-radius: 10px;
+}
+.product-list{
+    max-width: 1250px !important;
+    border-radius: 10px;
+    background-color: #fff;
 }
 .product-list .container .pro-lst{
     border-radius: 0 !important;
