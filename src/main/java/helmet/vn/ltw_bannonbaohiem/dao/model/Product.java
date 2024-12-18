@@ -1,6 +1,8 @@
 package helmet.vn.ltw_bannonbaohiem.dao.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Product {
     private int id;
@@ -10,8 +12,10 @@ public class Product {
     private Category category;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private List<ProductVariant> listVariant;
 
     public Product() {
+        this.listVariant = new ArrayList<>();
     }
 
     public Product(int id, String name, String description, Brand brand, Category category, LocalDateTime createdAt, LocalDateTime updatedAt) {
@@ -22,6 +26,7 @@ public class Product {
         this.category = category;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.listVariant = new ArrayList<>();
     }
     public int getId() {
         return id;
@@ -77,6 +82,17 @@ public class Product {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+    public boolean addVariant(ProductVariant pv){
+        return listVariant.add(pv);
+    }
+
+    public List<ProductVariant> getListVariant() {
+        return listVariant;
+    }
+
+    public void setListVariant(List<ProductVariant> listVariant) {
+        this.listVariant = listVariant;
     }
 
     @Override

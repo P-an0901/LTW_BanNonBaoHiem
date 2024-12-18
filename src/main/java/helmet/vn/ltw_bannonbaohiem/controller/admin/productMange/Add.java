@@ -1,6 +1,10 @@
 package helmet.vn.ltw_bannonbaohiem.controller.admin.productMange;
 
+import helmet.vn.ltw_bannonbaohiem.dao.model.Brand;
+import helmet.vn.ltw_bannonbaohiem.dao.model.Category;
 import helmet.vn.ltw_bannonbaohiem.service.BrandService;
+import helmet.vn.ltw_bannonbaohiem.service.CategoryService;
+import helmet.vn.ltw_bannonbaohiem.service.ProductService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,6 +20,8 @@ import java.io.IOException;
 @MultipartConfig
 public class Add extends HttpServlet {
     BrandService brandService = new BrandService();
+    CategoryService cateService = new CategoryService();
+    ProductService productService = new ProductService();
     private static final String UPLOAD_DIR = "images";
 
     @Override
@@ -67,9 +73,21 @@ public class Add extends HttpServlet {
         
     }
 
-    private void handleAddProduct(HttpServletRequest req, HttpServletResponse resp) {
-        String productName = req.getParameter("productName");
+    private void handleAddProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("bbbddbb");
+        String name = req.getParameter("productName");
+        String desciption = req.getParameter("productDescription");
+        int brandId = Integer.parseInt(req.getParameter("brand"));
+        int cateId = Integer.parseInt(req.getParameter("category"));
+
+        if(!name.equals(null) && !name.isEmpty()){
+            productService.addProduct(name, desciption, brandId, cateId);
+            resp.sendRedirect(req.getContextPath() + "/admin/product");
+
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Tên thương hiệu không hợp lệ");
+        }
+
     }
 
     private void handleAddBrand(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

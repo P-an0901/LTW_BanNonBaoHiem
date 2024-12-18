@@ -1,5 +1,8 @@
 package helmet.vn.ltw_bannonbaohiem.dao.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProductVariant {
 
     private int id;
@@ -8,6 +11,7 @@ public class ProductVariant {
     private String color;
     private double price;
     private String image;
+    private List<ProductSize> listPSize;
     private boolean isActive;
 
     public ProductVariant() {}
@@ -20,6 +24,7 @@ public class ProductVariant {
         this.price = price;
         this.image = image;
         this.isActive = isActive;
+        this.listPSize = new ArrayList<>();
     }
 
     public int getId() {
@@ -76,6 +81,17 @@ public class ProductVariant {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+    public boolean addPSize(ProductSize s){
+        return listPSize.add(s);
+    }
+
+    public List<ProductSize> getListPSize() {
+        return listPSize;
+    }
+
+    public void setListPSize(List<ProductSize> listPSize) {
+        this.listPSize = listPSize;
     }
 }
 

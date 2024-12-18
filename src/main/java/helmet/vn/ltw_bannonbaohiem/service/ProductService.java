@@ -14,4 +14,7 @@ public class ProductService {
     public Product getProById(int id){
         return prodao.getProById(id);
     }
+    public boolean addProduct(String name, String description, int brandId, int cateId){
+        return prodao.addProduct(name, description, brandId, cateId);
+    }
 }
