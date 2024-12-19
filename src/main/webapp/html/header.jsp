@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "f" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <header>
   <div class="header-top">
     <div class="container">
@@ -54,22 +57,34 @@
               </ul>
             </li>
             <li class="list-inline-item pointer cart-container" title="Giỏ hàng">
-              <a href="giohang.jsp">
+              <a href="${pageContext.request.contextPath}/cart">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="badge badge-pill badge-danger">0</span>
               </a>
               <div class="cart-dropdown">
-                <ul id="cart-items">
-                </ul>
-                <div id="empty-message" class="empty-message">
-                  <i class="fas fa-shopping-bag"></i>
-                  Không có sản phẩm nào.
-                </div>
+                <c:choose>
+                  <c:when test="${not empty sessionScope.cartItems}">
+                    <ul>
+                      <c:forEach var="item" items="${sessionScope.cartItems}">
+                        <li class="cart-item">
+                          <img src="${pageContext.request.contextPath}/${fn:escapeXml(item.image)}" alt="${item.name}" class="cart-item-img" />
+                          <span class="cart-item-name">${item.name}</span>
+                          <span class="cart-item-size">Size: ${item.size}</span>
+                          <span class="cart-item-quantity">Số lượng: ${item.quantity}</span>
+                          <span class="cart-item-price">${item.price} đ</span>
+                        </li>
+                      </c:forEach>
+                    </ul>
+                  </c:when>
+                  <c:otherwise>
+                    <p>Không có sản phẩm trong giỏ hàng</p>
+                  </c:otherwise>
+                </c:choose>
                 <div class="cart-sum">
-                  <div class="cart-total">
-                    <span>Tổng tiền:</span>
-                    <span id="total-price">0</span>
-                  </div>
+                    <div class="cart-total">
+                      <span>Tổng tiền:</span>
+                      <span id="total-price">0</span>
+                    </div>
                   <button class="checkout-btn"><a href="checkout.jsp"></a>
                     Xem chi tiết</button>
                 </div>
@@ -133,11 +148,11 @@
                 <img src="images/andes-logo.jpg" alt="Andes" class="submenu-icon">
               </a>
             </li>
-            <!-- <li>
-                <a href="#">
-                    <img src="" alt="NonSon" class="submenu-icon"><span>Nón sơn</span>
-                </a>
-            </li> -->
+<%--            <li>--%>
+<%--                <a href="#">--%>
+<%--                    <img src="" alt="NonSon" class="submenu-icon"><span>Nón sơn</span>--%>
+<%--                </a>--%>
+<%--            </li>--%>
           </ul>
         </li>
       </ul>

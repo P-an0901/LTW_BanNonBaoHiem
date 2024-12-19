@@ -69,6 +69,8 @@
                             <span class="number-rated">( 99 lượt đánh giá.)</span>
                         </div>
                     </div>
+                    <form action="${pageContext.request.contextPath}/add-cart" method="POST" id="addToCartForm">
+                        <input type="hidden" name="productId" value="${productVariant.id}">
                     <div class="d-flex justify-content-between">
                         <div class=" col-md-6 session-left p-0">
                             <!-- Thông số kỹ thuật -->
@@ -145,21 +147,22 @@
                                 <div id="size" class="form-group mb-3 pl-2">
                                     <c:forEach var="size" items="${sizes}">
                                         <label>
-                                            <input type="checkbox" name="size" value="${size.id}" class="checkbox-size" onclick="selectOnlyOne(this)">
+                                            <input type="checkbox" name="sizeId" value="${size.id}" class="checkbox-size" onclick="selectOnlyOne(this)" required>
                                                 ${size.size.name}
                                         </label>
                                     </c:forEach>
                                 </div>
                                 <label for="quantity">Số lượng:</label>
                                 <div class="quantity-selector">
-                                    <button onclick="decreaseQuantity()">-</button>
-                                    <input type="number" id="quantity" value="1" min="1">
-                                    <button onclick="increaseQuantity()">+</button>
+                                    <button type="button" onclick="decreaseQuantity()">-</button>
+                                    <input type="number" id="quantity" name="quantity" value="1" min="1" required>
+                                    <button type="button" onclick="increaseQuantity()">+</button>
                                 </div>
-                                <button class="buy-button" onclick="addToCart2(this)">Thêm vào giỏ hàng</button>
+                                <button class="buy-button" type="submit" >Thêm vào giỏ hàng</button>
                             </div>
                         </div> 
                     </div>
+                  </form>
                 </div>
             </div>
             <div class="product-description">

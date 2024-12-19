@@ -41,7 +41,18 @@
   <div class="cart-page">
     <div id="cart-container">
       <ul id="cart2-items">
-        <!-- Các sản phẩm trong giỏ hàng sẽ được hiển thị ở đây -->
+        <c:forEach var="item" items="${cartItems}">
+          <li class="cart-item">
+            <img src="${pageContext.request.contextPath}/${fn:escapeXml(item.image)}" alt="${item.name}" class="cart-item-img" />
+            <span class="cart-item-name">${item.name}</span>
+            <span class="cart-item-size">Size: ${item.size}</span>
+            <span class="ms-3">Số lượng: </span>
+            <span class="cart-item-quantity">
+              <input type="number" id="quantity-${item.id}" class="form-control text-center" value="${item.quantity}" min="1" step="1" style="width: 80px;">
+            </span>
+            <span class="cart-item-price">${item.price} đ</span>
+          </li>
+        </c:forEach>
 
       </ul>
       <div id="empty-message" class="empty-message">
