@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Cart {
-    Map<Integer, CartProduct> data = new HashMap<>();
+    Map<String, CartProduct> data = new HashMap<>();
     ProductVariantService pVService = new ProductVariantService();
 
     public boolean add(ProductVariant pv, int proSizeId, int quantity){
@@ -32,7 +32,7 @@ public class Cart {
         if(selectedSize.getStock() < quantity){
             return false;
         }
-        int uniqueKey = pv.getId() * 100 + proSizeId;
+        String uniqueKey = pv.getId() + "_" + selectedSize.getSize().getName();
         if(data.containsKey(uniqueKey)){
             CartProduct existingProduct = data.get(uniqueKey);
             int newQuantity = existingProduct.getQuantity() + quantity;
@@ -63,15 +63,11 @@ public class Cart {
         return new ArrayList<>(data.values());
     }
 
-    public static void main(String[] args) {
-        Cart c = new Cart();
-        ProductVariant pv = new ProductVariant(1,
-                "Mũ bảo hiểm thể thao",
-                101,
-                "Đỏ",
-                350000,
-                "images/helmet_red.jpg",
-                true    );
-        System.out.println(c.add(pv, 1, 1));
+    public void delete(int pvId, String proSize) {
+        data.remove(pvId + "_" + proSize);
+    }
+
+
+    public void update(int productId, int quantity) {
     }
 }

@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/danhmuc.css">
   <link rel="stylesheet" href="./css/header.css">
+  <link rel="stylesheet" href="./css/giohang.css">
   <link rel="icon" href="images/HELMET.png">
   <title>Giỏ hàng</title>
 </head>
@@ -28,7 +29,7 @@
 </div>
 <div class="breadcrumb-container">
   <ul class="breadcrumb">
-    <li><a href="index.jsp">Trang chủ </a></li>
+    <li><a href="${pageContext.request.contextPath}/">Trang chủ </a></li>
        <li><span>/</span></li>
     <li><a href="#" class="active"> Giỏ hàng</a></li>
   </ul>
@@ -40,25 +41,41 @@
   <h3>Giỏ hàng của bạn</h3>
   <div class="cart-page">
     <div id="cart-container">
+      <c:choose>
+        <c:when test="${not empty cartItems}">
       <ul id="cart2-items">
-        <c:forEach var="item" items="${cartItems}">
-          <li class="cart-item">
-            <img src="${pageContext.request.contextPath}/${fn:escapeXml(item.image)}" alt="${item.name}" class="cart-item-img" />
-            <span class="cart-item-name">${item.name}</span>
-            <span class="cart-item-size">Size: ${item.size}</span>
-            <span class="ms-3">Số lượng: </span>
-            <span class="cart-item-quantity">
-              <input type="number" id="quantity-${item.id}" class="form-control text-center" value="${item.quantity}" min="1" step="1" style="width: 80px;">
-            </span>
-            <span class="cart-item-price">${item.price} đ</span>
-          </li>
-        </c:forEach>
-
+        <table class="table table-bordered">
+          <tbody>
+          <c:forEach var="item" items="${cartItems}">
+            <tr>
+              <td><img src="${pageContext.request.contextPath}/${fn:escapeXml(item.image)}" alt="${item.name}" class="carts-item-img" /></td>
+              <td>Tên sản phẩm: ${item.name}</td>
+              <td>${item.size}</td>
+              <td>
+                <input type="number" id="quantity-${item.id}" class="form-control text-center" value="${item.quantity}" min="1" step="1" style="width: 80px;">
+              </td>
+              <td>${item.price} đ</td>
+              <td>
+                <form action="${pageContext.request.contextPath}/delete-cart" method="POST">
+                  <input type="hidden" name="cid" value="${item.id}" />
+                  <input type="hidden" name="size" value="${item.size}" />
+                  <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm này?');">Xóa</button>
+                </form>
+              </td>
+            </tr>
+          </c:forEach>
+          </tbody>
+        </table>
       </ul>
-      <div id="empty-message" class="empty-message">
-        <i class="fas fa-shopping-bag"></i>
-        Không có sản phẩm nào trong giỏ hàng.
-      </div>
+      </c:when>
+      <c:otherwise>
+        <div id="empty-message" class="empty-message">
+          <i class="fas fa-shopping-bag"></i>
+          Không có sản phẩm nào trong giỏ hàng.
+        </div>
+      </c:otherwise>
+      </c:choose>
+
       <div class="cart-summary">
         <p>Tổng cộng: <span id="cart-total" >0 đ</span></p>
         <button id="checkout-btn" class="btn btn-primary" onclick="redirectToCheckout()">Thanh toán</button>

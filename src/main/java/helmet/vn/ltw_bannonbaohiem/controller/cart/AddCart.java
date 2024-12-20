@@ -33,27 +33,7 @@ public class AddCart extends HttpServlet {
             cart = new Cart();
             session.setAttribute("cart", cart);
         }
-
-        String message = null;
-        boolean success = cart.add(productVariant, sizeId, quantity);
-
-        if (!success) {
-            if (productVariant.getListPSize().stream().noneMatch(size -> size.getId() == sizeId)) {
-                message = "Không tìm thấy kích thước sản phẩm!";
-            } else {
-                ProductSize selectedSize = productVariant.getListPSize().stream()
-                        .filter(size -> size.getId() == sizeId)
-                        .findFirst()
-                        .orElse(null);
-                if (selectedSize != null && selectedSize.getStock() < quantity) {
-                    message = "Không đủ hàng trong kho cho kích thước này!";
-                }
-            }
-        } else {
-            message = "Sản phẩm đã được thêm vào giỏ hàng thành công!";
-        }
-        System.out.println(message);
-        req.setAttribute("message", message);
+        cart.add(productVariant, sizeId, quantity);
         resp.sendRedirect(req.getContextPath() + "/detail?pvId=" + productId);
     }
 }

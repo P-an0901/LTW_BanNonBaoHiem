@@ -24,4 +24,7 @@ public class ProductVariantService {
     public List<ProductSize> getListSizeById(int id){
         return proSizeD.getSizeByVariantId(id);
     }
+    public List<ProductVariant> getListProVarByProId(int id){
+        return productVariantD.listProVariantByProId(id);
+    }
 }

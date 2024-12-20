@@ -147,7 +147,7 @@
                                 <div id="size" class="form-group mb-3 pl-2">
                                     <c:forEach var="size" items="${sizes}">
                                         <label>
-                                            <input type="checkbox" name="sizeId" value="${size.id}" class="checkbox-size" onclick="selectOnlyOne(this)" required>
+                                            <input type="checkbox" name="sizeId" value="${size.id}" class="checkbox-size" onclick="selectOnlyOne(this)">
                                                 ${size.size.name}
                                         </label>
                                     </c:forEach>
@@ -158,7 +158,7 @@
                                     <input type="number" id="quantity" name="quantity" value="1" min="1" required>
                                     <button type="button" onclick="increaseQuantity()">+</button>
                                 </div>
-                                <button class="buy-button" type="submit" >Thêm vào giỏ hàng</button>
+                                <button class="buy-button" type="submit" onclick="return validateForm()">Thêm vào giỏ hàng</button>
                             </div>
                         </div> 
                     </div>
@@ -368,6 +368,6 @@
 <script src="js/index.js"></script>
 <script src="js/modal.js"></script>
 <script src="js/header.js"></script>
-    <script src="js/detail.js"></script>
+<script src="js/detail.js"></script>
 </body>
 </html>

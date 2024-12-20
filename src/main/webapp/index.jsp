@@ -267,7 +267,7 @@
                         </a>
                         <div class="select-size">
                             <c:forEach var="productSize" items="${proV.listPSize}">
-                                <button class="size-button" data-value="${productSize.size.name}">
+                                <button class="size-button" data-value="${productSize.size.id}">
                                         ${productSize.size.name}
                                 </button>
                             </c:forEach>
