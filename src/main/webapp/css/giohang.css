@@ -1,79 +1,84 @@
-/* Khung tổng kết giỏ hàng */
+#cart2-items{
+    margin: 10px;
+    padding: 0px;
+}
+.table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6;
+    align-content: center;
+    justify-items: center;
+}
 .cart-summary {
-    background-color: #f9f9f9; /* Màu nền sáng */
-    padding: 20px; /* Khoảng cách bên trong */
-    border-radius: 12px; /* Bo tròn các góc */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng mờ nhẹ */
-    margin-top: 20px; /* Khoảng cách trên */
-    text-align: center; /* Căn giữa nội dung */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    text-align: center;
 }
 
-/* Phần tổng cộng */
+
 .cart-summary p {
-    font-size: 18px; /* Kích thước chữ */
-    font-weight: bold; /* Chữ đậm */
-    color: #333; /* Màu chữ đen */
-    margin-bottom: 20px; /* Khoảng cách dưới */
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+.carts-item-img{
+    max-width: 100px !important;
+    height: auto;
 }
 
-/* Tổng tiền */
 #cart-total {
-    color: #FF5C5C; /* Màu đỏ tươi */
-    font-size: 20px; /* Kích thước chữ lớn */
-    font-weight: bold; /* Chữ đậm */
+    color: #FF5C5C;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-/* Nút thanh toán */
+
 #checkout-btn2 {
-    background-color: #4CAF50; /* Màu xanh lá cây tươi */
-    color: white; /* Chữ trắng */
-    padding: 12px 20px; /* Khoảng cách bên trong */
-    border: none; /* Xóa đường viền */
-    border-radius: 8px; /* Bo tròn góc */
-    font-size: 16px; /* Kích thước chữ */
-    font-weight: bold; /* Chữ đậm */
-    cursor: pointer; /* Khi rê chuột vào, con trỏ đổi thành tay */
-    transition: background-color 0.3s, transform 0.2s; /* Hiệu ứng khi hover */
-    margin-bottom: 15px; /* Khoảng cách dưới */
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-bottom: 15px;
 }
 
-/* Hiệu ứng hover cho nút thanh toán */
 #checkout-btn2:hover {
-    background-color: #45a049; /* Đổi sang màu xanh lá đậm khi hover */
-    transform: scale(1.05); /* Tăng kích thước nhẹ khi hover */
+    background-color: #45a049;
+    transform: scale(1.05);
 }
 
-/* Hiệu ứng khi nút thanh toán được nhấn */
 #checkout-btn2:active {
-    transform: scale(0.98); /* Thu nhỏ nút khi nhấn */
+    transform: scale(0.98);
 }
 
-/* Nút xóa hết sản phẩm */
 #clear-cart-btn {
-    background-color: #FF5C5C; /* Màu đỏ tươi */
-    color: white; /* Chữ trắng */
-    padding: 12px 20px; /* Khoảng cách bên trong */
-    border: none; /* Xóa đường viền */
-    border-radius: 8px; /* Bo tròn góc */
-    font-size: 16px; /* Kích thước chữ */
-    font-weight: bold; /* Chữ đậm */
-    cursor: pointer; /* Khi rê chuột vào, con trỏ đổi thành tay */
-    transition: background-color 0.3s, transform 0.2s; /* Hiệu ứng khi hover */
+    background-color: #FF5C5C;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-/* Hiệu ứng hover cho nút xóa hết sản phẩm */
 #clear-cart-btn:hover {
-    background-color: #FF3333; /* Đổi sang màu đỏ đậm khi hover */
-    transform: scale(1.05); /* Tăng kích thước nhẹ khi hover */
+    background-color: #FF3333;
+    transform: scale(1.05);
 }
 
-/* Hiệu ứng khi nút xóa hết sản phẩm được nhấn */
 #clear-cart-btn:active {
-    transform: scale(0.98); /* Thu nhỏ nút khi nhấn */
+    transform: scale(0.98);
 }
 
-/* Hiệu ứng focus cho các nút */
 #checkout-btn2:focus, #clear-cart-btn:focus {
-    outline: none; /* Xóa viền focus mặc định */
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.8); /* Thêm bóng sáng khi nút được chọn */
+    outline: none;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.8);
 }

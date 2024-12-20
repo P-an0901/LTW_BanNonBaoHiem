@@ -3,16 +3,16 @@ package helmet.vn.ltw_bannonbaohiem.dao.model;
 public class ProductSize {
 
     private int id;
-    private ProductVariant variant;
+    private int variantId;
     private Sizes size;
     private int stock;
 
     // Constructor
     public ProductSize() {}
 
-    public ProductSize(int id, ProductVariant variant, Sizes size, int stock) {
+    public ProductSize(int id, int variantId, Sizes size, int stock) {
         this.id = id;
-        this.variant = variant;
+        this.variantId = variantId;
         this.size = size;
         this.stock = stock;
     }
@@ -25,12 +25,12 @@ public class ProductSize {
         this.id = id;
     }
 
-    public ProductVariant getVariant() {
-        return variant;
+    public int getVariantid() {
+        return variantId;
     }
 
-    public void setVariant(ProductVariant variant) {
-        this.variant = variant;
+    public void setVariantId(int variantId) {
+        this.variantId = variantId;
     }
 
     public Sizes getSize() {
@@ -47,6 +47,16 @@ public class ProductSize {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductSize{" +
+                "id=" + id +
+                ", variantId=" + variantId +
+                ", size=" + size +
+                ", stock=" + stock +
+                '}';
     }
 }
 

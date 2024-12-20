@@ -29,7 +29,6 @@ public class ShowCart extends HttpServlet {
         }
 
         List<CartProduct> list = cart.show();
-
         req.setAttribute("cartItems", list);
         System.out.println(list);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/giohang.jsp");

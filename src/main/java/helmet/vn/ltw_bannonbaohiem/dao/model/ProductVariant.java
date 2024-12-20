@@ -93,5 +93,19 @@ public class ProductVariant {
     public void setListPSize(List<ProductSize> listPSize) {
         this.listPSize = listPSize;
     }
+
+    @Override
+    public String toString() {
+        return "ProductVariant{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", productId=" + productId +
+                ", color='" + color + '\'' +
+                ", price=" + price +
+                ", image='" + image + '\'' +
+                ", listPSize=" + listPSize +
+                ", isActive=" + isActive +
+                '}';
+    }
 }
 

@@ -59,7 +59,7 @@
             <li class="list-inline-item pointer cart-container" title="Giỏ hàng">
               <a href="${pageContext.request.contextPath}/cart">
                 <i class="fas fa-shopping-cart"></i>
-                <span class="badge badge-pill badge-danger">0</span>
+                <span class="badge badge-pill badge-danger">${sessionScope.cartItems.size()}</span>
               </a>
               <div class="cart-dropdown">
                 <c:choose>
