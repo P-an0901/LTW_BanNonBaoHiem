@@ -560,12 +560,6 @@ button.close {
     color: #000;
     font-size: 18px;
   }
- .product-all .tab-content {
-    display: none;
-}
-.product-all .tab-content.active {
-    display: block;
-}
 .tabs {
     display: flex;
     justify-content: flex-start;

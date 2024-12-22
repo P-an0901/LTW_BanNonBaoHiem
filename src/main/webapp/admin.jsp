@@ -149,11 +149,22 @@
                     </div>
                 </div>
                 <ul class="tabs">
-                    <li class="tab-item active" data-tab="product-list">Danh sách sản phẩm</li>
-                    <li class="tab-item" data-tab="variant-list">Mục Khác</li>
-                </ul>
-                <div id="product-list" class="tab-content active">
+                    <li class="tab-item ${activeSubTab == 'product-list' ? 'active' : ''}"
+                        onclick="location.href='${pageContext.request.contextPath}/admin/product?subTab=product-list'">
+                        Danh sách sản phẩm
+                    </li>
 
+                    <li class="tab-item ${activeSubTab == 'variant-list' ? 'active' : ''}"
+                        onclick="location.href='${pageContext.request.contextPath}/admin/product?subTab=variant-list'">
+                        Mục Khác
+                    </li>
+
+
+                </ul>
+                <c:choose>
+                <c:when test="${activeSubTab == 'product-list'}">
+
+                <div id="product-list" class="tab-content">
                 <div>
                     <h2>Danh sách sản phẩm</h2>
                     <table id="product-table" style="width:100%">
@@ -224,7 +235,7 @@
                                 <td><button class="pvdetails-btn" data-id="${proV.id}"><i class="fa-solid fa-eye"></i></button></td>
 
                                 <td>
-                                    <button class="edit-btn" onclick="openEditModal(${proV.id}, '${proV.name}', '${pageContext.request.contextPath}/${proV.image}')">
+                                    <button class="edit-btn">
                                         <i class="fa-solid fa-pen"></i>
                                     </button>
                                 </td>
@@ -245,7 +256,7 @@
 
                 <div class="p-size-table" id="p-size-table">
                     <h4 id="p-size-title">Kích thước biến thể sản phẩm</h4>
-                    <button class="btn-control-large m-2" id="btn-add-p-size"><i class="fa-solid fa-plus"></i> Thêm kích thước biến thể</button> 
+                    <button class="btn-control-large m-2" id="btn-add-p-size"><i class="fa-solid fa-plus"></i> Thêm kích thước biến thể</button>
                     <table id="p-size-content" style="width:100%">
                         <thead>
                             <tr>
@@ -270,7 +281,9 @@
                     </table>
                 </div>
             </div>
-            <div id="variant-list" class="tab-content">
+                </c:when>
+                <c:when test="${activeSubTab == 'variant-list'}">
+                <div id="variant-list" class="tab-content">
                 <!-- Quản lý thương hiệu -->
                 <h4>Quản lý Thương hiệu</h4>
                 <table id="brand-table" style="width:100%">
@@ -315,7 +328,7 @@
                     </c:forEach>
                     </tbody>
                 </table>
-        
+
                 <!-- Quản lý danh mục -->
                 <h4>Quản lý Danh mục</h4>
                 <table id="category-table" style="width:100%">
@@ -371,7 +384,10 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+                </c:when>
+                </c:choose>
+
+            </div>
                 </c:when>
                 <c:when test="${activeTab == 'promotion'}">
             <div class="section promotion active">
@@ -850,14 +866,14 @@
     <div class="modal" id="addVariantModal">
         <div class="modal-dialog">
             <div class="modal-content">
-                <!-- Modal Header -->
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addVariantModalLabel">Thêm biến thể sản phẩm</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
                 </div>
-
                 <!-- Modal Body -->
                 <div class="modal-body">
+                    <h2 class="modal-title" id="addVariantModalLabel">Thêm biến thể sản phẩm</h2>
                     <form action="${pageContext.request.contextPath}/add-tab-product" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="action" value="addProductVariant">
                         <div class="mb-3">
@@ -906,13 +922,14 @@
                         <!-- Nút Lưu -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <button type="submit" class="btn btn-primary">Lưu</button>
+                            <button type="submit" class="btn btn-addO">Lưu</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 <!-- Modal chi tiết sản phẩm -->
 <div id="productDetailModal" class="modal">
     <div class="modal-dialog">

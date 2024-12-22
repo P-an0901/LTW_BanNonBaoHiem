@@ -34,6 +34,7 @@ public class AddCart extends HttpServlet {
             session.setAttribute("cart", cart);
         }
         cart.add(productVariant, sizeId, quantity);
-        resp.sendRedirect(req.getContextPath() + "/detail?pvId=" + productId);
+        String referer = req.getHeader("Referer");
+        resp.sendRedirect(referer);
     }
 }

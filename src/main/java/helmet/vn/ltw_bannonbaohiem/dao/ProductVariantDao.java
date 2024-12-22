@@ -23,8 +23,10 @@ public class ProductVariantDao {
                 "       ps.id AS psid, s.name AS sname, s.id AS sizeId, ps.stock " +
                 "FROM product_variants pv " +
                 "JOIN products p ON pv.productId = p.id " +
-                "JOIN product_sizes ps ON pv.id = ps.variantId " +
-                "JOIN sizes s ON ps.sizeId = s.id";
+                "LEFT JOIN product_sizes ps ON pv.id = ps.variantId " +
+                "LEFT JOIN sizes s ON ps.sizeId = s.id " +
+                "WHERE pv.isActive > 0";
+
 
         return jdbi.withHandle(handle -> {
             List<ProductVariant> variants = new ArrayList<>();
@@ -55,16 +57,18 @@ public class ProductVariantDao {
                             existingVariant = variant;
                         }
 
-                        ProductSize productSize = new ProductSize();
-                        productSize.setId(rs.getInt("psid"));
-                        productSize.setStock(rs.getInt("stock"));
+                        if (rs.getObject("sizeId") != null && rs.getObject("psid") != null) {
+                            ProductSize productSize = new ProductSize();
+                            productSize.setId(rs.getInt("psid"));
+                            productSize.setStock(rs.getInt("stock"));
 
-                        Sizes size = new Sizes();
-                        size.setId(rs.getInt("sizeId"));
-                        size.setName(rs.getString("sname"));
-                        productSize.setSize(size);
+                            Sizes size = new Sizes();
+                            size.setId(rs.getInt("sizeId"));
+                            size.setName(rs.getString("sname"));
+                            productSize.setSize(size);
 
-                        existingVariant.getListPSize().add(productSize);
+                            existingVariant.getListPSize().add(productSize);
+                        }
 
                         return null;
                     }).list();
@@ -72,6 +76,64 @@ public class ProductVariantDao {
             return variants;
         });
     }
+    public List<ProductVariant> getAllVariantsForAdmin() {
+        String sql = "SELECT pv.id, pv.name, pv.color, pv.price, pv.image, pv.isActive, " +
+                "       pv.productId AS pid, p.name AS pname, " +
+                "       ps.id AS psid, s.name AS sname, s.id AS sizeId, ps.stock " +
+                "FROM product_variants pv " +
+                "JOIN products p ON pv.productId = p.id " +
+                "LEFT JOIN product_sizes ps ON pv.id = ps.variantId " +
+                "LEFT JOIN sizes s ON ps.sizeId = s.id";
+
+        return jdbi.withHandle(handle -> {
+            List<ProductVariant> variants = new ArrayList<>();
+
+            handle.createQuery(sql)
+                    .map((rs, ctx) -> {
+                        int variantId = rs.getInt("id");
+
+                        ProductVariant existingVariant = null;
+                        for (ProductVariant variant : variants) {
+                            if (variant.getId() == variantId) {
+                                existingVariant = variant;
+                                break;
+                            }
+                        }
+
+                        if (existingVariant == null) {
+                            ProductVariant variant = new ProductVariant();
+                            variant.setId(variantId);
+                            variant.setName(rs.getString("name"));
+                            variant.setProductId(rs.getInt("pid"));
+                            variant.setColor(rs.getString("color"));
+                            variant.setPrice(rs.getDouble("price"));
+                            variant.setImage(rs.getString("image"));
+                            variant.setActive(rs.getInt("isActive") > 0);
+                            variant.setListPSize(new ArrayList<>());
+                            variants.add(variant);
+                            existingVariant = variant;
+                        }
+
+                        if (rs.getObject("sizeId") != null && rs.getObject("psid") != null) {
+                            ProductSize productSize = new ProductSize();
+                            productSize.setId(rs.getInt("psid"));
+                            productSize.setStock(rs.getInt("stock"));
+
+                            Sizes size = new Sizes();
+                            size.setId(rs.getInt("sizeId"));
+                            size.setName(rs.getString("sname"));
+                            productSize.setSize(size);
+
+                            existingVariant.getListPSize().add(productSize);
+                        }
+
+                        return null;
+                    }).list();
+
+            return variants;
+        });
+    }
+
 
     public boolean addVariant(String name, String color, int product, double price, String image, int active){
         String sql = "INSERT INTO product_variants(name, productId, color, price, image, isActive)" +
@@ -84,7 +146,7 @@ public class ProductVariantDao {
                 update.bind(2, color);
                 update.bind(3, price);
                 update.bind(4, image);
-                update.bind(5, active > 0);
+                update.bind(5, active);
                 int rowsAffected = update.execute();
                 return rowsAffected > 0;
             });
@@ -130,4 +192,5 @@ public class ProductVariantDao {
             return new ArrayList<>(); 
         }
     }
+
 }
