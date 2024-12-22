@@ -68,7 +68,8 @@ public class Delete extends HttpServlet {
         if(id != null && !id.isEmpty()){
             boolean isDeleted = brandService.deleteBrand(Integer.parseInt(id));
             if (isDeleted) {
-                resp.sendRedirect(req.getContextPath() + "/admin/product");
+                String referer = req.getHeader("Referer");
+                resp.sendRedirect(referer);
             } else {
                 req.setAttribute("error", "Không thể xóa thương hiệu!");
                 req.getRequestDispatcher("/admin/product").forward(req, resp);

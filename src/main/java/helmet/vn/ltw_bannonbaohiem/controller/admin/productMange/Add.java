@@ -5,6 +5,7 @@ import helmet.vn.ltw_bannonbaohiem.dao.model.Category;
 import helmet.vn.ltw_bannonbaohiem.service.BrandService;
 import helmet.vn.ltw_bannonbaohiem.service.CategoryService;
 import helmet.vn.ltw_bannonbaohiem.service.ProductService;
+import helmet.vn.ltw_bannonbaohiem.service.ProductVariantService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,6 +23,7 @@ public class Add extends HttpServlet {
     BrandService brandService = new BrandService();
     CategoryService cateService = new CategoryService();
     ProductService productService = new ProductService();
+    ProductVariantService productVariantService = new ProductVariantService();
     private static final String UPLOAD_DIR = "images";
 
     @Override
@@ -61,8 +63,38 @@ public class Add extends HttpServlet {
     private void handleAddProductVariantSize(HttpServletRequest req, HttpServletResponse resp) {
     }
 
-    private void handleAddProductVariant(HttpServletRequest req, HttpServletResponse resp) {
-        
+    private void handleAddProductVariant(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("bbbddbb");
+        int productId = Integer.parseInt(req.getParameter("product_id"));
+        String name = req.getParameter("name");
+        String color = req.getParameter("color");
+        double price = Double.parseDouble(req.getParameter("price"));
+        int active = Integer.parseInt(req.getParameter("is_active"));
+
+        Part filePart = req.getPart("image");
+        String fileName = extractFileName(filePart);
+        String uploadPath = getServletContext().getRealPath("/") + File.separator + UPLOAD_DIR;
+
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdir();
+        }
+
+        String filePath = uploadPath + File.separator + fileName;
+        filePart.write(filePath);
+        System.out.println("Ảnh đã được lưu tại: " + filePath);
+
+        String imagePath = UPLOAD_DIR + "/" + fileName;
+
+        if (name != null && !name.isEmpty()) {
+            productVariantService.addProductVariant(name, color, productId, price, imagePath, active);
+            System.out.println("hahaha");
+            resp.sendRedirect(req.getContextPath() + "/admin/product");
+
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Lỗi");
+        }
+
     }
 
     private void handleAddCate(HttpServletRequest req, HttpServletResponse resp) {
@@ -82,10 +114,11 @@ public class Add extends HttpServlet {
 
         if(!name.equals(null) && !name.isEmpty()){
             productService.addProduct(name, desciption, brandId, cateId);
-            resp.sendRedirect(req.getContextPath() + "/admin/product");
+            String referer = req.getHeader("Referer");
+            resp.sendRedirect(referer);
 
         } else {
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Tên thương hiệu không hợp lệ");
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Lỗi");
         }
 
     }
@@ -112,7 +145,8 @@ public class Add extends HttpServlet {
         if (brandName != null && !brandName.isEmpty()) {
             brandService.addBrand(brandName, imagePath);
 
-            resp.sendRedirect(req.getContextPath() + "/admin/product");
+            String referer = req.getHeader("Referer");
+            resp.sendRedirect(referer);
 
         } else {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Tên thương hiệu không hợp lệ");

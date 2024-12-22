@@ -26,6 +26,8 @@ public class Edit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("activeTab", "product");
+        String activeSubTab = req.getParameter("subTab");
+
         String action = req.getParameter("action");
         System.out.println(action);
         if (action == null) {
@@ -98,7 +100,8 @@ public class Edit extends HttpServlet {
         if (id != null && !id.isEmpty() && brandName != null && !brandName.isEmpty()) {
             brandService.updateBrand(Integer.parseInt(id), brandName, imagePath);
             System.out.println(brandName);
-            resp.sendRedirect(req.getContextPath() + "/admin/product");
+            String referer = req.getHeader("Referer");
+            resp.sendRedirect(referer);
 
         } else {
             req.setAttribute("error", "Thông tin không hợp lệ!");

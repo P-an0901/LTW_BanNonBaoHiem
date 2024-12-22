@@ -91,16 +91,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-document.querySelectorAll(".tab-item").forEach(tab => {
-    tab.addEventListener("click", () => {
-        document.querySelectorAll(".tab-content").forEach(content => content.classList.remove("active"));
-        document.querySelectorAll(".tab-item").forEach(item => item.classList.remove("active"));
-
-        const target = tab.getAttribute("data-tab");
-        tab.classList.add("active");
-        document.getElementById(target).classList.add("active");
-    });
-});
+// document.querySelectorAll(".tab-item").forEach(tab => {
+//     tab.addEventListener("click", () => {
+//         document.querySelectorAll(".tab-content").forEach(content => content.classList.remove("active"));
+//         document.querySelectorAll(".tab-item").forEach(item => item.classList.remove("active"));
+//
+//         const target = tab.getAttribute("data-tab");
+//         tab.classList.add("active");
+//         document.getElementById(target).classList.add("active");
+//     });
+// });
 $(document).ready(function() {
     $('#btn-add-product_variant').click(function () {
         $('#addVariantModal').modal('show')

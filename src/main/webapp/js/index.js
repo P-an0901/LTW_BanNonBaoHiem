@@ -104,23 +104,35 @@
         modal.querySelector('.form-message-login').style.display = 'none';
     }
 
-function loginWithFacebook() {
-    // Logic for Facebook login
-  }
-  
-  function loginWithGoogle() {
-    // Logic for Google login
-  }
 // Lấy tất cả các nút button với class 'size-button'
-const buttons = document.querySelectorAll('.size-button');
+        const buttons = document.querySelectorAll('.size-button');
 
-buttons.forEach(button => {
-    button.addEventListener('click', () => {
-        buttons.forEach(btn => btn.classList.remove('selected'));
-        button.classList.add('selected');
-    });
-});
-function checkStatus() {
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const productItem = button.closest('.product-item');
+
+                const sizeButtons = productItem.querySelectorAll('.size-button');
+                sizeButtons.forEach(btn => btn.classList.remove('selected'));
+
+                button.classList.add('selected');
+                const sizeId = button.getAttribute('data-value');
+                const productId = productItem.querySelector('input[name="productId"]').value;
+                productItem.querySelector(`#sizeId-${productId}`).value = sizeId;
+            });
+        });
+        function validateF() {
+            const productItem = event.target.closest('.product-item');
+            const sizeIdInput = productItem.querySelector('input[name="sizeId"]');
+
+            if (!sizeIdInput.value) {
+                alert('Vui lòng chọn kích thước trước khi thêm vào giỏ hàng!');
+                return false;
+            }
+            return true;
+        }
+
+
+        function checkStatus() {
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
     if (loggedInUser) {
@@ -171,97 +183,9 @@ products.forEach(pro => {
     }
 });
 
-
-// Giỏ hàng dưới dạng mảng
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-// Hàm thêm sản phẩm vào giỏ hàng
-function addToCart(button) {
-    const productElement = button.closest('.product-item');
-    const productName = productElement.querySelector('.product-name').innerText;
-    const productPrice = productElement.querySelector('.product-price').innerText;
-    const productImage = productElement.querySelector('.product-image').src;
-
-    const selectedSizeButton = productElement.querySelector('.size-button.selected');
-    if (!selectedSizeButton) {
-        alert('Vui lòng chọn kích thước!');
-        return;
-    }
-    const productSize = selectedSizeButton.getAttribute('data-value');
-    // Kiểm tra xem sản phẩm đã có trong giỏ hay chưa
-    const productInCart = cart.find(item => item.name === productName && item.size === productSize);
-    if (productInCart) {
-        alert('Sản phẩm này với kích thước này đã có trong giỏ hàng!');
-        return;
-    }
-
-    // Thêm sản phẩm vào giỏ
-    const product = {
-        name: productName,
-        price: productPrice,
-        image: productImage,
-        size: productSize,
-    };
-    cart.push(product);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    // Cập nhật giỏ hàng
-    // updateCart();
-}
 function extractNumber(priceString) {
     return Number(priceString.replace(/[^0-9]/g, ''));
 }
-// // Hàm cập nhật giỏ hàng
-// function updateCart() {
-//     const cart = JSON.parse(localStorage.getItem('cart')) || [];
-//
-//     // Phần tử chứa giỏ hàng
-//     const cartItemsContainer = document.getElementById('cart-items');
-//     const emptyMessage = document.getElementById('empty-message');
-//     const cartSum = document.querySelector('.cart-sum');
-//     const cartTotal = document.getElementById('total-price');
-//
-//     if (cartItemsContainer) {
-//         cartItemsContainer.innerHTML = '';
-//
-//         if (cart.length > 0) {
-//             emptyMessage.style.display = 'none';
-//             cartSum.style.display = 'block';
-//             cart.forEach((product, index) => {
-//                 const productHTML = `
-//                     <li class="cart-item">
-//                         <img src="${product.image}" alt="${product.name}" class="cart-item-img">
-//                         <span class="cart-item-name">${product.name}</span>
-//                         <span class="cart-item-size mr-2">${product.size}</span>
-//                         <span class="cart-item-quantity mr-2">${product.quantity ? product.quantity : '1'}</span>
-//                         <span class="cart-item-price">${product.price}</span>
-//                         <button class="remove-item-btn" onclick="removeFromCart(${index})">
-//                             <i class="fas fa-trash"></i> Xóa
-//                         </button>
-//                     </li>
-//                 `;
-//                 cartItemsContainer.innerHTML += productHTML;
-//             });
-//         }else{
-//             emptyMessage.style.display = 'flex';
-//             cartSum.style.display = 'none';
-//         }
-//     }
-//     // Cập nhật badge giỏ hàng
-//     const cartBadge = document.querySelector('.cart-container .badge');
-//     if (cartBadge) {
-//         cartBadge.textContent = cart.length;
-//     }
-//     if (cartTotal) {
-//         let total = 0;
-//         cart.forEach(product => {
-//         const price = extractNumber(product.price);
-//         if (!isNaN(price)) {
-//             total += price;
-//         }
-//     });
-//         cartTotal.textContent = total.toLocaleString() + ' đ';
-//     }
-// }
 
 // Hàm xóa sản phẩm khỏi giỏ
 function removeFromCart(index) {

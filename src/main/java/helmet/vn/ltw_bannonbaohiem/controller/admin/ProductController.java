@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,14 +22,22 @@ public class ProductController extends HttpServlet {
     private ProductVariantService productVariantService = new ProductVariantService();
     private SizeService sizeService = new SizeService();
 
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
         req.setAttribute("activeTab", "product");
-
+        String activeSubTab = req.getParameter("subTab");
+        System.out.println(activeSubTab);
+        if (activeSubTab == null) {
+            activeSubTab = "product-list";
+        }
+        session.setAttribute("activeSubTab", activeSubTab);
+        req.setAttribute("activeSubTab", session.getAttribute("activeSubTab"));
         List<Brand> brands = brandService.getAllBrands();
         List<Product> products = productService.getAllPro();
         List<Category> categories = categoryService.getAllCate();
-        List<ProductVariant> proVariants = productVariantService.getAllVariant();
+        List<ProductVariant> proVariants = productVariantService.getAllVariantsForAdmin();
         List<Sizes> sizes = sizeService.getAllSize();
 
         req.setAttribute("sizes", sizes);
