@@ -30,10 +30,14 @@ public class DetailServlet extends HttpServlet {
         if(pvIdstr != null){
             int pvId = Integer.parseInt(pvIdstr);
             ProductVariant productVariant = productVariantService.getProVariant(pvId);
-            System.out.println(productVariant);
+            int pid = productVariant.getProductId();
+//            System.out.println(productVariant);
             Product product = productService.getProById(productVariant.getProductId());
-            System.out.println(product);
+//            System.out.println(product);
             List<ProductSize> sizes = productVariantService.getListSizeById(pvId);
+            List<ProductVariant> lstProVariant = productVariantService.getListProVarByProId(pid);
+            System.out.println(lstProVariant+ "bbbbb");
+            req.setAttribute("lstProVariant", lstProVariant);
             req.setAttribute("sizes", sizes);
             req.setAttribute("product", product);
             req.setAttribute("productVariant", productVariant);

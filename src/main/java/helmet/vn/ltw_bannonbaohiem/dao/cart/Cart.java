@@ -14,43 +14,26 @@ public class Cart {
     ProductVariantService pVService = new ProductVariantService();
 
     public boolean add(ProductVariant pv, int proSizeId, int quantity){
-        List<ProductSize> sizes = pVService.getListSizeById(pv.getId());
-        ProductSize selectedSize = null;
-        System.out.println(sizes);
-
-        for(ProductSize size: sizes) {
-            if(size.getId() == proSizeId){
-                System.out.println(sizes);
-                selectedSize = size;
-                break;
-            }
-        }
-        if(selectedSize == null){
-            System.out.println("null sizw");
+        ProductSize selectedSize = pVService.getById(proSizeId);
+        if (selectedSize == null) {
+            System.out.println("Không tìm thấy kích cỡ cho sản phẩm.");
             return false;
         }
-        if(selectedSize.getStock() < quantity){
-            return false;
-        }
-        String uniqueKey = pv.getId() + "_" + selectedSize.getSize().getName();
+        String uniqueKey = pv.getId() + "_" + selectedSize.getId();
         if(data.containsKey(uniqueKey)){
-            CartProduct existingProduct = data.get(uniqueKey);
-            int newQuantity = existingProduct.getQuantity() + quantity;
-
-            if (selectedSize.getStock() < newQuantity) {
+            update(pv.getId(), proSizeId, data.get(uniqueKey).getQuantity()+ quantity);
+            System.out.println("Đã cập nhật số lượng sản phẩm trong giỏ hàng.");
+        }else{
+            if(selectedSize.getStock() < quantity){
                 System.out.println("Không đủ hàng để thêm số lượng này vào giỏ!");
                 return false;
             }
-
-            existingProduct.setQuantity(newQuantity);
-            System.out.println("Đã cập nhật số lượng sản phẩm trong giỏ hàng.");
-        }else{
             CartProduct cartProduct = new CartProduct(
                     pv.getId(),
                     pv.getName(),
                     pv.getImage(),
                     quantity,
-                    selectedSize.getSize().getName(),
+                    selectedSize,
                     pv.getPrice()
             );
             data.put(uniqueKey, cartProduct);
@@ -63,11 +46,24 @@ public class Cart {
         return new ArrayList<>(data.values());
     }
 
-    public void delete(int pvId, String proSize) {
+    public void delete(int pvId, int proSize) {
         data.remove(pvId + "_" + proSize);
     }
 
 
-    public void update(int productId, int quantity) {
+    public void update(int pvId, int sizeId, int newQuantity) {
+        String key = pvId +"_" + sizeId;
+        ProductSize selectedSize = pVService.getById(sizeId);
+        if (data.containsKey(key)) {
+            if(selectedSize.getStock() < newQuantity){
+                System.out.println("Không đủ hàng để thêm số lượng này vào giỏ!");
+                return;
+            }
+            CartProduct existingProduct = data.get(key);
+            existingProduct.setQuantity(newQuantity);
+            System.out.println("Đã cập nhật số lượng sản phẩm với key " + key);
+        } else {
+            System.out.println("Sản phẩm với key " + key + " không tồn tại trong giỏ hàng.");
+        }
     }
 }

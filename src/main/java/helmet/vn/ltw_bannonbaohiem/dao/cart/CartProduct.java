@@ -1,14 +1,16 @@
 package helmet.vn.ltw_bannonbaohiem.dao.cart;
 
+import helmet.vn.ltw_bannonbaohiem.dao.model.ProductSize;
+
 public class CartProduct {
     private int id;
     private String name;
     private String image;
     private int quantity;
-    private String size;
+    private ProductSize size;
     private double price;
 
-    public CartProduct(int id, String name, String image, int quantity, String size, double price) {
+    public CartProduct(int id, String name, String image, int quantity, ProductSize size, double price) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -52,11 +54,11 @@ public class CartProduct {
         this.quantity = quantity;
     }
 
-    public String getSize() {
+    public ProductSize getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(ProductSize size) {
         this.size = size;
     }
 

@@ -37,4 +37,30 @@ public class ProductSizeDao {
                     .list();
         });
     }
+    public ProductSize getById(int id) {
+        String sql = "SELECT ps.id, ps.variantId, ps.sizeId, ps.stock, s.name AS size_name " +
+                "FROM product_sizes ps " +
+                "JOIN sizes s ON ps.sizeId = s.id " +
+                "WHERE ps.id = ?";
+        return jdbi.withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .bind(0, id)
+                    .map((rs, ctx) -> {
+                        ProductSize productSize = new ProductSize();
+                        productSize.setId(rs.getInt("id"));
+                        productSize.setVariantId(rs.getInt("variantId"));
+                        productSize.setStock(rs.getInt("stock"));
+
+                        Sizes size = new Sizes();
+                        size.setId(rs.getInt("sizeId"));
+                        size.setName(rs.getString("size_name"));
+                        productSize.setSize(size);
+
+                        return productSize;
+                    })
+                    .findOne()
+                    .orElse(null);
+        });
+    }
+
 }

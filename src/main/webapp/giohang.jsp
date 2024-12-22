@@ -43,44 +43,60 @@
     <div id="cart-container">
       <c:choose>
         <c:when test="${not empty cartItems}">
-      <ul id="cart2-items">
-        <table class="table table-bordered">
-          <tbody>
-          <c:forEach var="item" items="${cartItems}">
-            <tr>
-              <td><img src="${pageContext.request.contextPath}/${fn:escapeXml(item.image)}" alt="${item.name}" class="carts-item-img" /></td>
-              <td>Tên sản phẩm: ${item.name}</td>
-              <td>${item.size}</td>
-              <td>
-                <input type="number" id="quantity-${item.id}" class="form-control text-center" value="${item.quantity}" min="1" step="1" style="width: 80px;">
-              </td>
-              <td>${item.price} đ</td>
-              <td>
-                <form action="${pageContext.request.contextPath}/delete-cart" method="POST">
-                  <input type="hidden" name="cid" value="${item.id}" />
-                  <input type="hidden" name="size" value="${item.size}" />
-                  <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm này?');">Xóa</button>
-                </form>
-              </td>
-            </tr>
-          </c:forEach>
-          </tbody>
-        </table>
-      </ul>
-      </c:when>
-      <c:otherwise>
-        <div id="empty-message" class="empty-message">
-          <i class="fas fa-shopping-bag"></i>
-          Không có sản phẩm nào trong giỏ hàng.
-        </div>
-      </c:otherwise>
+          <ul id="cart2-items">
+            <table class="table table-bordered">
+              <thead>
+              <tr>
+                <th>Hình ảnh</th>
+                <th>Tên sản phẩm</th>
+                <th>Kích cỡ</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+                <th>Hành động</th>
+              </tr>
+              </thead>
+              <tbody>
+              <c:forEach var="item" items="${cartItems}">
+                <tr>
+                  <td><img src="${pageContext.request.contextPath}/${fn:escapeXml(item.image)}" alt="${item.name}" class="carts-item-img" /></td>
+                  <td>${item.name}</td>
+                  <td>${item.size.size.name}</td>
+                  <td>
+                    <form action="${pageContext.request.contextPath}/update-cart" method="POST">
+                      <input type="hidden" name="productId" value="${item.id}" />
+                      <input type="hidden" name="size" value="${item.size.id}" />
+                      <input type="number" name="quantity" class="form-control text-center" value="${item.quantity}" min="1" step="1" style="width: 80px;" />
+                      <button type="submit" class="btn btn-success">Cập nhật</button>
+                    </form>
+                  </td>
+                  <td>${item.price} đ</td>
+                  <td>
+                    <form action="${pageContext.request.contextPath}/delete-cart">
+                      <input type="hidden" name="cid" value="${item.id}" />
+                      <input type="hidden" name="size" value="${item.size.id}" />
+                      <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm này?');">Xóa</button>
+                    </form>
+                  </td>
+                </tr>
+              </c:forEach>
+              </tbody>
+            </table>
+          </ul>
+          <div class="cart-summary">
+            <p>Tổng cộng: <span id="cart-total"> đ</span></p>
+            <a href="${pageContext.request.contextPath}/danhmuc" class="btn btn-secondary">Tiếp tục mua hàng</a>
+            <a href="${pageContext.request.contextPath}/checkout" class="btn btn-primary">Thanh toán</a>
+          </div>
+        </c:when>
+
+        <c:otherwise>
+          <div id="empty-message" class="empty-message">
+            <i class="fas fa-shopping-bag"></i>
+            <p>Không có sản phẩm nào trong giỏ hàng.</p>
+            <a href="${pageContext.request.contextPath}/danhmuc" class="btn btn-secondary">Tiếp tục mua hàng</a>
+          </div>
+        </c:otherwise>
       </c:choose>
-
-      <div class="cart-summary">
-        <p>Tổng cộng: <span id="cart-total" >0 đ</span></p>
-        <button id="checkout-btn" class="btn btn-primary" onclick="redirectToCheckout()">Thanh toán</button>
-
-      </div>
     </div>
   </div>
 </div>

@@ -64,20 +64,25 @@
               <div class="cart-dropdown">
                 <c:choose>
                   <c:when test="${not empty sessionScope.cartItems}">
-                    <ul>
+                    <table>
+                      <tbody>
                       <c:forEach var="item" items="${sessionScope.cartItems}">
-                        <li class="cart-item">
-                          <img src="${pageContext.request.contextPath}/${fn:escapeXml(item.image)}" alt="${item.name}" class="cart-item-img" />
-                          <span class="cart-item-name">${item.name}</span>
-                          <span class="cart-item-size">Size: ${item.size}</span>
-                          <span class="cart-item-quantity">Số lượng: ${item.quantity}</span>
-                          <span class="cart-item-price">${item.price} đ</span>
-                        </li>
+                        <tr class="cart-item">
+                          <td><img src="${pageContext.request.contextPath}/${fn:escapeXml(item.image)}" alt="${item.name}" class="cart-item-img" /></td>
+                          <td class="cart-item-name">${item.name}</td>
+                          <td class="cart-item-size">${item.size.size.name}</td>
+                          <td class="cart-item-quantity">${item.quantity}</td>
+                          <td class="cart-item-price">${item.price} đ</td>
+                        </tr>
                       </c:forEach>
-                    </ul>
+                      </tbody>
+                    </table>
                   </c:when>
                   <c:otherwise>
-                    <p>Không có sản phẩm trong giỏ hàng</p>
+                    <div id="empty-message" class="empty-message">
+                      <i class="fas fa-shopping-bag"></i>
+                      <p>Không có sản phẩm nào trong giỏ hàng.</p>
+                    </div>
                   </c:otherwise>
                 </c:choose>
                 <div class="cart-sum">
