@@ -15,16 +15,17 @@ import java.io.IOException;
 @WebServlet("/delete-cart")
 public class DeleteCart extends HttpServlet{
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int cid = Integer.parseInt(req.getParameter("cid"));
-        String size = req.getParameter("size");
+        int size = Integer.parseInt(req.getParameter("size"));
         System.out.println(size);
-        HttpSession session = req.getSession();
+        HttpSession session = req.getSession(true);
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart != null) {
             cart.delete(cid, size);
             System.out.println(cart);
         }
+        session.setAttribute("cart", cart);
         resp.sendRedirect(req.getContextPath() + "/cart");
     }
 }
