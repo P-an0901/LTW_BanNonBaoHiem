@@ -88,7 +88,7 @@
                 <div class="cart-sum">
                     <div class="cart-total">
                       <span>Tổng tiền:</span>
-                      <span id="total-price">0</span>
+                      <span id="total-price">${totalPrice} đ</span>
                     </div>
                   <button class="checkout-btn"><a href="checkout.jsp"></a>
                     Xem chi tiết</button>

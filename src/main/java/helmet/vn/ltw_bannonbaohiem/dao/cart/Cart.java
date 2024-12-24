@@ -66,4 +66,11 @@ public class Cart {
             System.out.println("Sản phẩm với key " + key + " không tồn tại trong giỏ hàng.");
         }
     }
+    public double totalPrice(){
+        double total = 0.0;
+        for (CartProduct product : data.values()) {
+            total += product.getTotalPrice();
+        }
+        return total;
+    }
 }

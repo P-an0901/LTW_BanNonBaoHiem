@@ -29,7 +29,9 @@ public class ShowCart extends HttpServlet {
         }
 
         List<CartProduct> list = cart.show();
+        double totalPrice = cart.totalPrice();
         req.setAttribute("cartItems", list);
+        req.setAttribute("totalPrice", totalPrice);
         System.out.println(list);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/giohang.jsp");
         dispatcher.forward(req, resp);

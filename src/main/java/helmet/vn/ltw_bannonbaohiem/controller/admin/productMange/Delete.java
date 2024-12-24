@@ -1,6 +1,7 @@
 package helmet.vn.ltw_bannonbaohiem.controller.admin.productMange;
 
 import helmet.vn.ltw_bannonbaohiem.service.BrandService;
+import helmet.vn.ltw_bannonbaohiem.service.CategoryService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import java.io.IOException;
 @WebServlet("/delete-tab-product")
 public class Delete extends HttpServlet {
     private BrandService brandService = new BrandService();
+    private CategoryService cateService = new CategoryService();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -50,8 +52,19 @@ public class Delete extends HttpServlet {
         
     }
 
-    private void handleDeleteCate(HttpServletRequest req, HttpServletResponse resp) {
-        
+    private void handleDeleteCate(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException{
+        String id = req.getParameter("id");
+        System.out.println(id);
+        if(id != null && !id.isEmpty()){
+            boolean isDeleted = cateService.deleteCate(Integer.parseInt(id));
+            if (isDeleted) {
+                String referer = req.getHeader("Referer");
+                resp.sendRedirect(referer);
+            } else {
+                req.setAttribute("error", "Không thể xóa danh mục!");
+                req.getRequestDispatcher("/admin/product").forward(req, resp);
+            }
+        }
     }
 
     private void handleDeleteSize(HttpServletRequest req, HttpServletResponse resp) {

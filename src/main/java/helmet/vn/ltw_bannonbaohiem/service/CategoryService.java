@@ -14,4 +14,26 @@ public class CategoryService {
     public List<Category> getAllCate(){
         return cateDao.getAllCate();
     }
+
+    public boolean addCate(String name) {
+        if(name != null){
+            cateDao.addCate(name);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean deleteCate(int id) {
+        if(cateDao.getCateById(id) != null){
+            return cateDao.deleteCate(id);
+        }
+        return false;
+    }
+
+    public boolean updateCate(int id, String name) {
+        if(cateDao.getCateById(id) != null){
+            return cateDao.updateCate(id, name);
+        }
+        return false;
+    }
 }

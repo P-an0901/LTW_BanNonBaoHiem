@@ -14,7 +14,7 @@ public class CategoryDao {
         this.jdbi = JdbiConnect.get();
     }
 
-    public boolean addBCate(String name) {
+    public boolean addCate(String name) {
         String sql = "INSERT INTO categories (name) VALUES (?)";
         try {
             return jdbi.withHandle(handle -> {
@@ -66,4 +66,5 @@ public class CategoryDao {
             return row > 0;
         });
     }
+
 }

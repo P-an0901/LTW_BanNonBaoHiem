@@ -33,6 +33,8 @@ public class CartFilter implements Filter {
         }
 
         List<CartProduct> cartItems = cart.show();
+        double totalPrice = cart.totalPrice();
+        session.setAttribute("totalPrice", totalPrice);
         session.setAttribute("cartItems", cartItems);
         System.out.println(cartItems);
 
