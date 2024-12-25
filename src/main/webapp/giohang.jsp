@@ -83,7 +83,7 @@
             </table>
           </ul>
           <div class="cart-summary">
-            <p>Tổng cộng: <span id="cart-total"> đ</span></p>
+            <p>Tổng cộng: <span id="cart-total">${totalPrice} đ</span></p>
             <a href="${pageContext.request.contextPath}/danhmuc" class="btn btn-secondary">Tiếp tục mua hàng</a>
             <a href="${pageContext.request.contextPath}/checkout" class="btn btn-primary">Thanh toán</a>
           </div>

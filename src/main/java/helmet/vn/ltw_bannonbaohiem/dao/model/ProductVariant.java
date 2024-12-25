@@ -1,5 +1,6 @@
 package helmet.vn.ltw_bannonbaohiem.dao.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +14,11 @@ public class ProductVariant {
     private String image;
     private List<ProductSize> listPSize;
     private boolean isActive;
+    private LocalDateTime createdAt;
 
     public ProductVariant() {}
 
-    public ProductVariant(int id, String name, int productId, String color, double price, String image, boolean isActive) {
+    public ProductVariant(int id, String name, int productId, String color, double price, String image, boolean isActive, LocalDateTime createdAt) {
         this.id = id;
         this.name = name;
         this.productId = productId;
@@ -24,6 +26,7 @@ public class ProductVariant {
         this.price = price;
         this.image = image;
         this.isActive = isActive;
+        this.createdAt = createdAt;
         this.listPSize = new ArrayList<>();
     }
 
@@ -92,6 +95,14 @@ public class ProductVariant {
 
     public void setListPSize(List<ProductSize> listPSize) {
         this.listPSize = listPSize;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override

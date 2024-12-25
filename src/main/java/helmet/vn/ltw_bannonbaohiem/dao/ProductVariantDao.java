@@ -1,7 +1,6 @@
 package helmet.vn.ltw_bannonbaohiem.dao;
 
 import helmet.vn.ltw_bannonbaohiem.dao.db.JdbiConnect;
-import helmet.vn.ltw_bannonbaohiem.dao.model.Product;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductSize;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductVariant;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Sizes;
@@ -9,7 +8,6 @@ import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.statement.Update;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ProductVariantDao {
@@ -19,7 +17,7 @@ public class ProductVariantDao {
     }
     public List<ProductVariant> getAllVariant() {
         String sql = "SELECT pv.id, pv.name, pv.color, pv.price, pv.image, pv.isActive, " +
-                "       pv.productId AS pid, p.name AS pname, " +
+                "       pv.productId AS pid, pv.createdAt, p.name AS pname, " +
                 "       ps.id AS psid, s.name AS sname, s.id AS sizeId, ps.stock " +
                 "FROM product_variants pv " +
                 "JOIN products p ON pv.productId = p.id " +
@@ -28,63 +26,21 @@ public class ProductVariantDao {
                 "WHERE pv.isActive > 0";
 
 
-        return jdbi.withHandle(handle -> {
-            List<ProductVariant> variants = new ArrayList<>();
-
-            handle.createQuery(sql)
-                    .map((rs, ctx) -> {
-                        int variantId = rs.getInt("id");
-
-                        ProductVariant existingVariant = null;
-                        for (ProductVariant variant : variants) {
-                            if (variant.getId() == variantId) {
-                                existingVariant = variant;
-                                break;
-                            }
-                        }
-
-                        if (existingVariant == null) {
-                            ProductVariant variant = new ProductVariant();
-                            variant.setId(variantId);
-                            variant.setName(rs.getString("name"));
-                            variant.setProductId(rs.getInt("pid"));
-                            variant.setColor(rs.getString("color"));
-                            variant.setPrice(rs.getDouble("price"));
-                            variant.setImage(rs.getString("image"));
-                            variant.setActive(rs.getInt("isActive") > 0);
-                            variant.setListPSize(new ArrayList<>());
-                            variants.add(variant);
-                            existingVariant = variant;
-                        }
-
-                        if (rs.getObject("sizeId") != null && rs.getObject("psid") != null) {
-                            ProductSize productSize = new ProductSize();
-                            productSize.setId(rs.getInt("psid"));
-                            productSize.setStock(rs.getInt("stock"));
-
-                            Sizes size = new Sizes();
-                            size.setId(rs.getInt("sizeId"));
-                            size.setName(rs.getString("sname"));
-                            productSize.setSize(size);
-
-                            existingVariant.getListPSize().add(productSize);
-                        }
-
-                        return null;
-                    }).list();
-
-            return variants;
-        });
+        return getProductVariants(sql);
     }
     public List<ProductVariant> getAllVariantsForAdmin() {
         String sql = "SELECT pv.id, pv.name, pv.color, pv.price, pv.image, pv.isActive, " +
-                "       pv.productId AS pid, p.name AS pname, " +
+                "       pv.productId AS pid, pv.createdAt, p.name AS pname, " +
                 "       ps.id AS psid, s.name AS sname, s.id AS sizeId, ps.stock " +
                 "FROM product_variants pv " +
                 "JOIN products p ON pv.productId = p.id " +
                 "LEFT JOIN product_sizes ps ON pv.id = ps.variantId " +
                 "LEFT JOIN sizes s ON ps.sizeId = s.id";
 
+        return getProductVariants(sql);
+    }
+
+    private List<ProductVariant> getProductVariants(String sql) {
         return jdbi.withHandle(handle -> {
             List<ProductVariant> variants = new ArrayList<>();
 
@@ -109,6 +65,7 @@ public class ProductVariantDao {
                             variant.setPrice(rs.getDouble("price"));
                             variant.setImage(rs.getString("image"));
                             variant.setActive(rs.getInt("isActive") > 0);
+                            variant.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
                             variant.setListPSize(new ArrayList<>());
                             variants.add(variant);
                             existingVariant = variant;
@@ -156,7 +113,7 @@ public class ProductVariantDao {
         }
     }
     public ProductVariant getProVariantById(int id){
-        String sql ="SELECT pv.id, pv.name, pv.productId, pv.color, pv.price, pv.image, pv.isActive " +
+        String sql ="SELECT pv.id, pv.name, pv.productId, pv.color, pv.price, pv.image, pv.isActive, pv.createdAt " +
                 "FROM product_variants pv " +
                 "WHERE pv.id = ?;";
         try {
@@ -170,7 +127,8 @@ public class ProductVariantDao {
                                     rs.getString("color"),
                                     rs.getDouble("price"),
                                     rs.getString("image"),
-                                    rs.getBoolean("isActive")
+                                    rs.getBoolean("isActive"),
+                                    rs.getTimestamp("createdAt").toLocalDateTime()
                             )).findOne().orElse(null)
             );
         } catch (Exception e) {
@@ -192,5 +150,21 @@ public class ProductVariantDao {
             return new ArrayList<>(); 
         }
     }
+    public List<ProductVariant> getNewProductVariants() {
+
+        String sql = "SELECT pv.id, pv.name, pv.color, pv.price, pv.image, pv.isActive, " +
+                "       pv.productId AS pid, pv.createdAt, p.name AS pname, " +
+                "       ps.id AS psid, s.name AS sname, s.id AS sizeId, ps.stock " +
+                "FROM product_variants pv " +
+                "JOIN products p ON pv.productId = p.id " +
+                "LEFT JOIN product_sizes ps ON pv.id = ps.variantId " +
+                "LEFT JOIN sizes s ON ps.sizeId = s.id " +
+                "WHERE pv.isActive > 0 " +
+                "ORDER BY pv.createdAt DESC " +
+                "LIMIT 5";
+
+        return getProductVariants(sql);
+    }
+
 
 }

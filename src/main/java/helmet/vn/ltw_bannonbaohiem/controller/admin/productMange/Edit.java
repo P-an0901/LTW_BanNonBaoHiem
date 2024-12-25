@@ -1,6 +1,7 @@
 package helmet.vn.ltw_bannonbaohiem.controller.admin.productMange;
 
 import helmet.vn.ltw_bannonbaohiem.service.BrandService;
+import helmet.vn.ltw_bannonbaohiem.service.CategoryService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,6 +17,7 @@ import java.io.IOException;
 @MultipartConfig
 public class Edit extends HttpServlet {
     private BrandService brandService = new BrandService();
+    private CategoryService cateService = new CategoryService();
     private static final String UPLOAD_DIR = "images";
 
     @Override
@@ -66,8 +68,18 @@ public class Edit extends HttpServlet {
 
     }
 
-    private void handleEditCate(HttpServletRequest req, HttpServletResponse resp) {
+    private void handleEditCate(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        String id = req.getParameter("cateId");
+        String name = req.getParameter("cateName");
+        if(id != null && name != null){
+            cateService.updateCate(Integer.parseInt(id), name);
+            String referer = req.getHeader("Referer");
+            resp.sendRedirect(referer);
 
+        } else {
+            req.setAttribute("error", "Thông tin không hợp lệ!");
+            req.getRequestDispatcher("/admin/product").forward(req, resp);
+        }
     }
 
     private void handleEditSize(HttpServletRequest req, HttpServletResponse resp) {
