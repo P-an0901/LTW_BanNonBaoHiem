@@ -77,6 +77,12 @@
                       </c:forEach>
                       </tbody>
                     </table>
+                    <div class="cart-sum">
+                      <div class="cart-total">
+                        <span>Tổng tiền:</span>
+                        <span id="total-price">${totalPrice} đ</span>
+                      </div>
+                    </div>
                   </c:when>
                   <c:otherwise>
                     <div id="empty-message" class="empty-message">
@@ -85,14 +91,6 @@
                     </div>
                   </c:otherwise>
                 </c:choose>
-                <div class="cart-sum">
-                    <div class="cart-total">
-                      <span>Tổng tiền:</span>
-                      <span id="total-price">${totalPrice} đ</span>
-                    </div>
-                  <button class="checkout-btn"><a href="checkout.jsp"></a>
-                    Xem chi tiết</button>
-                </div>
               </div>
             </li>
           </ul>
@@ -128,36 +126,13 @@
             <i class="fa-solid fa-chevron-down icon-arrow"></i> <!-- Icon mũi tên -->
           </a>
           <ul class="submenu" id="brand-submenu">
-            <li>
-              <a href="Royal.jsp">
-                <img src="images/Logo2020-02.png" alt="Roc" class="submenu-icon">
-              </a>
-            </li>
-            <li>
-              <a href="Royal.jsp">
-                <img src="images/Logo2020-03.png" alt="Royal" class="submenu-icon">
-              </a>
-            </li>
-            <li>
-              <a href="html/JC.jsp">
-                <img src="images/Logo2020-05.png" alt="JC" class="submenu-icon">
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <img src="images/Logo2020-01-1.png" alt="Asia" class="submenu-icon">
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <img src="images/andes-logo.jpg" alt="Andes" class="submenu-icon">
-              </a>
-            </li>
-<%--            <li>--%>
-<%--                <a href="#">--%>
-<%--                    <img src="" alt="NonSon" class="submenu-icon"><span>Nón sơn</span>--%>
-<%--                </a>--%>
-<%--            </li>--%>
+            <c:forEach var="brand" items="${brands}">
+              <li>
+                <a href="${pageContext.request.contextPath}/danhmuc?brand=${brand.name}">
+                  <img src="${brand.imageUrl}" alt="${brand.name}" class="submenu-icon">
+                </a>
+              </li>
+            </c:forEach>
           </ul>
         </li>
       </ul>

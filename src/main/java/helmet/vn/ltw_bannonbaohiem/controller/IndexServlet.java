@@ -21,7 +21,6 @@ import java.util.List;
 
 @WebServlet (name = "/", value ="")
 public class IndexServlet extends HttpServlet {
-    private BrandService brandService = new BrandService();
     //    private static CategoryService categoryService = new CategoryService();
     private ProductService productService = new ProductService();
     private ProductSizeDao proSizeD = new ProductSizeDao();
@@ -31,14 +30,12 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("activePage", "home");
         List<Product> products = productService.getAllPro();
-        List<Brand> brands = brandService.getAllBrands();
-        List<ProductVariant> proVariants = productVariantService.getAllVariant();
+        List<ProductVariant> proVariants = productVariantService.getNewProductVariants();
 //        List<ProductSize> proSizes = proSizeD.getSizeByVariantId();
 //        req.setAttribute("proVariants", proVariants);
         req.setAttribute("proVariants", proVariants);
         System.out.println(proVariants);
         req.setAttribute("products", products);
-        req.setAttribute("brands", brands);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
         dispatcher.forward(req, resp);
     }

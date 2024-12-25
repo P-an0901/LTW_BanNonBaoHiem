@@ -25,7 +25,7 @@ window.onload = function() {
     const selectedCategory = getCategoryFromURL();
     filterProductsByType(selectedCategory);
     helmetTypeSelect.value = selectedCategory;
-    updatePageTitle(selectedCategory); 
+    updatePageTitle(selectedCategory);
 };
 function updatePageTitle(selectedType) {
     const titleElement = document.getElementById('product-list-title');
@@ -144,8 +144,10 @@ function updateActivePagination() {
 
 // Hàm cuộn trang tới danh sách sản phẩm
 function scrollToProductList() {
-    document.querySelector('.product-list').scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+    // Cuộn trang lên trên cùng
+    window.scrollTo({
+        top: 0,  // Cuộn lên trên cùng của trang
+        behavior: 'smooth'  // Cuộn mượt mà
     });
 }
+

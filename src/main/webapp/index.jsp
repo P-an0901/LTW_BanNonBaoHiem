@@ -191,39 +191,65 @@
                     <h3>Sản Phẩm Mới</h3>
                 </div>
                 <div class="product-row">
-                    <div class="product-item">
-                        <img src=" images/1-Royal M125K Xanh Mực Mờ.png" alt="Sản phẩm 1" class="product-image">
-                        <div class="select-size">
-                            <button class="size-button selected" data-value="M">M</button>
-                            <button class="size-button" data-value="L">L</button>
-                            <button class="size-button" data-value="XL">XL</button>
-                        </div> 
-                        <h3 class="product-name">Royal M125K Xanh Mực Mờ</h3>
-                        <p class="product-price">Giá: 200.000 đ</p>
-                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
-                    </div>
-                    <div class="product-item">
-                        <img src=" images/Royal-M139-Chuot-xuoc-bong.jpg" alt="Sản phẩm 2" class="product-image">
-                        <div class="select-size">
-                            <button class="size-button selected" data-value="M">M</button>
-                            <button class="size-button" data-value="L">L</button>
-                            <button class="size-button" data-value="XL">XL</button>
-                        </div> 
-                        <h3 class="product-name">Royal M139 Chuột xước bóng</h3>
-                        <p class="product-price">Giá: 200.000 đ</p>
-                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
-                    </div>
-                    <div class="product-item">
-                        <img src=" images/Royal-M139-Den-mo.jpg" alt="Sản phẩm 3" class="product-image">
-                        <div class="select-size">
-                            <button class="size-button selected" data-value="M">M</button>
-                            <button class="size-button" data-value="L">L</button>
-                            <button class="size-button" data-value="XL">XL</button>
-                        </div> 
-                        <h3 class="product-name">Royal M139 Đen mờ</h3>
-                        <p class="product-price">Giá: 150.000 đ</p>
-                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
-                    </div>
+                    <c:forEach var="proV" items="${proVariants}">
+                        <div class="product-item">
+                            <div class="product-new-label">Mới</div>
+                            <a href="${pageContext.request.contextPath}/detail?pvId=${proV.id}">
+                                <img src="${pageContext.request.contextPath}/${fn:escapeXml(proV.image)}" alt="${proV.name}" class="product-image">
+                            </a>
+                            <div class="select-size">
+                                <c:forEach var="productSize" items="${proV.listPSize}">
+                                    <button class="size-button" data-value="${productSize.size.id}">
+                                            ${productSize.size.name}
+                                    </button>
+                                </c:forEach>
+                            </div>
+                            <a href="detail.jsp">
+                                <h3 class="product-name">${proV.name}</h3>
+                            </a>
+                            <p class="product-price">Giá: <f:formatNumber value="${proV.price}"/> đ</p>
+                            <form action="${pageContext.request.contextPath}/add-cart" method="POST">
+                                <input type="hidden" name="productId" value="${proV.id}">
+                                <input type="hidden" name="price" value="${proV.price}">
+                                <input type="hidden" name="sizeId" id="sizeId-${proV.id}">
+                                <input type="hidden" name="quantity" value="1" min="1">
+                                <button type="submit" class="buy-button" onclick="return validateF()">Thêm vào giỏ hàng</button>
+                            </form>
+                        </div>
+                    </c:forEach>
+<%--                    <div class="product-item">--%>
+<%--                        <img src=" images/1-Royal M125K Xanh Mực Mờ.png" alt="Sản phẩm 1" class="product-image">--%>
+<%--                        <div class="select-size">--%>
+<%--                            <button class="size-button selected" data-value="M">M</button>--%>
+<%--                            <button class="size-button" data-value="L">L</button>--%>
+<%--                            <button class="size-button" data-value="XL">XL</button>--%>
+<%--                        </div> --%>
+<%--                        <h3 class="product-name">Royal M125K Xanh Mực Mờ</h3>--%>
+<%--                        <p class="product-price">Giá: 200.000 đ</p>--%>
+<%--                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>--%>
+<%--                    </div>--%>
+<%--                    <div class="product-item">--%>
+<%--                        <img src=" images/Royal-M139-Chuot-xuoc-bong.jpg" alt="Sản phẩm 2" class="product-image">--%>
+<%--                        <div class="select-size">--%>
+<%--                            <button class="size-button selected" data-value="M">M</button>--%>
+<%--                            <button class="size-button" data-value="L">L</button>--%>
+<%--                            <button class="size-button" data-value="XL">XL</button>--%>
+<%--                        </div> --%>
+<%--                        <h3 class="product-name">Royal M139 Chuột xước bóng</h3>--%>
+<%--                        <p class="product-price">Giá: 200.000 đ</p>--%>
+<%--                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>--%>
+<%--                    </div>--%>
+<%--                    <div class="product-item">--%>
+<%--                        <img src=" images/Royal-M139-Den-mo.jpg" alt="Sản phẩm 3" class="product-image">--%>
+<%--                        <div class="select-size">--%>
+<%--                            <button class="size-button selected" data-value="M">M</button>--%>
+<%--                            <button class="size-button" data-value="L">L</button>--%>
+<%--                            <button class="size-button" data-value="XL">XL</button>--%>
+<%--                        </div> --%>
+<%--                        <h3 class="product-name">Royal M139 Đen mờ</h3>--%>
+<%--                        <p class="product-price">Giá: 150.000 đ</p>--%>
+<%--                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>--%>
+<%--                    </div>--%>
                     <div class="product-item">
                         <img src=" images/Royal-M139-Leopard.jpg" alt="Sản phẩm 4" class="product-image">
                         <div class="select-size">

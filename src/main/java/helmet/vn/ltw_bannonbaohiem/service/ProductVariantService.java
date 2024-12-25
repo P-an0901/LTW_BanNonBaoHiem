@@ -18,6 +18,9 @@ public class ProductVariantService {
     public List<ProductVariant> getAllVariantsForAdmin(){
         return productVariantD.getAllVariantsForAdmin();
     }
+    public List<ProductVariant> getNewProductVariants(){
+        return productVariantD.getNewProductVariants();
+    }
     public boolean addProductVariant(String name, String color, int product, double price, String image, int active){
         return productVariantD.addVariant(name, color, product, price, image, active);
     }

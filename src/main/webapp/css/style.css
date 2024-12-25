@@ -138,7 +138,7 @@ a:hover{
     display: flex;
     flex-wrap: wrap;
 }
-.product-hot-label {
+.product-hot-label, .product-new-label {
     position: absolute;
     top: 0;
     background-color: red;

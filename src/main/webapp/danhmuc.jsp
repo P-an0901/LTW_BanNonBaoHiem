@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "f" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -33,6 +36,15 @@
         <div class="filter-container">
             <h3>Lọc sản phẩm</h3>
             <div class="filter-menu">
+                <div class="filter-item">
+                    <label for="helmet-brand">Thương hiệu:</label>
+                    <select id="helmet-brand" class="filter-select">
+                        <option value="all">Tất cả</option>
+                        <c:forEach var="brand" items="${brands}">
+                            <option value="${brand.id}">${brand.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
             <div class="filter-item">
                 <label for="helmet-type">Loại nón:</label>
                 <select id="helmet-type" class="filter-select">
@@ -106,7 +118,7 @@
                         <input type="checkbox" id="color-green" class="filter-color" value="green"> Xanh lá
                     </label>
                     
-                    <label for="color-yellow" style="color: yellow;">
+                    <label for="color-yellow" style="color: #e68027;">
                         <input type="checkbox" id="color-yellow" class="filter-color" value="yellow"> Vàng
                     </label>
                     
@@ -116,7 +128,7 @@
                 </div>
             </div>
         </div>
-            <!-- <button id="filter-btn" class="btn" onclick="applyFilters()">Áp dụng lọc</button> -->
+            <button id="filter-btn" class="btn">Áp dụng lọc</button>
         </div> 
         <div class="container">
             <div class="pro-lst" id="prolst">
