@@ -2,7 +2,9 @@ package helmet.vn.ltw_bannonbaohiem.dao.cart;
 
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductSize;
 
-public class CartProduct {
+import java.io.Serializable;
+
+public class CartProduct implements Serializable {
     private int id;
     private String name;
     private String image;

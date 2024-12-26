@@ -39,8 +39,11 @@ public class ProductController extends HttpServlet {
         List<Category> categories = categoryService.getAllCate();
         List<ProductVariant> proVariants = productVariantService.getAllVariantsForAdmin();
         List<Sizes> sizes = sizeService.getAllSize();
+        List<ProductSize> productSizes = productVariantService.getListProSize();
+        System.out.println(productSizes);
 
         req.setAttribute("sizes", sizes);
+        req.setAttribute("productSizes", productSizes);
         req.setAttribute("proVariants", proVariants);
         req.setAttribute("categories", categories);
         req.setAttribute("brands", brands);

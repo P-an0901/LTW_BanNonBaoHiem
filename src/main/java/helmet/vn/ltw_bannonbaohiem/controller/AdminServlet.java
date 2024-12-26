@@ -20,7 +20,6 @@ public class AdminServlet extends HttpServlet {
         if (tab == null || tab.equals("/")) {
             tab = "/home";
         }
-
         req.setAttribute("activeTab", tab.substring(1));
         RequestDispatcher dispatcher = req.getRequestDispatcher("/admin.jsp");
         dispatcher.forward(req, resp);

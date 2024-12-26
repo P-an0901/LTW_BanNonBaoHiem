@@ -24,8 +24,8 @@ public class DeleteCart extends HttpServlet{
         if (cart != null) {
             cart.delete(cid, size);
             System.out.println(cart);
+            session.setAttribute("cart", cart);
         }
-        session.setAttribute("cart", cart);
         resp.sendRedirect(req.getContextPath() + "/cart");
     }
 }

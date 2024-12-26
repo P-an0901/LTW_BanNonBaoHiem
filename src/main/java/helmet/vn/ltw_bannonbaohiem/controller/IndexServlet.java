@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet (name = "/", value ="")
 public class IndexServlet extends HttpServlet {
@@ -30,11 +31,10 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("activePage", "home");
         List<Product> products = productService.getAllPro();
-        List<ProductVariant> proVariants = productVariantService.getNewProductVariants();
-//        List<ProductSize> proSizes = proSizeD.getSizeByVariantId();
-//        req.setAttribute("proVariants", proVariants);
-        req.setAttribute("proVariants", proVariants);
-        System.out.println(proVariants);
+
+        List<ProductVariant> limitedProducts = productVariantService.getLimitedNewProductVariants(5);
+        req.setAttribute("proVariants", limitedProducts);
+        System.out.println(limitedProducts);
         req.setAttribute("products", products);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
         dispatcher.forward(req, resp);

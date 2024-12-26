@@ -61,6 +61,7 @@ public class Add extends HttpServlet {
     }
 
     private void handleAddProductVariantSize(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+
     }
 
     private void handleAddProductVariant(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -98,7 +99,7 @@ public class Add extends HttpServlet {
     }
 
     private void handleAddCate(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-        String name = req.getParameter("cateName");
+        String name = req.getParameter("categoryName");
         if(!name.equals(null) && !name.isEmpty()){
             cateService.addCate(name);
             String referer = req.getHeader("Referer");

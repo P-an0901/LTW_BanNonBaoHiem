@@ -19,20 +19,7 @@ public class ShowCart extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
 
-        Cart cart = (Cart) session.getAttribute("cart");
-
-        if (cart == null) {
-            cart = new Cart();
-            session.setAttribute("cart", cart);
-        }
-
-        List<CartProduct> list = cart.show();
-        double totalPrice = cart.totalPrice();
-        req.setAttribute("cartItems", list);
-        req.setAttribute("totalPrice", totalPrice);
-        System.out.println(list);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/giohang.jsp");
         dispatcher.forward(req, resp);
     }
