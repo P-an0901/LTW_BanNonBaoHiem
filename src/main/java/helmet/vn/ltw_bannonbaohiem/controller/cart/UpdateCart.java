@@ -27,9 +27,9 @@ public class UpdateCart extends HttpServlet {
 
         if (cart == null) {
             cart = new Cart();
-            session.setAttribute("cart", cart);
         }
         cart.update(productId, size, newQuantity);
+        session.setAttribute("cart", cart);
         resp.sendRedirect(req.getContextPath() + "/cart");
     }
 }

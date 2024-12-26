@@ -1,5 +1,6 @@
 package helmet.vn.ltw_bannonbaohiem.dao.model;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,13 @@ public class ProductVariant {
     private List<ProductSize> listPSize;
     private boolean isActive;
     private LocalDateTime createdAt;
-
+    private boolean newProV;
     public ProductVariant() {}
+
+    public ProductVariant(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public ProductVariant(int id, String name, int productId, String color, double price, String image, boolean isActive, LocalDateTime createdAt) {
         this.id = id;
@@ -28,6 +34,7 @@ public class ProductVariant {
         this.isActive = isActive;
         this.createdAt = createdAt;
         this.listPSize = new ArrayList<>();
+        this.newProV = isNewProduct();
     }
 
     public int getId() {
@@ -104,6 +111,23 @@ public class ProductVariant {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    public boolean isNewProV() {
+        return isNewProduct();
+    }
+
+    public void setNewProV(boolean newProV) {
+        this.newProV = newProV;
+    }
+
+    public boolean isNewProduct() {
+        if (createdAt == null) {
+            return false;
+        }
+        long daysDifference = Duration.between(createdAt, LocalDateTime.now()).toDays();
+        return daysDifference <= 30;
+    }
+
 
     @Override
     public String toString() {

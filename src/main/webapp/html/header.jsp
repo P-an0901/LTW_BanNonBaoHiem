@@ -59,14 +59,15 @@
             <li class="list-inline-item pointer cart-container" title="Giỏ hàng">
               <a href="${pageContext.request.contextPath}/cart">
                 <i class="fas fa-shopping-cart"></i>
-                <span class="badge badge-pill badge-danger">${sessionScope.cartItems.size()}</span>
+                <span class="badge badge-pill badge-danger">${sessionScope.cart != null ? sessionScope.cart.total : 0}
+                </span>
               </a>
               <div class="cart-dropdown">
                 <c:choose>
-                  <c:when test="${not empty sessionScope.cartItems}">
+                  <c:when test="${not empty sessionScope.cart.list}">
                     <table>
                       <tbody>
-                      <c:forEach var="item" items="${sessionScope.cartItems}">
+                      <c:forEach var="item" items="${sessionScope.cart.list}">
                         <tr class="cart-item">
                           <td><img src="${pageContext.request.contextPath}/${fn:escapeXml(item.image)}" alt="${item.name}" class="cart-item-img" /></td>
                           <td class="cart-item-name">${item.name}</td>
@@ -80,7 +81,7 @@
                     <div class="cart-sum">
                       <div class="cart-total">
                         <span>Tổng tiền:</span>
-                        <span id="total-price">${totalPrice} đ</span>
+                        <span id="total-price">${sessionScope.cart.totalPrice} đ</span>
                       </div>
                     </div>
                   </c:when>

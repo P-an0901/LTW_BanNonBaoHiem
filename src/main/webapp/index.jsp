@@ -193,13 +193,15 @@
                 <div class="product-row">
                     <c:forEach var="proV" items="${proVariants}">
                         <div class="product-item">
-                            <div class="product-new-label">Mới</div>
+                            <c:if test="${proV.newProV}">
+                                <div class="product-new-label">Mới</div>
+                            </c:if>
                             <a href="${pageContext.request.contextPath}/detail?pvId=${proV.id}">
                                 <img src="${pageContext.request.contextPath}/${fn:escapeXml(proV.image)}" alt="${proV.name}" class="product-image">
                             </a>
                             <div class="select-size">
                                 <c:forEach var="productSize" items="${proV.listPSize}">
-                                    <button class="size-button" data-value="${productSize.size.id}">
+                                    <button class="size-button" data-value="${productSize.id}">
                                             ${productSize.size.name}
                                     </button>
                                 </c:forEach>
@@ -211,7 +213,7 @@
                             <form action="${pageContext.request.contextPath}/add-cart" method="POST">
                                 <input type="hidden" name="productId" value="${proV.id}">
                                 <input type="hidden" name="price" value="${proV.price}">
-                                <input type="hidden" name="sizeId" id="sizeId-${proV.id}">
+                                <input type="hidden" name="sizeId" class="sizeId-${proV.id}">
                                 <input type="hidden" name="quantity" value="1" min="1">
                                 <button type="submit" class="buy-button" onclick="return validateF()">Thêm vào giỏ hàng</button>
                             </form>
@@ -305,7 +307,7 @@
                         <form action="${pageContext.request.contextPath}/add-cart" method="POST">
                             <input type="hidden" name="productId" value="${proV.id}">
                             <input type="hidden" name="price" value="${proV.price}">
-                            <input type="hidden" name="sizeId" id="sizeId-${proV.id}">
+                            <input type="hidden" name="sizeId" class="sizeId-${proV.id}">
                             <input type="hidden" name="quantity" value="1" min="1">
                             <button type="submit" class="buy-button" onclick="return validateF()">Thêm vào giỏ hàng</button>
                         </form>

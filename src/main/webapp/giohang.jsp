@@ -42,7 +42,7 @@
   <div class="cart-page">
     <div id="cart-container">
       <c:choose>
-        <c:when test="${not empty cartItems}">
+        <c:when test="${not empty sessionScope.cart.list}">
           <ul id="cart2-items">
             <table class="table table-bordered">
               <thead>
@@ -56,7 +56,7 @@
               </tr>
               </thead>
               <tbody>
-              <c:forEach var="item" items="${cartItems}">
+              <c:forEach var="item" items="${sessionScope.cart.list}">
                 <tr>
                   <td><img src="${pageContext.request.contextPath}/${fn:escapeXml(item.image)}" alt="${item.name}" class="carts-item-img" /></td>
                   <td>${item.name}</td>
@@ -83,7 +83,7 @@
             </table>
           </ul>
           <div class="cart-summary">
-            <p>Tổng cộng: <span id="cart-total">${totalPrice} đ</span></p>
+            <p>Tổng cộng: <span id="cart-total">${sessionScope.cart.totalPrice} đ</span></p>
             <a href="${pageContext.request.contextPath}/danhmuc" class="btn btn-secondary">Tiếp tục mua hàng</a>
             <a href="${pageContext.request.contextPath}/checkout" class="btn btn-primary">Thanh toán</a>
           </div>

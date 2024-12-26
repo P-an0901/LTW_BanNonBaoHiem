@@ -7,6 +7,7 @@ import helmet.vn.ltw_bannonbaohiem.dao.model.ProductSize;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductVariant;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductVariantService {
     ProductVariantDao productVariantD = new ProductVariantDao();
@@ -27,13 +28,24 @@ public class ProductVariantService {
     public ProductVariant getProVariant(int id){
         return productVariantD.getProVariantById(id);
     }
-    public List<ProductSize> getListSizeById(int id){
-        return proSizeD.getSizeByVariantId(id);
-    }
     public List<ProductVariant> getListProVarByProId(int id){
         return productVariantD.listProVariantByProId(id);
     }
+
+
+    // product size
     public ProductSize getById(int id){
         return proSizeD.getById(id);
+    }
+    public List<ProductSize> getListSizeById(int id){
+        return proSizeD.getSizeByVariantId(id);
+    }
+    public List<ProductSize> getListProSize(){return proSizeD.getAll();}
+
+    public List<ProductVariant> getLimitedNewProductVariants(int limit) {
+        List<ProductVariant> newProductVariants = getNewProductVariants();
+        return newProductVariants.stream()
+                .limit(limit)
+                .collect(Collectors.toList());
     }
 }

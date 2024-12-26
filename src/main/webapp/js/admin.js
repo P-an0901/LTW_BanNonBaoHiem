@@ -1,61 +1,39 @@
-// const sidebars = document.querySelectorAll(".sidebar-list-item.tab-content");
-// const sections = document.querySelectorAll(".section");
-//
-// for (let i = 0; i < sidebars.length; i++) {
-//     sidebars[i].onclick = function () {
-//         document.querySelector(".sidebar-list-item.active")?.classList.remove("active");
-//         document.querySelector(".section.active")?.classList.remove("active");
-//
-//         sidebars[i].classList.add("active");
-//         sections[i].classList.add("active");
-//     };
-// }
 document.addEventListener("DOMContentLoaded", function () {
     const table1 = document.getElementById("product-table");
     const dataTable = new DataTable(table1, {
         "paging": true,
-        "searching": false, 
+        "searching": true,
 
-        "ordering": false,  
+        "ordering": true,
 
         "info": false,  
         "lengthChange": false, 
-        "pageLength": 3,    
+        "pageLength": 5,
     });
 });
 
 
-    // const table2 = document.getElementById("variant-content");
-    //         const variantDataTable = new DataTable(table2, {
-    //             "paging": true,
-    //             "searching": false,
-    //
-    //             "ordering": false,
-    //
-    //             "info": false,
-    //             "lengthChange": false,
-    //             "pageLength": 3,
-    //         });
+    const table2 = document.getElementById("variant-content");
+            const variantDataTable = new DataTable(table2, {
+                "paging": true,
+                "searching": true,
+
+                "ordering": true,
+
+                "info": false,
+                "lengthChange": false,
+                "pageLength": 5,
+            });
 
 
 
 document.addEventListener('DOMContentLoaded', function() {
     // Lấy các nút
-    const btnAddProduct = document.getElementById('btn-add-product');
-    const btnAddCategory = document.getElementById('btn-add-category');
     const btnAddUser = document.getElementById('btn-add-user');
 
     // Lấy các modal
-    const addProductModal = document.getElementById('addProductModal');
     const addCategoryModal = document.getElementById('addCategoryModal');
     const addUserModal = document.getElementById('addUserModal');
-
-
-    if (btnAddCategory && addCategoryModal) {
-        btnAddCategory.addEventListener('click', function() {
-            addCategoryModal.style.display = 'block';
-        });
-    }
 
     if (btnAddUser && addUserModal) {
         btnAddUser.addEventListener('click', function() {
@@ -91,19 +69,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-// document.querySelectorAll(".tab-item").forEach(tab => {
-//     tab.addEventListener("click", () => {
-//         document.querySelectorAll(".tab-content").forEach(content => content.classList.remove("active"));
-//         document.querySelectorAll(".tab-item").forEach(item => item.classList.remove("active"));
-//
-//         const target = tab.getAttribute("data-tab");
-//         tab.classList.add("active");
-//         document.getElementById(target).classList.add("active");
-//     });
-// });
 $(document).ready(function() {
     $('#btn-add-product_variant').click(function () {
         $('#addVariantModal').modal('show')
+    });
+
+    $('#btn-add-category').click(function () {
+        $('#addCategoryModal').modal('show')
     });
 
     $('#btn-add-product').click(function () {

@@ -175,7 +175,6 @@
                                 <th>Thương hiệu</th>
                                 <th>Danh mục</th>
                                 <th>Ngày thêm</th>
-                                <th>Biến thể</th>
                                 <th>Chi tiết</th>
                                 <th>Sửa</th>
                                 <th>Xóa</th>
@@ -190,7 +189,6 @@
                                 <td>${product.brand.name}</td>
                                 <td>${product.category.name}</td>
                                 <td>${product.createdAt}</td>
-                                <td><button class="variant-btn" data-id="${product.id}"><i class="fa-solid fa-cogs"></i></button></td>
                                 <td><button class="pdetails-btn" data-id="${product.id}"><i class="fa-solid fa-eye"></i></button></td>
                                 <td><button class="edit-btn" data-id="${product.id}"><i class="fa-solid fa-pen"></i></button></td>
                                 <td><button class="delete-btn" data-id="${product.id}"><i class="fa-solid fa-trash"></i></button></td>
@@ -260,6 +258,7 @@
                     <table id="p-size-content" style="width:100%">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>STT</th>
                                 <th>Tên biến thể</th>
                                 <th>Kích cỡ</th>
@@ -269,14 +268,34 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <c:if test="${empty productSizes}">
                             <tr>
-                                <td>1</td>
-                                <td>Royal M139 Trắng</td>
-                                <td>M</td>
-                                <td>10</td>
-                                <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
-                                <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                                <td colspan="5" style="text-align: center; font-style: italic;">Không có dữ liệu</td>
                             </tr>
+                        </c:if>
+                        <c:forEach var="proS" items="${productSizes}">
+                            <tr>
+                                <td><input type="checkbox" name="selectedProV" value="${proS.id}"></td>
+                                <td>${proS.id}</td>
+                                <td>${proS.variant.name}</td>
+                                <td>${proS.size.name}</td>
+                                <td>${proS.stock}</td>
+                                <td>
+                                    <button class="edit-btn">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <form action="${pageContext.request.contextPath}/delete-tab-product" method="POST" style="display:inline;">
+                                        <input type="hidden" name="action" value="deletePSize">
+                                        <input type="hidden" name="id" value="${proS.id}" />
+                                        <button type="submit" class="delete-btn">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -848,11 +867,8 @@
             </div>
             <div class="modal-body">
                 <h2 class="modal-title">Thêm Danh Mục</h2>
-                <form id="addCategoryForm">
-                    <div class="form-group col-md-6">
-                        <label for="categoryId">ID Danh Mục</label>
-                        <input type="text" class="form-control" id="categoryId" name="categoryId" placeholder="Nhập ID danh mục" required>
-                    </div>
+                <form action="${pageContext.request.contextPath}/add-tab-product" method="post">
+                    <input type="hidden" name="action" value="addCate">
                     <div class="form-group col-md-6">
                         <label for="categoryName">Tên Danh Mục</label>
                         <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Nhập tên danh mục" required>

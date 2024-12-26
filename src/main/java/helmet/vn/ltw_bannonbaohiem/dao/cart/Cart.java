@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Cart {
-    Map<String, CartProduct> data = new HashMap<>();
+    private Map<String, CartProduct> data = new HashMap<>();
     ProductVariantService pVService = new ProductVariantService();
 
     public boolean add(ProductVariant pv, int proSizeId, int quantity){
@@ -42,7 +42,7 @@ public class Cart {
 
         return true;
     }
-    public List<CartProduct> show(){
+    public List<CartProduct> getList(){
         return new ArrayList<>(data.values());
     }
 
@@ -66,11 +66,14 @@ public class Cart {
             System.out.println("Sản phẩm với key " + key + " không tồn tại trong giỏ hàng.");
         }
     }
-    public double totalPrice(){
+    public double getTotalPrice(){
         double total = 0.0;
         for (CartProduct product : data.values()) {
             total += product.getTotalPrice();
         }
         return total;
+    }
+    public int getTotal(){
+        return data.size();
     }
 }

@@ -117,7 +117,7 @@
                 button.classList.add('selected');
                 const sizeId = button.getAttribute('data-value');
                 const productId = productItem.querySelector('input[name="productId"]').value;
-                productItem.querySelector(`#sizeId-${productId}`).value = sizeId;
+                productItem.querySelector(`.sizeId-${productId}`).value = sizeId;
             });
         });
         function validateF() {
@@ -186,22 +186,6 @@ products.forEach(pro => {
 function extractNumber(priceString) {
     return Number(priceString.replace(/[^0-9]/g, ''));
 }
-
-// Hàm xóa sản phẩm khỏi giỏ
-function removeFromCart(index) {
-    if (window.confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?')) {
-    cart.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCart();
-    }
-}
-
-// Đọc giỏ hàng từ localStorage khi trang tải
-document.addEventListener('DOMContentLoaded', function() {
-    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart = storedCart;
-    updateCart();
-});
 
 /*Lên đầu trang */
 window.addEventListener("scroll", function() {

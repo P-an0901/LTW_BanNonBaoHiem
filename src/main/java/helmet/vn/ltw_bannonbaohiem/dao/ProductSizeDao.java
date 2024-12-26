@@ -2,6 +2,7 @@ package helmet.vn.ltw_bannonbaohiem.dao;
 
 import helmet.vn.ltw_bannonbaohiem.dao.db.JdbiConnect;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductSize;
+import helmet.vn.ltw_bannonbaohiem.dao.model.ProductVariant;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Sizes;
 import org.jdbi.v3.core.Jdbi;
 
@@ -38,9 +39,10 @@ public class ProductSizeDao {
         });
     }
     public ProductSize getById(int id) {
-        String sql = "SELECT ps.id, ps.variantId, ps.sizeId, ps.stock, s.name AS size_name " +
+        String sql = "SELECT ps.id, ps.variantId, ps.sizeId, ps.stock, s.name AS size_name, pv.name AS variant_name " +
                 "FROM product_sizes ps " +
                 "JOIN sizes s ON ps.sizeId = s.id " +
+                "JOIN product_variants pv ON ps.variantId = pv.id " +
                 "WHERE ps.id = ?";
         return jdbi.withHandle(handle -> {
             return handle.createQuery(sql)
@@ -48,7 +50,37 @@ public class ProductSizeDao {
                     .map((rs, ctx) -> {
                         ProductSize productSize = new ProductSize();
                         productSize.setId(rs.getInt("id"));
-                        productSize.setVariantId(rs.getInt("variantId"));
+                        productSize.setStock(rs.getInt("stock"));
+
+                        Sizes size = new Sizes();
+                        size.setId(rs.getInt("sizeId"));
+                        size.setName(rs.getString("size_name"));
+
+                        ProductVariant productVariant = new ProductVariant(
+                                rs.getInt("variantId"),
+                                rs.getString("variant_name")
+                        );
+                        productSize.setVariant(productVariant);
+                        productSize.setSize(size);
+
+                        return productSize;
+                    })
+                    .findOne()
+                    .orElse(null);
+        });
+    }
+
+    public List<ProductSize> getAll() {
+        String sql = "SELECT ps.id, ps.variantId, ps.sizeId, ps.stock, s.name AS size_name, " +
+                "pv.name AS variant_name " +
+                "FROM product_sizes ps " +
+                "JOIN sizes s ON ps.sizeId = s.id " +
+                "JOIN product_variants pv ON ps.variantId = pv.id";
+        return jdbi.withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .map((rs, ctx) -> {
+                        ProductSize productSize = new ProductSize();
+                        productSize.setId(rs.getInt("id"));
                         productSize.setStock(rs.getInt("stock"));
 
                         Sizes size = new Sizes();
@@ -56,10 +88,14 @@ public class ProductSizeDao {
                         size.setName(rs.getString("size_name"));
                         productSize.setSize(size);
 
+                        ProductVariant productVariant = new ProductVariant();
+                        productVariant.setId(rs.getInt("variantId"));
+                        productVariant.setName(rs.getString("variant_name"));
+                        productSize.setVariant(productVariant);
+
                         return productSize;
                     })
-                    .findOne()
-                    .orElse(null);
+                    .list();
         });
     }
 
