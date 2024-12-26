@@ -1,8 +1,6 @@
 package helmet.vn.ltw_bannonbaohiem.controller.cart;
 
 import helmet.vn.ltw_bannonbaohiem.dao.cart.Cart;
-import helmet.vn.ltw_bannonbaohiem.dao.cart.CartProduct;
-import helmet.vn.ltw_bannonbaohiem.dao.model.ProductSize;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductVariant;
 import helmet.vn.ltw_bannonbaohiem.service.ProductVariantService;
 import jakarta.servlet.ServletException;
@@ -13,7 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/add-cart")
 public class AddCart extends HttpServlet {

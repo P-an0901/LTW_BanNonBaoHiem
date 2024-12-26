@@ -1,7 +1,13 @@
 package helmet.vn.ltw_bannonbaohiem.controller.admin.productMange;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import helmet.vn.ltw_bannonbaohiem.controller.admin.LocalDateTimeAdapter;
+import helmet.vn.ltw_bannonbaohiem.dao.model.Brand;
+import helmet.vn.ltw_bannonbaohiem.dao.model.Product;
 import helmet.vn.ltw_bannonbaohiem.service.BrandService;
 import helmet.vn.ltw_bannonbaohiem.service.CategoryService;
+import helmet.vn.ltw_bannonbaohiem.service.ProductService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,23 +18,70 @@ import jakarta.servlet.http.Part;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
 
 @WebServlet("/edit-tab-product")
 @MultipartConfig
 public class Edit extends HttpServlet {
     private BrandService brandService = new BrandService();
     private CategoryService cateService = new CategoryService();
+    private ProductService proService = new ProductService();
     private static final String UPLOAD_DIR = "images";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        req.setAttribute("activeTab", "product");
+        String action = req.getParameter("action");
+        System.out.println(action);
+        if (action == null) {
+            System.out.println("action is null");
+        }else {
+            switch (action) {
+                case "findBrand":
+                    int id = Integer.parseInt(req.getParameter("brandId"));
+                    Brand brand = brandService.getBrandById(id);
+                    System.out.println(brand);
+                    resp.setContentType("application/json");
+                    PrintWriter out = resp.getWriter();
+                    Gson gson = new Gson();
+                    out.print(gson.toJson(brand));
+                    out.flush();
+                    out.close();
+                    break;
+                case "findProduct":
+                    int pid = Integer.parseInt(req.getParameter("productId"));
+                    Product product = proService.getProById(pid);
+                    System.out.println(product);
+
+                    resp.setContentType("application/json");
+                    PrintWriter outp = resp.getWriter();
+                    Gson gsonn = new GsonBuilder()
+                            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                            .create();
+
+                    outp.print(gsonn.toJson(product));
+                    outp.flush();
+                    outp.close();
+                    break;
+
+                case "findSize":
+                    break;
+                case "findCate":
+                    break;
+                case "findProductVariant":
+                    break;
+                case "findProductVariantSize":
+                    break;
+                default:
+                    resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action parameter");
+            }
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("activeTab", "product");
-        String activeSubTab = req.getParameter("subTab");
 
         String action = req.getParameter("action");
         System.out.println(action);

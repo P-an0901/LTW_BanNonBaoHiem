@@ -81,26 +81,61 @@ $(document).ready(function() {
     $('#btn-add-product').click(function () {
         $('#addProductModal').modal('show')
     });
-
-    $("#btn-add-brand").click(function() {
-        $("#addBrandForm").show();
-        $("#editBrandForm").hide();
-        $("#modalTitle").text('Thêm Thương Hiệu');
-        $("#brandModal").modal('show');
+    $('#btn-add-brand').click(function () {
+        $('#addBrandModal').modal('show')
     });
-
-    window.openEditModal = function(id, name, imageUrl) {
-        document.getElementById("brandId").value = id;
-        document.getElementById("editBrandName").value = name;
-        document.getElementById("brandImagePreview").src = imageUrl;
-
-        $("#addBrandForm").hide();
-        $("#editBrandForm").show();
-        $("#modalTitle").text('Cập Nhật Thương Hiệu');
-        $("#brandModal").modal('show');
-    };
-
 });
+function openEditBrandModal(brandId) {
+
+    $.ajax({
+        type: 'GET',
+        url: '/LTW_BanNonBaoHiem/edit-tab-product',
+        data: {
+            action: 'findBrand',
+            brandId: brandId
+        },
+        dataType: 'json',
+        success: function(data) {
+            $('#editBrandId').val(data.id);
+            $('#editBrandName').val(data.name);
+            $('#editBrandImagePreview').attr('src', '/LTW_BanNonBaoHiem/' + data.imageUrl);
+
+            $('#editBrandModal').modal('show');
+        },
+        error: function(xhr, status, error) {
+            console.log('Lỗi:', error);
+            console.log('Response:', xhr.responseText);
+        }
+    });
+}
+function openEditProModal(productId) {
+
+    $.ajax({
+        type: 'GET',
+        url: '/LTW_BanNonBaoHiem/edit-tab-product',
+        data: {
+            action: 'findProduct',
+            productId: productId
+        },
+        dataType: 'json',
+        success: function(data) {
+            $('#editProductId').val(data.id);
+            $('#productName').val(data.name);
+            $('#productDescription').val(data.description);
+            $('#brand').val(data.brand.id);
+            $('#category').val(data.category.id);
+
+            document.getElementById('addProForm').style.display = 'none';
+            document.getElementById('editProForm').style.display = 'block';
+            document.querySelector('.modal-title').textContent = 'Chỉnh sửa sản phẩm';
+            $('#addProductModal').modal('show');
+        },
+        error: function(xhr, status, error) {
+            console.log('Lỗi:', error);
+            console.log('Response:', xhr.responseText);
+        }
+    });
+}
 
 
 
