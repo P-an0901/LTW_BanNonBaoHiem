@@ -235,7 +235,7 @@
                                 <td><button class="pvdetails-btn" data-id="${proV.id}"><i class="fa-solid fa-eye"></i></button></td>
 
                                 <td>
-                                    <button class="edit-btn" onclick="openEditProVModal(${proV.id})">
+                                    <button class="edit-btn" onclick="openEditVariantModal(${proV.id})">
                                         <i class="fa-solid fa-pen"></i>
                                     </button>
                                 </td>

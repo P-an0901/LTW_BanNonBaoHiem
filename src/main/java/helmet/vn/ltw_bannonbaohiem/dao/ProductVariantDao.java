@@ -127,7 +127,7 @@ public class ProductVariantDao {
                                     rs.getString("color"),
                                     rs.getDouble("price"),
                                     rs.getString("image"),
-                                    rs.getBoolean("isActive"),
+                                    rs.getInt("isActive") > 0,
                                     rs.getTimestamp("createdAt").toLocalDateTime()
                             )).findOne().orElse(null)
             );
@@ -167,4 +167,25 @@ public class ProductVariantDao {
     }
 
 
+    public boolean update(int id, int productId, String name, String color, double price, String image, int active) {
+        String sql = "UPDATE product_variants SET name = ?, productId = ?, color = ?, price = ?, image = ?, isActive = ? " +
+                "WHERE id = ?";
+        try{
+            return jdbi.withHandle(handle -> {
+                Update update = handle.createUpdate(sql);
+                update.bind(0, name);
+                update.bind(1, productId);
+                update.bind(2, color);
+                update.bind(3, price);
+                update.bind(4, image);
+                update.bind(5, active);
+                update.bind(6, id);
+                int rowsAffected = update.execute();
+                return rowsAffected > 0;
+            });
+        }catch (Exception e ){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

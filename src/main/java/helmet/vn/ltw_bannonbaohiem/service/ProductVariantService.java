@@ -48,4 +48,7 @@ public class ProductVariantService {
                 .limit(limit)
                 .collect(Collectors.toList());
     }
+    public boolean updateVariant(int id, int productId, String name, String color, double price, String image, int active){
+        return productVariantD.update(id, productId, name, color, price, image, active);
+    }
 }
