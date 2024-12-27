@@ -17,4 +17,7 @@ public class ProductService {
     public boolean addProduct(String name, String description, int brandId, int cateId){
         return prodao.addProduct(name, description, brandId, cateId);
     }
+    public boolean updateProduct(int id, String name, String description, int brandId, int cateId){
+        return prodao.updateProduct(id, name, description, brandId, cateId);
+    }
 }

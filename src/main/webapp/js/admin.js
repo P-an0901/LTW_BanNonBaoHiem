@@ -71,6 +71,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 $(document).ready(function() {
     $('#btn-add-product_variant').click(function () {
+        document.getElementById('addVariantForm').style.display = 'block';
+        document.getElementById('editVariantForm').style.display = 'none';
+        document.querySelector('.modal-title').textContent = 'Thêm biến thể sản phẩm';
         $('#addVariantModal').modal('show')
     });
 
@@ -79,6 +82,9 @@ $(document).ready(function() {
     });
 
     $('#btn-add-product').click(function () {
+        document.getElementById('addProForm').style.display = 'block';
+        document.getElementById('editProForm').style.display = 'none';
+        document.querySelector('.modal-title').textContent = 'Thêm sản phẩm';
         $('#addProductModal').modal('show')
     });
     $('#btn-add-brand').click(function () {
@@ -129,6 +135,36 @@ function openEditProModal(productId) {
             document.getElementById('editProForm').style.display = 'block';
             document.querySelector('.modal-title').textContent = 'Chỉnh sửa sản phẩm';
             $('#addProductModal').modal('show');
+        },
+        error: function(xhr, status, error) {
+            console.log('Lỗi:', error);
+            console.log('Response:', xhr.responseText);
+        }
+    });
+}
+function openEditVariantModal(variantId) {
+
+    $.ajax({
+        type: 'GET',
+        url: '/LTW_BanNonBaoHiem/edit-tab-product',
+        data: {
+            action: 'findProductVariant',
+            variantId: variantId
+        },
+        dataType: 'json',
+        success: function(data) {
+            $('#editVariantId').val(data.id);
+            $('#editProductParent').val(data.productId);
+            $('#editVariantName').val(data.name);
+            $('#editVariantColor').val(data.color);
+            $('#editVariantPrice').val(data.price);
+            $('#editVariantImagePreview').attr('src', '/LTW_BanNonBaoHiem/' + data.image);
+            $('#editVariantActive').val(data.isActive ? 1 : 0);
+
+            document.getElementById('addVariantForm').style.display = 'none';
+            document.getElementById('editVariantForm').style.display = 'block';
+            document.getElementById('addVariantModalLabel').textContent = 'Chỉnh sửa biến thể sản phẩm';
+            $('#addVariantModal').modal('show');
         },
         error: function(xhr, status, error) {
             console.log('Lỗi:', error);

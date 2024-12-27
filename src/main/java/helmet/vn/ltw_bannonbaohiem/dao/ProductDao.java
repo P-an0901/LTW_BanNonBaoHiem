@@ -99,4 +99,23 @@ public class ProductDao {
             return false;
         }
     }
+    public boolean updateProduct(int id, String name, String description, int brandId, int cateId){
+        String sql = "UPDATE products SET name = ?, description = ?, brandId = ?, categoryId = ? " +
+                "WHERE id = ?;";
+        try{
+            return jdbi.withHandle(handle -> {
+                Update update = handle.createUpdate(sql);
+                update.bind(0, name);
+                update.bind(1, description);
+                update.bind(2, brandId);
+                update.bind(3, cateId);
+                update.bind(4, id);
+                int rowsAffected = update.execute();
+                return rowsAffected > 0;
+            });
+        }catch (Exception e ){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

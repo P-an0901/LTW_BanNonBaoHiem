@@ -47,7 +47,7 @@
           <button type="submit" class="btn btn-addO">Thêm Sản Phẩm</button>
         </form>
 
-        <form id="editProForm" action="${pageContext.request.contextPath}/edit-tab-product" method="POST" enctype="multipart/form-data">
+        <form id="editProForm" action="${pageContext.request.contextPath}/edit-tab-product" method="POST" enctype="multipart/form-data" style="display: none">
           <input type="hidden" name="action" value="editProduct">
           <input type="hidden" id="editProductId" name="productId" value="">
           <div class="form-row">
@@ -80,7 +80,7 @@
               </select>
             </div>
           </div>
-          <button type="submit" class="btn btn-addO">Cập nhật Sản Phẩm</button>
+          <button type="submit" class="btn btn-editO">Cập nhật Sản Phẩm</button>
         </form>
       </div>
     </div>
@@ -178,6 +178,7 @@
     </div>
   </div>
 </div>
+
 <div class="modal" id="addVariantModal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -189,7 +190,8 @@
       <!-- Modal Body -->
       <div class="modal-body">
         <h2 class="modal-title" id="addVariantModalLabel">Thêm biến thể sản phẩm</h2>
-        <form action="${pageContext.request.contextPath}/add-tab-product" method="post" enctype="multipart/form-data">
+
+        <form id="addVariantForm" action="${pageContext.request.contextPath}/add-tab-product" method="post" enctype="multipart/form-data">
           <input type="hidden" name="action" value="addProductVariant">
           <div class="mb-3">
             <label for="productParent" class="form-label">Sản phẩm mẹ</label>
@@ -236,8 +238,65 @@
 
           <!-- Nút Lưu -->
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
             <button type="submit" class="btn btn-addO">Lưu</button>
+          </div>
+        </form>
+
+
+        <form id="editVariantForm" action="${pageContext.request.contextPath}/edit-tab-product" method="post" enctype="multipart/form-data" style="display: none">
+          <input type="hidden" name="action" value="editProductVariant">
+          <input type="hidden" id="editVariantId" name="variantId" value="">
+          <div class="mb-3">
+            <label for="productParent" class="form-label">Sản phẩm mẹ</label>
+            <select class="form-select" id="editProductParent" name="product_id" required>
+              <option value="" disabled selected>Chọn sản phẩm</option>
+              <c:forEach var="product" items="${products}">
+                <option value="${product.id}">${product.name}</option>
+              </c:forEach>
+            </select>
+          </div>
+
+          <!-- Tên biến thể -->
+          <div class="mb-3">
+            <label for="variantName" class="form-label">Tên biến thể</label>
+            <input type="text" class="form-control" id="editVariantName" name="name" placeholder="Nhập tên biến thể" required>
+          </div>
+
+          <!-- Màu sắc -->
+          <div class="mb-3">
+            <label for="variantColor" class="form-label">Màu sắc</label>
+            <input type="text" class="form-control" id="editVariantColor" name="color" placeholder="Nhập màu sắc" required>
+          </div>
+
+          <!-- Giá -->
+          <div class="mb-3">
+            <label for="variantPrice" class="form-label">Giá</label>
+            <input type="number" class="form-control" id="editVariantPrice" name="price" placeholder="Nhập giá" required>
+          </div>
+
+          <!-- Hình ảnh -->
+          <div class="mb-3">
+            <label for="variantImage" class="form-label">Hình ảnh hiện tại:</label>
+            <img id="editVariantImagePreview" src="" alt="Hình ảnh biến thể" style="width: 100px;">
+          </div>
+
+          <div class="mb-3">
+            <label for="variantImage" class="form-label">Hình ảnh</label>
+            <input type="file" class="form-control" id="editVariantImage" name="image" accept="image/*">
+          </div>
+
+          <!-- Trạng thái -->
+          <div class="mb-3">
+            <label for="variantActive" class="form-label">Trạng thái</label>
+            <select class="form-select" id="editVariantActive" name="is_active" required>
+              <option value="1" selected>Hoạt động</option>
+              <option value="0">Không hoạt động</option>
+            </select>
+          </div>
+
+          <!-- Nút Lưu -->
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-editO">Lưu</button>
           </div>
         </form>
       </div>

@@ -5,9 +5,11 @@ import com.google.gson.GsonBuilder;
 import helmet.vn.ltw_bannonbaohiem.controller.admin.LocalDateTimeAdapter;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Brand;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Product;
+import helmet.vn.ltw_bannonbaohiem.dao.model.ProductVariant;
 import helmet.vn.ltw_bannonbaohiem.service.BrandService;
 import helmet.vn.ltw_bannonbaohiem.service.CategoryService;
 import helmet.vn.ltw_bannonbaohiem.service.ProductService;
+import helmet.vn.ltw_bannonbaohiem.service.ProductVariantService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -27,6 +29,9 @@ public class Edit extends HttpServlet {
     private BrandService brandService = new BrandService();
     private CategoryService cateService = new CategoryService();
     private ProductService proService = new ProductService();
+    private ProductVariantService productVariantService = new ProductVariantService();
+    private Gson gson;
+    private PrintWriter out;
     private static final String UPLOAD_DIR = "images";
 
     @Override
@@ -44,7 +49,7 @@ public class Edit extends HttpServlet {
                     System.out.println(brand);
                     resp.setContentType("application/json");
                     PrintWriter out = resp.getWriter();
-                    Gson gson = new Gson();
+                    gson = new Gson();
                     out.print(gson.toJson(brand));
                     out.flush();
                     out.close();
@@ -55,14 +60,14 @@ public class Edit extends HttpServlet {
                     System.out.println(product);
 
                     resp.setContentType("application/json");
-                    PrintWriter outp = resp.getWriter();
-                    Gson gsonn = new GsonBuilder()
+                    out = resp.getWriter();
+                    gson = new GsonBuilder()
                             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
                             .create();
 
-                    outp.print(gsonn.toJson(product));
-                    outp.flush();
-                    outp.close();
+                    out.print(gson.toJson(product));
+                    out.flush();
+                    out.close();
                     break;
 
                 case "findSize":
@@ -70,6 +75,18 @@ public class Edit extends HttpServlet {
                 case "findCate":
                     break;
                 case "findProductVariant":
+                    int pvId = Integer.parseInt(req.getParameter("variantId"));
+                    ProductVariant pv = productVariantService.getProVariant(pvId);
+                    System.out.println(pv);
+                    resp.setContentType("application/json");
+                    out = resp.getWriter();
+                    gson = new GsonBuilder()
+                            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                            .create();
+
+                    out.print(gson.toJson(pv));
+                    out.flush();
+                    out.close();
                     break;
                 case "findProductVariantSize":
                     break;
@@ -117,8 +134,36 @@ public class Edit extends HttpServlet {
     private void handleEditProductVariantSize(HttpServletRequest req, HttpServletResponse resp) {
     }
 
-    private void handleEditProductVariant(HttpServletRequest req, HttpServletResponse resp) {
+    private void handleEditProductVariant(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("variantId");
+        int pid = Integer.parseInt(req.getParameter("product_id"));
+        String name = req.getParameter("name");
+        String color = req.getParameter("color");
+        double price = Double.parseDouble(req.getParameter("price"));
+        int active = Integer.parseInt(req.getParameter("price"));
+        Part filePart = req.getPart("image");
+        String fileName = extractFileName(filePart);
+        String uploadPath = getServletContext().getRealPath("/") + File.separator + UPLOAD_DIR;
 
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdir();
+        }
+
+        String filePath = uploadPath + File.separator + fileName;
+        filePart.write(filePath);
+        System.out.println("Ảnh đã được lưu tại: " + filePath);
+
+        String imagePath = UPLOAD_DIR + "/" + fileName;
+        if(id != null && !id.isEmpty() && name != null & !name.isEmpty()){
+
+            productVariantService.updateVariant(Integer.parseInt(id), pid, name, color, price, imagePath, active);
+            String referer = req.getHeader("Referer");
+            resp.sendRedirect(referer);
+        } else {
+            req.setAttribute("error", "Thông tin không hợp lệ!");
+            req.getRequestDispatcher("/admin/product").forward(req, resp);
+        }
     }
 
     private void handleEditCate(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -140,7 +185,20 @@ public class Edit extends HttpServlet {
     }
 
     private void handleEditProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        String id = req.getParameter("productId");
+        String name = req.getParameter("productName");
+        String description = req.getParameter("productDescription");
+        int brandId = Integer.parseInt(req.getParameter("brand"));
+        int cateId = Integer.parseInt(req.getParameter("category"));
 
+        if(id != null && !id.isEmpty() && name != null & !name.isEmpty()){
+            proService.updateProduct(Integer.parseInt(id), name, description, brandId, cateId);
+            String referer = req.getHeader("Referer");
+            resp.sendRedirect(referer);
+        } else {
+            req.setAttribute("error", "Thông tin không hợp lệ!");
+            req.getRequestDispatcher("/admin/product").forward(req, resp);
+        }
     }
 
     private void handleEditBrand(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
