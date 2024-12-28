@@ -36,26 +36,30 @@
           </form>
 
           <ul class="list-inline mb-0 d-flex">
-            <li class="list-inline-item pointer" id="login-menu" onclick="openModal('login')">
-              <i class="fas fa-user"></i>
-              <span>Đăng nhập</span>
-            </li>
-            <li class="list-inline-item pointer" id="signup-menu" onclick="openModal('signup')">
-              <i class="fas fa-user-plus"></i>
-              <span>Đăng ký</span>
-            </li>
-            <li class="list-inline-item pointer" id="account-menu" style="display: none; position: relative;">
-              <i class="fas fa-user-circle"></i>
-              <span id="account-name">Tài khoản</span>
+            <c:if test="${empty sessionScope.auth}">
+              <li class="list-inline-item pointer" id="login-menu" onclick="openModal('login')">
+                <i class="fas fa-user"></i>
+                <span>Đăng nhập</span>
+              </li>
+              <li class="list-inline-item pointer" id="signup-menu" onclick="openModal('signup')">
+                <i class="fas fa-user-plus"></i>
+                <span>Đăng ký</span>
+              </li>
+            </c:if>
 
-              <!-- Dropdown menu -->
-              <ul class="dropdown-menu  pl-2" style="display: none;">
-                <li><a href="taikhoan.jsp" id="logout">Thông tin tài khoản</a></li>
-                <li><a href="admin.jsp" id="admin-page" style="display: none;">Trang Admin</a></li>
-                <li><a href="#" id="logout-button">Đăng xuất</a></li>
-                <li><a href="#" id="change-password">Đổi mật khẩu</a></li>
-              </ul>
-            </li>
+            <c:if test="${not empty sessionScope.auth}">
+              <li class="list-inline-item pointer" id="account-menu" style="position: relative;">
+                <i class="fas fa-user-circle"></i>
+                <span id="account-name">${sessionScope.auth.username}</span>
+
+                <!-- Dropdown menu -->
+                <ul class="dropdown-menu pl-2" style="display: none;">
+                  <li><a href="taikhoan.jsp" id="account-info">Thông tin tài khoản</a></li>
+                  <li><a href="${pageContext.request.contextPath}/logout" id="logout-button">Đăng xuất</a></li>
+                  <li><a href="#" id="change-password">Đổi mật khẩu</a></li>
+                </ul>
+              </li>
+            </c:if>
             <li class="list-inline-item pointer cart-container" title="Giỏ hàng">
               <a href="${pageContext.request.contextPath}/cart">
                 <i class="fas fa-shopping-cart"></i>

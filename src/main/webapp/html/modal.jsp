@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "f" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <div class="modal fade" id="signup-login" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -12,7 +15,7 @@
                     <div class="form-content sign-up">
                         <h3 class="form-title">Đăng ký tài khoản</h3>
                         <p class="form-description">Đăng ký thành viên để mua hàng và nhận những ưu đãi đặc biệt từ chúng tôi</p>
-                        <form action="" class="signup-form">
+                        <form action="register" method="post" id="registerForm" class="signup-form">
                             <div class="form-group">
                                 <label for="fullname" class="form-label">Tên đầy đủ <span class="text-danger">*</span></label>
                                 <input id="fullname" name="fullname" type="text" placeholder="VD: Nguyễn Văn A" class="form-control">
@@ -50,7 +53,7 @@
                     <div class="form-content login">
                         <h3 class="form-title">Đăng nhập tài khoản</h3>
                         <p class="form-description">Đăng nhập thành viên để mua hàng và nhận những ưu đãi đặc biệt từ chúng tôi</p>
-                        <form action="" class="login-form">
+                        <form action="login" method="post" id="loginForm" class="login-form">
                             <span class="form-message-login"></span>
                             <div class="form-group">
                                 <label for="username-login" class="form-label">Tên đăng nhập</label>
