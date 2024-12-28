@@ -140,7 +140,7 @@ public class Edit extends HttpServlet {
         String name = req.getParameter("name");
         String color = req.getParameter("color");
         double price = Double.parseDouble(req.getParameter("price"));
-        int active = Integer.parseInt(req.getParameter("price"));
+        int active = Integer.parseInt(req.getParameter("is_active"));
         Part filePart = req.getPart("image");
         String fileName = extractFileName(filePart);
         String uploadPath = getServletContext().getRealPath("/") + File.separator + UPLOAD_DIR;

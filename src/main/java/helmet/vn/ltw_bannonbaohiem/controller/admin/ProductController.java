@@ -26,6 +26,13 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        User u = (User) session.getAttribute("auth");
+
+        if (u == null || u.getRole() < 1) {
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            resp.sendRedirect(req.getContextPath() + "/");
+            return;
+        }
         req.setAttribute("activeTab", "product");
         String activeSubTab = req.getParameter("subTab");
         System.out.println(activeSubTab);
