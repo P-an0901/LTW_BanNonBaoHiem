@@ -349,19 +349,16 @@
     </div>
   </div>
 </div>
+
 <!-- Modal Thêm Người Dùng -->
 <div class="modal" id="addUserModal">
   <div class="modal-dialog">
     <div class="modal-content">
-
-      <!-- Header Modal -->
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span>&times;</span>
         </button>
       </div>
-
-      <!-- Body Modal -->
       <div class="modal-body">
         <h2 class="modal-title">Thêm Người Dùng</h2>
         <form id="addUserForm">
@@ -385,29 +382,6 @@
               <label for="password">Xác nhận mật khẩu</label>
               <input type="password" class="form-control" id="password2" name="password" required>
             </div>
-            <div class="form-group col-md-6">
-              <label for="phone">Số Điện Thoại</label>
-              <input type="tel" class="form-control" id="phone" name="phone">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="birthday">Ngày Sinh</label>
-            <input type="date" class="form-control" id="birthday" name="birthday">
-          </div>
-
-          <div class="form-row">
-            <div class="form-group col-md-12">
-              <label for="image">Ảnh Đại Diện</label>
-              <input type="file" class="form-control-file" id="image" name="image">
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group col-md-12">
-              <label for="address">Địa Chỉ</label>
-              <textarea class="form-control" id="address" name="address" rows="3"></textarea>
-            </div>
           </div>
 
           <div class="form-row">
@@ -418,9 +392,14 @@
                 <option value="1">Quản Trị Viên</option>
               </select>
             </div>
+            <div class="form-group col-md-6">
+              <label for="active">Vai Trò</label>
+              <select class="form-control" id="active" name="active">
+                <option value="0">Không hoạt động</option>
+                <option value="1">Hoạt động</option>
+              </select>
+            </div>
           </div>
-
-          <!-- Nút Thêm Người Dùng -->
           <button type="submit" class="btn btn-addO">Thêm Người Dùng</button>
         </form>
       </div>

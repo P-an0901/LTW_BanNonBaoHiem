@@ -13,14 +13,14 @@ public class User {
     private String phone;
     private String image;
     private String address;
+    private int isActive;
     private int role;
-    private boolean isActive;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public User(int id, String username, String email, String password, String fullName,
-                LocalDateTime birthday, String phone, String image, String address, int role,
-                boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
+                LocalDateTime birthday, String phone, String image, String address, int isActive, int role
+                , LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -119,12 +119,12 @@ public class User {
         this.role = role;
     }
 
-    public boolean isActive() {
+    public int getIsActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -141,5 +141,12 @@ public class User {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+    public String getRoleName() {
+        return role == 1 ? "Admin" : "Khách";
+    }
+
+    public String getActiveStatus() {
+        return isActive == 1 ? "Hoạt động" : "Không hoạt động";
     }
 }
