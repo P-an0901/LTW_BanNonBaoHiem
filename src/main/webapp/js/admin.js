@@ -26,22 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Lấy các nút
-    const btnAddUser = document.getElementById('btn-add-user');
-
-    // Lấy các modal
-    const addCategoryModal = document.getElementById('addCategoryModal');
-    const addUserModal = document.getElementById('addUserModal');
-
-    if (btnAddUser && addUserModal) {
-        btnAddUser.addEventListener('click', function() {
-            addUserModal.style.display = 'block';
-        });
-    }
-});
-
     const detailsBtns = document.querySelectorAll('.pdetails-btn'); 
     detailsBtns.forEach(function(btn) {
         btn.addEventListener('click', function() {
@@ -79,6 +63,10 @@ $(document).ready(function() {
 
     $('#btn-add-category').click(function () {
         $('#addCategoryModal').modal('show')
+    });
+
+    $('#btn-add-user').click(function () {
+        $('#addUserModal').modal('show')
     });
 
     $('#btn-add-product').click(function () {

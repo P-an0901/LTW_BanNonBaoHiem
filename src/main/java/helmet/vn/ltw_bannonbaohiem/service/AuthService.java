@@ -5,6 +5,7 @@ import helmet.vn.ltw_bannonbaohiem.dao.model.User;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 public class AuthService {
     private UserDao udao = new UserDao();
@@ -35,5 +36,13 @@ public class AuthService {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Lỗi mã hóa: " + e.getMessage());
         }
+    }
+
+    public List<User> getAllUser() {
+        List<User> users = udao.getAllUsers();
+        for(User u : users){
+            u.setPassword(null);
+        }
+        return users;
     }
 }

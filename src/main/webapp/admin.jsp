@@ -524,37 +524,33 @@
                 <table width="100%">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>STT</td>
                             <th>Họ và tên</td>
-                            <th>Liên hệ</td>
+                            <th>SĐT</td>
                             <th>Ngày tham gia</td>
                             <th>Quyền Hạn</td>
+                            <th>Tình trạng</td>
                             <th>Chi tiết</th>
                             <th>Sửa</th>
                             <th>Xóa</th>
                         </tr>
                     </thead>
                     <tbody id="show-user">
-                    <tr>
-                        <td>1</td>
-                        <td>Trần Thị B</td>
-                        <td>0123456789</td>
-                        <td>2024-10-15</td>
-                        <td>Admin</td>
-                        <td><button class="udetails-btn" data-id="1"><i class="fa-solid fa-eye"></i></button></td>
-                        <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
-                        <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Phạm Văn C</td>
-                        <td>0981234567</td>
-                        <td>2024-09-30</td>
-                        <td>Khách hàng</td>
-                        <td><button class="udetails-btn" data-id="2"><i class="fa-solid fa-eye"></i></button></td>
-                        <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
-                        <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
-                    </tr>
+                    <c:forEach var="u" items="${users}">
+                        <tr>
+                            <td><input type="checkbox" name="selectedUser" value="${u.id}"></td>
+                            <td>${u.id}</td>
+                            <td>${u.fullName}</td>
+                            <td>${u.phone}</td>
+                            <td>${u.createdAt}</td>
+                            <td>${u.roleName}</td>
+                            <td>${u.activeStatus}</td>
+                            <td><button class="detail-btn"><i class="fa-solid fa-pen"></i></button></td>
+                            <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                            <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
                 </table>
             </div>

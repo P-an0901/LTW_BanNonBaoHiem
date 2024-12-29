@@ -5,6 +5,8 @@ import helmet.vn.ltw_bannonbaohiem.dao.model.User;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.statement.Update;
 
+import java.util.List;
+
 public class UserDao {
     private Jdbi jdbi;
 
@@ -43,5 +45,14 @@ public class UserDao {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public List<User> getAllUsers() {
+        String sql = "SELECT * FROM users";
+        return jdbi.withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .mapToBean(User.class)
+                    .list();
+        });
     }
 }
