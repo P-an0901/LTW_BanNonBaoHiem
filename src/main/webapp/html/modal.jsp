@@ -16,9 +16,10 @@
                         <h3 class="form-title">Đăng ký tài khoản</h3>
                         <p class="form-description">Đăng ký thành viên để mua hàng và nhận những ưu đãi đặc biệt từ chúng tôi</p>
                         <form action="register" method="post" id="registerForm" class="signup-form">
+                            <span class="form-message-register form-message"></span>
                             <div class="form-group">
-                                <label for="fullname" class="form-label">Tên đầy đủ <span class="text-danger">*</span></label>
-                                <input id="fullname" name="fullname" type="text" placeholder="VD: Nguyễn Văn A" class="form-control">
+                                <label for="fullName" class="form-label">Tên đầy đủ <span class="text-danger">*</span></label>
+                                <input id="fullName" name="name" type="text" placeholder="VD: Nguyễn Văn A" class="form-control">
                                 <span class="form-message-name form-message"></span>
                             </div>
                             <div class="form-group">
@@ -54,7 +55,7 @@
                         <h3 class="form-title">Đăng nhập tài khoản</h3>
                         <p class="form-description">Đăng nhập thành viên để mua hàng và nhận những ưu đãi đặc biệt từ chúng tôi</p>
                         <form action="login" method="post" id="loginForm" class="login-form">
-                            <span class="form-message-login"></span>
+                            <span class="form-message-login form-message"></span>
                             <div class="form-group">
                                 <label for="username-login" class="form-label">Tên đăng nhập</label>
                                 <input id="username-login" name="username" type="text" placeholder="Nhập tên đăng nhập" class="form-control">
