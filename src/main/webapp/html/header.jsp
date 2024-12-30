@@ -54,7 +54,7 @@
 
                 <!-- Dropdown menu -->
                 <ul class="dropdown-menu pl-2" style="display: none;">
-                  <li><a href="taikhoan.jsp" id="account-info">Thông tin tài khoản</a></li>
+                  <li><a href="${pageContext.request.contextPath}/account" id="account-info">Thông tin tài khoản</a></li>
                   <li><a href="${pageContext.request.contextPath}/logout" id="logout-button">Đăng xuất</a></li>
                   <li><a href="#" id="change-password">Đổi mật khẩu</a></li>
                 </ul>

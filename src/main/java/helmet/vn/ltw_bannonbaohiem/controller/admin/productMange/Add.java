@@ -117,12 +117,12 @@ public class Add extends HttpServlet {
     private void handleAddProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("bbbddbb");
         String name = req.getParameter("productName");
-        String desciption = req.getParameter("productDescription");
+        String description = req.getParameter("productDescription");
         int brandId = Integer.parseInt(req.getParameter("brand"));
         int cateId = Integer.parseInt(req.getParameter("category"));
 
         if(!name.equals(null) && !name.isEmpty()){
-            productService.addProduct(name, desciption, brandId, cateId);
+            productService.addProduct(name, description, brandId, cateId);
             String referer = req.getHeader("Referer");
             resp.sendRedirect(referer);
 
