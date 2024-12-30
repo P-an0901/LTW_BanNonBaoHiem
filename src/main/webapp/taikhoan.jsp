@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "f" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -38,17 +41,15 @@
             <h4>Thông tin tài khoản</h4>
         </div>
         <div class="card-body">
-            <!-- Thông tin cá nhân và ảnh -->
             <div class="d-flex align-items-center">
-                <!-- Ảnh người dùng -->
-                <img src="images/Royal M139 Cờ VN.jpg" alt="Avatar" class="avatar-img me-3" />
-                
-                <!-- Thông tin cá nhân -->
+                <img src="${pageContext.request.contextPath}/${fn:escapeXml(sessionScope.auth.image)}" alt="Avatar" class="avatar-img me-3" />
+
                 <div>
-                    <p><strong>Họ và tên:</strong> <span id="account-fullname"></span></p>
-                    <p><strong>Email:</strong> <span id="account-email"></span></p>
-                    <p><strong>Số điện thoại:</strong> <span id="account-phone"></span></p>
-                    <p><strong>Địa chỉ:</strong> <span id="account-address"></span></p>
+                    <p><strong>Họ và tên:</strong> <span id="account-fullname">${sessionScope.auth.fullName}</span></p>
+                    <p><strong>Tên đăng nhập:</strong> <span id="account-username">${sessionScope.auth.username}</span></p>
+                    <p><strong>Email:</strong> <span id="account-email">${sessionScope.auth.email}</span></p>
+                    <p><strong>Số điện thoại:</strong> <span id="account-phone">${sessionScope.auth.phone}</span></p>
+                    <p><strong>Địa chỉ:</strong> <span id="account-address">${sessionScope.auth.address}</span></p>
                 </div>
             </div>
             

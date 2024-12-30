@@ -1,6 +1,8 @@
 package helmet.vn.ltw_bannonbaohiem.dao.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Promotion {
     private int id;
@@ -11,6 +13,7 @@ public class Promotion {
     private LocalDateTime endDate;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private List<ProductVariant> lstVariant;
 
     public Promotion(int id, String name, String description, double discountPercentage,
                      LocalDateTime startDate, LocalDateTime endDate,
@@ -23,6 +26,7 @@ public class Promotion {
         this.endDate = endDate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.lstVariant = new ArrayList<>();
     }
 
     // Getter and Setter

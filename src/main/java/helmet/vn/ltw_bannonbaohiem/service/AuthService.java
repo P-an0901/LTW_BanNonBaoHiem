@@ -45,4 +45,13 @@ public class AuthService {
         }
         return users;
     }
+
+    public boolean checkExist(String username) {
+        List<User> users = udao.getAllUsers();
+        for(User u : users){
+            if(u.getUsername().equalsIgnoreCase(username));
+            return false;
+        }
+        return true;
+    }
 }

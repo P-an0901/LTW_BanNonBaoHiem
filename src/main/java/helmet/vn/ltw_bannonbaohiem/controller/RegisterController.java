@@ -34,6 +34,10 @@ public class RegisterController extends HttpServlet {
             responseMap.put("username", "Tên đăng nhập không được để trống.");
             hasError = true;
         }
+        if (auth.checkExist(username)) {
+            responseMap.put("username", "Tên đăng nhập đã tồn tại.");
+            hasError = true;
+        }
 
         if (password == null || password.trim().isEmpty()) {
             responseMap.put("password", "Mật khẩu không được để trống.");
