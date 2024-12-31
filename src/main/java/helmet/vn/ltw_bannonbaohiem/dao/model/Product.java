@@ -18,6 +18,10 @@ public class Product {
         this.listVariant = new ArrayList<>();
     }
 
+    public Product(int id) {
+        this.id = id;
+    }
+
     public Product(int id, String name, String description, Brand brand, Category category, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;

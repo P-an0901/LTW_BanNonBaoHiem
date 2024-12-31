@@ -58,46 +58,16 @@
         <div class="slider">
             <div class="container">
                 <div class="slider-wrapper">
-                    <div class="slider-item">
-                        <a href="./danhmuc?category=mu34">
-                            <div class="image-container">
-                                <img src=" images/Royal-M139-V.2.jpg" alt="Nón 3/4 đầu">
-                            </div>
-                            <h5>Nón 3/4 đầu</h5>
-                        </a>
-                    </div>
-                    <div class="slider-item">
-                        <a href="./danhmuc?category=fullface">
-                            <div class="image-container">
-                                <img src=" images/Fullface-Royal-M136-V.29-red.jpg" alt="Nón Fullface">
-                            </div>
-                            <h5>Nón Fullface</h5>
-                        </a>
-                    </div>
-                    <div class="slider-item">
-                        <a href="./danhmuc?category=half">
-                            <div class="image-container">
-                                <img src=" images/1.2-Asia MT-10-Muc-mo.jpg" alt="Nón Nửa Đầu">
-                            </div>
-                            <h5>Nón Nửa Đầu</h5>
-                        </a>
-                    </div>
-                    <div class="slider-item">
-                        <a href="./danhmuc?category=child">
-                            <div class="image-container">
-                                <img src=" images/OKFaM2congchua-12.jpg" alt="Nón Trẻ Em">
-                            </div>
-                            <h5>Nón trẻ em</h5>
-                        </a>
-                    </div>
-                    <div class="slider-item">
-                        <a href="./danhmuc?category=bicycle">
-                            <div class="image-container">
-                                <img src=" images/mu-xe-dap.jpg" alt="Nón Xe Đạp">
-                            </div>
-                            <h5>Nón xe đạp</h5>
-                        </a>
-                    </div>
+                    <c:forEach var="category" items="${cates}">
+                        <div class="slider-item">
+                            <a href="./danhmuc?category=${category.id}">
+                                <div class="image-container">
+                                    <img src="${category.image}" alt="${category.name}">
+                                </div>
+                                <h5>${category.name}</h5>
+                            </a>
+                        </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>

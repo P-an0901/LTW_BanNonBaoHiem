@@ -172,6 +172,10 @@
             <label for="categoryName">Tên Danh Mục</label>
             <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Nhập tên danh mục" required>
           </div>
+          <div class="form-group col-md-6">
+            <label for="brandImage">Chọn Hình Ảnh</label>
+            <input type="file" class="form-control" id="cateImage" name="cateImage" required>
+          </div>
           <button type="submit" class="btn btn-addO">Thêm Danh Mục</button>
         </form>
       </div>

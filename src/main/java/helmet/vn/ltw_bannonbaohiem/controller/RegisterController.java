@@ -33,8 +33,7 @@ public class RegisterController extends HttpServlet {
         if (username == null || username.trim().isEmpty()) {
             responseMap.put("username", "Tên đăng nhập không được để trống.");
             hasError = true;
-        }
-        if (auth.checkExist(username)) {
+        }else if (auth.checkExist(username)) {
             responseMap.put("username", "Tên đăng nhập đã tồn tại.");
             hasError = true;
         }
@@ -56,7 +55,7 @@ public class RegisterController extends HttpServlet {
             hasError = true;
         }
         if (hasError) {
-            responseMap.put("loginError", "Đăng nhập không thành công");
+            responseMap.put("loginError", "Đăng Ký không thành công");
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         } else {
             boolean isRegister = auth.register(username, password, name, email);

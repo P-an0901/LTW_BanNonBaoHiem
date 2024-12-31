@@ -15,9 +15,9 @@ public class CategoryService {
         return cateDao.getAllCate();
     }
 
-    public boolean addCate(String name) {
+    public boolean addCate(String name, String image) {
         if(name != null){
-            cateDao.addCate(name);
+            cateDao.addCate(name, image);
             return true;
         }
         return false;
@@ -30,9 +30,9 @@ public class CategoryService {
         return false;
     }
 
-    public boolean updateCate(int id, String name) {
+    public boolean updateCate(int id, String name, String image) {
         if(cateDao.getCateById(id) != null){
-            return cateDao.updateCate(id, name);
+            return cateDao.updateCate(id, name, image);
         }
         return false;
     }

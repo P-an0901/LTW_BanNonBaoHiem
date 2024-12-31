@@ -136,20 +136,6 @@ public class ProductVariantDao {
             return null;
         }
     }
-    public List<ProductVariant> listProVariantByProId(int id) {
-        String sql = "SELECT * FROM product_variants WHERE productId = ?";
-        try {
-            return jdbi.withHandle(handle ->
-                    handle.createQuery(sql)
-                            .bind(0, id)
-                            .mapToBean(ProductVariant.class)
-                            .list()
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ArrayList<>(); 
-        }
-    }
     public List<ProductVariant> getNewProductVariants() {
 
         String sql = "SELECT pv.id, pv.name, pv.color, pv.price, pv.image, pv.isActive, " +

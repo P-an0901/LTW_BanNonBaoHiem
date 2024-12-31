@@ -116,11 +116,9 @@
           </a>
           <ul class="submenu">
             <li><a href="${pageContext.request.contextPath}/danhmuc?category=all"><strong>Tất cả sản phẩm</strong></a></li>
-            <li><a href="${pageContext.request.contextPath}/danhmuc?category=mu34">Mũ bảo hiểm 3/4 đầu</a></li>
-            <li><a href="${pageContext.request.contextPath}/danhmuc?category=fullface">Mũ bảo hiểm fullface</a></li>
-            <li><a href="${pageContext.request.contextPath}/danhmuc?category=half">Mũ bảo hiểm nửa đầu</a></li>
-            <li><a href="${pageContext.request.contextPath}/danhmuc?category=child">Mũ bảo hiểm trẻ em</a></li>
-            <li><a href="${pageContext.request.contextPath}/danhmuc?category=bicycle">Mũ bảo hiểm xe đạp</a></li>
+            <c:forEach var="category" items="${cates}">
+              <li><a href="${pageContext.request.contextPath}/danhmuc?category=${category.id}">${category.name}</a></li>
+            </c:forEach>
           </ul>
         </li>
         <li class="menu-list-item"><a href="${pageContext.request.contextPath}/khuyenmai" class="menu-link ${activePage == 'khuyenmai' ? 'active' : ''}">

@@ -49,9 +49,9 @@ public class AuthService {
     public boolean checkExist(String username) {
         List<User> users = udao.getAllUsers();
         for(User u : users){
-            if(u.getUsername().equalsIgnoreCase(username));
-            return false;
+            if(u.getUsername().equalsIgnoreCase(username))
+            return true;
         }
-        return true;
+        return false;
     }
 }

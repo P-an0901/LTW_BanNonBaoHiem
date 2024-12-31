@@ -14,12 +14,13 @@ public class CategoryDao {
         this.jdbi = JdbiConnect.get();
     }
 
-    public boolean addCate(String name) {
-        String sql = "INSERT INTO categories (name) VALUES (?)";
+    public boolean addCate(String name, String image) {
+        String sql = "INSERT INTO categories (name, image) VALUES (?, ?)";
         try {
             return jdbi.withHandle(handle -> {
                 Update update = handle.createUpdate(sql);
                 update.bind(0, name);
+                update.bind(1, image);
                 int rowsAffected = update.execute();
                 return rowsAffected > 0;
             });
@@ -47,12 +48,13 @@ public class CategoryDao {
                     .orElse(null);
         });
     }
-    public boolean updateCate(int id, String name) {
-        String sql = "UPDATE categories SET name = ? WHERE id = ?";
+    public boolean updateCate(int id, String name, String image) {
+        String sql = "UPDATE categories SET name = ?, image = ? WHERE id = ?";
         return jdbi.withHandle(handle -> {
             Update update = handle.createUpdate(sql);
             update.bind(0, name);
             update.bind(1, id);
+            update.bind(2, image);
             int rowsAffected = update.execute();
             return rowsAffected > 0;
         });
