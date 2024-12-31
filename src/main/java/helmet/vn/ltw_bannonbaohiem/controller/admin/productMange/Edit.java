@@ -169,8 +169,22 @@ public class Edit extends HttpServlet {
     private void handleEditCate(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String id = req.getParameter("cateId");
         String name = req.getParameter("cateName");
+        Part filePart = req.getPart("cateImage");
+        String fileName = extractFileName(filePart);
+        String uploadPath = getServletContext().getRealPath("/") + File.separator + UPLOAD_DIR;
+
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdir();
+        }
+
+        String filePath = uploadPath + File.separator + fileName;
+        filePart.write(filePath);
+        System.out.println("Ảnh đã được lưu tại: " + filePath);
+
+        String imagePath = UPLOAD_DIR + "/" + fileName;
         if(id != null && name != null){
-            cateService.updateCate(Integer.parseInt(id), name);
+            cateService.updateCate(Integer.parseInt(id), name, imagePath);
             String referer = req.getHeader("Referer");
             resp.sendRedirect(referer);
 

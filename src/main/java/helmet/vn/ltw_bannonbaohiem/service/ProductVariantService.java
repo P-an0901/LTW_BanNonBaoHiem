@@ -6,6 +6,7 @@ import helmet.vn.ltw_bannonbaohiem.dao.model.Product;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductSize;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductVariant;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +30,14 @@ public class ProductVariantService {
         return productVariantD.getProVariantById(id);
     }
     public List<ProductVariant> getListProVarByProId(int id){
-        return productVariantD.listProVariantByProId(id);
+        List<ProductVariant> result = new ArrayList<>();
+        for(ProductVariant variant : getAllVariant()){
+            if(variant.getProductId() == id){
+                result.add(variant);
+            }
+        }
+        return result;
+
     }
 
 

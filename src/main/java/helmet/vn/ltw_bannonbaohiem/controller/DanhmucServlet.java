@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "danhmuc", value ="/danhmuc")
@@ -28,10 +29,18 @@ public class DanhmucServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("activePage", "danhmuc");
-        List<Product> products = productService.getAllPro();
-        List<ProductVariant> proVariants = productVariantService.getAllVariant();
+        String categoryId = req.getParameter("category");
+        List<Product> products = new ArrayList<>();
+        List<ProductVariant> proVariants = new ArrayList<>();
+        if (categoryId != null && !categoryId.equals("all")) {
+            products = productService.getProByCateId(Integer.parseInt(categoryId));
+            for(Product pro : products){
+                proVariants.addAll(productVariantService.getListProVarByProId(pro.getId()));
+            }
+        }else{
+            proVariants = productVariantService.getAllVariant();
+        }
         List<Sizes> sizes = sizeService.getAllSize();
-
         req.setAttribute("sizes", sizes);
         req.setAttribute("proVariants", proVariants);
         System.out.println(proVariants);
