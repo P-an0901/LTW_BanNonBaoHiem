@@ -461,9 +461,12 @@
                 </div>
             </div>
             <div class="pagination">
-                <!-- <button onclick="changePage(-1)">&laquo;</button> -->
-                <div id="page-numbers"></div>
-                <!-- <button onclick="changePage(1)">&raquo;</button> -->
+                <div id="page-numbers">
+                    <c:forEach var="i" begin="1" end="${totalPages}">
+                        <a href="${pageContext.request.contextPath}/danhmuc?category=${param.category}&page=${i}"
+                           class="${i == currentPage ? 'active' : ''}">${i}</a>
+                    </c:forEach>
+                </div>
             </div>
         </div>
     </div>
