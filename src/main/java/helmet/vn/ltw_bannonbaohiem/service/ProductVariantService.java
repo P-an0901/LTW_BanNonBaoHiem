@@ -59,4 +59,12 @@ public class ProductVariantService {
     public boolean updateVariant(int id, int productId, String name, String color, double price, String image, int active){
         return productVariantD.update(id, productId, name, color, price, image, active);
     }
+
+    public List<ProductVariant> getProVariantsByCategoryIdWithPagination(int categoryId, int offset, int pageSize) {
+        return productVariantD.getProVariantsByCategoryIdWithPagination(categoryId, offset, pageSize);
+    }
+
+    public int getTotalVariantCount(int categoryId) {
+        return productVariantD.getTotalVariantCount(categoryId);
+    }
 }
