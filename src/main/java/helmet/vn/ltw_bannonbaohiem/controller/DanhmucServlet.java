@@ -32,7 +32,7 @@ public class DanhmucServlet extends HttpServlet {
         String categoryId = req.getParameter("category");
         String pageParam = req.getParameter("page");
         int page = pageParam == null ? 1 : Integer.parseInt(pageParam);
-        int pageSize = 5;
+        int pageSize = 4;
         int offset = (page - 1) * pageSize;
         System.out.println(offset);
         int totalVariants = 0;
@@ -44,6 +44,7 @@ public class DanhmucServlet extends HttpServlet {
             totalVariants = productVariantService.getTotalVariantCount(Integer.parseInt(categoryId));
         }
         int totalPages = (int) Math.ceil((double) totalVariants  / pageSize);
+
         System.out.println(totalPages);
         req.setAttribute("totalPages", totalPages);
         req.setAttribute("currentPage", page);

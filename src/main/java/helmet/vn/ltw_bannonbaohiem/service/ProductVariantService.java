@@ -8,6 +8,7 @@ import helmet.vn.ltw_bannonbaohiem.dao.model.ProductVariant;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ProductVariantService {
@@ -15,13 +16,16 @@ public class ProductVariantService {
     ProductSizeDao proSizeD = new ProductSizeDao();
 
     public List<ProductVariant> getAllVariant(){
-        return productVariantD.getAllVariant();
+        List<ProductVariant> variants = productVariantD.getAllVariant(false);
+        return supportVariantSize(variants);
     }
     public List<ProductVariant> getAllVariantsForAdmin(){
-        return productVariantD.getAllVariantsForAdmin();
+        List<ProductVariant> variants = productVariantD.getAllVariant(true);
+        return supportVariantSize(variants);
     }
     public List<ProductVariant> getNewProductVariants(){
-        return productVariantD.getNewProductVariants();
+        List<ProductVariant> variants = productVariantD.getNewProductVariants();
+        return supportVariantSize(variants);
     }
     public boolean addProductVariant(String name, String color, int product, double price, String image, int active){
         return productVariantD.addVariant(name, color, product, price, image, active);
@@ -61,10 +65,24 @@ public class ProductVariantService {
     }
 
     public List<ProductVariant> getProVariantsByCategoryIdWithPagination(int categoryId, int offset, int pageSize) {
-        return productVariantD.getProVariantsByCategoryIdWithPagination(categoryId, offset, pageSize);
+        List<ProductVariant> variants = productVariantD.getProVariantsByCategoryIdWithPagination(categoryId, offset, pageSize);
+        return supportVariantSize(variants);
     }
 
     public int getTotalVariantCount(int categoryId) {
         return productVariantD.getTotalVariantCount(categoryId);
+    }
+    private List<ProductVariant> supportVariantSize(List<ProductVariant> variants){
+        List<Integer> variantIds = variants.stream().map(ProductVariant::getId).collect(Collectors.toList());
+        if (!variantIds.isEmpty()) {
+            Map<Integer, List<ProductSize>> sizeMap = productVariantD.getProductSizes(variantIds);
+
+            for (ProductVariant variant : variants) {
+                List<ProductSize> sizes = sizeMap.getOrDefault(variant.getId(), List.of());
+                variant.setListPSize(sizes);
+            }
+        }
+
+        return variants;
     }
 }

@@ -17,6 +17,9 @@ const headerNav = document.querySelector(".header-bottom");
         if (closeButton) {
             closeButton.addEventListener('click', resetModal);
         }
+        $('#signup-login').on('hidden.bs.modal', function () {
+            resetModal();
+        });
 
         document.querySelector('.login-link').addEventListener('click', function () {
             resetModal();
@@ -52,7 +55,7 @@ const headerNav = document.querySelector(".header-bottom");
             document.querySelector('.sign-up').style.display = 'block';
         }
         document.querySelector('.forgot-password-form').style.display = 'none';
-        $('#signup-login').modal('show'); // Hiển thị modal
+        $('#signup-login').modal('show');
     };
 
     // Hàm reset modal
@@ -61,9 +64,7 @@ const headerNav = document.querySelector(".header-bottom");
         modal.querySelectorAll('input[type="text"], input[type="password"]').forEach(input => {
             input.value = ''; 
         });
-        modal.querySelectorAll('.form-message').forEach(msg => {
-            msg.textContent = '';
-        });
+        $('.form-message').text('').hide();
         
         modal.querySelector('.sign-up').style.display = 'none';
         modal.querySelector('.forgot-password-form').style.display = 'none';
@@ -100,36 +101,7 @@ const headerNav = document.querySelector(".header-bottom");
         }
 
 
-//         function checkStatus() {
-//     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-//
-//     if (loggedInUser) {
-//         document.getElementById("account-menu").style.display = "block";
-//         document.getElementById("login-menu").style.display = "none";
-//         document.getElementById("signup-menu").style.display = "none";
-//         document.getElementById("account-name").textContent = loggedInUser.fullName || "Tài khoản";
-//         if (loggedInUser.role === 'admin') {
-//             document.getElementById('admin-page').style.display = 'block';
-//         } else {
-//             document.getElementById('admin-page').style.display = 'none';
-//         }
-//     } else {
-//         document.getElementById("account-menu").style.display = "none";
-//         document.getElementById("login-menu").style.display = "block";
-//         document.getElementById("signup-menu").style.display = "block";
-//     }
-// }
-// function logout() {
-//     // Xóa thông tin người dùng khỏi localStorage
-//     localStorage.removeItem("loggedInUser");
-//
-//     // Cập nhật lại trạng thái giao diện
-//     checkStatus();
-//
-//     // Thông báo và chuyển hướng
-//     alert("Bạn đã đăng xuất thành công!");
-//     window.location.href = "index.jsp";
-// }
+
 /* Giảm giá*/
 const products = document.querySelectorAll('.product-item');
 

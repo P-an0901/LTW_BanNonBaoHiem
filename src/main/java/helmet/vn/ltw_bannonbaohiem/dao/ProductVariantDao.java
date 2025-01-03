@@ -10,85 +10,71 @@ import org.jdbi.v3.core.statement.Update;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ProductVariantDao {
     Jdbi jdbi;
     public ProductVariantDao(){
         this.jdbi = JdbiConnect.get();
     }
-    public List<ProductVariant> getAllVariant() {
+    public List<ProductVariant> getAllVariant(boolean forAdmin) {
         String sql = "SELECT pv.id, pv.name, pv.color, pv.price, pv.image, pv.isActive, " +
-                "       pv.productId AS pid, pv.createdAt, p.name AS pname, " +
-                "       ps.id AS psid, s.name AS sname, s.id AS sizeId, ps.stock " +
+                "       pv.productId AS pid, pv.createdAt, p.name AS pname " +
                 "FROM product_variants pv " +
-                "JOIN products p ON pv.productId = p.id " +
-                "LEFT JOIN product_sizes ps ON pv.id = ps.variantId " +
-                "LEFT JOIN sizes s ON ps.sizeId = s.id " +
-                "WHERE pv.isActive > 0";
+                "JOIN products p ON pv.productId = p.id ";
 
-
-        return getProductVariants(sql);
-    }
-    public List<ProductVariant> getAllVariantsForAdmin() {
-        String sql = "SELECT pv.id, pv.name, pv.color, pv.price, pv.image, pv.isActive, " +
-                "       pv.productId AS pid, pv.createdAt, p.name AS pname, " +
-                "       ps.id AS psid, s.name AS sname, s.id AS sizeId, ps.stock " +
-                "FROM product_variants pv " +
-                "JOIN products p ON pv.productId = p.id " +
-                "LEFT JOIN product_sizes ps ON pv.id = ps.variantId " +
-                "LEFT JOIN sizes s ON ps.sizeId = s.id";
+        if (!forAdmin) {
+            sql += "WHERE pv.isActive > 0";
+        }
 
         return getProductVariants(sql);
     }
 
     private List<ProductVariant> getProductVariants(String sql) {
         return jdbi.withHandle(handle -> {
-            List<ProductVariant> variants = new ArrayList<>();
-
-            handle.createQuery(sql)
+            return handle.createQuery(sql)
                     .map((rs, ctx) -> {
-                        int variantId = rs.getInt("id");
-
-                        ProductVariant existingVariant = null;
-                        for (ProductVariant variant : variants) {
-                            if (variant.getId() == variantId) {
-                                existingVariant = variant;
-                                break;
-                            }
-                        }
-
-                        if (existingVariant == null) {
-                            ProductVariant variant = new ProductVariant();
-                            variant.setId(variantId);
-                            variant.setName(rs.getString("name"));
-                            variant.setProductId(rs.getInt("pid"));
-                            variant.setColor(rs.getString("color"));
-                            variant.setPrice(rs.getDouble("price"));
-                            variant.setImage(rs.getString("image"));
-                            variant.setActive(rs.getInt("isActive") > 0);
-                            variant.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
-                            variant.setListPSize(new ArrayList<>());
-                            variants.add(variant);
-                            existingVariant = variant;
-                        }
-
-                        if (rs.getObject("sizeId") != null && rs.getObject("psid") != null) {
-                            ProductSize productSize = new ProductSize();
-                            productSize.setId(rs.getInt("psid"));
-                            productSize.setStock(rs.getInt("stock"));
-
-                            Sizes size = new Sizes();
-                            size.setId(rs.getInt("sizeId"));
-                            size.setName(rs.getString("sname"));
-                            productSize.setSize(size);
-
-                            existingVariant.getListPSize().add(productSize);
-                        }
-
-                        return null;
+                        ProductVariant variant = new ProductVariant();
+                        variant.setId(rs.getInt("id"));
+                        variant.setName(rs.getString("name"));
+                        variant.setProductId(rs.getInt("pid"));
+                        variant.setColor(rs.getString("color"));
+                        variant.setPrice(rs.getDouble("price"));
+                        variant.setImage(rs.getString("image"));
+                        variant.setActive(rs.getInt("isActive") > 0);
+                        variant.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
+                        return variant;
                     }).list();
+        });
+    }
+    public Map<Integer, List<ProductSize>> getProductSizes(List<Integer> variantIds) {
+        return jdbi.withHandle(handle -> {
+            String sizeSql = "SELECT ps.variantId, ps.id AS psid, ps.stock, " +
+                    "       s.id AS sizeId, s.name AS sname " +
+                    "FROM product_sizes ps " +
+                    "JOIN sizes s ON ps.sizeId = s.id " +
+                    "WHERE ps.variantId IN (<variantIds>)";
 
-            return variants;
+            return handle.createQuery(sizeSql)
+                    .bindList("variantIds", variantIds)
+                    .map((rs, ctx) -> {
+                        int variantId = rs.getInt("variantId");
+                        ProductSize productSize = new ProductSize();
+                        productSize.setId(rs.getInt("psid"));
+                        productSize.setStock(rs.getInt("stock"));
+
+                        Sizes size = new Sizes();
+                        size.setId(rs.getInt("sizeId"));
+                        size.setName(rs.getString("sname"));
+                        productSize.setSize(size);
+
+                        return Map.entry(variantId, productSize);
+                    })
+                    .list()
+                    .stream()
+                    .collect(Collectors.groupingBy(Map.Entry::getKey,
+                            Collectors.mapping(Map.Entry::getValue, Collectors.toList())));
         });
     }
 
@@ -140,12 +126,9 @@ public class ProductVariantDao {
     public List<ProductVariant> getNewProductVariants() {
 
         String sql = "SELECT pv.id, pv.name, pv.color, pv.price, pv.image, pv.isActive, " +
-                "       pv.productId AS pid, pv.createdAt, p.name AS pname, " +
-                "       ps.id AS psid, s.name AS sname, s.id AS sizeId, ps.stock " +
+                "       pv.productId AS pid, pv.createdAt, p.name AS pname " +
                 "FROM product_variants pv " +
                 "JOIN products p ON pv.productId = p.id " +
-                "LEFT JOIN product_sizes ps ON pv.id = ps.variantId " +
-                "LEFT JOIN sizes s ON ps.sizeId = s.id " +
                 "WHERE pv.isActive > 0 " +
                 "ORDER BY pv.createdAt DESC " +
                 "LIMIT 5";
@@ -177,12 +160,9 @@ public class ProductVariantDao {
     }
     public List<ProductVariant> getProVariantsByCategoryIdWithPagination(int categoryId, int offset, int pageSize) {
         StringBuilder sql = new StringBuilder("SELECT pv.id, pv.name, pv.color, pv.price, pv.image, pv.isActive, " +
-                "       pv.productId AS pid, pv.createdAt, p.name AS pname, " +
-                "       ps.id AS psid, s.name AS sname, s.id AS sizeId, ps.stock " +
+                "       pv.productId AS pid, pv.createdAt, p.name AS pname " +
                 "FROM product_variants pv " +
                 "JOIN products p ON pv.productId = p.id " +
-                "LEFT JOIN product_sizes ps ON pv.id = ps.variantId " +
-                "LEFT JOIN sizes s ON ps.sizeId = s.id " +
                 "WHERE pv.isActive > 0 ");
 
         if (categoryId != -1) {
@@ -190,61 +170,31 @@ public class ProductVariantDao {
         }
 
         sql.append("LIMIT :pageSize OFFSET :offset");
-    return jdbi.withHandle(handle -> {
-            List<ProductVariant> variants = new ArrayList<>();
 
-        Query query = handle.createQuery(sql.toString())
-                .bind("pageSize", pageSize)
-                .bind("offset", offset);
+        return jdbi.withHandle(handle -> {
+            Query query = handle.createQuery(sql.toString())
+                    .bind("pageSize", pageSize)
+                    .bind("offset", offset);
 
-        if (categoryId != -1) {
-            query.bind("categoryId", categoryId);
-        }
-        query.map((rs, ctx) -> {
-                        int variantId = rs.getInt("id");
+            if (categoryId != -1) {
+                query.bind("categoryId", categoryId);
+            }
 
-                        ProductVariant existingVariant = null;
-                        for (ProductVariant variant : variants) {
-                            if (variant.getId() == variantId) {
-                                existingVariant = variant;
-                                break;
-                            }
-                        }
-
-                        if (existingVariant == null) {
-                            ProductVariant variant = new ProductVariant();
-                            variant.setId(variantId);
-                            variant.setName(rs.getString("name"));
-                            variant.setProductId(rs.getInt("pid"));
-                            variant.setColor(rs.getString("color"));
-                            variant.setPrice(rs.getDouble("price"));
-                            variant.setImage(rs.getString("image"));
-                            variant.setActive(rs.getInt("isActive") > 0);
-                            variant.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
-                            variant.setListPSize(new ArrayList<>());
-                            variants.add(variant);
-                            existingVariant = variant;
-                        }
-
-                        if (rs.getObject("sizeId") != null && rs.getObject("psid") != null) {
-                            ProductSize productSize = new ProductSize();
-                            productSize.setId(rs.getInt("psid"));
-                            productSize.setStock(rs.getInt("stock"));
-
-                            Sizes size = new Sizes();
-                            size.setId(rs.getInt("sizeId"));
-                            size.setName(rs.getString("sname"));
-                            productSize.setSize(size);
-
-                            existingVariant.getListPSize().add(productSize);
-                        }
-
-                        return null;
+            return query.map((rs, ctx) -> {
+                        ProductVariant variant = new ProductVariant();
+                        variant.setId(rs.getInt("id"));
+                        variant.setName(rs.getString("name"));
+                        variant.setProductId(rs.getInt("pid"));
+                        variant.setColor(rs.getString("color"));
+                        variant.setPrice(rs.getDouble("price"));
+                        variant.setImage(rs.getString("image"));
+                        variant.setActive(rs.getInt("isActive") > 0);
+                        variant.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
+                        return variant;
                     }).list();
-
-            return variants;
         });
     }
+
     public int getTotalVariantCount(int categoryId) {
         StringBuilder sql = new StringBuilder("SELECT COUNT(*) " +
                 "FROM product_variants pv " +
