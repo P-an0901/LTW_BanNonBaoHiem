@@ -45,17 +45,18 @@
                         </c:forEach>
                     </select>
                 </div>
-            <div class="filter-item">
-                <label for="helmet-type">Loại nón:</label>
-                <select id="helmet-type" class="filter-select">
-                    <option value="all">Tất cả</option>
-                    <c:forEach var="cate" items="${cates}">
-                        <option value="${cate.id}">${cate.name}</option>
-                    </c:forEach>
-                </select>
-            </div>
-            
-            <div class="filter-item">
+                <div class="filter-item">
+                    <label for="helmet-type">Loại nón:</label>
+                    <select id="helmet-type" class="filter-select">
+                        <option value="all" ${param.category == 'all' ? 'selected' : ''}>Tất cả</option>
+                        <c:forEach var="cate" items="${cates}">
+                            <option value="${cate.id}" ${param.category != null && param.category == cate.id.toString() ? 'selected' : ''}>${cate.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+
+
+                <div class="filter-item">
                 <label>Kích thước:</label>
                 <div class="filter-options">
                 <c:forEach var="size" items="${sizes}">
@@ -125,7 +126,19 @@
         <div class="container">
             <div class="pro-lst" id="prolst">
                 <div class="lst-title p-4">
-                    <h3 id="product-list-title">Tất cả sản phẩm</h3>
+                    <h3 id="product-list-title">
+                        <c:choose>
+                            <c:when test="${param.category eq 'all'}">
+                                Tất cả sản phẩm
+                            </c:when>
+                            <c:when test="${not empty param.category}">
+                                ${cates[param.category -1].name}
+                            </c:when>
+                            <c:otherwise>
+                                Tất cả sản phẩm
+                            </c:otherwise>
+                        </c:choose>
+                    </h3>
                 </div>
                 <div class="product-row" id="danhmuc-pro">
                     <c:forEach var="proV" items="${proVariants}">
