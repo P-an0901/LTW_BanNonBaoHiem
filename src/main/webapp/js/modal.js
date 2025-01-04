@@ -59,8 +59,8 @@ $(document).ready(function(){
                 $('.form-message').text('').hide();
 
 
-                if (errors.loginError) {
-                    $('.form-message-register').text(errors.loginError).show();
+                if (errors.registerError) {
+                    $('.form-message-register').text(errors.registerError).show();
                 }
                 if (errors.username) {
                     $('.form-message-username').text(errors.username).show();

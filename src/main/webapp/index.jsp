@@ -350,10 +350,5 @@
     <script src="js/index.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/header.js"></script>
-<c:if test="${not empty loginError}">
-    <script>
-        $('#signup-login').modal('show');
-    </script>
-</c:if>
 </body>
 </html>

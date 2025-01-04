@@ -30,6 +30,10 @@ public class DanhmucServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("activePage", "danhmuc");
         String categoryId = req.getParameter("category");
+        System.out.println(categoryId);
+        if (categoryId == null || categoryId.isEmpty() || categoryId.equals("all")){
+            categoryId = "-1";
+        }
         String pageParam = req.getParameter("page");
         int page = pageParam == null ? 1 : Integer.parseInt(pageParam);
         int pageSize = 4;
@@ -38,11 +42,9 @@ public class DanhmucServlet extends HttpServlet {
         int totalVariants = 0;
         List<Product> products = new ArrayList<>();
         List<ProductVariant> proVariants = new ArrayList<>();
-        if (categoryId != null) {
-            if(categoryId.equalsIgnoreCase("all")) categoryId = "-1";
-            proVariants = productVariantService.getProVariantsByCategoryIdWithPagination(Integer.parseInt(categoryId), offset, pageSize);
-            totalVariants = productVariantService.getTotalVariantCount(Integer.parseInt(categoryId));
-        }
+        proVariants = productVariantService.getProVariantsByCategoryIdWithPagination(Integer.parseInt(categoryId), offset, pageSize);
+        totalVariants = productVariantService.getTotalVariantCount(Integer.parseInt(categoryId));
+
         int totalPages = (int) Math.ceil((double) totalVariants  / pageSize);
 
         System.out.println(totalPages);

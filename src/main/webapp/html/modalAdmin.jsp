@@ -365,15 +365,23 @@
       </div>
       <div class="modal-body">
         <h2 class="modal-title">Thêm Người Dùng</h2>
-        <form id="addUserForm">
+        <form id="addUserForm" method="post">
+          <span class="form-message-register form-message"></span>
+          <div class="form-group col-md-6">
+            <label for="fullName">Tên Người Dùng</label>
+            <input type="text" class="form-control" id="fullName" name="fullName" required>
+            <span class="form-message-name form-message"></span>
+          </div>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="username">Tên Người Dùng</label>
+              <label for="username">Tên đăng nhập</label>
               <input type="text" class="form-control" id="username" name="username" required>
+              <span class="form-message-username form-message"></span>
             </div>
             <div class="form-group col-md-6">
               <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" name="email" required>
+              <input type="email" class="form-control" id="email" name="email">
+              <span class="form-message-email form-message"></span>
             </div>
           </div>
 
@@ -381,24 +389,27 @@
             <div class="form-group col-md-6">
               <label for="password">Mật Khẩu</label>
               <input type="password" class="form-control" id="password" name="password" required>
+              <span class="form-message-password form-message"></span>
+
             </div>
             <div class="form-group col-md-6">
               <label for="password">Xác nhận mật khẩu</label>
-              <input type="password" class="form-control" id="password2" name="password" required>
+              <input type="password" class="form-control" id="password2" name="password02" required>
+              <span class="form-message-password-confi form-message"></span>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="role">Vai Trò</label>
-              <select class="form-control" id="role" name="role">
+              <select class="form-control" id="role" name="role" required>
                 <option value="0">Khách Hàng</option>
                 <option value="1">Quản Trị Viên</option>
               </select>
             </div>
             <div class="form-group col-md-6">
-              <label for="active">Vai Trò</label>
-              <select class="form-control" id="active" name="active">
+              <label for="active">Tình Trạng</label>
+              <select class="form-control" id="active" name="active" required>
                 <option value="0">Không hoạt động</option>
                 <option value="1">Hoạt động</option>
               </select>

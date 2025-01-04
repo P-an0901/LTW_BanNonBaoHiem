@@ -36,6 +36,7 @@ public class DetailServlet extends HttpServlet {
 //            System.out.println(product);
             List<ProductSize> sizes = productVariantService.getListSizeById(pvId);
             List<ProductVariant> lstProVariant = productVariantService.getListProVarByProId(pid);
+            lstProVariant.removeIf(variant -> variant.getId() == pvId);
             System.out.println(lstProVariant+ "bbbbb");
             req.setAttribute("lstProVariant", lstProVariant);
             req.setAttribute("sizes", sizes);

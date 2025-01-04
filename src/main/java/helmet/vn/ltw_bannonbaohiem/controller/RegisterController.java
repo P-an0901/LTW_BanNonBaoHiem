@@ -55,7 +55,7 @@ public class RegisterController extends HttpServlet {
             hasError = true;
         }
         if (hasError) {
-            responseMap.put("loginError", "Đăng Ký không thành công");
+            responseMap.put("registerError", "Đăng Ký không thành công");
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         } else {
             boolean isRegister = auth.register(username, password, name, email);

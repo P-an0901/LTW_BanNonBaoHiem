@@ -23,7 +23,7 @@
 <jsp:include page="html/modal.jsp" />
 <div class="breadcrumb-container">
     <ul class="breadcrumb">
-        <li><a href="index.jsp">Trang chủ </a></li>
+        <li><a href="${pageContext.request.contextPath}/">Trang chủ </a></li>
         <li><span>/</span></li>
         <li><a href="#" class="active"> Danh mục sản phẩm</a></li>
     </ul>

@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "f" uri = "http://java.sun.com/jsp/jstl/fmt" %>
   <!DOCTYPE html>
   <html lang="vi">
   <head>
@@ -18,6 +21,13 @@
 
   <!-- Load modal -->
   <jsp:include page="html/modal.jsp" />
+  <div class="breadcrumb-container">
+      <ul class="breadcrumb">
+          <li><a href="${pageContext.request.contextPath}/">Trang chủ </a></li>
+          <li><span>/</span></li>
+          <li><a href="#" class="active">Thanh toán</a></li>
+      </ul>
+  </div>
       <div class="back-to-top active">
           <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
       </div>
@@ -47,16 +57,46 @@
         </form>
       </div>
 
-      <!-- Tóm tắt Đơn hàng -->
       <div class="order-summary">
-        <h5>Tóm tắt đơn hàng</h5>
-        <ul id="order-items">
-          <!-- Các sản phẩm trong đơn hàng sẽ được hiển thị ở đây -->
-        </ul>
-        <p>Tổng cộng: <span id="order-total">0 đ</span></p>
+          <c:choose>
+              <c:when test="${not empty sessionScope.cart.list}">
+                  <ul id="cart2-items">
+                      <table class="table table-bordered">
+                          <thead>
+                          <tr>
+                              <th>Hình ảnh</th>
+                              <th>Tên sản phẩm</th>
+                              <th>Kích cỡ</th>
+                              <th>Số lượng</th>
+                              <th>Giá</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <c:forEach var="item" items="${sessionScope.cart.list}">
+                              <tr>
+                                  <td><img src="${pageContext.request.contextPath}/${fn:escapeXml(item.image)}" alt="${item.name}" class="carts-item-img" /></td>
+                                  <td>${item.name}</td>
+                                  <td>${item.size.size.name}</td>
+                                  <td>${item.quantity}</td>
+                                  <td>${item.price} đ</td>
+                              </tr>
+                          </c:forEach>
+                          </tbody>
+                      </table>
+                  </ul>
+                  <div class="cart-summary">
+                      <p>Tổng cộng: <span id="cart-total">${sessionScope.cart.totalPrice} đ</span></p>
+                  </div>
+              </c:when>
+
+              <c:otherwise>
+                  <div id="empty-message" class="empty-message">
+                      <p>Không có sản phẩm nào.</p>
+                  </div>
+              </c:otherwise>
+          </c:choose>
       </div>
 
-      <!-- Phương thức Thanh toán -->
       <div class="payment-info">
         <h5>Phương thức thanh toán</h5>
         <div class="form-group">

@@ -24,9 +24,9 @@
 <jsp:include page="html/modal.jsp" />
     <div class="breadcrumb-container">
         <ul class="breadcrumb">
-          <li><a href="index.jsp">Trang chủ </a></li>
+          <li><a href="${pageContext.request.contextPath}/">Trang chủ </a></li>
           <li><span>/</span></li>
-          <li><a href="danhmuc.jsp">Danh mục </a></li>
+          <li><a href="./danhmuc">Danh mục </a></li>
           <li><span>/</span></li>
           <li><a href="#" class="active">${productVariant.name}</a></li>
         </ul>
@@ -128,6 +128,11 @@
                             <h5>Màu sắc</h5>
                             <div class="product-thumbnails">
                                 <div class="thumbnail-container">
+                                    <c:forEach var="variant" items="${lstProVariant}">
+                                        <a href="${pageContext.request.contextPath}/detail?pvId=${variant.id}">
+                                            <img src="${pageContext.request.contextPath}/${fn:escapeXml(variant.image)}" alt="${variant.id}" class="thumbnails">
+                                        </a>
+                                    </c:forEach>
                                     <img src="images/Royal-M139-Leopard.jpg" alt="Màu 1" class="thumbnails">
                                     <img src="images/Royal-M139-Vang-bong.png" alt="Màu 2" class="thumbnails">
                                     <img src="images/Royal-M139-Chuot-xuoc-bong.jpg" alt="Màu 3" class="thumbnails">
