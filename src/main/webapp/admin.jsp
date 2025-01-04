@@ -56,7 +56,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list-item user-logout">
-                        <a href="#" class="sidebar-link" id="logout-acc">
+                        <a href="${pageContext.request.contextPath}/logout" class="sidebar-link" id="logout-acc">
                             <div class="sidebar-icon"><i class="fa-solid fa-right-from-bracket"></i></div>
                             <div class="hidden-sidebar">Đăng xuất</div>
                         </a>
@@ -596,47 +596,34 @@
                 <table width="100%">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Mã đơn</td>
                             <th>Khách hàng</td>
                             <th>Ngày đặt</td>
                             <th>Tổng tiền</td>
                             <th>Trạng thái</td>
                             <th>Chi tiết</th>
-                            <th>Sửa</th>
                             <th>Xóa</th>
                         </tr>
                     </thead>
                     <tbody id="showOrder">
+                    <c:forEach var="o" items="${orders}">
                         <tr>
-                            <td>#001</td>
-                            <td>Nguyễn A</td>
-                            <td>2024-11-01</td>
-                            <td>500,000 VND</td>
-                            <td>Đang xử lý</td>
-                            <td><button class="details-btn" data-id="3"><i class="fa-solid fa-eye"></i></button></td>
-                            <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
+                            <td><input type="checkbox" name="selectedUser" value="${o.id}"></td>
+                            <td>${o.id}</td>
+                            <td>${o.user.fullName}</td>
+                            <td>${o.createdAt}</td>
+                            <td>${o.totalAmount}</td>
+                            <td>${o.status}</td>
+                            <td><button class="detail-btn"><i class="fa-solid fa-pen"></i></button></td>
                             <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                         </tr>
+                    </c:forEach>
+                    <c:if test="${empty orders}">
                         <tr>
-                            <td>#002</td>
-                            <td>Trần Thị B</td>
-                            <td>2024-11-02</td>
-                            <td>1,000,000 VND</td>
-                            <td>Hoàn thành</td>
-                            <td><button class="details-btn" data-id="3"><i class="fa-solid fa-eye"></i></button></td>
-                            <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
-                            <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                            <td colspan="9" style="text-align: center;">Không có dữ liệu</td>
                         </tr>
-                        <tr>
-                            <td>#003</td>
-                            <td>Phạm Văn C</td>
-                            <td>2024-11-03</td>
-                            <td>750,000 VND</td>
-                            <td>Đang xử lý</td>
-                            <td><button class="details-btn" data-id="3"><i class="fa-solid fa-eye"></i></button></td>
-                            <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
-                            <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
-                        </tr>
+                    </c:if>
                     </tbody>
                 </table>
             </div>

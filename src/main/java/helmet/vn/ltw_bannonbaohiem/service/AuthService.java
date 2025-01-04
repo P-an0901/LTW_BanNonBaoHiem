@@ -23,7 +23,7 @@ public class AuthService {
         String hashedPassword = hashPassword(password);
         return udao.register(username, hashedPassword, name, email);
     }
-    private String hashPassword(String password) {
+    public String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hashedBytes = md.digest(password.getBytes());
@@ -38,13 +38,6 @@ public class AuthService {
         }
     }
 
-    public List<User> getAllUser() {
-        List<User> users = udao.getAllUsers();
-        for(User u : users){
-            u.setPassword(null);
-        }
-        return users;
-    }
 
     public boolean checkExist(String username) {
         List<User> users = udao.getAllUsers();
