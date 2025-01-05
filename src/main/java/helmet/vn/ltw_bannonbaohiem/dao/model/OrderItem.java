@@ -3,11 +3,11 @@ package helmet.vn.ltw_bannonbaohiem.dao.model;
 public class OrderItem {
     private int id;
     private ProductVariant proVariant;
-    private ProductSize size;
+    private Sizes size;
     private int quantity;
     private double price;
 
-    public OrderItem(int id, ProductVariant proVariant, ProductSize size, int quantity, double price) {
+    public OrderItem(int id, ProductVariant proVariant, Sizes size, int quantity, double price) {
         this.id = id;
         this.proVariant = proVariant;
         this.size = size;
@@ -31,11 +31,11 @@ public class OrderItem {
         this.proVariant = proVariant;
     }
 
-    public ProductSize getSize() {
+    public Sizes getSize() {
         return size;
     }
 
-    public void setSize(ProductSize size) {
+    public void setSize(Sizes size) {
         this.size = size;
     }
 

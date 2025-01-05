@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/checkout.css">
     <link rel="stylesheet" href="css/header.css">
+      <link rel="stylesheet" href="css/danhmuc.css">
     <link rel="icon" href="images/HELMET.png">
     <title>Thanh toán</title>
   </head>
@@ -32,127 +33,166 @@
           <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
       </div>
   <div class="checkout-container">
-    <h3>Thông tin thanh toán</h3>
-    <div class="checkout-page">
-      <!-- Thông tin Khách hàng -->
-      <div class="billing-info">
-        <h5>Thông tin người nhận</h5>
-        <form id="checkout-form">
-          <div class="form-group">
-            <label for="full-name">Họ và tên</label>
-            <input type="text" id="full-name" name="full-name" class="form-control" required>
+      <h2>THANH TOÁN</h2>
+      <div class="row">
+          <!-- Bên trái: Thông tin người nhận -->
+          <div class="col-md-6 billing-info">
+              <h5 class="section-title">THÔNG TIN NGƯỜI NHẬN</h5>
+              <form id="checkout-form">
+                  <div class="form-group">
+                      <label for="full-name">Họ và tên <span class="text-danger">*</span></label>
+                      <input type="text" id="full-name" name="recipientName" class="form-control" required>
+                      <div id="full-name-error" class="form-message" style="display: none;">Họ và tên là bắt buộc!</div>
+                  </div>
+                  <div class="form-group">
+                      <label for="address">Địa chỉ <span class="text-danger">*</span></label>
+                      <input type="text" id="address" name="address" class="form-control" required>
+                      <div id="address-error" class="form-message" style="display: none;">Địa chỉ là bắt buộc!</div>
+                  </div>
+                  <div class="form-group">
+                      <label for="phone">Số điện thoại <span class="text-danger">*</span></label>
+                      <input type="text" id="phone" name="phone" class="form-control" required>
+                      <div id="phone-error" class="form-message" style="display: none;">Số điện thoại là bắt buộc!</div>
+                  </div>
+                  <div class="form-group">
+                      <label for="note">Ghi chú</label>
+                      <textarea id="note" name="note" class="form-control" rows="4" placeholder="Nhập ghi chú của bạn"></textarea>
+                  </div>
+              </form>
           </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="address">Địa chỉ</label>
-            <input type="text" id="address" name="address" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="phone">Số điện thoại</label>
-            <input type="text" id="phone" name="phone" class="form-control" required>
-          </div>
-        </form>
-      </div>
 
-      <div class="order-summary">
-          <c:choose>
-              <c:when test="${not empty sessionScope.cart.list}">
-                  <ul id="cart2-items">
-                      <table class="table table-bordered">
-                          <thead>
-                          <tr>
-                              <th>Hình ảnh</th>
-                              <th>Tên sản phẩm</th>
-                              <th>Kích cỡ</th>
-                              <th>Số lượng</th>
-                              <th>Giá</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          <c:forEach var="item" items="${sessionScope.cart.list}">
+          <!-- Bên phải: Danh sách sản phẩm, phương thức thanh toán -->
+          <div class="col-md-6 order-summary">
+              <h5 class="section-title">ĐƠN HÀNG CỦA BẠN</h5>
+              <div class="product-list">
+                  <c:choose>
+                      <c:when test="${not empty sessionScope.cart.list}">
+                          <table class="table table-bordered">
+                              <thead>
                               <tr>
-                                  <td><img src="${pageContext.request.contextPath}/${fn:escapeXml(item.image)}" alt="${item.name}" class="carts-item-img" /></td>
-                                  <td>${item.name}</td>
-                                  <td>${item.size.size.name}</td>
-                                  <td>${item.quantity}</td>
-                                  <td>${item.price} đ</td>
+                                  <th>Hình ảnh</th>
+                                  <th>Tên sản phẩm</th>
+                                  <th>Kích cỡ</th>
+                                  <th>Số lượng</th>
+                                  <th>Giá</th>
                               </tr>
-                          </c:forEach>
-                          </tbody>
-                      </table>
-                  </ul>
-                  <div class="cart-summary">
-                      <p>Tổng cộng: <span id="cart-total">${sessionScope.cart.totalPrice} đ</span></p>
+                              </thead>
+                              <tbody>
+                              <c:forEach var="item" items="${sessionScope.cart.list}">
+                                  <tr>
+                                      <td><img src="${pageContext.request.contextPath}/${fn:escapeXml(item.image)}" alt="${item.name}" class="carts-item-img" /></td>
+                                      <td>${item.name}</td>
+                                      <td>${item.size.size.name}</td>
+                                      <td>${item.quantity}</td>
+                                      <td>${item.price} đ</td>
+                                  </tr>
+                              </c:forEach>
+                              <!-- Tổng tiền -->
+                              <tr class="cart-summary">
+                                  <td colspan="4" class="text-right"><strong>Tổng cộng:</strong></td>
+                                  <td><strong>${sessionScope.cart.totalPrice} đ</strong></td>
+                              </tr>
+                              </tbody>
+                          </table>
+                      </c:when>
+                      <c:otherwise>
+                          <div id="empty-message" class="empty-message">
+                              <p>Không có sản phẩm nào.</p>
+                          </div>
+                      </c:otherwise>
+                  </c:choose>
+              </div>
+
+              <div class="payment-methods">
+                  <h5>Phương thức thanh toán</h5>
+                  <div class="form-group">
+                      <c:forEach var="payment" items="${payList}">
+                          <div class="form-check">
+                              <input type="radio" id="${payment.id}" name="payment-method" class="form-check-input" value="${payment.id}"
+                                  ${payment.active == 0 ? 'disabled' : ''} />
+                              <label class="form-check-label" for="${payment.id}">
+                                      ${payment.name}
+                              </label>
+                              <small class="text-muted">${payment.active == 1 ? '' : 'Không hoạt động'}</small>
+                          </div>
+                      </c:forEach>
                   </div>
-              </c:when>
-
-              <c:otherwise>
-                  <div id="empty-message" class="empty-message">
-                      <p>Không có sản phẩm nào.</p>
-                  </div>
-              </c:otherwise>
-          </c:choose>
+              </div>
+              <input type="hidden" id="isLoggedIn" value="${not empty sessionScope.auth ? 'true' : 'false'}">
+              <input type="hidden" id="isHaveCart" value="${not empty sessionScope.cart ? 'true' : 'false'}">
+              <button id="place-order-btn" class="btn btn-success" data-toggle="modal" >Đặt hàng</button>
+              <div id="payment-error" class="form-message" style="display: none;">Vui lòng chọn phương thức thanh toán!</div>
+          </div>
       </div>
-
-      <div class="payment-info">
-        <h5>Phương thức thanh toán</h5>
-        <div class="form-group">
-          <button class="btn btn-primary" id="cash-payment">Thanh toán tiền mặt</button>
-          <button class="btn btn-primary" id="card-payment">Thanh toán bằng thẻ</button>
-          <button class="btn btn-primary" id="e-wallet-payment">Thanh toán qua ví điện tử</button>
-        </div>
-          <!-- Form thanh toán ví điện tử -->
-          <form id="e-wallet-payment-form" style="display: none;">
-              <h6>Chọn ví điện tử để thanh toán</h6>
-              <div class="form-group">
-                  <label for="momo-payment">Momo</label>
-                  <input type="radio" id="momo-payment" name="e-wallet" value="momo">
-                  <img id="momo-image" src="images/momo.jpg" alt="QR Momo" class="qr-code-img" style="display: none;">
-              </div>
-              <div class="form-group">
-                  <label for="zalopay-payment">ZaloPay</label>
-                  <input type="radio" id="zalopay-payment" name="e-wallet" value="zalopay">
-                  <img id="zalopay-image" src="zalopay-qr.png" alt="QR ZaloPay" class="qr-code-img" style="display: none;">
-              </div>
-              <div class="form-group">
-                  <label for="viettel-money-payment">Viettel Money</label>
-                  <input type="radio" id="viettel-money-payment" name="e-wallet" value="viettel-money">
-                  <img id="viettel-money-image" src="viettel-money-qr.png" alt="QR Viettel Money" class="qr-code-img" style="display: none;">
-              </div>
-              <div class="form-group">
-                  <label for="vnpay-payment">VNPay</label>
-                  <input type="radio" id="vnpay-payment" name="e-wallet" value="vnpay">
-                  <img id="vnpay-image" src="vnpay-qr.png" alt="QR VNPay" class="qr-code-img" style="display: none;">
-              </div>
-          </form>
-
-          <form id="card-payment-form" style="display: none;">
-          <div class="form-group">
-            <label for="card-name">Tên trên thẻ</label>
-            <input type="text" id="card-name" name="card-name" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="card-number">Số thẻ</label>
-            <input type="text" id="card-number" name="card-number" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="expiry-date">Ngày hết hạn</label>
-            <input type="text" id="expiry-date" name="expiry-date" class="form-control" placeholder="MM/YY">
-          </div>
-          <div class="form-group">
-            <label for="cvv">CVV</label>
-            <input type="text" id="cvv" name="cvv" class="form-control">
-          </div>
-        </form>
-      </div>
-
-      <!-- Nút Thanh toán -->
-      <button id="place-order-btn" class="btn btn-success">Đặt hàng</button>
-    </div>
   </div>
+  <!-- Modal for Order Confirmation -->
+  <div class="modal fade" id="orderModal">
+      <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <h2 class="form-title">Kiểm Tra và Xác Nhận</h2>
+                  <p class="form-description">Kiểm tra lại đơn hàng để của bạn và xác nhận thanh toán.</p>
+                  <p><strong>Họ và tên:</strong> <span id="modal-full-name"></span></p>
+                  <p><strong>Địa chỉ:</strong> <span id="modal-address"></span></p>
+                  <p><strong>Số điện thoại:</strong> <span id="modal-phone"></span></p>
+                  <p><strong>Ghi chú:</strong> <span id="modal-note"></span></p>
+                  <c:choose>
+                      <c:when test="${not empty sessionScope.cart.list}">
+                          <table class="table table-bordered">
+                              <thead>
+                              <tr>
+                                  <th></th>
+                                  <th>Tên sản phẩm</th>
+                                  <th>Kích cỡ</th>
+                                  <th>Số lượng</th>
+                                  <th>Giá</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <c:forEach var="item" items="${sessionScope.cart.list}">
+                                  <tr>
+                                      <td>${status.index + 1}</td>
+                                      <td>${item.name}</td>
+                                      <td>${item.size.size.name}</td>
+                                      <td>${item.quantity}</td>
+                                      <td>${item.price} đ</td>
+                                  </tr>
+                              </c:forEach>
+                              </tbody>
+                          </table>
+                      </c:when>
+                      <c:otherwise>
+                          <div id="empty-message" class="empty-message">
+                              <p>Không có sản phẩm nào.</p>
+                          </div>
+                      </c:otherwise>
+                  </c:choose>
+
+                        <h6><strong>Tổng cộng:</strong><strong>${sessionScope.cart.totalPrice} đ</strong></h6>
+                        <h6><strong>Phương thức thanh toán: </strong><span id="modal-payment-method"></span></h6>
+              </div>
+              <form action="${pageContext.request.contextPath}/thanh-toan" method="post" id="addOrderForm">
+              <div class="modal-footer">
+                  <input type="hidden" name="recipientName" id="hidden-recipient-name" value="" />
+                  <input type="hidden" name="address" id="hidden-address" value="" />
+                  <input type="hidden" name="phone" id="hidden-phone" value="" />
+                  <input type="hidden" name="note" id="hidden-note" value="" />
+                  <input type="hidden" name="paymentMethodId" id="hidden-payment-method" value="" />
+
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                  <button type="submit" class="btn btn-primary" id="confirm-order-btn">Xác nhận Đặt Hàng</button>
+              </div>
+              </form>
+          </div>
+      </div>
+  </div>
+
+
   <!-- Load footer -->
   <jsp:include page="html/footer.jsp" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
