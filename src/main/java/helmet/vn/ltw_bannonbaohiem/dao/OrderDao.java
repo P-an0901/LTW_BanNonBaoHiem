@@ -1,5 +1,7 @@
 package helmet.vn.ltw_bannonbaohiem.dao;
 
+import helmet.vn.ltw_bannonbaohiem.dao.cart.Cart;
+import helmet.vn.ltw_bannonbaohiem.dao.cart.CartProduct;
 import helmet.vn.ltw_bannonbaohiem.dao.db.JdbiConnect;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Order;
 import helmet.vn.ltw_bannonbaohiem.dao.model.PaymentMethod;
@@ -52,25 +54,40 @@ public class OrderDao {
         });
     }
 
-    public boolean add(int id, String recipientName, String address, int methodPaymentId, String phone, double totalPrice) {
-        String sql = "INSERT INTO orders(id, recipientName, address, methodPaymentId, phone, totalAmount, status)" +
+    public boolean add(int uid, String recipientName, String address, int methodPaymentId, String phone, Cart cart) {
+        String sql = "INSERT INTO orders(userId, recipientName, shippingAddress, paymentMethodId, phone, totalAmount, status) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try{
-            return jdbi.withHandle(handle -> {
-                Update update = handle.createUpdate(sql);
-                update.bind(0, id);
-                update.bind(1, recipientName);
-                update.bind(2, address);
-                update.bind(3, methodPaymentId);
-                update.bind(4, phone);
-                update.bind(5, totalPrice);
-                update.bind(6, "Đang xử lý");
-                int rowsAffected = update.execute();
-                return rowsAffected > 0;
+        String insertOrderItemsSql = "INSERT INTO order_items (orderId, productVariantId, sizeId, quantity, price) VALUES (?, ?, ?, ?, ?)";
+
+        try {
+            jdbi.useTransaction(handle -> {
+                int orderId = handle.createUpdate(sql)
+                        .bind(0, uid)
+                        .bind(1, recipientName)
+                        .bind(2, address)
+                        .bind(3, methodPaymentId)
+                        .bind(4, phone)
+                        .bind(5, cart.getTotalPrice())
+                        .bind(6, "Đang xử lý")
+                        .executeAndReturnGeneratedKeys("id")
+                        .mapTo(int.class)
+                        .one();
+
+                for (CartProduct item : cart.getList()) {
+                    handle.createUpdate(insertOrderItemsSql)
+                            .bind(0, orderId)
+                            .bind(1, item.getId())
+                            .bind(2, item.getSize().getSize().getId())
+                            .bind(3, item.getQuantity())
+                            .bind(4, item.getPrice())
+                            .execute();
+                }
             });
-        }catch (Exception e ){
+            return true;
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
+
 }
