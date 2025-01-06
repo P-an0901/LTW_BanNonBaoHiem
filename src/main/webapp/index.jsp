@@ -151,7 +151,7 @@
                     </div>
                 </div>
                 <div class="xem-them p-3 d-flex justify-content-end">
-                    <a href="khuyenmai.jsp" class="btn-xem-them d-flex align-items-center justify-content-between">
+                    <a href="./khuyenmai" class="btn-xem-them d-flex align-items-center justify-content-between">
                         <span>Xem thêm</span>
                         <i class="fas fa-chevron-right"></i>
                     </a>
@@ -177,7 +177,7 @@
                                     </button>
                                 </c:forEach>
                             </div>
-                            <a href="detail.jsp">
+                            <a href="${pageContext.request.contextPath}/detail?pvId=${proV.id}">
                                 <h3 class="product-name">${proV.name}</h3>
                             </a>
                             <p class="product-price">Giá: <f:formatNumber value="${proV.price}"/> đ</p>
@@ -271,7 +271,7 @@
                                 </button>
                             </c:forEach>
                         </div> 
-                        <a href="detail.jsp">
+                        <a href="${pageContext.request.contextPath}/detail?pvId=${proV.id}">
                             <h3 class="product-name">${proV.name}</h3>
                         </a>
                         <p class="product-price">Giá: <f:formatNumber value="${proV.price}"/> đ</p>
