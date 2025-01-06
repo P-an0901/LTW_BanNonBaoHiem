@@ -45,12 +45,6 @@ public class Checkout extends HttpServlet {
         String phone = req.getParameter("phone");
         String note = req.getParameter("note");
 
-        System.out.println("Recipient Name: " + recipientName);
-        System.out.println("Address: " + address);
-        System.out.println("Payment Method: " + methodPayment);
-        System.out.println("Phone: " + phone);
-        System.out.println("Note: " + note);
-
         boolean order = orderService.add(u.getId(), cart, recipientName, address, Integer.parseInt(methodPayment), phone);
         if (order == true) {
             session.removeAttribute("cart");

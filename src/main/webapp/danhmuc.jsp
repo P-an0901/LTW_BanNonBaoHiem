@@ -92,31 +92,31 @@
                 <label>Màu sắc:</label>
                 <div class="filter-colors">
                     <label for="color-red" style="color: red;">
-                        <input type="checkbox" id="color-red" class="filter-color" value="red"> Đỏ
+                        <input type="checkbox" id="color-red" class="filter-color" value="Đỏ"> Đỏ
                     </label>
                     
                     <label for="color-blue" style="color: blue;">
-                        <input type="checkbox" id="color-blue" class="filter-color" value="blue"> Xanh
+                        <input type="checkbox" id="color-blue" class="filter-color" value="Xanh"> Xanh
                     </label>
                     
                     <label for="color-black" style="color: black;">
-                        <input type="checkbox" id="color-black" class="filter-color" value="black"> Đen
+                        <input type="checkbox" id="color-black" class="filter-color" value="Đen"> Đen
                     </label>
                     
                     <label for="color-white">
-                        <input type="checkbox" id="color-white" class="filter-color" value="white"> Trắng
+                        <input type="checkbox" id="color-white" class="filter-color" value="Trắng"> Trắng
                     </label>
                     
                     <label for="color-green" style="color: green;">
-                        <input type="checkbox" id="color-green" class="filter-color" value="green"> Xanh lá
+                        <input type="checkbox" id="color-green" class="filter-color" value="Xanh lá"> Xanh lá
                     </label>
                     
                     <label for="color-yellow" style="color: #e68027;">
-                        <input type="checkbox" id="color-yellow" class="filter-color" value="yellow"> Vàng
+                        <input type="checkbox" id="color-yellow" class="filter-color" value="Vàng"> Vàng
                     </label>
                     
                     <label for="color-gray" style="color: gray;">
-                        <input type="checkbox" id="color-gray" class="filter-color" value="gray"> Xám
+                        <input type="checkbox" id="color-gray" class="filter-color" value="Xám"> Xám
                     </label>                    
                 </div>
             </div>
