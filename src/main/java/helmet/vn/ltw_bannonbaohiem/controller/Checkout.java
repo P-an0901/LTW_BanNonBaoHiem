@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 @WebServlet("/thanh-toan")
@@ -44,8 +45,10 @@ public class Checkout extends HttpServlet {
         String methodPayment = req.getParameter("paymentMethodId");
         String phone = req.getParameter("phone");
         String note = req.getParameter("note");
+        LocalDate estimatedDeliveryDate = LocalDate.now().plusDays(3);
 
-        boolean order = orderService.add(u.getId(), cart, recipientName, address, Integer.parseInt(methodPayment), phone);
+        boolean order = orderService.add(u.getId(), cart, recipientName, address, Integer.parseInt(methodPayment),
+                phone, note, estimatedDeliveryDate);
         if (order == true) {
             session.removeAttribute("cart");
             resp.sendRedirect(req.getContextPath() + "/account");
