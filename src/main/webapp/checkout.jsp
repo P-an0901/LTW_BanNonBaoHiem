@@ -141,6 +141,7 @@
                   <p><strong>Địa chỉ:</strong> <span id="modal-address"></span></p>
                   <p><strong>Số điện thoại:</strong> <span id="modal-phone"></span></p>
                   <p><strong>Ghi chú:</strong> <span id="modal-note"></span></p>
+                  <p><strong>Ngày giao dự kiến: </strong><span id="delivery-date"></span></p>
                   <c:choose>
                       <c:when test="${not empty sessionScope.cart.list}">
                           <table class="table table-bordered">

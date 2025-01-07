@@ -49,14 +49,28 @@ public class UserController extends HttpServlet {
                 handleAddUser(req, resp);
                 break;
             case "edit":
+                handleEditUser(req, resp);
                 break;
             case "find":
+                handleFindUser(req, resp);
                 break;
             case "delete":
+                handleDeleteUser(req, resp);
                 break;
             default:
                 resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action parameter");
         }
+    }
+
+    private void handleFindUser(HttpServletRequest req, HttpServletResponse resp) {
+    }
+
+    private void handleEditUser(HttpServletRequest req, HttpServletResponse resp) {
+        
+    }
+
+    private void handleDeleteUser(HttpServletRequest req, HttpServletResponse resp) {
+
     }
 
     private void handleAddUser(HttpServletRequest req, HttpServletResponse resp) throws IOException {

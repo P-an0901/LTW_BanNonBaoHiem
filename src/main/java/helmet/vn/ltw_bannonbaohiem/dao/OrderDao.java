@@ -11,6 +11,8 @@ import org.jdbi.v3.core.statement.Update;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.sql.Date;
 import java.util.List;
 
 public class OrderDao {
@@ -60,6 +62,13 @@ public class OrderDao {
         order.setStatus(rs.getString("status"));
         order.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
         order.setUpdatedAt(rs.getTimestamp("updatedAt").toLocalDateTime());
+        order.setEstimatedDelivery(rs.getDate("estimatedDelivery").toLocalDate());
+        Date deliveryDate = rs.getDate("deliveryDate");
+        if (deliveryDate != null) {
+            order.setDeliveryDate(deliveryDate.toLocalDate());
+        } else {
+            order.setDeliveryDate(null);
+        }
 
         // Ánh xạ User
         User user = new User();
@@ -78,9 +87,9 @@ public class OrderDao {
 
 
 
-    public boolean add(int uid, String recipientName, String address, int methodPaymentId, String phone, Cart cart) {
-        String sql = "INSERT INTO orders(userId, recipientName, shippingAddress, paymentMethodId, phone, totalAmount, status) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public boolean add(int uid, String recipientName, String address, int methodPaymentId, String phone, Cart cart, String note, LocalDate estimatedDeliveryDate) {
+        String sql = "INSERT INTO orders(userId, recipientName, shippingAddress, paymentMethodId, phone, totalAmount, status, note, estimatedDelivery) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String insertOrderItemsSql = "INSERT INTO order_items (orderId, productVariantId, sizeId, quantity, price) VALUES (?, ?, ?, ?, ?)";
 
         try {
@@ -93,6 +102,8 @@ public class OrderDao {
                         .bind(4, phone)
                         .bind(5, cart.getTotalPrice())
                         .bind(6, "Đang xử lý")
+                        .bind(7, note != null ? note : null)
+                        .bind(8, estimatedDeliveryDate)
                         .executeAndReturnGeneratedKeys("id")
                         .mapTo(int.class)
                         .one();

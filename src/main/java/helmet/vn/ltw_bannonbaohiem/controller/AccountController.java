@@ -24,15 +24,17 @@ public class AccountController extends HttpServlet {
         User u = (User) session.getAttribute("auth");
         List<Order> currentOrders = new ArrayList<>();
         List<Order> orderHistory = new ArrayList<>();
+        List<Order> cancelOrders = new ArrayList<>();
         for (Order order : orserService.getAllList()) {
             if ("Đã giao".equals(order.getStatus())) {
                 orderHistory.add(order);
-            } else {
+            } else if("Đã hủy".equals(order.getStatus())){
+                cancelOrders.add(order);
+            }else{
                 currentOrders.add(order);
             }
         }
         if (u == null) {
-
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             resp.sendRedirect(req.getContextPath() + "/");
         }else {

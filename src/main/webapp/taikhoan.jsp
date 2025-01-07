@@ -87,23 +87,27 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Mã đơn</th>
                         <th>Tên người nhận</th>
                         <th>Tổng tiền</th>
                         <th>Phương thức thanh toán</th>
                         <th>Địa chỉ</th>
+                        <th>Ngày giao dự kiến</th>
                         <th>Trạng thái</th>
                         <th>Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="order" items="${currentOrders}">
+                <c:forEach var="order" items="${currentOrders}" varStatus="status">
                     <tr>
-                        <td>${order.id}</td>
+                        <td>${status.index + 1}</td>
+                        <td>#${order.id}</td>
                         <td>${order.user.fullName}</td>
                         <td>${order.totalAmount}</td>
                         <td>${order.paymentMethod.name}</td>
                         <td>${order.shippingAddress}</td>
+                        <td>${order.estimatedDelivery}</td>
                         <td>${order.status}</td>
                         <td>
                             <button class="btn btn-info">Xem chi tiết</button>
@@ -134,7 +138,7 @@
                 <tbody>
                 <c:forEach var="order" items="${orderHistory}">
                     <tr>
-                        <td>${order.id}</td>
+                        <td>#${order.id}</td>
                         <td>${order.user.fullName}</td>
                         <td>${order.totalAmount}</td>
                         <td>${order.paymentMethod.name}</td>

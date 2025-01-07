@@ -1,5 +1,6 @@
 package helmet.vn.ltw_bannonbaohiem.dao.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +14,16 @@ public class Order {
     private PaymentMethod paymentMethod;
     private double totalAmount;
     private String status;
+    private String note;
     private List<OrderItem> listItem;
+    private LocalDate estimatedDelivery;
+    private LocalDate deliveryDate;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public Order(int id, User user, String recipientName, String shippingAddress, String phone,
-                 PaymentMethod paymentMethod, double totalAmount, String status, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Order(int id, User user, String recipientName, String shippingAddress, String phone, PaymentMethod paymentMethod,
+                 double totalAmount, String status, String note,
+                 LocalDate estimatedDelivery, LocalDate deliveryDate, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.user = user;
         this.recipientName = recipientName;
@@ -26,7 +31,10 @@ public class Order {
         this.phone = phone;
         this.paymentMethod = paymentMethod;
         this.totalAmount = totalAmount;
+        this.note = note;
         this.status = status;
+        this.estimatedDelivery = estimatedDelivery;
+        this.deliveryDate = deliveryDate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.listItem = new ArrayList<>();
@@ -99,6 +107,30 @@ public class Order {
         this.status = status;
     }
 
+    public List<OrderItem> getListItem() {
+        return listItem;
+    }
+
+    public void setListItem(List<OrderItem> listItem) {
+        this.listItem = listItem;
+    }
+
+    public LocalDate getEstimatedDelivery() {
+        return estimatedDelivery;
+    }
+
+    public void setEstimatedDelivery(LocalDate estimatedDelivery) {
+        this.estimatedDelivery = estimatedDelivery;
+    }
+
+    public LocalDate getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(LocalDate deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -113,5 +145,13 @@ public class Order {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }
