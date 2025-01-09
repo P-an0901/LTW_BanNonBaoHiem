@@ -31,4 +31,8 @@ public class ProductService {
         }
         return list;
     }
+
+    public boolean deleteProduct(String id) {
+        return prodao.delete(Integer.parseInt(id));
+    }
 }

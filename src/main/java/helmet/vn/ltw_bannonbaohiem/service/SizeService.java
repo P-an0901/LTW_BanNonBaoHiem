@@ -10,4 +10,8 @@ public class SizeService {
     public List<Sizes> getAllSize(){
         return sizeDao.getAllSize();
     }
+
+    public boolean add(String name) {
+        return sizeDao.addSize(name);
+    }
 }
