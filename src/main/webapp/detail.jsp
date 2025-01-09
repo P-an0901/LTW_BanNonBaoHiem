@@ -133,17 +133,6 @@
                                             <img src="${pageContext.request.contextPath}/${fn:escapeXml(variant.image)}" alt="${variant.id}" class="thumbnails">
                                         </a>
                                     </c:forEach>
-                                    <img src="images/Royal-M139-Leopard.jpg" alt="Màu 1" class="thumbnails">
-                                    <img src="images/Royal-M139-Vang-bong.png" alt="Màu 2" class="thumbnails">
-                                    <img src="images/Royal-M139-Chuot-xuoc-bong.jpg" alt="Màu 3" class="thumbnails">
-                                    <img src="images/Royal-M139-V.2.jpg" alt="Màu 4" class="thumbnails">
-                                    <img src="images/Royal-M139-V.5-Trang-den.jpg" alt="Màu 5" class="thumbnails">
-                                    <img src="images/Royal M139 Carbon.jpg" alt="Màu 6" class="thumbnails">
-                                    <img src="images/1-Royal M139 V.5 Đen - đồng.jpg" alt="Màu 7" class="thumbnails">
-                                    <img src="images/1-Royal M139 V.7 Vàng bóng.jpg" alt="Màu 8" class="thumbnails">
-                                    <img src="images/1-Royal M139 V.9 Trắng.jpg" alt="Màu 9" class="thumbnails">
-                                    <img src="images/Royal M139 Xanh ngọc.jpg" alt="Màu 10" class="thumbnails">
-                                    <img src="images/Royal-M139-V.10-Den.jpg" alt="Màu 11" class="thumbnails">
                                 </div>
                             </div>
                             <!-- Chọn size và số lượng -->

@@ -215,5 +215,27 @@ public class ProductVariantDao {
     }
 
 
+    public List<ProductVariant> getSaleProductVariants() {
+        String sql = "SELECT pv.id, pv.name, pv.color, pv.price, pv.image, pv.isActive, " +
+                "       pv.productId AS pid, pv.createdAt, p.name AS pname " +
+                "FROM product_variants pv " +
+                "JOIN products p ON pv.productId = p.id " +
+                "JOIN product_variant_promotions pvp ON pvp.variantId = pv.id " +
+                "JOIN promotions pm ON pm.id = pvp.promotionId " +
+                "WHERE pv.isActive > 0 AND pm.startDate <= NOW() AND pm.endDate >= NOW() " +
+                "ORDER BY pm.endDate DESC " +
+                "LIMIT 5";
 
+        return getProductVariants(sql);
+    }
+
+    public boolean delete(int id) {
+        String sql = "DELETE FROM product_variants WHERE id = ?";
+        return jdbi.withHandle(handle -> {
+            Update update = handle.createUpdate(sql);
+            update.bind(0, id);
+            int rowsAffected = update.execute();
+            return rowsAffected > 0;
+        });
+    }
 }

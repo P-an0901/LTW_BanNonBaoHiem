@@ -5,14 +5,14 @@ import java.time.LocalTime;
 
 public class ProductVariantPromotion {
     private int id;
-    private ProductVariant variant;
-    private Promotion promotion;
+    private int variant;
+    private int promotion;
     private LocalDateTime createdAt;
 
     public ProductVariantPromotion() {
     }
 
-    public ProductVariantPromotion(int id, ProductVariant variant, Promotion promotion, LocalDateTime createdAt) {
+    public ProductVariantPromotion(int id, int variant, int promotion, LocalDateTime createdAt) {
         this.id = id;
         this.variant = variant;
         this.promotion = promotion;
@@ -27,19 +27,19 @@ public class ProductVariantPromotion {
         this.id = id;
     }
 
-    public ProductVariant getVariant() {
+    public int getVariant() {
         return variant;
     }
 
-    public void setVariant(ProductVariant variant) {
+    public void setVariant(int variant) {
         this.variant = variant;
     }
 
-    public Promotion getPromotion() {
+    public int getPromotion() {
         return promotion;
     }
 
-    public void setPromotion(Promotion promotion) {
+    public void setPromotion(int promotion) {
         this.promotion = promotion;
     }
 

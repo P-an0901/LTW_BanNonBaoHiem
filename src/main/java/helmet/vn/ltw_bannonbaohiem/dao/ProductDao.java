@@ -118,4 +118,14 @@ public class ProductDao {
             return false;
         }
     }
+
+    public boolean delete(int id) {
+        String sql = "DELETE FROM products WHERE id = ?";
+        return jdbi.withHandle(handle -> {
+            Update update = handle.createUpdate(sql);
+            update.bind(0, id);
+            int rowsAffected = update.execute();
+            return rowsAffected > 0;
+        });
+    }
 }

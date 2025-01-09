@@ -33,7 +33,9 @@ public class IndexServlet extends HttpServlet {
         List<Product> products = productService.getAllPro();
 
         List<ProductVariant> limitedProducts = productVariantService.getLimitedNewProductVariants(5);
+        List<ProductVariant> limitedProSale = productVariantService.getLimitedSaleProductVariants(5);
         req.setAttribute("proVariants", limitedProducts);
+        req.setAttribute("limitedProSale", limitedProSale);
         System.out.println(limitedProducts);
         req.setAttribute("products", products);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");

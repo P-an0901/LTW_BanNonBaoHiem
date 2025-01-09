@@ -2,10 +2,7 @@ package helmet.vn.ltw_bannonbaohiem.controller.admin.productMange;
 
 import helmet.vn.ltw_bannonbaohiem.dao.model.Brand;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Category;
-import helmet.vn.ltw_bannonbaohiem.service.BrandService;
-import helmet.vn.ltw_bannonbaohiem.service.CategoryService;
-import helmet.vn.ltw_bannonbaohiem.service.ProductService;
-import helmet.vn.ltw_bannonbaohiem.service.ProductVariantService;
+import helmet.vn.ltw_bannonbaohiem.service.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,6 +18,7 @@ import java.io.IOException;
 @MultipartConfig
 public class Add extends HttpServlet {
     BrandService brandService = new BrandService();
+    SizeService sizeService = new SizeService();
     CategoryService cateService = new CategoryService();
     ProductService productService = new ProductService();
     ProductVariantService productVariantService = new ProductVariantService();
@@ -61,6 +59,17 @@ public class Add extends HttpServlet {
     }
 
     private void handleAddProductVariantSize(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+        String variant = req.getParameter("variantId");
+        String size = req.getParameter("sizeId");
+        int stock = Integer.parseInt(req.getParameter("stock"));
+        if(variant != null && size != null && stock >= 0){
+            boolean bo = productVariantService.addNewSize(Integer.parseInt(variant), Integer.parseInt(size), stock);
+            if(bo){
+                resp.sendRedirect(req.getContextPath() + "/admin/product");
+            }else{
+                resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Lỗi");
+            }
+        }
 
     }
 
@@ -125,6 +134,17 @@ public class Add extends HttpServlet {
     }
 
     private void handleAddSize(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+        String name = req.getParameter("nameSize");
+        if(name != null){
+            boolean bo = sizeService.add(name);
+            if(bo){
+                String referer = req.getHeader("Referer");
+                resp.sendRedirect(referer);
+            }
+
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Lỗi");
+        }
         
     }
 

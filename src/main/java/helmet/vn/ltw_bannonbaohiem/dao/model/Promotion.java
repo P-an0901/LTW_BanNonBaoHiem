@@ -13,7 +13,7 @@ public class Promotion {
     private LocalDateTime endDate;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private List<ProductVariant> lstVariant;
+    private List<Integer> lstVariant;
 
     public Promotion(int id, String name, String description, double discountPercentage,
                      LocalDateTime startDate, LocalDateTime endDate,
@@ -27,6 +27,9 @@ public class Promotion {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.lstVariant = new ArrayList<>();
+    }
+
+    public Promotion() {
     }
 
     // Getter and Setter
@@ -92,6 +95,14 @@ public class Promotion {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public List<Integer> getLstVariant() {
+        return lstVariant;
+    }
+
+    public void setLstVariant(List<Integer> lstVariant) {
+        this.lstVariant = lstVariant;
     }
 
     @Override
