@@ -452,16 +452,23 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <c:if test="${empty promotions}">
                             <tr>
-                                <td>1</td>
-                                <td>Giảm giá Đầu tháng</td>
-                                <td>Giảm giá sốc!</td>
-                                <td>10</th>
-                                <td>01-12-2024</th>
-                                <td>10-12-2024</th>
+                                <td colspan="5" style="text-align: center; font-style: italic;">Không có dữ liệu</td>
+                            </tr>
+                        </c:if>
+                        <c:forEach var="pr" items="${promotions}">
+                            <tr>
+                                <td>${pr.id}</td>
+                                <td>${pr.name}</td>
+                                <td>${pr.description}</td>
+                                <td>${pr.discountPercentage}</td>
+                                <td>${pr.startDate}</td>
+                                <td>${pr.endDate}</td>
                                 <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
                                 <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                             </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>

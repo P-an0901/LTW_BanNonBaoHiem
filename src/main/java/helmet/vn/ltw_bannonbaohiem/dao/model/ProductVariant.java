@@ -17,6 +17,7 @@ public class ProductVariant {
     private boolean isActive;
     private LocalDateTime createdAt;
     private boolean newProV;
+    private boolean isSale;
     public ProductVariant() {}
 
     public ProductVariant(int id, String name) {
@@ -128,6 +129,13 @@ public class ProductVariant {
         return daysDifference <= 30;
     }
 
+    public boolean isSale() {
+        return isSale;
+    }
+
+    public void setSale(boolean sale) {
+        isSale = sale;
+    }
 
     @Override
     public String toString() {
