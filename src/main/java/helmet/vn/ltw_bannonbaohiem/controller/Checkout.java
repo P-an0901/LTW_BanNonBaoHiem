@@ -6,6 +6,7 @@ import helmet.vn.ltw_bannonbaohiem.dao.model.PaymentMethod;
 import helmet.vn.ltw_bannonbaohiem.dao.model.User;
 import helmet.vn.ltw_bannonbaohiem.service.OrderService;
 import helmet.vn.ltw_bannonbaohiem.service.PaymentMethodService;
+import helmet.vn.ltw_bannonbaohiem.service.ProductVariantService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,6 +23,7 @@ import java.util.List;
 public class Checkout extends HttpServlet {
     private OrderService orderService = new OrderService();
     private PaymentMethodService payService = new PaymentMethodService();
+    private ProductVariantService productVariantService = new ProductVariantService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<PaymentMethod> payList = payService.getListPaymentMethod();
@@ -50,6 +52,7 @@ public class Checkout extends HttpServlet {
         boolean order = orderService.add(u.getId(), cart, recipientName, address, Integer.parseInt(methodPayment),
                 phone, note, estimatedDeliveryDate);
         if (order == true) {
+            productVariantService.updateStock(cart);
             session.removeAttribute("cart");
             resp.sendRedirect(req.getContextPath() + "/account");
         } else {

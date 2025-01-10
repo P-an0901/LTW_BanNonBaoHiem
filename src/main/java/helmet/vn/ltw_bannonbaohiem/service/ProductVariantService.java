@@ -4,6 +4,7 @@ import helmet.vn.ltw_bannonbaohiem.dao.ProductSizeDao;
 import helmet.vn.ltw_bannonbaohiem.dao.ProductVariantDao;
 import helmet.vn.ltw_bannonbaohiem.dao.PromotionDao;
 import helmet.vn.ltw_bannonbaohiem.dao.PromotionVariantDao;
+import helmet.vn.ltw_bannonbaohiem.dao.cart.Cart;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Product;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductSize;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductVariant;
@@ -115,5 +116,8 @@ public class ProductVariantService {
 
     public boolean deleteVariant(String id) {
         return productVariantD.delete(Integer.parseInt(id));
+    }
+    public boolean updateStock(Cart cart){
+        return proSizeD.updateStock(cart);
     }
 }

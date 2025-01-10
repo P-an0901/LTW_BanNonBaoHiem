@@ -18,6 +18,7 @@ public class ProductVariant {
     private LocalDateTime createdAt;
     private boolean newProV;
     private boolean isSale;
+    private double salePrice;
     public ProductVariant() {}
 
     public ProductVariant(int id, String name) {
@@ -36,6 +37,7 @@ public class ProductVariant {
         this.createdAt = createdAt;
         this.listPSize = new ArrayList<>();
         this.newProV = isNewProduct();
+        this.salePrice = 0;
     }
 
     public int getId() {
@@ -135,6 +137,14 @@ public class ProductVariant {
 
     public void setSale(boolean sale) {
         isSale = sale;
+    }
+
+    public double getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(double percent) {
+        this.salePrice = this.price - this.price*percent;
     }
 
     @Override

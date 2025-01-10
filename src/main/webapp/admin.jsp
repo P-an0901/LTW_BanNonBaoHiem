@@ -504,12 +504,6 @@
             <div class="section user active">
                 <h1 class="section-title">Quản Lý Người Dùng</h1>
                 <div class="admin-control">
-                    <div class="admin-control-center">
-                        <form action="userSearch" class="form-search">
-                            <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input id="form-search-user" type="text" class="form-search-input" placeholder="Tìm kiếm khách hàng..." oninput="">
-                        </form>
-                    </div>
                     <div class="admin-control-right">
                         <form action="dateSearch" class="fillter-date">
                             <div>
@@ -528,7 +522,7 @@
             <div>
             <h2>Danh Sách Người Dùng</h2>
             <div class="table">
-                <table width="100%">
+                <table id="user-table" width="100%">
                     <thead>
                         <tr>
                             <th></th>

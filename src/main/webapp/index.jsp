@@ -96,12 +96,12 @@
 
                             </a>
                             <div class="product-price-container">
-                                <p class="product-sale-price"><span>120.000 đ</span></p>
-                                <p class="product-price"><span><f:formatNumber value="${proV.price}"/></span></p>
+                                <p class="product-sale-price"><span><f:formatNumber value="${proV.salePrice}"/> đ</span></p>
+                                <p class="product-price"><span><f:formatNumber value="${proV.price}"/> đ</span></p>
                             </div>
                             <form action="${pageContext.request.contextPath}/add-cart" method="POST">
                                 <input type="hidden" name="productId" value="${proV.id}">
-                                <input type="hidden" name="price" value="${proV.price}">
+                                <input type="hidden" name="price" value="${proV.salePrice}">
                                 <input type="hidden" name="sizeId" class="sizeId-${proV.id}">
                                 <input type="hidden" name="quantity" value="1" min="1">
                                 <button type="submit" class="buy-button" onclick="return validateF()">Thêm vào giỏ hàng</button>

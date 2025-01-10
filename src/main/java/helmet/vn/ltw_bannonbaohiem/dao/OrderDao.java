@@ -52,7 +52,6 @@ public class OrderDao {
         });
     }
     private Order mapOrder(ResultSet rs) throws SQLException {
-        // Ánh xạ Order
         Order order = new Order();
         order.setId(rs.getInt("id"));
         order.setRecipientName(rs.getString("recipientName"));
@@ -70,13 +69,11 @@ public class OrderDao {
             order.setDeliveryDate(null);
         }
 
-        // Ánh xạ User
         User user = new User();
         user.setId(rs.getInt("userId"));
         user.setFullName(rs.getString("user_name"));
         order.setUser(user);
 
-        // Ánh xạ PaymentMethod
         PaymentMethod paymentMethod = new PaymentMethod();
         paymentMethod.setId(rs.getInt("paymentMethodId"));
         paymentMethod.setName(rs.getString("payment_method_name"));
@@ -84,9 +81,6 @@ public class OrderDao {
 
         return order;
     }
-
-
-
     public boolean add(int uid, String recipientName, String address, int methodPaymentId, String phone, Cart cart, String note, LocalDate estimatedDeliveryDate) {
         String sql = "INSERT INTO orders(userId, recipientName, shippingAddress, paymentMethodId, phone, totalAmount, status, note, estimatedDelivery) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";

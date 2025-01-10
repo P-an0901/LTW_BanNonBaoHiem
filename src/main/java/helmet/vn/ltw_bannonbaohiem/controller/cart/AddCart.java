@@ -21,6 +21,7 @@ public class AddCart extends HttpServlet {
         int productId = Integer.parseInt(req.getParameter("productId"));
         int sizeId = Integer.parseInt(req.getParameter("sizeId"));
         int quantity = Integer.parseInt(req.getParameter("quantity"));
+        double price = Double.parseDouble(req.getParameter("price"));
         System.out.println(sizeId);
 
         ProductVariantService productVariantService = new ProductVariantService();
@@ -31,7 +32,7 @@ public class AddCart extends HttpServlet {
         if (cart == null) {
             cart = new Cart();
         }
-        cart.add(productVariant, sizeId, quantity);
+        cart.add(productVariant, sizeId, quantity, price);
         session.setAttribute("cart", cart);
         String referer = req.getHeader("Referer");
         resp.sendRedirect(referer);

@@ -103,7 +103,7 @@
                     <tr>
                         <td>${status.index + 1}</td>
                         <td>#${order.id}</td>
-                        <td>${order.user.fullName}</td>
+                        <td>${order.recipientName}</td>
                         <td>${order.totalAmount}</td>
                         <td>${order.paymentMethod.name}</td>
                         <td>${order.shippingAddress}</td>

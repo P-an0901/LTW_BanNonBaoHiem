@@ -3,27 +3,69 @@ document.addEventListener("DOMContentLoaded", function () {
     const dataTable = new DataTable(table1, {
         "paging": true,
         "searching": true,
-
         "ordering": true,
-
-        "info": false,  
-        "lengthChange": false, 
+        "info": true,
+        "lengthChange": true,
+        "pageLength": 5,
+    });
+    const table2 = document.getElementById("variant-content");
+    const variantDataTable = new DataTable(table2, {
+        "paging": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "lengthChange": true,
+        "pageLength": 5,
+    });
+    const table3 = document.getElementById("brand-table");
+    const brandDataTable = new DataTable(table3, {
+        "paging": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "lengthChange": true,
+        "pageLength": 5,
+    });
+    const table4 = document.getElementById("category-table");
+    const cateDataTable = new DataTable(table4, {
+        "paging": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "lengthChange": true,
+        "pageLength": 5,
+    });
+    const table5 = document.getElementById("p-size-content");
+    const productSizeDataTable = new DataTable(table5, {
+        "paging": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "lengthChange": true,
+        "pageLength": 5,
+    });
+    const table6 = document.getElementById("user-table");
+    const userDataTable = new DataTable(table6, {
+        "paging": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "lengthChange": true,
+        "pageLength": 5,
+    });
+    const table7 = document.getElementById("promotion-table");
+    const promtionDataTable = new DataTable(table7, {
+        "paging": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "lengthChange": true,
         "pageLength": 5,
     });
 });
 
 
-    const table2 = document.getElementById("variant-content");
-            const variantDataTable = new DataTable(table2, {
-                "paging": true,
-                "searching": true,
 
-                "ordering": true,
-
-                "info": false,
-                "lengthChange": false,
-                "pageLength": 5,
-            });
 
 
     const detailsBtns = document.querySelectorAll('.pdetails-btn'); 

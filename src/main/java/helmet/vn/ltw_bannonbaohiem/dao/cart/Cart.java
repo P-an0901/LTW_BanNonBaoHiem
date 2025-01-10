@@ -13,7 +13,7 @@ public class Cart {
     private Map<String, CartProduct> data = new HashMap<>();
     ProductVariantService pVService = new ProductVariantService();
 
-    public boolean add(ProductVariant pv, int proSizeId, int quantity){
+    public boolean add(ProductVariant pv, int proSizeId, int quantity, double price){
         ProductSize selectedSize = pVService.getById(proSizeId);
         if (selectedSize == null) {
             System.out.println("Không tìm thấy kích cỡ cho sản phẩm.");
@@ -34,7 +34,7 @@ public class Cart {
                     pv.getImage(),
                     quantity,
                     selectedSize,
-                    pv.getPrice()
+                    price
             );
             data.put(uniqueKey, cartProduct);
             System.out.println("Đã thêm sản phẩm vào giỏ hàng.");
