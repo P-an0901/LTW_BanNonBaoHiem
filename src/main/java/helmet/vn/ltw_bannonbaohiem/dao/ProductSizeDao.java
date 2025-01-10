@@ -1,5 +1,7 @@
 package helmet.vn.ltw_bannonbaohiem.dao;
 
+import helmet.vn.ltw_bannonbaohiem.dao.cart.Cart;
+import helmet.vn.ltw_bannonbaohiem.dao.cart.CartProduct;
 import helmet.vn.ltw_bannonbaohiem.dao.db.JdbiConnect;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductSize;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductVariant;
@@ -125,5 +127,23 @@ public class ProductSizeDao {
             int rowsAffected = update.execute();
             return rowsAffected > 0;
         });
+    }
+
+    public boolean updateStock(Cart cart) {
+        String sql = "UPDATE product_sizes SET stock = stock - ? WHERE id = ?";
+        try {
+            jdbi.useTransaction(handle -> {
+                for (CartProduct item : cart.getList()) {
+                    handle.createUpdate(sql)
+                            .bind(0, item.getQuantity())
+                            .bind(1, item.getSize().getId())
+                            .execute();
+                }
+            });
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

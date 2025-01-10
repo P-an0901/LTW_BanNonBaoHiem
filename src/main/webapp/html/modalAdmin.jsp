@@ -166,7 +166,7 @@
       </div>
       <div class="modal-body">
         <h2 class="modal-title">Thêm Danh Mục</h2>
-        <form action="${pageContext.request.contextPath}/add-tab-product" method="post">
+        <form action="${pageContext.request.contextPath}/add-tab-product" method="post" enctype="multipart/form-data">
           <input type="hidden" name="action" value="addCate">
           <div class="form-group col-md-6">
             <label for="categoryName">Tên Danh Mục</label>

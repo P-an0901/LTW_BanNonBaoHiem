@@ -53,7 +53,6 @@ public class LoginController extends HttpServlet {
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             }
         }
-
         resp.setContentType("application/json");
         PrintWriter out = resp.getWriter();
         out.print(new Gson().toJson(responseMap));

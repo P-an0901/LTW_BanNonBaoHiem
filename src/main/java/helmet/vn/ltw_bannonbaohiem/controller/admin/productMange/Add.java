@@ -170,7 +170,9 @@ public class Add extends HttpServlet {
         String brandName = req.getParameter("brandName");
         System.out.println("bbbbb");
         Part filePart = req.getPart("brandImage");
+        System.out.println(filePart);
         String fileName = extractFileName(filePart);
+        System.out.println(fileName);
         String uploadPath = getServletContext().getRealPath("/") + File.separator + UPLOAD_DIR;
 
         File uploadDir = new File(uploadPath);
@@ -197,6 +199,7 @@ public class Add extends HttpServlet {
     }
     private String extractFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
+        System.out.println(contentDisp);
         for (String content : contentDisp.split(";")) {
             if (content.trim().startsWith("filename")) {
                 return content.substring(content.indexOf("=") + 2, content.length() - 1);

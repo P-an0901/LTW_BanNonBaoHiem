@@ -217,7 +217,7 @@ public class ProductVariantDao {
 
     public List<ProductVariant> getSaleProductVariants() {
         String sql = "SELECT pv.id, pv.name, pv.color, pv.price, pv.image, pv.isActive, " +
-                "       pv.productId AS pid, pv.createdAt, p.name AS pname " +
+                "       pv.productId AS pid, pv.createdAt, p.name AS pname, pm.discountPercentage AS discount " +
                 "FROM product_variants pv " +
                 "JOIN products p ON pv.productId = p.id " +
                 "JOIN product_variant_promotions pvp ON pvp.variantId = pv.id " +
@@ -226,7 +226,22 @@ public class ProductVariantDao {
                 "ORDER BY pm.endDate DESC " +
                 "LIMIT 5";
 
-        return getProductVariants(sql);
+        return jdbi.withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .map((rs, ctx) -> {
+                        ProductVariant variant = new ProductVariant();
+                        variant.setId(rs.getInt("id"));
+                        variant.setName(rs.getString("name"));
+                        variant.setProductId(rs.getInt("pid"));
+                        variant.setColor(rs.getString("color"));
+                        variant.setPrice(rs.getDouble("price"));
+                        variant.setImage(rs.getString("image"));
+                        variant.setActive(rs.getInt("isActive") > 0);
+                        variant.setSalePrice(rs.getDouble("discount")/100);
+                        variant.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
+                        return variant;
+                    }).list();
+        });
     }
 
     public boolean delete(int id) {
