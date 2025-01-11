@@ -51,19 +51,20 @@
                         <img src="${productVariant.image}" class="product-image" id="main-product-image">
                     </div>
                     <div class="product-thumbnails">
-                        <img src="images/Royal-M139-BoomBang.jpg" class="thumbnail" data-src="images/Royal-M139-BoomBang.jpg">
-                        <img src="images/2-Royal-M139-BoomBang.jpg" class="thumbnail" data-src="images/2-Royal-M139-BoomBang.jpg">
+                        <c:forEach var="im" items="${listImages}">
+                            <img src="${im.imageUrl}" class="thumbnail" data-src="${im.imageUrl}">
+                        </c:forEach>
                     </div>
                 </div>
 
                 <!-- Thông tin sản phẩm -->
                 <div class="col-md-8 product-info">
-                    <div class="product-name">
+                    <div class="product-name" id="detail-t">
                         <h1 >${productVariant.name}</h1>
                     </div>
                     <div class="product-details">
-                        <span>Thương hiệu: </span><a href="Royal.html" class="product-brand">${product.brand.name}</a>
-                        <span> | Loại nón: </span><a href="Royal.html" class="product-type">${product.category.name}</a>
+                        <span>Thương hiệu: </span><a href="${pageContext.request.contextPath}/danhmuc?brand=${product.brand.id}" class="product-brand">${product.brand.name}</a>
+                        <span> | Loại nón: </span><a href="${pageContext.request.contextPath}/danhmuc?category=${product.category.id}" class="product-type">${product.category.name}</a>
                         <div class="rating mt-1">
                             <img src="images/stars.original.png" class="stars">
                             <span class="number-rated">( 99 lượt đánh giá.)</span>
@@ -79,47 +80,47 @@
                                 <tbody>
                                     <tr>
                                         <td><strong>Kích thước:</strong></td>
-                                        <td>M, L và XL.</td>
+                                        <td>${technical.lstSize}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Trọng lượng:</strong></td>
-                                        <td>950 gram.</td>
+                                        <td>${technical.weight}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Màu sắc:</strong></td>
-                                        <td>Đen</td>
+                                        <td>${technical.lstColor}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Đạt chuẩn:</strong></td>
-                                        <td>QCVN 2:2021/BKHCN</td>
+                                        <td>${technical.standards}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Chất liệu:</strong></td>
-                                        <td>Nhựa ABS, Xốp EPS</td>
+                                        <td>${technical.material}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Mũ lót:</strong></td>
-                                        <td>Vải nâu đất, có thể tháo rời</td>
+                                        <td>${technical.innerLining}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Kính</strong></td>
-                                        <td>Kính âm, PC (Polycarbonat)</td>
+                                        <td>${technical.visorType}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Sản xuất tại:</strong></td>
-                                        <td>Việt Nam</td>
+                                        <td>${technical.madeIn}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Tình trạng:</strong></td>
-                                        <td>Mới 100%</td>
+                                        <td>${technical.condition}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Bảo hành:</strong></td>
-                                        <td>365 ngày</td>
+                                        <td>${technical.warranty}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Đổi trả:</strong></td>
-                                        <td>7 ngày</td>
+                                        <td>${technical.returns}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -174,23 +175,23 @@
                     
                     <!-- Mô tả đầy đủ, có lớp phủ mờ -->
                     <div class="full-description">
-                        <p>Là sản phẩm mới nhất của Royal Helmet, thương hiệu nón bảo hiểm hàng đầu Việt Nam. 
-                            Royal M139 được sản xuất trên những công nghệ tiên tiến nhất, 
-                            mang đến chất lượng và sự an toàn cao nhất cho người sử dụng.                        
+                        <p>Là sản phẩm mới nhất của Royal Helmet, thương hiệu nón bảo hiểm hàng đầu Việt Nam.
+                            Royal M139 được sản xuất trên những công nghệ tiên tiến nhất,
+                            mang đến chất lượng và sự an toàn cao nhất cho người sử dụng.
                             mang lại cho bạn trải nghiệm dễ chịu nhưng vẫn an toàn khi đội trên mình nón bảo hiểm Royal M139.
                         </p>
                         <p>
-                            -Vỏ nón bảo hiểm Royal M139 được chế tạo bằng nhựa ABS nguyên sinh - loại nhựa tinh khiết chưa qua sử dụng, 
-                            được sử dụng cho các sản phẩm có tiêu chuẩn an toàn cao như vỏ thiết bị y tế, dược phẩm, 
-                            vỏ máy bay... giúp sản phẩm có độ bền cao và chịu va đập tốt. 
-                            Royal M139 có trọng lượng chỉ 950g mang đến sự nhẹ nhàng, 
-                            thoải mái nhưng vẫn đảm bảo được sự an toàn cho người sử dụng.   
+                            -Vỏ nón bảo hiểm Royal M139 được chế tạo bằng nhựa ABS nguyên sinh - loại nhựa tinh khiết chưa qua sử dụng,
+                            được sử dụng cho các sản phẩm có tiêu chuẩn an toàn cao như vỏ thiết bị y tế, dược phẩm,
+                            vỏ máy bay... giúp sản phẩm có độ bền cao và chịu va đập tốt.
+                            Royal M139 có trọng lượng chỉ 950g mang đến sự nhẹ nhàng,
+                            thoải mái nhưng vẫn đảm bảo được sự an toàn cho người sử dụng.
                         </p>
                         <p>
-                            -Phần đệm lót bên trong nón còn có lớp vải kháng khuẩn, chống ẩm, 
-                            thấm hút mồ hôi rất tốt cho việc bảo vệ chiếc nón khỏi mùi hôi, ẩm mốc. 
-                            Đây là tính năng đặc biệt phù hợp với khí hậu nhiệt đới của Việt Nam.                           
-                            -Khóa nón được thiết kế chắc chắn, có khả năng điều chỉnh linh hoạt 
+                            -Phần đệm lót bên trong nón còn có lớp vải kháng khuẩn, chống ẩm,
+                            thấm hút mồ hôi rất tốt cho việc bảo vệ chiếc nón khỏi mùi hôi, ẩm mốc.
+                            Đây là tính năng đặc biệt phù hợp với khí hậu nhiệt đới của Việt Nam.
+                            -Khóa nón được thiết kế chắc chắn, có khả năng điều chỉnh linh hoạt
                         </p>
                         <p> -Phần lót nón có thể tháo rời dễ dàng để tiện vệ sinh, mang tới sự sạch sẽ, dễ chịu cho người sử dụng.</p>
                     </div>

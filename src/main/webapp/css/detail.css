@@ -18,7 +18,9 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7); 
 }
-
+#detail-t {
+    height: 2.4em;
+}
 #imageModal .modal-content {
     position: relative; 
     width: 600px;

@@ -155,7 +155,7 @@
   </div>
 </div>
 
-
+<%-- Modal thêm danh mục--%>
 <div class="modal" id="addCategoryModal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -325,34 +325,60 @@
           <tr>
             <th>Thông số</th>
             <th>Giá trị</th>
-            <th>Thao tác</th>
           </tr>
           </thead>
           <tbody>
           <tr>
+            <td>Kích thước</td>
+            <td id="list-size"></td>
+          </tr>
+          <tr>
             <td>Trọng lượng</td>
-            <td>1.2kg</td>
-            <td>
-              <button class="edit-btn"><i class="fa-solid fa-pen"></i> Sửa</button>
-              <button class="delete-btn"><i class="fa-solid fa-trash"></i> Xóa</button>
-            </td>
+            <td id="weight-value"></td>
+          </tr>
+          <tr>
+            <td>Màu sắc</td>
+            <td id="list-color"></td>
+          </tr>
+          <tr>
+            <td>Đạt chuẩn</td>
+            <td id="standards"></td>
           </tr>
           <tr>
             <td>Chất liệu</td>
-            <td>Nhựa ABS</td>
-            <td>
-              <button class="edit-btn"><i class="fa-solid fa-pen"></i> Sửa</button>
-              <button class="delete-btn"><i class="fa-solid fa-trash"></i> Xóa</button>
-            </td>
+            <td id="material-value"></td>
           </tr>
-
+          <tr>
+            <td>Muc lót</td>
+            <td id="inner-lining"></td>
+          </tr>
+          <tr>
+            <td>Kính</td>
+            <td id="visor-type"></td>
+          </tr>
+          <tr>
+            <td>Nơi sản xuất</td>
+            <td id="made-in"></td>
+          </tr>
+          <tr>
+            <td>Tình trạng</td>
+            <td id="condition-value"></td>
+          </tr>
+          <tr>
+            <td>Bảo hành</td>
+            <td id="warranty-value"></td>
+          </tr>
+          <tr>
+            <td>Đổi trả</td>
+            <td id="returns-value"></td>
+          </tr>
           </tbody>
         </table>
-        <button id="add-detail-btn"><i class="fa-solid fa-plus"></i> Thêm thông số</button>
       </div>
     </div>
   </div>
 </div>
+
 
 <!-- Modal Thêm Người Dùng -->
 <div class="modal" id="addUserModal">

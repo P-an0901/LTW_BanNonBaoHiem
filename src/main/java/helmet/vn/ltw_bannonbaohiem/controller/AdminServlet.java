@@ -26,7 +26,6 @@ public class AdminServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/");
             return;
         }
-
         String tab = req.getPathInfo();
         if (tab == null || tab.equals("/")) {
             tab = "/home";

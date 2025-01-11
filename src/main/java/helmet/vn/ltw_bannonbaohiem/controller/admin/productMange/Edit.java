@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import helmet.vn.ltw_bannonbaohiem.controller.admin.LocalDateTimeAdapter;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Brand;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Product;
+import helmet.vn.ltw_bannonbaohiem.dao.model.ProductSize;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductVariant;
 import helmet.vn.ltw_bannonbaohiem.service.BrandService;
 import helmet.vn.ltw_bannonbaohiem.service.CategoryService;
@@ -30,8 +31,6 @@ public class Edit extends HttpServlet {
     private CategoryService cateService = new CategoryService();
     private ProductService proService = new ProductService();
     private ProductVariantService productVariantService = new ProductVariantService();
-    private Gson gson;
-    private PrintWriter out;
     private static final String UPLOAD_DIR = "images";
 
     @Override
@@ -39,63 +38,7 @@ public class Edit extends HttpServlet {
         req.setAttribute("activeTab", "product");
         String action = req.getParameter("action");
         System.out.println(action);
-        if (action == null) {
-            System.out.println("action is null");
-        }else {
-            switch (action) {
-                case "findBrand":
-                    int id = Integer.parseInt(req.getParameter("brandId"));
-                    Brand brand = brandService.getBrandById(id);
-                    System.out.println(brand);
-                    resp.setContentType("application/json");
-                    PrintWriter out = resp.getWriter();
-                    gson = new Gson();
-                    out.print(gson.toJson(brand));
-                    out.flush();
-                    out.close();
-                    break;
-                case "findProduct":
-                    int pid = Integer.parseInt(req.getParameter("productId"));
-                    Product product = proService.getProById(pid);
-                    System.out.println(product);
-
-                    resp.setContentType("application/json");
-                    out = resp.getWriter();
-                    gson = new GsonBuilder()
-                            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
-                            .create();
-
-                    out.print(gson.toJson(product));
-                    out.flush();
-                    out.close();
-                    break;
-
-                case "findSize":
-                    break;
-                case "findCate":
-                    break;
-                case "findProductVariant":
-                    int pvId = Integer.parseInt(req.getParameter("variantId"));
-                    ProductVariant pv = productVariantService.getProVariant(pvId);
-                    System.out.println(pv);
-                    resp.setContentType("application/json");
-                    out = resp.getWriter();
-                    gson = new GsonBuilder()
-                            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
-                            .create();
-
-                    out.print(gson.toJson(pv));
-                    out.flush();
-                    out.close();
-                    break;
-                case "findProductVariantSize":
-                    break;
-                default:
-                    resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action parameter");
-            }
-        }
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("activeTab", "product");
