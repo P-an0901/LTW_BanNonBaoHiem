@@ -71,4 +71,17 @@ function increaseQuantity() {
     quantityInput.value = quantity + 1;
 }
 
+document.getElementById('toggleDescription').addEventListener('click', function() {
+    const fullDescription = document.querySelector('.full-description');
+    const overlay = document.querySelector('.overlay');
 
+    if (fullDescription.style.display === 'none' || fullDescription.style.display === '') {
+        fullDescription.style.display = 'block';
+        overlay.style.display = 'none';
+        this.textContent = 'Thu gọn';
+    } else {
+        fullDescription.style.display = 'none';
+        overlay.style.display = 'block';
+        this.textContent = 'Xem thêm';
+    }
+});

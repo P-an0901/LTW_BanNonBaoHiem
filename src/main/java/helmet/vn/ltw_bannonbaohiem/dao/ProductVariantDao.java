@@ -1,6 +1,7 @@
 package helmet.vn.ltw_bannonbaohiem.dao;
 
 import helmet.vn.ltw_bannonbaohiem.dao.db.JdbiConnect;
+import helmet.vn.ltw_bannonbaohiem.dao.model.ProductImages;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductSize;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductVariant;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Sizes;
@@ -82,18 +83,25 @@ public class ProductVariantDao {
     public boolean addVariant(String name, String color, int product, double price, String image, int active){
         String sql = "INSERT INTO product_variants(name, productId, color, price, image, isActive)" +
                 "VALUES (?, ?, ?, ?, ?, ?)";
+        String sql2 = "INSERT INTO product_images(variantId, imageUrl) VALUES(?, ?)";
         try {
-            return jdbi.withHandle(handle -> {
-                Update update = handle.createUpdate(sql);
-                update.bind(0, name);
-                update.bind(1, product);
-                update.bind(2, color);
-                update.bind(3, price);
-                update.bind(4, image);
-                update.bind(5, active);
-                int rowsAffected = update.execute();
-                return rowsAffected > 0;
+            jdbi.useTransaction(handle -> {
+                    int variantId = handle.createUpdate(sql)
+                            .bind(0, name)
+                            .bind(1, product)
+                            .bind(2, color)
+                            .bind(3, price)
+                            .bind(4, image)
+                            .bind(5, active)
+                            .executeAndReturnGeneratedKeys("id")
+                            .mapTo(int.class)
+                            .one();
+                    handle.createUpdate(sql2)
+                            .bind(0, variantId)
+                            .bind(1, image)
+                            .execute();
             });
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -158,15 +166,31 @@ public class ProductVariantDao {
             return false;
         }
     }
-    public List<ProductVariant> getProVariantsByCategoryIdWithPagination(int categoryId, int offset, int pageSize) {
+    public List<ProductVariant> getProVariantsWithPagination(Integer categoryId, Integer brandId, String color, Double minPrice,
+            Double maxPrice, int offset, int pageSize) {
+
         StringBuilder sql = new StringBuilder("SELECT pv.id, pv.name, pv.color, pv.price, pv.image, pv.isActive, " +
                 "       pv.productId AS pid, pv.createdAt, p.name AS pname " +
                 "FROM product_variants pv " +
                 "JOIN products p ON pv.productId = p.id " +
                 "WHERE pv.isActive > 0 ");
 
-        if (categoryId != -1) {
+        if (categoryId != null) {
             sql.append("AND p.categoryId = :categoryId ");
+        }
+        if (categoryId != null) {
+            sql.append("AND p.brandId = :brandId ");
+        }
+
+        if (color != null && !color.isEmpty()) {
+            sql.append("AND pv.color = :color ");
+        }
+
+        if (minPrice != null) {
+            sql.append("AND pv.price >= :minPrice ");
+        }
+        if (maxPrice != null) {
+            sql.append("AND pv.price <= :maxPrice ");
         }
 
         sql.append("LIMIT :pageSize OFFSET :offset");
@@ -176,22 +200,34 @@ public class ProductVariantDao {
                     .bind("pageSize", pageSize)
                     .bind("offset", offset);
 
-            if (categoryId != -1) {
+            if (categoryId != null) {
                 query.bind("categoryId", categoryId);
+            }
+            if (brandId != null) {
+                query.bind("brandId", brandId);
+            }
+            if (color != null && !color.isEmpty()) {
+                query.bind("color", color);
+            }
+            if (minPrice != null) {
+                query.bind("minPrice", minPrice);
+            }
+            if (maxPrice != null) {
+                query.bind("maxPrice", maxPrice);
             }
 
             return query.map((rs, ctx) -> {
-                        ProductVariant variant = new ProductVariant();
-                        variant.setId(rs.getInt("id"));
-                        variant.setName(rs.getString("name"));
-                        variant.setProductId(rs.getInt("pid"));
-                        variant.setColor(rs.getString("color"));
-                        variant.setPrice(rs.getDouble("price"));
-                        variant.setImage(rs.getString("image"));
-                        variant.setActive(rs.getInt("isActive") > 0);
-                        variant.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
-                        return variant;
-                    }).list();
+                ProductVariant variant = new ProductVariant();
+                variant.setId(rs.getInt("id"));
+                variant.setName(rs.getString("name"));
+                variant.setProductId(rs.getInt("pid"));
+                variant.setColor(rs.getString("color"));
+                variant.setPrice(rs.getDouble("price"));
+                variant.setImage(rs.getString("image"));
+                variant.setActive(rs.getInt("isActive") > 0);
+                variant.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
+                return variant;
+            }).list();
         });
     }
 
@@ -251,6 +287,16 @@ public class ProductVariantDao {
             update.bind(0, id);
             int rowsAffected = update.execute();
             return rowsAffected > 0;
+        });
+    }
+
+    public List<ProductImages> listImages(int variantId){
+        String sql = "SELECT * FROM product_images WHERE variantId = ?";
+        return jdbi.withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .bind(0, variantId)
+                    .mapToBean(ProductImages.class)
+                    .list();
         });
     }
 }

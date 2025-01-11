@@ -4,6 +4,7 @@ import helmet.vn.ltw_bannonbaohiem.dao.db.JdbiConnect;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Brand;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Category;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Product;
+import helmet.vn.ltw_bannonbaohiem.dao.model.ProductTechnicalDetail;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.statement.Update;
 
@@ -126,6 +127,33 @@ public class ProductDao {
             update.bind(0, id);
             int rowsAffected = update.execute();
             return rowsAffected > 0;
+        });
+    }
+
+    public ProductTechnicalDetail getProductTech(int productId){
+        String sql = "SELECT * FROM product_technical_details WHERE productId = ?";
+        return jdbi.withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .bind(0, productId)
+                    .map((rs, ctx) -> {
+                        ProductTechnicalDetail detail = new ProductTechnicalDetail();
+                        detail.setId(rs.getInt("id"));
+                        detail.setProductId(rs.getInt("productId"));
+                        detail.setWeight(rs.getDouble("weight"));
+                        detail.setMaterial(rs.getString("material"));
+                        detail.setStandards(rs.getString("standards"));
+                        detail.setWarranty(rs.getString("warranty"));
+                        detail.setVisorType(rs.getString("visorType"));
+                        detail.setReturns(rs.getString("returns"));
+                        detail.setCondition(rs.getString("condition"));
+                        detail.setMadeIn(rs.getString("madeIn"));
+                        detail.setInnerLining(rs.getString("innerLining"));
+                        detail.setLstSize(rs.getString("lstSize"));
+                        detail.setLstColor(rs.getString("lstColor"));
+                        return detail;
+                    })
+                    .findOne()
+                    .orElse(null);
         });
     }
 }

@@ -104,12 +104,9 @@ const headerNav = document.querySelector(".header-bottom");
 
 /* Giảm giá*/
 const products = document.querySelectorAll('.product-item');
-
 products.forEach(pro => {
     const priceElement = pro.querySelector('.product-price');
     const salePriceElement = pro.querySelector('.product-sale-price');
-
-    // Kiểm tra nếu phần tử giá có tồn tại
     if (priceElement && salePriceElement) {
         if (pro.dataset.hasDiscount === 'true') {
             pro.classList.add('has-discount');
@@ -118,7 +115,7 @@ products.forEach(pro => {
         } else {
             priceElement.style.textDecoration = 'none';
             pro.classList.remove('has-discount');
-            //salePriceElement.style.display = 'none'; 
+            salePriceElement.style.display = 'none';
         }
     }
 });

@@ -35,11 +35,12 @@
     <div class="product-list">
         <div class="filter-container">
             <h3>Lọc sản phẩm</h3>
-            <div class="filter-menu">
+            <form action="/danhmuc" method="GET">
+                <div class="filter-menu">
                 <div class="filter-item">
                     <label for="helmet-brand">Thương hiệu:</label>
-                    <select id="helmet-brand" class="filter-select">
-                        <option value="all">Tất cả</option>
+                    <select id="helmet-brand" name="brand" class="filter-select">
+                        <option value="all" ${param.brand == 'all' ? 'selected' : ''}>Tất cả</option>
                         <c:forEach var="brand" items="${brands}">
                             <option value="${brand.id}">${brand.name}</option>
                         </c:forEach>
@@ -47,7 +48,7 @@
                 </div>
                 <div class="filter-item">
                     <label for="helmet-type">Loại nón:</label>
-                    <select id="helmet-type" class="filter-select">
+                    <select id="helmet-type" name="category" class="filter-select">
                         <option value="all" ${param.category == 'all' ? 'selected' : ''}>Tất cả</option>
                         <c:forEach var="cate" items="${cates}">
                             <option value="${cate.id}" ${param.category != null && param.category == cate.id.toString() ? 'selected' : ''}>${cate.name}</option>
@@ -61,7 +62,7 @@
                 <div class="filter-options">
                 <c:forEach var="size" items="${sizes}">
                     <div class="size-checkbox">
-                        <input type="checkbox" id="${size.id}" class="filter-checkbox" value="${size.id}">
+                        <input type="checkbox" id="${size.id}" name="sizes" class="filter-checkbox" value="${size.id}">
                         <label for="${size.id}">${size.name}</label>
                     </div>
                 </c:forEach>
@@ -69,60 +70,62 @@
             </div>
             <div class="filter-item">
                 <label for="price-select">Khoảng giá:</label>
-                <select id="price-select" class="filter-select">
-                    <option value="all">Tất cả</option>
-                    <option value="below500">Dưới 500.000 đ</option>
-                    <option value="above500">Trên 500.000 đ</option>
-                    <option value="above10000">Trên 1.000.000 đ</option>
+                <select id="price-select" name="price" class="filter-select">
+                    <option value="all" ${param.price == 'all' ? 'selected' : ''}>Tất cả</option>
+                    <option value="below500" ${param.price == 'below500' ? 'selected' : ''}>Dưới 500.000 đ</option>
+                    <option value="above500" ${param.price == 'above500' ? 'selected' : ''}>Trên 500.000 đ</option>
+                    <option value="above10000" ${param.price == 'above10000' ? 'selected' : ''}>Trên 1.000.000 đ</option>
                 </select>
             </div>
             <div class="filter-item">
                 <label for="purchase-time-select">Mua nhiều trong: </label>
-                <select id="purchase-time-select" class="filter-select">
-                    <option value="all">Tất cả thời gian</option>
-                    <option value="this-month">1 tháng qua</option>
-                    <option value="3-months">3 tháng qua</option>
-                    <option value="6-months">6 tháng qua</option>
-                    <option value="12-months">12 tháng qua</option>
+                <select id="purchase-time-select" name="purchase_time" class="filter-select">
+                    <option value="all" ${param.purchase_time == 'all' ? 'selected' : ''}>Tất cả thời gian</option>
+                    <option value="this-month" ${param.purchase_time == 'this-month' ? 'selected' : ''}>1 tháng qua</option>
+                    <option value="3-months" ${param.purchase_time == '3-months' ? 'selected' : ''}>3 tháng qua</option>
+                    <option value="6-months" ${param.purchase_time == '6-months' ? 'selected' : ''}>6 tháng qua</option>
+                    <option value="12-months" ${param.purchase_time == '12-months' ? 'selected' : ''}>12 tháng qua</option>
                 </select>
             </div>
-        
-        
-            <div class="filter-item">
-                <label>Màu sắc:</label>
-                <div class="filter-colors">
-                    <label for="color-red" style="color: red;">
-                        <input type="checkbox" id="color-red" class="filter-color" value="Đỏ"> Đỏ
-                    </label>
-                    
-                    <label for="color-blue" style="color: blue;">
-                        <input type="checkbox" id="color-blue" class="filter-color" value="Xanh"> Xanh
-                    </label>
-                    
-                    <label for="color-black" style="color: black;">
-                        <input type="checkbox" id="color-black" class="filter-color" value="Đen"> Đen
-                    </label>
-                    
-                    <label for="color-white">
-                        <input type="checkbox" id="color-white" class="filter-color" value="Trắng"> Trắng
-                    </label>
-                    
-                    <label for="color-green" style="color: green;">
-                        <input type="checkbox" id="color-green" class="filter-color" value="Xanh lá"> Xanh lá
-                    </label>
-                    
-                    <label for="color-yellow" style="color: #e68027;">
-                        <input type="checkbox" id="color-yellow" class="filter-color" value="Vàng"> Vàng
-                    </label>
-                    
-                    <label for="color-gray" style="color: gray;">
-                        <input type="checkbox" id="color-gray" class="filter-color" value="Xám"> Xám
-                    </label>                    
+
+
+                    <div class="filter-item">
+                        <label>Màu sắc:</label>
+                        <div class="filter-colors">
+                            <label for="color-red" style="color: red;">
+                                <input type="checkbox" id="color-red" name="colors" value="Đỏ" ${param.colors != null && param.colors.contains('Đỏ') ? 'checked' : ''}> Đỏ
+                            </label>
+
+                            <label for="color-blue" style="color: blue;">
+                                <input type="checkbox" id="color-blue" name="colors" value="Xanh" ${param.colors != null && param.colors.contains('Xanh') ? 'checked' : ''}> Xanh
+                            </label>
+
+                            <label for="color-black" style="color: black;">
+                                <input type="checkbox" id="color-black" name="colors" value="Đen" ${param.colors != null && param.colors.contains('Đen') ? 'checked' : ''}> Đen
+                            </label>
+
+                            <label for="color-white">
+                                <input type="checkbox" id="color-white" name="colors" value="Trắng" ${param.colors != null && param.colors.contains('Trắng') ? 'checked' : ''}> Trắng
+                            </label>
+
+                            <label for="color-green" style="color: green;">
+                                <input type="checkbox" id="color-green" name="colors" value="Xanh lá" ${param.colors != null && param.colors.contains('Xanh lá') ? 'checked' : ''}> Xanh lá
+                            </label>
+
+                            <label for="color-yellow" style="color: #e68027;">
+                                <input type="checkbox" id="color-yellow" name="colors" value="Vàng" ${param.colors != null && param.colors.contains('Vàng') ? 'checked' : ''}> Vàng
+                            </label>
+
+                            <label for="color-gray" style="color: gray;">
+                                <input type="checkbox" id="color-gray" name="colors" value="Xám" ${param.colors != null && param.colors.contains('Xám') ? 'checked' : ''}> Xám
+                            </label>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
             <button id="filter-btn" class="btn">Áp dụng lọc</button>
-        </div> 
+            </form>
+        </div>
+
         <div class="container">
             <div class="pro-lst" id="prolst">
                 <div class="lst-title p-4">

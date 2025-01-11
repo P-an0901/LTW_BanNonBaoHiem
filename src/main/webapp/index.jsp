@@ -80,7 +80,7 @@
                 </div>
                 <div class="product-row">
                     <c:forEach var="proV" items="${limitedProSale}">
-                        <div class="product-item" data-has-discount="true">
+                        <div class="product-item" data-has-discount="${proV.salePrice > 0 ? 'true' : 'false'}">
                             <a href="${pageContext.request.contextPath}/detail?pvId=${proV.id}">
                                 <img src="${pageContext.request.contextPath}/${fn:escapeXml(proV.image)}" alt="${proV.name}" class="product-image">
                             </a>

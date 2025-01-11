@@ -2,13 +2,13 @@ package helmet.vn.ltw_bannonbaohiem.dao.model;
 
 public class ProductImages {
     private int id;
-    private String image;
-    private int productVariantId;
+    private String imageUrl;
+    private int variantId;
 
-    public ProductImages(int id, String image, int productVariantId) {
+    public ProductImages(int id, String imageUrl, int variantId) {
         this.id = id;
-        this.image = image;
-        this.productVariantId = productVariantId;
+        this.imageUrl = imageUrl;
+        this.variantId = variantId;
     }
 
     public ProductImages() {
@@ -22,19 +22,19 @@ public class ProductImages {
         this.id = id;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public int getProductVariantId() {
-        return productVariantId;
+    public int getVariantId() {
+        return variantId;
     }
 
-    public void setProductVariantId(int productVariantId) {
-        this.productVariantId = productVariantId;
+    public void setVariantId(int variantId) {
+        this.variantId = variantId;
     }
 }

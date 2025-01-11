@@ -2,6 +2,7 @@ package helmet.vn.ltw_bannonbaohiem.service;
 
 import helmet.vn.ltw_bannonbaohiem.dao.ProductDao;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Product;
+import helmet.vn.ltw_bannonbaohiem.dao.model.ProductTechnicalDetail;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductVariant;
 
 import java.util.ArrayList;
@@ -31,8 +32,11 @@ public class ProductService {
         }
         return list;
     }
-
     public boolean deleteProduct(String id) {
         return prodao.delete(Integer.parseInt(id));
+    }
+
+    public ProductTechnicalDetail getProductTeach(int productId){
+        return prodao.getProductTech(productId);
     }
 }

@@ -181,7 +181,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <%-- Lặp qua danh sách sản phẩm và hiển thị thông tin --%>
                         <c:forEach var="product" items="${products}">
                             <tr>
                                 <td>${product.id}</td>
@@ -189,7 +188,7 @@
                                 <td>${product.brand.name}</td>
                                 <td>${product.category.name}</td>
                                 <td>${product.createdAt}</td>
-                                <td><button class="pdetails-btn" data-id="${product.id}"><i class="fa-solid fa-eye"></i></button></td>
+                                <td><button class="pdetails-btn" onclick="openDetailProModal(${product.id})"><i class="fa-solid fa-eye"></i></button></td>
                                 <td><button class="edit-btn" onclick="openEditProModal(${product.id})">
                                     <i class="fa-solid fa-pen"></i>
                                 </button></td>
@@ -364,7 +363,7 @@
                     <tbody>
                     <c:if test="${empty categories}">
                         <tr>
-                            <td colspan="5" style="text-align: center; font-style: italic;">Không có dữ liệu</td>
+                            <td colspan="4" style="text-align: center; font-style: italic;">Không có dữ liệu</td>
                         </tr>
                     </c:if>
                     <c:forEach var="cate" items="${categories}">

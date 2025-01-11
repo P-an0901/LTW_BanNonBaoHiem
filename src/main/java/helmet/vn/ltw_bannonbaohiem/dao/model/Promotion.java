@@ -1,5 +1,6 @@
 package helmet.vn.ltw_bannonbaohiem.dao.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,14 +10,14 @@ public class Promotion {
     private String name;
     private String description;
     private double discountPercentage;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private List<Integer> lstVariant;
 
     public Promotion(int id, String name, String description, double discountPercentage,
-                     LocalDateTime startDate, LocalDateTime endDate,
+                     LocalDate startDate, LocalDate endDate,
                      LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
@@ -31,8 +32,6 @@ public class Promotion {
 
     public Promotion() {
     }
-
-    // Getter and Setter
     public int getId() {
         return id;
     }
@@ -65,19 +64,19 @@ public class Promotion {
         this.discountPercentage = discountPercentage;
     }
 
-    public LocalDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -119,4 +118,3 @@ public class Promotion {
                 '}';
     }
 }
-

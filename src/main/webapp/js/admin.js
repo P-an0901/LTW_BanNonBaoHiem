@@ -63,23 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
         "pageLength": 5,
     });
 });
-
-
-
-
-
-    const detailsBtns = document.querySelectorAll('.pdetails-btn'); 
-    detailsBtns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            const productId = btn.getAttribute('data-id'); 
-            console.log('ID Sản Phẩm:', productId); 
-            const productIdDisplay = document.getElementById('product-id-display');
-            productIdDisplay.textContent = `ID sản phẩm: ${productId}`; 
-            productDetailModal.style.display = 'block';
-        });
-
-
-    // Đóng modal khi nhấn nút đóng (×)
     const closeButtons = document.querySelectorAll('.close');
     closeButtons.forEach(function(button) {
         button.addEventListener('click', function() {
@@ -94,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
             event.target.style.display = 'none';
         }
     });
-});
+
 $(document).ready(function() {
     $('#btn-add-product_variant').click(function () {
         document.getElementById('addVariantForm').style.display = 'block';
@@ -125,7 +108,7 @@ function openEditBrandModal(brandId) {
 
     $.ajax({
         type: 'GET',
-        url: '/LTW_BanNonBaoHiem/edit-tab-product',
+        url: '/LTW_BanNonBaoHiem/show-tab-product',
         data: {
             action: 'findBrand',
             brandId: brandId
@@ -148,7 +131,7 @@ function openEditProModal(productId) {
 
     $.ajax({
         type: 'GET',
-        url: '/LTW_BanNonBaoHiem/edit-tab-product',
+        url: '/LTW_BanNonBaoHiem/show-tab-product',
         data: {
             action: 'findProduct',
             productId: productId
@@ -176,7 +159,7 @@ function openEditVariantModal(variantId) {
 
     $.ajax({
         type: 'GET',
-        url: '/LTW_BanNonBaoHiem/edit-tab-product',
+        url: '/LTW_BanNonBaoHiem/show-tab-product',
         data: {
             action: 'findProductVariant',
             variantId: variantId
@@ -195,6 +178,37 @@ function openEditVariantModal(variantId) {
             document.getElementById('editVariantForm').style.display = 'block';
             document.getElementById('addVariantModalLabel').textContent = 'Chỉnh sửa biến thể sản phẩm';
             $('#addVariantModal').modal('show');
+        },
+        error: function(xhr, status, error) {
+            console.log('Lỗi:', error);
+            console.log('Response:', xhr.responseText);
+        }
+    });
+}
+function openDetailProModal(productId) {
+    $.ajax({
+        type: 'GET',
+        url: '/LTW_BanNonBaoHiem/show-tab-product',
+        data: {
+            action: 'showProductTech',
+            productId: productId
+        },
+        dataType: 'json',
+        success: function(data) {
+            console.log(data);
+            // $('#product-id-display').text(data.productId);
+            $('#list-size').text(data.lstSize);
+            $('#weight-value').text(data.weight);
+            $('#list-color').text(data.lstColor);
+            $('#standards').text(data.standards);
+            $('#material-value').text(data.material);
+            $('#inner-lining').text(data.innerLining);
+            $('#visor-type').text(data.visorType);
+            $('#made-in').text(data.madeIn);
+            $('#condition-value').text(data.condition);
+            $('#warranty-value').text(data.warranty);
+            $('#returns-value').text(data.returns);
+            $('#productDetailModal').modal('show');
         },
         error: function(xhr, status, error) {
             console.log('Lỗi:', error);

@@ -1,8 +1,6 @@
 package helmet.vn.ltw_bannonbaohiem.controller;
 
-import helmet.vn.ltw_bannonbaohiem.dao.model.Product;
-import helmet.vn.ltw_bannonbaohiem.dao.model.ProductSize;
-import helmet.vn.ltw_bannonbaohiem.dao.model.ProductVariant;
+import helmet.vn.ltw_bannonbaohiem.dao.model.*;
 import helmet.vn.ltw_bannonbaohiem.service.*;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -16,8 +14,6 @@ import java.util.List;
 
 @WebServlet("/detail")
 public class DetailServlet extends HttpServlet {
-    private BrandService brandService = new BrandService();
-    private CategoryService categoryService = new CategoryService();
     private ProductService productService = new ProductService();
     private ProductVariantService productVariantService = new ProductVariantService();
     private SizeService sizeService = new SizeService();
@@ -33,12 +29,16 @@ public class DetailServlet extends HttpServlet {
             int pid = productVariant.getProductId();
 //            System.out.println(productVariant);
             Product product = productService.getProById(productVariant.getProductId());
-//            System.out.println(product);
+            ProductTechnicalDetail technical = productService.getProductTeach(pid);
+            System.out.println(technical);
             List<ProductSize> sizes = productVariantService.getListSizeById(pvId);
             List<ProductVariant> lstProVariant = productVariantService.getListProVarByProId(pid);
+            List<ProductImages> listImages = productVariantService.listImages(pvId);
             lstProVariant.removeIf(variant -> variant.getId() == pvId);
             System.out.println(lstProVariant+ "bbbbb");
             req.setAttribute("lstProVariant", lstProVariant);
+            req.setAttribute("listImages", listImages);
+            req.setAttribute("technical", technical);
             req.setAttribute("sizes", sizes);
             req.setAttribute("product", product);
             req.setAttribute("productVariant", productVariant);
