@@ -6,6 +6,7 @@ import helmet.vn.ltw_bannonbaohiem.dao.PromotionDao;
 import helmet.vn.ltw_bannonbaohiem.dao.PromotionVariantDao;
 import helmet.vn.ltw_bannonbaohiem.dao.cart.Cart;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Product;
+import helmet.vn.ltw_bannonbaohiem.dao.model.ProductImages;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductSize;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductVariant;
 
@@ -69,8 +70,10 @@ public class ProductVariantService {
         return productVariantD.update(id, productId, name, color, price, image, active);
     }
 
-    public List<ProductVariant> getProVariantsByCategoryIdWithPagination(int categoryId, int offset, int pageSize) {
-        List<ProductVariant> variants = productVariantD.getProVariantsByCategoryIdWithPagination(categoryId, offset, pageSize);
+    public List<ProductVariant> getProVariantsWithPagination(Integer categoryId, Integer brandId ,String name, String color, Double minPrice,
+                                                             Double maxPrice, int offset, int pageSize) {
+        List<ProductVariant> variants = productVariantD.getProVariantsWithPagination( categoryId, brandId, name, color, minPrice,
+                maxPrice, offset, pageSize);
         return supportVariantSize(variants);
     }
 
@@ -119,5 +122,9 @@ public class ProductVariantService {
     }
     public boolean updateStock(Cart cart){
         return proSizeD.updateStock(cart);
+    }
+
+    public List<ProductImages> listImages(int variantId){
+        return productVariantD.listImages(variantId);
     }
 }

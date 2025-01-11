@@ -21,28 +21,34 @@ import java.util.List;
 
 @WebServlet(name = "danhmuc", value ="/danhmuc")
 public class DanhmucServlet extends HttpServlet {
-    //    private static CategoryService categoryService = new CategoryService();
-    private ProductService productService = new ProductService();
-    private ProductSizeDao proSizeD = new ProductSizeDao();
     private ProductVariantService productVariantService = new ProductVariantService();
     private SizeService sizeService = new SizeService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("activePage", "danhmuc");
         String categoryId = req.getParameter("category");
+        String brand = req.getParameter("brand");
+        String price = req.getParameter("price");
+        String[] lstsizes = req.getParameterValues("size");
+        String[] colors = req.getParameterValues("color");
+
         System.out.println(categoryId);
         if (categoryId == null || categoryId.isEmpty() || categoryId.equals("all")){
             categoryId = "-1";
         }
+        if (brand == null || brand.isEmpty() || brand.equals("all")){
+            brand = "-1";
+        }
         String pageParam = req.getParameter("page");
         int page = pageParam == null ? 1 : Integer.parseInt(pageParam);
-        int pageSize = 4;
+        int pageSize = 20;
         int offset = (page - 1) * pageSize;
         System.out.println(offset);
         int totalVariants = 0;
         List<Product> products = new ArrayList<>();
         List<ProductVariant> proVariants = new ArrayList<>();
-        proVariants = productVariantService.getProVariantsByCategoryIdWithPagination(Integer.parseInt(categoryId), offset, pageSize);
+        proVariants = productVariantService.getProVariantsWithPagination( Integer.parseInt(categoryId), Integer.parseInt(brand), color, minPrice,
+                maxPrice, offset, pageSize);
         totalVariants = productVariantService.getTotalVariantCount(Integer.parseInt(categoryId));
 
         int totalPages = (int) Math.ceil((double) totalVariants  / pageSize);

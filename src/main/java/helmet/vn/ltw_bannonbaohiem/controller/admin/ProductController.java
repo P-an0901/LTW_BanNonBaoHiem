@@ -16,8 +16,6 @@ import java.util.List;
 
 @WebServlet("/admin/product")
 public class ProductController extends HttpServlet {
-    private BrandService brandService = new BrandService();
-    private CategoryService categoryService = new CategoryService();
     private ProductService productService = new ProductService();
     private ProductVariantService productVariantService = new ProductVariantService();
     private SizeService sizeService = new SizeService();
@@ -41,9 +39,7 @@ public class ProductController extends HttpServlet {
         }
         session.setAttribute("activeSubTab", activeSubTab);
         req.setAttribute("activeSubTab", session.getAttribute("activeSubTab"));
-        List<Brand> brands = brandService.getAllBrands();
         List<Product> products = productService.getAllPro();
-        List<Category> categories = categoryService.getAllCate();
         List<ProductVariant> proVariants = productVariantService.getAllVariantsForAdmin();
         List<Sizes> sizes = sizeService.getAllSize();
         List<ProductSize> productSizes = productVariantService.getListProSize();
@@ -52,8 +48,6 @@ public class ProductController extends HttpServlet {
         req.setAttribute("sizes", sizes);
         req.setAttribute("productSizes", productSizes);
         req.setAttribute("proVariants", proVariants);
-        req.setAttribute("categories", categories);
-        req.setAttribute("brands", brands);
         req.setAttribute("products", products);
         System.out.println("ssss");
         RequestDispatcher dispatcher = req.getRequestDispatcher("/admin.jsp");
