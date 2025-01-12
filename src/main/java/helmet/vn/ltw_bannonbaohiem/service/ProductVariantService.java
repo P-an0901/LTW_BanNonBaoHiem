@@ -10,10 +10,7 @@ import helmet.vn.ltw_bannonbaohiem.dao.model.ProductImages;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductSize;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductVariant;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ProductVariantService {
@@ -70,15 +67,17 @@ public class ProductVariantService {
         return productVariantD.update(id, productId, name, color, price, image, active);
     }
 
-    public List<ProductVariant> getProVariantsWithPagination(Integer categoryId, Integer brandId ,String name, String color, Double minPrice,
-                                                             Double maxPrice, int offset, int pageSize) {
-        List<ProductVariant> variants = productVariantD.getProVariantsWithPagination( categoryId, brandId, name, color, minPrice,
-                maxPrice, offset, pageSize);
+    public List<ProductVariant> getProVariantsWithPagination(int categoryId, int brandId, String[] colors,
+                                                             String price, String[] sizes, String filterType, int offset, int pageSize) {
+        List<ProductVariant> variants = productVariantD.getProVariantsWithPagination( categoryId, brandId,
+                colors, price, sizes,filterType , offset, pageSize);
         return supportVariantSize(variants);
     }
 
-    public int getTotalVariantCount(int categoryId) {
-        return productVariantD.getTotalVariantCount(categoryId);
+    public int getTotalVariantCount(int categoryId, int brandId, String[] colors,
+                                    String price, String[] sizes, String filterType) {
+        return productVariantD.getTotalVariantCount(categoryId, brandId,
+                colors, price, sizes,filterType);
     }
     private List<ProductVariant> supportVariantSize(List<ProductVariant> variants){
         List<Integer> variantIds = variants.stream().map(ProductVariant::getId).collect(Collectors.toList());

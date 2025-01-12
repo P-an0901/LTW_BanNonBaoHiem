@@ -166,31 +166,54 @@ public class ProductVariantDao {
             return false;
         }
     }
-    public List<ProductVariant> getProVariantsWithPagination(Integer categoryId, Integer brandId, String color, Double minPrice,
-            Double maxPrice, int offset, int pageSize) {
+    public List<ProductVariant> getProVariantsWithPagination(Integer categoryId, Integer brandId, String[] color,
+            String price, String[] sizes, String filterType, int offset, int pageSize) {
 
-        StringBuilder sql = new StringBuilder("SELECT pv.id, pv.name, pv.color, pv.price, pv.image, pv.isActive, " +
+        StringBuilder sql = new StringBuilder("SELECT DISTINCT pv.id, pv.name, pv.color, pv.price, pv.image, pv.isActive, " +
                 "       pv.productId AS pid, pv.createdAt, p.name AS pname " +
                 "FROM product_variants pv " +
                 "JOIN products p ON pv.productId = p.id " +
+                "JOIN product_sizes ps ON pv.id = ps.variantId " +
                 "WHERE pv.isActive > 0 ");
 
-        if (categoryId != null) {
+        if (categoryId != -1) {
             sql.append("AND p.categoryId = :categoryId ");
         }
-        if (categoryId != null) {
+        if (brandId != -1) {
             sql.append("AND p.brandId = :brandId ");
         }
-
-        if (color != null && !color.isEmpty()) {
-            sql.append("AND pv.color = :color ");
+        if (color != null && color.length > 0) {
+            sql.append(" AND (");
+            for (int i = 0; i < color.length; i++) {
+                sql.append("pv.color LIKE :color" +i);
+                if (i < color.length - 1) sql.append(" OR ");
+            }
+            sql.append(") ");
         }
 
-        if (minPrice != null) {
-            sql.append("AND pv.price >= :minPrice ");
+        if (sizes != null && sizes.length > 0) {
+            sql.append(" AND ps.sizeId IN (");
+            for (int i = 0; i < sizes.length; i++) {
+                sql.append(":size" + i);
+                if (i < sizes.length - 1) sql.append(", ");
+            }
+            sql.append(") ");
         }
-        if (maxPrice != null) {
-            sql.append("AND pv.price <= :maxPrice ");
+        if (price != null && !price.isEmpty() || price.equalsIgnoreCase("all")) {
+            if ("below500".equals(price)) {
+                sql.append(" AND pv.price < 500000 ");
+            } else if ("500to1000".equals(price)) {
+                sql.append(" AND pv.price BETWEEN 500000 AND 1000000 ");
+            } else if ("above1000".equals(price)) {
+                sql.append(" AND pv.price > 1000000 ");
+            }
+        }
+        if (filterType != null && !filterType.isEmpty() || filterType.equalsIgnoreCase("all")) {
+            if ("new".equals(filterType)) {
+                sql.append(" ORDER BY pv.createdAt DESC ");
+            } else if ("old".equals(filterType)) {
+                sql.append(" ORDER BY pv.createdAt ASC ");
+            }
         }
 
         sql.append("LIMIT :pageSize OFFSET :offset");
@@ -200,20 +223,21 @@ public class ProductVariantDao {
                     .bind("pageSize", pageSize)
                     .bind("offset", offset);
 
-            if (categoryId != null) {
+            if (categoryId != -1) {
                 query.bind("categoryId", categoryId);
             }
-            if (brandId != null) {
+            if (brandId != -1) {
                 query.bind("brandId", brandId);
             }
-            if (color != null && !color.isEmpty()) {
-                query.bind("color", color);
+            if (color != null && color.length > 0) {
+                for (int i = 0; i < color.length; i++) {
+                    query.bind("color" + i, "%" + color[i] + "%");
+                }
             }
-            if (minPrice != null) {
-                query.bind("minPrice", minPrice);
-            }
-            if (maxPrice != null) {
-                query.bind("maxPrice", maxPrice);
+            if (sizes != null && sizes.length > 0) {
+                for (int i = 0; i < sizes.length; i++) {
+                    query.bind("size" + i, sizes[i]);
+                }
             }
 
             return query.map((rs, ctx) -> {
@@ -231,20 +255,71 @@ public class ProductVariantDao {
         });
     }
 
-    public int getTotalVariantCount(int categoryId) {
-        StringBuilder sql = new StringBuilder("SELECT COUNT(*) " +
+    public int getTotalVariantCount(Integer categoryId, Integer brandId, String[] color,
+                                    String price, String[] sizes, String filterType) {
+        StringBuilder sql = new StringBuilder("SELECT COUNT(DISTINCT pv.id) " +
                 "FROM product_variants pv " +
                 "JOIN products p ON pv.productId = p.id " +
+                "JOIN product_sizes ps ON pv.id = ps.variantId " +
                 "WHERE pv.isActive > 0 ");
 
         if (categoryId != -1) {
             sql.append("AND p.categoryId = :categoryId ");
+        }
+        if (brandId != -1) {
+            sql.append("AND p.brandId = :brandId ");
+        }
+        if (color != null && color.length > 0) {
+            sql.append(" AND (");
+            for (int i = 0; i < color.length; i++) {
+                sql.append("pv.color LIKE :color" +i);
+                if (i < color.length - 1) sql.append(" OR ");
+            }
+            sql.append(") ");
+        }
+
+        if (sizes != null && sizes.length > 0) {
+            sql.append(" AND ps.sizeId IN (");
+            for (int i = 0; i < sizes.length; i++) {
+                sql.append(":size" + i);
+                if (i < sizes.length - 1) sql.append(", ");
+            }
+            sql.append(") ");
+        }
+        if (price != null && !price.isEmpty() || price.equalsIgnoreCase("all")) {
+            if ("below500".equals(price)) {
+                sql.append(" AND pv.price < 500000 ");
+            } else if ("500to1000".equals(price)) {
+                sql.append(" AND pv.price BETWEEN 500000 AND 1000000 ");
+            } else if ("above1000".equals(price)) {
+                sql.append(" AND pv.price > 1000000 ");
+            }
+        }
+        if (filterType != null && !filterType.isEmpty() || filterType.equalsIgnoreCase("all")) {
+            if ("new".equals(filterType)) {
+                sql.append(" ORDER BY pv.createdAt DESC ");
+            } else if ("old".equals(filterType)) {
+                sql.append(" ORDER BY pv.createdAt ASC ");
+            }
         }
 
         return jdbi.withHandle(handle -> {
             Query query = handle.createQuery(sql.toString());
             if (categoryId != -1) {
                 query.bind("categoryId", categoryId);
+            }
+            if (brandId != -1) {
+                query.bind("brandId", brandId);
+            }
+            if (color != null && color.length > 0) {
+                for (int i = 0; i < color.length; i++) {
+                    query.bind("color" + i, "%" + color[i] + "%");
+                }
+            }
+            if (sizes != null && sizes.length > 0) {
+                for (int i = 0; i < sizes.length; i++) {
+                    query.bind("size" + i, sizes[i]);
+                }
             }
             return query.mapTo(int.class).one();
         });
