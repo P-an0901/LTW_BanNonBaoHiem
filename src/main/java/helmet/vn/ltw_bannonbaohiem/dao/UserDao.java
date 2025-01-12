@@ -5,6 +5,7 @@ import helmet.vn.ltw_bannonbaohiem.dao.model.User;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.statement.Update;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
@@ -79,5 +80,41 @@ public class UserDao {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean updateInfo(int uid, String fullName, String email, String phone, String birthday, String address, String image) {
+        StringBuilder updateQuery = new StringBuilder("UPDATE users SET fullName = ?");
+        List<Object> params = new ArrayList<>();
+        params.add(fullName);
+        if (email != null && !email.isEmpty()) {
+            updateQuery.append(", email = ?");
+            params.add(email);
+        }
+        if (phone != null && !phone.isEmpty()) {
+            updateQuery.append(", phone = ?");
+            params.add(phone);
+        }
+        if (birthday != null && !birthday.isEmpty()) {
+            updateQuery.append(", birthday = ?");
+            params.add(birthday);
+        }
+        if (address != null && !address.isEmpty()) {
+            updateQuery.append(", address = ?");
+            params.add(address);
+        }
+        if (image != null && !image.isEmpty()) {
+            updateQuery.append(", image = ?");
+            params.add(image);
+        }
+        updateQuery.append(" WHERE id = ?");
+        params.add(uid);
+        return jdbi.withHandle(handle -> {
+            Update update = handle.createUpdate(updateQuery.toString());
+            for (int i = 0; i < params.size(); i++) {
+                update.bind(i , params.get(i));
+            }
+            int rowsUpdated = update.execute();
+            return rowsUpdated > 0;
+        });
     }
 }
