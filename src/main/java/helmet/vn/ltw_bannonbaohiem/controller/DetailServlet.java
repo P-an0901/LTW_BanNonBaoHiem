@@ -26,6 +26,7 @@ public class DetailServlet extends HttpServlet {
         if(pvIdstr != null){
             int pvId = Integer.parseInt(pvIdstr);
             ProductVariant productVariant = productVariantService.getProVariant(pvId);
+            productVariantService.checkSale(productVariant);
             int pid = productVariant.getProductId();
 //            System.out.println(productVariant);
             Product product = productService.getProById(productVariant.getProductId());

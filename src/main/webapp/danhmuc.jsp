@@ -136,10 +136,24 @@
                             <a href="${pageContext.request.contextPath}/detail?pvId=${proV.id}">
                                 <h3 class="product-name">${proV.name}</h3>
                             </a>
-                            <p class="product-price">Giá: <f:formatNumber value="${proV.price}"/> đ</p>
+                            <div class="product-price-container">
+                                <c:choose>
+                                    <c:when test="${proV.sale == true}">
+                                        <p class="product-sale-price">
+                                            <span><f:formatNumber value="${proV.salePrice}" pattern="#,###.###"/> đ</span>
+                                        </p>
+                                        <p class="product-price">
+                                            <span><f:formatNumber value="${proV.price}" pattern="#,###.###"/> đ</span>
+                                        </p>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <p class="product-price"><f:formatNumber value="${proV.price}" pattern="#,###.###"/> đ</p>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
                             <form action="${pageContext.request.contextPath}/add-cart" method="POST">
                                 <input type="hidden" name="productId" value="${proV.id}">
-                                <input type="hidden" name="price" value="${proV.price}">
+                                <input type="hidden" name="price" value="${proV.sale ? proV.salePrice : proV.price}">
                                 <input type="hidden" name="sizeId" class="sizeId-${proV.id}">
                                 <input type="hidden" name="quantity" value="1" min="1">
                                 <button type="submit" class="buy-button" onclick="return validateF()">Thêm vào giỏ hàng</button>
@@ -165,7 +179,6 @@
                     </c:forEach>
                 </div>
             </div>
-
         </div>
     </div>
 <!-- Load footer -->

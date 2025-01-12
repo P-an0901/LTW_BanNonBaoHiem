@@ -143,8 +143,12 @@ public class ProductVariant {
         return salePrice;
     }
 
-    public void setSalePrice(double percent) {
+    public void setSalePricewithPercent(double percent) {
         this.salePrice = this.price - this.price*percent;
+    }
+
+    public void setSalePrice(double salePrice) {
+        this.salePrice = salePrice;
     }
 
     @Override

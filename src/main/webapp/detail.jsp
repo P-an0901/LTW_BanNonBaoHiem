@@ -76,8 +76,17 @@
                     <div class="d-flex justify-content-between">
                         <div class=" col-md-6 session-left p-0">
                             <!-- Thông số kỹ thuật -->
-                            <p class="product-price">Giá: <f:formatNumber value="${productVariant.price} " pattern="#,###.###"/> đ</p>
-                            <input type="hidden" name="price" value="${productVariant.price}">
+                            <c:choose>
+                                <c:when test="${productVariant.sale == true}">
+                                    <span class="product-price">Giá <f:formatNumber value="${productVariant.salePrice}" pattern="#,###.###"/> đ</span>
+                                    <span class="product-price" style="text-decoration: line-through; color: #7f8c8d; font-size: 0.9em; margin-left: 10px;"><f:formatNumber value="${productVariant.price}" pattern="#,###.###"/> đ</span>
+                                    <input type="hidden" name="price" value="${productVariant.salePrice}">
+                                </c:when>
+                                <c:otherwise>
+                                    <p class="product-price"> Giá <f:formatNumber value="${productVariant.price}" pattern="#,###.###"/> đ</p>
+                                    <input type="hidden" name="price" value="${productVariant.price}">
+                                </c:otherwise>
+                            </c:choose>
                             <table class="session-left">
                                 <tbody>
                                     <tr>
@@ -227,10 +236,24 @@
                             <a href="${pageContext.request.contextPath}/detail?pvId=${proV.id}">
                                 <h3 class="product-name">${proV.name}</h3>
                             </a>
-                            <p class="product-price">Giá: <f:formatNumber value="${proV.price}"/>${proV.price} đ</p>
+                            <div class="product-price-container">
+                                <c:choose>
+                                    <c:when test="${proV.sale == true}">
+                                        <p class="product-sale-price">
+                                            <span><f:formatNumber value="${proV.salePrice}" pattern="#,###.###"/> đ</span>
+                                        </p>
+                                        <p class="product-price">
+                                            <span><f:formatNumber value="${proV.price}" pattern="#,###.###"/> đ</span>
+                                        </p>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <p class="product-price"><f:formatNumber value="${proV.price}" pattern="#,###.###"/> đ</p>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
                             <form action="${pageContext.request.contextPath}/add-cart" method="POST">
                                 <input type="hidden" name="productId" value="${proV.id}">
-                                <input type="hidden" name="price" value="${proV.price}">
+                                <input type="hidden" name="price" value="${proV.sale ? proV.salePrice : proV.price}">
                                 <input type="hidden" name="sizeId" class="sizeId-${proV.id}">
                                 <input type="hidden" name="quantity" value="1" min="1">
                                 <button type="submit" class="buy-button" onclick="return validateF()">Thêm vào giỏ hàng</button>
@@ -255,7 +278,6 @@
                         <p class="product-price">Giá: 150.000 đ</p>
                         <button class="buy-button related-product-btn" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
                 </div>
-                
             </div>
         </div>
     </div>

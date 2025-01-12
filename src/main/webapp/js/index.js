@@ -100,26 +100,6 @@ const headerNav = document.querySelector(".header-bottom");
             return true;
         }
 
-
-
-/* Giảm giá*/
-const products = document.querySelectorAll('.product-item');
-products.forEach(pro => {
-    const priceElement = pro.querySelector('.product-price');
-    const salePriceElement = pro.querySelector('.product-sale-price');
-    if (priceElement && salePriceElement) {
-        if (pro.dataset.hasDiscount === 'true') {
-            pro.classList.add('has-discount');
-            priceElement.style.textDecoration = 'line-through'; 
-            salePriceElement.style.display = 'block'; 
-        } else {
-            priceElement.style.textDecoration = 'none';
-            pro.classList.remove('has-discount');
-            salePriceElement.style.display = 'none';
-        }
-    }
-});
-
 function extractNumber(priceString) {
     return Number(priceString.replace(/[^0-9]/g, ''));
 }

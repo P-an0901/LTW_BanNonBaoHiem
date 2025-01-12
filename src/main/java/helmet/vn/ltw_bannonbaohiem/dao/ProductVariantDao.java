@@ -334,8 +334,7 @@ public class ProductVariantDao {
                 "JOIN product_variant_promotions pvp ON pvp.variantId = pv.id " +
                 "JOIN promotions pm ON pm.id = pvp.promotionId " +
                 "WHERE pv.isActive > 0 AND pm.startDate <= NOW() AND pm.endDate >= NOW() " +
-                "ORDER BY pm.endDate DESC " +
-                "LIMIT 5";
+                "ORDER BY pm.endDate DESC ";
 
         return jdbi.withHandle(handle -> {
             return handle.createQuery(sql)
@@ -348,7 +347,7 @@ public class ProductVariantDao {
                         variant.setPrice(rs.getDouble("price"));
                         variant.setImage(rs.getString("image"));
                         variant.setActive(rs.getInt("isActive") > 0);
-                        variant.setSalePrice(rs.getDouble("discount")/100);
+                        variant.setSalePricewithPercent(rs.getDouble("discount")/100);
                         variant.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
                         return variant;
                     }).list();
@@ -372,6 +371,85 @@ public class ProductVariantDao {
                     .bind(0, variantId)
                     .mapToBean(ProductImages.class)
                     .list();
+        });
+    }
+
+    public List<ProductVariant> searchVariant(String query) {
+        String sql = "SELECT pv.id, pv.name, pv.color, pv.price, pv.image, pv.isActive, " +
+                "       pv.productId AS pid, pv.createdAt, p.name AS pname " +
+                "FROM product_variants pv " +
+                "JOIN products p ON pv.productId = p.id " +
+                "JOIN brands b ON b.id = p.brandId " +
+                "JOIN categories c ON c.id = p.categoryId " +
+                "WHERE pv.isActive > 0 AND (" +
+                "pv.name LIKE CONCAT('%', :query, '%')  " +
+                "    OR pv.color LIKE CONCAT('%', :query, '%') " +
+                "    OR p.name LIKE CONCAT('%', :query, '%') " +
+                "    OR b.name LIKE CONCAT('%', :query, '%') " +
+                "    OR c.name LIKE CONCAT('%', :query, '%') " +
+                "    OR pv.price LIKE CONCAT('%', :query, '%'))";
+
+        return jdbi.withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .bind("query", query)
+                    .map((rs, ctx) -> {
+                        ProductVariant variant = new ProductVariant();
+                        variant.setId(rs.getInt("id"));
+                        variant.setName(rs.getString("name"));
+                        variant.setProductId(rs.getInt("pid"));
+                        variant.setColor(rs.getString("color"));
+                        variant.setPrice(rs.getDouble("price"));
+                        variant.setImage(rs.getString("image"));
+                        variant.setActive(rs.getInt("isActive") > 0);
+                        variant.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
+                        return variant;
+                    }).list();
+        });
+    }
+
+    public int getTotalVariantSaleCount() {
+        String sql = "SELECT COUNT(*) " +
+                "FROM product_variants pv " +
+                "JOIN products p ON pv.productId = p.id " +
+                "JOIN product_variant_promotions pvp ON pvp.variantId = pv.id " +
+                "JOIN promotions pm ON pm.id = pvp.promotionId " +
+                "WHERE pv.isActive > 0 AND pm.startDate <= NOW() AND pm.endDate >= NOW()";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .mapTo(int.class)
+                        .one()
+        );
+    }
+
+    public List<ProductVariant> getProVariantsSaleWithPagination(int offset, int pageSize) {
+        String sql = "SELECT pv.id, pv.name, pv.color, pv.price, pv.image, pv.isActive, " +
+                "       pv.productId AS pid, pv.createdAt, p.name AS pname, pm.discountPercentage AS discount " +
+                "FROM product_variants pv " +
+                "JOIN products p ON pv.productId = p.id " +
+                "JOIN product_variant_promotions pvp ON pvp.variantId = pv.id " +
+                "JOIN promotions pm ON pm.id = pvp.promotionId " +
+                "WHERE pv.isActive > 0 AND pm.startDate <= NOW() AND pm.endDate >= NOW() " +
+                "ORDER BY pm.endDate DESC " +
+                "LIMIT :limit OFFSET :offset";
+
+        return jdbi.withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .bind("limit", pageSize)
+                    .bind("offset", offset)
+                    .map((rs, ctx) -> {
+                        ProductVariant variant = new ProductVariant();
+                        variant.setId(rs.getInt("id"));
+                        variant.setName(rs.getString("name"));
+                        variant.setProductId(rs.getInt("pid"));
+                        variant.setColor(rs.getString("color"));
+                        variant.setPrice(rs.getDouble("price"));
+                        variant.setImage(rs.getString("image"));
+                        variant.setActive(rs.getInt("isActive") > 0);
+                        variant.setSalePricewithPercent(rs.getDouble("discount") / 100);
+                        variant.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
+                        return variant;
+                    }).list();
         });
     }
 }

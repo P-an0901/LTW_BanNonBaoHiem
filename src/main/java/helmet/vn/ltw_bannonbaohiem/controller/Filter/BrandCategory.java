@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebFilter("/*")
-public class Filter implements jakarta.servlet.Filter {
+public class BrandCategory implements jakarta.servlet.Filter {
     private BrandService brandService = new BrandService();
     private CategoryService cateService = new CategoryService();
 

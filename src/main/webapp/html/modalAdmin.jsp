@@ -374,6 +374,8 @@
           </tr>
           </tbody>
         </table>
+        <button type="button" id="edit-product-btn" class="btn btn-primary">Sửa</button>
+        <button id="save-btn" style="display: none;">Lưu</button>
       </div>
     </div>
   </div>
@@ -448,3 +450,44 @@
   </div>
 </div>
 
+<div class="modal fade" id="detailOrderModal" tabindex="-1" aria-labelledby="detailOrderModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2 class="form-title">Chi tiết đơn hàng</h2>
+        <p><strong>Họ và tên:</strong> <span id="modal-full-name"></span></p>
+        <p><strong>Địa chỉ:</strong> <span id="modal-address"></span></p>
+        <p><strong>Số điện thoại:</strong> <span id="modal-phone"></span></p>
+        <p><strong>Ghi chú:</strong> <span id="modal-note"></span></p>
+        <p><strong>Ngày giao dự kiến: </strong><span id="delivery-date"></span></p>
+            <table class="table table-bordered">
+              <thead>
+              <tr>
+                <th></th>
+                <th>Tên sản phẩm</th>
+                <th>Kích cỡ</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>đ</td>
+                </tr>
+              </tbody>
+            </table>
+            <h6><strong>Tổng cộng:</strong><strong> Đ</strong></h6>
+        <h6><strong>Phương thức thanh toán: </strong><span id="modal-payment-method"></span></h6>
+      </div>
+    </div>
+  </div>
+</div>
