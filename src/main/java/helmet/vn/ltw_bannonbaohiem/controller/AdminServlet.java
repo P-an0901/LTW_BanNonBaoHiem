@@ -4,6 +4,9 @@ import helmet.vn.ltw_bannonbaohiem.controller.admin.ProductController;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Brand;
 import helmet.vn.ltw_bannonbaohiem.dao.model.User;
 import helmet.vn.ltw_bannonbaohiem.service.BrandService;
+import helmet.vn.ltw_bannonbaohiem.service.OrderService;
+import helmet.vn.ltw_bannonbaohiem.service.ProductVariantService;
+import helmet.vn.ltw_bannonbaohiem.service.UserService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,6 +20,9 @@ import java.util.List;
 
 @WebServlet(name = "admin", value = "/admin/*")
 public class AdminServlet extends HttpServlet {
+    private OrderService orderService = new OrderService();
+    private UserService userService = new UserService();
+    private ProductVariantService productVariantService = new ProductVariantService();
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User u = (User) session.getAttribute("auth");
@@ -37,6 +43,14 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int countUser = userService.countCustomer();
+        int countOrder = orderService.countOrder();
+        double revenueMonth = orderService.revenueMonth();
+        int countVariantSell = orderService.countVariantSell();
+        req.setAttribute("countUser", countUser);
+        req.setAttribute("countOrder", countOrder);
+        req.setAttribute("revenueMonth", revenueMonth);
+        req.setAttribute("countVariantSell", countVariantSell);
         processRequest(req, resp);
     }
 

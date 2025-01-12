@@ -69,7 +69,7 @@
                       <button type="submit" class="btn btn-success">Cập nhật</button>
                     </form>
                   </td>
-                  <td>${item.price} đ</td>
+                  <td><f:formatNumber value="${item.price} " pattern="#,###.###"/> đ</td>
                   <td>
                     <form action="${pageContext.request.contextPath}/delete-cart">
                       <input type="hidden" name="cid" value="${item.id}" />
@@ -83,7 +83,7 @@
             </table>
           </ul>
           <div class="cart-summary">
-            <p>Tổng cộng: <span id="cart-total">${sessionScope.cart.totalPrice} đ</span></p>
+            <p>Tổng cộng: <span id="cart-total"><f:formatNumber value="${sessionScope.cart.totalPrice} " pattern="#,###.###"/> đ</span></p>
             <a href="${pageContext.request.contextPath}/danhmuc" class="btn btn-secondary">Tiếp tục mua hàng</a>
             <a href="${pageContext.request.contextPath}/thanh-toan" class="btn btn-primary">Thanh toán</a>
           </div>

@@ -1,5 +1,6 @@
 package helmet.vn.ltw_bannonbaohiem.dao.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class User {
@@ -9,7 +10,7 @@ public class User {
     private String email;
     private String password;
     private String fullName;
-    private LocalDateTime birthday;
+    private LocalDate  birthday;
     private String phone;
     private String image;
     private String address;
@@ -19,7 +20,7 @@ public class User {
     private LocalDateTime updatedAt;
 
     public User(int id, String username, String email, String password, String fullName,
-                LocalDateTime birthday, String phone, String image, String address, int isActive, int role
+                LocalDate birthday, String phone, String image, String address, int isActive, int role
                 , LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.username = username;
@@ -79,11 +80,11 @@ public class User {
         this.fullName = fullName;
     }
 
-    public LocalDateTime getBirthday() {
+    public LocalDate  getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDateTime birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

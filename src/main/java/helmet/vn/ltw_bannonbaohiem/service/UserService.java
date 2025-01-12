@@ -18,4 +18,8 @@ public class UserService {
     public boolean addUser(String username, String password, String name, String email, int role, int active) {
         return dao.addUser(username, password, name, email, role, active);
     }
+
+    public int countCustomer() {
+        return dao.countCustomer();
+    }
 }

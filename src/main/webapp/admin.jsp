@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "f" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,27 +76,28 @@
                     <!-- Khách hàng -->
                     <div class="card-single">
                         <div class="box">
-                            <h2 id="amount-user">0</h2>
+                            <h2 id="amount-user">${countUser}</h2>
                             <div class="on-box">
                                 <h3>Khách hàng</h3>
-                                <p>Sản phẩm là bất cứ cái gì có thể đưa vào thị trường để tạo sự chú ý, mua sắm, sử dụng hay tiêu dùng nhằm thỏa mãn một nhu cầu hay ước muốn.</p>
+                                <p>Khách hàng mục tiêu là nhóm đối tượng khách hàng trong phân khúc thị trường mục tiêu mà doanh nghiệp bạn đang hướng tới.</p>
+
                             </div>
                         </div>
                     </div>
                     <!-- Sản phẩm -->
                     <div class="card-single">
                         <div class="box">
-                            <h2 id="amount-product">0</h2>
+                            <h2 id="amount-product">${countVariantSell}</h2>
                             <div class="on-box">
-                                <h3>Sản phẩm</h3>
-                                <p>Khách hàng mục tiêu là nhóm đối tượng khách hàng trong phân khúc thị trường mục tiêu mà doanh nghiệp bạn đang hướng tới.</p>
+                                <h3>Sản phẩm Bán Ra</h3>
+                                <p>Sản phẩm là bất cứ cái gì có thể đưa vào thị trường để tạo sự chú ý, mua sắm, sử dụng hay tiêu dùng nhằm thỏa mãn một nhu cầu hay ước muốn.</p>
                             </div>
                         </div>
                     </div>
                     <!-- Doanh thu -->
                     <div class="card-single">
                         <div class="box">
-                            <h2 id="doanh-thu">VNĐ</h2>
+                            <h2 id="doanh-thu">${revenueMonth} VNĐ</h2>
                             <div class="on-box">
                                 <h3>Doanh thu</h3>
                                 <p>Doanh thu của doanh nghiệp là toàn bộ số tiền thu được do tiêu thụ sản phẩm, cung cấp dịch vụ với sản lượng.</p>
@@ -105,7 +107,7 @@
                     <!-- Đơn hàng mới -->
                     <div class="card-single">
                         <div class="box">
-                            <h2 id="new-orders">45</h2>
+                            <h2 id="new-orders">${countOrder}</h2>
                             <div class="on-box">
                                 <h3>Đơn hàng mới</h3>
                                 <p>Số lượng đơn hàng mới được tạo gần đây, phản ánh nhu cầu mua sắm của khách hàng.</p>
@@ -230,7 +232,7 @@
                                 <td>${proV.name}</td>
                                 <td><img src="${pageContext.request.contextPath}/${fn:escapeXml(proV.image)}" alt="${proV.name}" width="50"></td>
                                 <td>${proV.color}</td>
-                                <td>${proV.price}</td>
+                                <td><span><f:formatNumber value="${proV.price}" pattern="#,###.###"/> đ</span> </td>
                                 <td><button class="pvdetails-btn" data-id="${proV.id}"><i class="fa-solid fa-eye"></i></button></td>
 
                                 <td>
@@ -361,18 +363,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <c:if test="${empty categories}">
+                    <c:if test="${empty cates}">
                         <tr>
                             <td colspan="4" style="text-align: center; font-style: italic;">Không có dữ liệu</td>
                         </tr>
                     </c:if>
-                    <c:forEach var="cate" items="${categories}">
+                    <c:forEach var="cate" items="${cates}">
                     <tr>
                         <td>${cate.id}</td>
                         <td>${cate.name}</td>
                         <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
                         <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
-                    <tr>
+                    </tr>
                     </c:forEach>
                     </tbody>
                 </table>
@@ -413,24 +415,7 @@
             <div class="section promotion active">
                 <h1 class="section-title">Quản Lý Khuyến Mãi</h1>
                 <div class="admin-control">
-                    <div class="admin-control-left">
-                            <form action="promotionSearch" class="form-search">
-                                <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span> 
-                                <input id="form-search-promotion" type="text" class="form-search-input" placeholder="Tìm kiếm khuyến mãi.." oninput="">
-                                
-                            </form>
-
-                    </div>
                     <div class="admin-control-right">
-                        <div>
-                            <label for="time-start">Từ</label>
-                            <input type="date" class="form-control-date" id="time-start" onchange="">
-                        </div>
-                        <div>
-                            <label for="time-end">Đến</label>
-                            <input type="date" class="form-control-date" id="time-end" onchange="">
-                        </div>
-                        <button class="btn-control-large" id="btn-cancel-promotion"><i class="fa-solid fa-rotate-right"></i> Làm mới</button>
                         <button class="btn-control-large" id="btn-add-promotion"><i class="fa-solid fa-plus"></i> Thêm Khuyến Mãi</button>
                     </div>
 
@@ -504,17 +489,6 @@
                 <h1 class="section-title">Quản Lý Người Dùng</h1>
                 <div class="admin-control">
                     <div class="admin-control-right">
-                        <form action="dateSearch" class="fillter-date">
-                            <div>
-                                <label for="time-start">Từ</label>
-                                <input type="date" class="form-control-date" id="time-start-user" onchange="">
-                            </div>
-                            <div>
-                                <label for="time-end">Đến</label>
-                                <input type="date" class="form-control-date" id="time-end-user" onchange="">
-                            </div>
-                        </form>      
-                        <button class="btn-reset-order" onclick=""><i class="fa-solid fa-arrow-rotate-right"></i></button>     
                         <button id="btn-add-user" class="btn-control-large"><i class="fa-solid fa-plus"></i> <span>Thêm Người Dùng</span></button>          
                     </div>
                 </div>
@@ -546,7 +520,7 @@
                             <td>${u.createdAt}</td>
                             <td>${u.roleName}</td>
                             <td>${u.activeStatus}</td>
-                            <td><button class="detail-btn"><i class="fa-solid fa-pen"></i></button></td>
+                            <td><button class="detail-btn"><i class="fa-solid fa-eye"></i></button></td>
                             <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
                             <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                         </tr>
@@ -576,16 +550,6 @@
                     </form>
                 </div>
                 <div class="admin-control-right">
-                    <form action="dateSearch" class="fillter-date">
-                        <div>
-                            <label for="time-start">Từ</label>
-                            <input type="date" class="form-control-date" id="time-start2" onchange="">
-                        </div>
-                        <div>
-                            <label for="time-end">Đến</label>
-                            <input type="date" class="form-control-date" id="time-end2" onchange="">
-                        </div>
-                    </form>      
                     <button class="btn-reset-order" onclick=""><i class="fa-solid fa-sync-alt"></i></button>     
                     <button class="btn-control-large" id="btn-add-order"><i class="fa-solid fa-plus"></i>Đơn Hàng</button>  
                     <button class="btn-control-large" id="btn-add-payment_method"><i class="fa-solid fa-plus"></i>Phương Thức Thanh Toán</button>            
@@ -593,7 +557,7 @@
             </div>
             <h2>Danh Sách Đơn Hàng</h2>
             <div class="table">
-                <table width="100%">
+                <table>
                     <thead>
                         <tr>
                             <th></th>
@@ -613,8 +577,21 @@
                             <td>${o.id}</td>
                             <td>${o.user.fullName}</td>
                             <td>${o.createdAt}</td>
-                            <td>${o.totalAmount}</td>
-                            <td>${o.status}</td>
+                            <td><f:formatNumber value="${o.totalAmount} " pattern="#,###.###"/> đ</td>
+                            <td>
+                                <form action="${pageContext.request.contextPath}/admin/order" method="POST">
+                                    <input type="hidden" name="action" value="updateStatus" />
+                                    <input type="hidden" name="orderId" value="${o.id}" />
+                                    <select name="status" class="form-select">
+                                        <c:forEach var="entry" items="${statusList}">
+                                            <option value="${entry.value}" ${entry.value == o.status ? 'selected' : ''}>
+                                                    ${entry.value}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                    <button type="submit" class="btn btn-success">Cập nhật</button>
+                                </form>
+                            </td>
                             <td><button class="detail-btn"><i class="fa-solid fa-pen"></i></button></td>
                             <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                         </tr>
@@ -633,40 +610,9 @@
         <div class="section active">
             <h1 class="section-title">Thống Kê</h1>
             <div class="admin-control">
-                <div class="admin-control-left">
-                    <select name="the-loai-tk" id="the-loai-tk" onchange="">
-                        <option>Tất cả</option>
-                        <option>3/4 đầu</option>
-                        <option>Nửa đầu</option>
-                        <option>Full face</option>
-                        <option>Nón trẻ em</option>
-                        <option>Nón xe đạp</option>
-                    </select>
-                    <select name="brand-tk" id="brand-tk" onchange="">
-                        <option>Tất cả</option>
-                        <option>Royal</option>
-                        <option>Asia</option>
-                        <option>JC</option>
-                        <!-- <option>Nón Sơn</option> -->
-                    </select>
-                </div>
                 <div class="admin-control-center">
-                    <form action="tksearch" class="form-search">
-                        <span class="search-btn"><i class="fa-solid fa-search"></i></span>
-                        <input id="form-search-tk" type="text" class="form-search-input" placeholder="Tìm kiếm nón..." oninput="">
-                    </form>
                 </div>
                 <div class="admin-control-right">
-                    <form action="s" class="fillter-date">
-                        <div>
-                            <label for="time-start">Từ</label>
-                            <input type="date" class="form-control-date" id="time-start-tk" onchange="">
-                        </div>
-                        <div>
-                            <label for="time-end">Đến</label>
-                               <input type="date" class="form-control-date" id="time-end-tk" onchange="">
-                        </div>
-                    </form> 
                     <button class="btn-reset-order" onclick=""><i class="fa-solid fa-arrow-up-short-wide"></i></button>
                     <button class="btn-reset-order" onclick=""><i class="fa-solid fa-arrow-down-wide-short"></i></button>
                     <button class="btn-reset-order" onclick=""><i class="fa-solid fa-sync-alt"></i></button>                    
@@ -676,7 +622,8 @@
                 <div class="order-statistical-item">
                     <div class="order-statistical-item-content">
                         <p class="order-statistical-item-content-desc">Sản phẩm được bán ra</p>
-                        <h4 class="order-statistical-item-content-h" id="quantity-product"></h4>
+                        <h4 class="order-statistical-item-content-h" id="quantity-product">
+                        </h4>
                     </div>
                     <div class="order-statistical-item-icon">
                         <i class="fa-solid fa-box"></i>
@@ -699,41 +646,6 @@
                     <div class="order-statistical-item-icon">
                         <i class="fa-solid fa-dollar-sign fa-2x"></i>
                     </div>
-                </div>
-                <div class="table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>STT</td>
-                                <td>Tên sản phẩm</td>
-                                <td>Số lượng bán</td>
-                                <td>Doanh thu</td>
-                                <td></td>
-                            </tr>
-                        </thead>
-                        <tbody id="showTk"></tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Sản phẩm A</td>
-                            <td>100</td>
-                            <td>2,000,000</td>
-                            <td><button>Chi tiết</button></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Sản phẩm B</td>
-                            <td>150</td>
-                            <td>3,000,000</td>
-                            <td><button>Chi tiết</button></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Sản phẩm C</td>
-                            <td>200</td>
-                            <td>4,000,000</td>
-                            <td><button>Chi tiết</button></td>
-                        </tr>
-                    </table>
                 </div>
             </div>
         </div>
