@@ -244,7 +244,7 @@
                                     <form action="${pageContext.request.contextPath}/delete-tab-product" method="POST" style="display:inline;">
                                         <input type="hidden" name="action" value="deleteProduct">
                                         <input type="hidden" name="id" value="${proV.id}" />
-                                        <button type="submit" class="delete-btn">
+                                        <button type="submit" class="delete-btn" onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm này?');">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </form>
@@ -290,9 +290,9 @@
                                 </td>
                                 <td>
                                     <form action="${pageContext.request.contextPath}/delete-tab-product" method="POST" style="display:inline;">
-                                        <input type="hidden" name="action" value="deletePSize">
+                                        <input type="hidden" name="action" value="deleteProductVariantSize">
                                         <input type="hidden" name="id" value="${proS.id}" />
-                                        <button type="submit" class="delete-btn">
+                                        <button type="submit" class="delete-btn" onclick="return confirm('Bạn chắc chắn muốn xóa mục này?');">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </form>
@@ -341,7 +341,7 @@
                                 <form action="${pageContext.request.contextPath}/delete-tab-product" method="POST" style="display:inline;">
                                     <input type="hidden" name="action" value="deleteBrand">
                                     <input type="hidden" name="id" value="${brand.id}" />
-                                    <button type="submit" class="delete-btn">
+                                    <button type="submit" class="delete-btn" onclick="return confirm('Bạn chắc chắn muốn xóa mục này?');">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
@@ -544,10 +544,6 @@
                     </select>
                 </div>
                 <div class="admin-control-center">
-                    <form action="orderSearch" class="form-search">
-                        <span class="search-btn"><i class="fa-solid fa-search"></i></span>
-                        <input id="form-search-order" type="text" class="form-search-input" placeholder="Tìm kiếm mã đơn, khách hàng...">
-                    </form>
                 </div>
                 <div class="admin-control-right">
                     <button class="btn-reset-order" onclick=""><i class="fa-solid fa-sync-alt"></i></button>     
@@ -592,7 +588,7 @@
                                     <button type="submit" class="btn btn-success">Cập nhật</button>
                                 </form>
                             </td>
-                            <td><button class="detail-btn"><i class="fa-solid fa-pen"></i></button></td>
+                            <td><button class="detail-btn" id="btn-detail-order" data-order-id="${o.id}"> <i class="fa-solid fa-pen"></i></button></td>
                             <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                         </tr>
                     </c:forEach>

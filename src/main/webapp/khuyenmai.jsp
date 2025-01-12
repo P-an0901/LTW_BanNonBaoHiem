@@ -37,7 +37,7 @@
         <div class="tab-content" id="promotion-tabs-content">
             <div class="tab-pane fade show active" id="product" role="tabpanel" aria-labelledby="product-tab">
                 <div class="product-row">
-                    <c:forEach var="proV" items="${limitedProSale}">
+                    <c:forEach var="proV" items="${listVariantSale}">
                         <div class="product-item" data-has-discount="${proV.salePrice > 0 ? 'true' : 'false'}">
                             <a href="${pageContext.request.contextPath}/detail?pvId=${proV.id}">
                                 <img src="${pageContext.request.contextPath}/${fn:escapeXml(proV.image)}" alt="${proV.name}" class="product-image">
@@ -66,6 +66,14 @@
                             </form>
                         </div>
                     </c:forEach>
+                </div>
+            </div>
+            <div class="pagination">
+                <div id="page-numbers">
+            <c:forEach var="i" begin="1" end="${totalPages}">
+                <a href="${pageContext.request.contextPath}/khuyenmai?&page=${i}"
+                   class="${i == currentPage ? 'active' : ''}">${i}</a>
+            </c:forEach>
                 </div>
             </div>
             </div>

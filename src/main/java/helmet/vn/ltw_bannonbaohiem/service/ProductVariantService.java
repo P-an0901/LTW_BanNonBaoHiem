@@ -71,6 +71,16 @@ public class ProductVariantService {
                                                              String price, String[] sizes, String filterType, int offset, int pageSize) {
         List<ProductVariant> variants = productVariantD.getProVariantsWithPagination( categoryId, brandId,
                 colors, price, sizes,filterType , offset, pageSize);
+        List<ProductVariant> variantSale = productVariantD.getSaleProductVariants();
+        for (ProductVariant variant : variants) {
+            for (ProductVariant saleVariant : variantSale) {
+                if (variant.getId() == saleVariant.getId()) {
+                    variant.setSale(true);
+                    variant.setSalePrice(saleVariant.getSalePrice());
+                    break;
+                }
+            }
+        }
         return supportVariantSize(variants);
     }
 
@@ -103,7 +113,7 @@ public class ProductVariantService {
                 .collect(Collectors.toList());
     }
 
-    private List<ProductVariant> getSaleProductVariants() {
+    public List<ProductVariant> getSaleProductVariants() {
         List<ProductVariant> variants = productVariantD.getSaleProductVariants();
         return supportVariantSize(variants);
     }
@@ -125,5 +135,51 @@ public class ProductVariantService {
 
     public List<ProductImages> listImages(int variantId){
         return productVariantD.listImages(variantId);
+    }
+
+    public void checkSale(ProductVariant productVariant) {
+        List<ProductVariant> variants = productVariantD.getSaleProductVariants();
+        ProductVariant existingVariant = variants.stream()
+                .filter(v -> v.getId() == productVariant.getId())
+                .findFirst()
+                .orElse(null);
+
+        if (existingVariant != null) {
+            productVariant.setSalePrice(existingVariant.getSalePrice());
+            productVariant.setSale(true);
+        }
+    }
+
+    public List<ProductVariant> getProVariantSalesWithPagination(int offset, int pageSize) {
+        List<ProductVariant> variants = productVariantD.getProVariantsSaleWithPagination(offset, pageSize);
+        List<ProductVariant> variantSale = productVariantD.getSaleProductVariants();
+        for (ProductVariant variant : variants) {
+            for (ProductVariant saleVariant : variantSale) {
+                if (variant.getId() == saleVariant.getId()) {
+                    variant.setSale(true);
+                    variant.setSalePrice(saleVariant.getSalePrice());
+                    break;
+                }
+            }
+        }
+        return supportVariantSize(variants);
+    }
+
+    public int getTotalVariantSaleCount() {
+        return productVariantD.getTotalVariantSaleCount();
+    }
+    public List<ProductVariant> searchVariant(String query) {
+        List<ProductVariant>  variants =  productVariantD.searchVariant(query);
+        List<ProductVariant> variantSale = productVariantD.getSaleProductVariants();
+        for (ProductVariant variant : variants) {
+            for (ProductVariant saleVariant : variantSale) {
+                if (variant.getId() == saleVariant.getId()) {
+                    variant.setSale(true);
+                    variant.setSalePrice(saleVariant.getSalePrice());
+                    break;
+                }
+            }
+        }
+        return supportVariantSize(variants);
     }
 }
