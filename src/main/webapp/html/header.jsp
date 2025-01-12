@@ -131,7 +131,7 @@
           <ul class="submenu" id="brand-submenu">
             <c:forEach var="brand" items="${brands}">
               <li>
-                <a href="${pageContext.request.contextPath}/danhmuc?brand=${brand.name}">
+                <a href="${pageContext.request.contextPath}/danhmuc?brand=${brand.id}">
                   <img src="${brand.imageUrl}" alt="${brand.name}" class="submenu-icon">
                 </a>
               </li>

@@ -171,32 +171,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>#12346</td>
-                    <td>
-                        <ul>
-                            <li>Nón bảo hiểm 3/4 - Đỏ đô (Số lượng: 1)</li>
-                        </ul>
-                    </td>
-                    <td>300.000 VNĐ</td>
-                    <td>Chuyển khoản ngân hàng</td>
-                    <td>456 Đường DEF, Quận 2, TP.HCM</td>
-                    <td>25-11-2024</td>
-                    <td>Khách thay đổi ý định</td>
-                </tr>
-                <tr>
-                    <td>#12347</td>
-                    <td>
-                        <ul>
-                            <li>Nón bảo hiểm fullface - Đen nhám (Số lượng: 2)</li>
-                        </ul>
-                    </td>
-                    <td>1.200.000 VNĐ</td>
-                    <td>Tiền mặt</td>
-                    <td>789 Đường GHI, Quận 4, TP.HCM</td>
-                    <td>30-11-2024</td>
-                    <td>Không thể giao hàng</td>
-                </tr>
+
                 </tbody>
             </table>
         </div>
@@ -213,14 +188,44 @@
             </div>
             <div class="modal-body">
                 <h2 class="modal-title">Chỉnh sửa thông tin</h2>
-                <form id="edit-info-form">
+                <form id="edit-info-form" action="${pageContext.request.contextPath}/account" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="action" value="updateInfoUser">
                     <div class="mb-3">
-                        <label for="username-tk" class="form-label">Tên người dùng</label>
-                        <input type="text" class="form-control" id="username-tk" name="username" value="Tên người dùng hiện tại" readonly>
+                        <label for="username-tk" class="form-label">Tên đăng nhập</label>
+                        <input type="text" class="form-control" id="username-tk" name="username"
+                               value="${sessionScope.auth.username}" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image-tk" class="form-label">Hình ảnh</label>
+                        <div>
+                            <img src="${empty sessionScope.auth.image ? './images/default-avatar.jpg' : sessionScope.auth.image}" alt="Hình ảnh người dùng" style="max-width: 150px; max-height: 150px;">
+                        </div>
+                        <input type="file" class="form-control" id="image-tk" name="image">
+                    </div>
+                    <div class="mb-3">
+                        <label for="fullName-tk" class="form-label">Tên người dùng</label>
+                        <input type="text" class="form-control" id="fullName-tk" name="fullName"
+                               value="${sessionScope.auth.fullName}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="birthday-tk" class="form-label">Ngày sinh</label>
+                        <input type="date" class="form-control" id="birthday-tk" name="birthday"
+                               value="${sessionScope.auth.birthday}">
                     </div>
                     <div class="mb-3">
                         <label for="email-tk" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email-tk" name="email" required>
+                        <input type="email" class="form-control" id="email-tk" name="email"
+                               value="${sessionScope.auth.email}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address-tk" class="form-label">Địa chỉ</label>
+                        <input type="text" class="form-control" id="address-tk" name="address"
+                               value="${sessionScope.auth.address}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone-tk" class="form-label">Số điện thoại</label>
+                        <input type="text" class="form-control" id="phone-tk" name="phone"
+                               value="${sessionScope.auth.phone}">
                     </div>
                 </form>
             </div>

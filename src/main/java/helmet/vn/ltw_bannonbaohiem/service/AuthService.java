@@ -47,4 +47,7 @@ public class AuthService {
         }
         return false;
     }
+    public boolean updateInfo(int uid, String fullName, String email, String phone, String birthday, String address, String image){
+        return udao.updateInfo(uid, fullName, email, phone, birthday, address, image);
+    }
 }
