@@ -14,13 +14,13 @@ import java.io.IOException;
 
 @WebServlet("/add-cart")
 public class AddCart extends HttpServlet {
-    private static final long serialVersionUID = 1L;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int productId = Integer.parseInt(req.getParameter("productId"));
         int sizeId = Integer.parseInt(req.getParameter("sizeId"));
         int quantity = Integer.parseInt(req.getParameter("quantity"));
+        System.out.println(req.getParameter("price"));
         double price = Double.parseDouble(req.getParameter("price"));
         System.out.println(sizeId);
 

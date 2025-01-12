@@ -84,13 +84,13 @@
                                       <td>${item.name}</td>
                                       <td>${item.size.size.name}</td>
                                       <td>${item.quantity}</td>
-                                      <td>${item.price} đ</td>
+                                      <td><span><f:formatNumber value="${item.price}" pattern="#,###.###"/> đ</span></td>
                                   </tr>
                               </c:forEach>
                               <!-- Tổng tiền -->
                               <tr class="cart-summary">
                                   <td colspan="4" class="text-right"><strong>Tổng cộng:</strong></td>
-                                  <td><strong>${sessionScope.cart.totalPrice} đ</strong></td>
+                                  <td><strong><f:formatNumber value="${sessionScope.cart.totalPrice} " pattern="#,###.###"/> đ</strong></td>
                               </tr>
                               </tbody>
                           </table>
@@ -161,7 +161,7 @@
                                       <td>${item.name}</td>
                                       <td>${item.size.size.name}</td>
                                       <td>${item.quantity}</td>
-                                      <td>${item.price} đ</td>
+                                      <td><f:formatNumber value="${item.price} " pattern="#,###.###"/> đ</td>
                                   </tr>
                               </c:forEach>
                               </tbody>
@@ -173,8 +173,14 @@
                           </div>
                       </c:otherwise>
                   </c:choose>
-
-                        <h6><strong>Tổng cộng:</strong><strong>${sessionScope.cart.totalPrice} đ</strong></h6>
+                  <c:choose>
+                      <c:when test="${not empty sessionScope.cart.totalPrice}">
+                          <h6><strong>Tổng cộng:</strong><strong><f:formatNumber value="${sessionScope.cart.totalPrice}" pattern="#,###.###"/> Đ</strong></h6>
+                      </c:when>
+                      <c:otherwise>
+                          <h6><strong>Tổng cộng: 0 Đ</strong></h6>
+                      </c:otherwise>
+                  </c:choose>
                         <h6><strong>Phương thức thanh toán: </strong><span id="modal-payment-method"></span></h6>
               </div>
               <form action="${pageContext.request.contextPath}/thanh-toan" method="post" id="addOrderForm">

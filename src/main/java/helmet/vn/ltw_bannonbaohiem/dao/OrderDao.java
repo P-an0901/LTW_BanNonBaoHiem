@@ -119,4 +119,59 @@ public class OrderDao {
         }
     }
 
+    public void updateStatus(int oid, String status) {
+        StringBuilder sqlBuilder = new StringBuilder("UPDATE orders SET status = :status");
+        if ("Đã giao".equalsIgnoreCase(status)) {
+            sqlBuilder.append(", deliveryDate = :date");
+        }
+        sqlBuilder.append(" WHERE id = :oid");
+
+        try {
+            jdbi.useHandle(handle -> {
+                var update = handle.createUpdate(sqlBuilder.toString())
+                        .bind("status", status)
+                        .bind("oid", oid);
+                if ("Đã giao".equalsIgnoreCase(status)) {
+                    update.bind("date", LocalDate.now());
+                }
+                update.execute();
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int countOrder() {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT COUNT(*) FROM orders WHERE status NOT LIKE 'Đã giao' ")
+                        .mapTo(int.class)
+                        .one()
+        );
+    }
+
+    public double revenueMonth() {
+        String sql = "SELECT SUM(totalAmount) FROM orders " +
+                "WHERE MONTH(deliveryDate) = MONTH(CURRENT_DATE()) AND YEAR(deliveryDate) = YEAR(CURRENT_DATE())";
+
+        // Sử dụng JDBI để thực thi truy vấn
+        return jdbi.withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .mapTo(Double.class)
+                    .findOne()
+                    .orElse(0.0);
+        });
+    }
+
+    public int countVariantSell() {
+        String sql = "SELECT oi.quantity " +
+                "FROM order_items oi " +
+                "JOIN orders o ON oi.orderId = o.id " +
+                "WHERE o.status = 'Đã giao'";
+
+        return jdbi.withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .mapTo(Integer.class)
+                    .reduce(0, (total, quantity) -> total + quantity);
+        });
+    }
 }

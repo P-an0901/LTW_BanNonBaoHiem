@@ -1,5 +1,6 @@
 package helmet.vn.ltw_bannonbaohiem.controller;
 
+import helmet.vn.ltw_bannonbaohiem.controller.Filter.DanhMucFilter;
 import helmet.vn.ltw_bannonbaohiem.dao.ProductSizeDao;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Product;
 import helmet.vn.ltw_bannonbaohiem.dao.model.ProductSize;
@@ -23,47 +24,64 @@ import java.util.List;
 public class DanhmucServlet extends HttpServlet {
     private ProductVariantService productVariantService = new ProductVariantService();
     private SizeService sizeService = new SizeService();
+    private DanhMucFilter danhMucFilter = new DanhMucFilter();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("activePage", "danhmuc");
-        String categoryId = req.getParameter("category");
-        String brand = req.getParameter("brand");
-        String price = req.getParameter("price");
-        String[] lstsizes = req.getParameterValues("size");
-        String[] colors = req.getParameterValues("color");
 
-        System.out.println(categoryId);
-        if (categoryId == null || categoryId.isEmpty() || categoryId.equals("all")){
-            categoryId = "-1";
-        }
-        if (brand == null || brand.isEmpty() || brand.equals("all")){
-            brand = "-1";
-        }
-        String pageParam = req.getParameter("page");
-        int page = pageParam == null ? 1 : Integer.parseInt(pageParam);
+        int categoryId = parseCategoryId(req.getParameter("category"));
+        int brand = parseBrand(req.getParameter("brand"));
+        String price = parsePrice(req.getParameter("price"));
+        String filterType = parseFilterType(req.getParameter("filter_type"));
+        String[] sizes = req.getParameterValues("sizes") == null ? new String[0] : req.getParameterValues("sizes");
+        String[] colors = req.getParameterValues("colors") == null ? new String[0] : req.getParameterValues("colors");
+
+        int page = parsePageParam(req.getParameter("page"));
         int pageSize = 20;
         int offset = (page - 1) * pageSize;
-        System.out.println(offset);
-        int totalVariants = 0;
-        List<Product> products = new ArrayList<>();
-        List<ProductVariant> proVariants = new ArrayList<>();
-        proVariants = productVariantService.getProVariantsWithPagination( Integer.parseInt(categoryId), Integer.parseInt(brand), color, minPrice,
-                maxPrice, offset, pageSize);
-        totalVariants = productVariantService.getTotalVariantCount(Integer.parseInt(categoryId));
 
-        int totalPages = (int) Math.ceil((double) totalVariants  / pageSize);
+        List<ProductVariant> proVariants = productVariantService.getProVariantsWithPagination(
+                categoryId, brand, colors, price, sizes, filterType, offset, pageSize
+        );
+        int totalVariants = productVariantService.getTotalVariantCount(categoryId, brand, colors,
+                price, sizes, filterType);
 
-        System.out.println(totalPages);
+        int totalPages = calculateTotalPages(totalVariants, pageSize);
+
         req.setAttribute("totalPages", totalPages);
         req.setAttribute("currentPage", page);
-        List<Sizes> sizes = sizeService.getAllSize();
-        req.setAttribute("sizes", sizes);
         req.setAttribute("proVariants", proVariants);
-        System.out.println(proVariants);
-        req.setAttribute("products", products);
+        req.setAttribute("sizes", sizeService.getAllSize());
+        req.setAttribute("colorMap", danhMucFilter.getColorMap());
+        req.setAttribute("priceMap", danhMucFilter.getPriceMap());
+        req.setAttribute("filterMap", danhMucFilter.getFilterMap());
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("/danhmuc.jsp");
         dispatcher.forward(req, resp);
     }
+    private int parsePageParam(String pageParam) {
+        return pageParam == null || pageParam.isEmpty() ? 1 : Integer.parseInt(pageParam);
+    }
+
+    private int parseCategoryId(String categoryId) {
+        return (categoryId == null || categoryId.isEmpty() || categoryId.equals("all")) ? -1 : Integer.parseInt(categoryId);
+    }
+
+    private int parseBrand(String brand) {
+        return (brand == null || brand.isEmpty() || brand.equals("all")) ? -1 : Integer.parseInt(brand);
+    }
+
+    private String parsePrice(String price) {
+        return (price == null || price.isEmpty() || price.equals("all")) ? "all" : price;
+    }
+
+    private String parseFilterType(String filterType) {
+        return (filterType == null || filterType.isEmpty() || filterType.equals("all")) ? "all" : filterType;
+    }
+    private int calculateTotalPages(int totalVariants, int pageSize) {
+        return (int) Math.ceil((double) totalVariants / pageSize);
+    }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

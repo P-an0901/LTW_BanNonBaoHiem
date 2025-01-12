@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix = "f" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -75,7 +76,8 @@
                     <div class="d-flex justify-content-between">
                         <div class=" col-md-6 session-left p-0">
                             <!-- Thông số kỹ thuật -->
-                            <p class="product-price">Giá: ${productVariant.price} đ</p>
+                            <p class="product-price">Giá: <f:formatNumber value="${productVariant.price} " pattern="#,###.###"/> đ</p>
+                            <input type="hidden" name="price" value="${productVariant.price}">
                             <table class="session-left">
                                 <tbody>
                                     <tr>
@@ -206,37 +208,36 @@
                     <!-- Gợi ý sản phẩm cùng loại -->
             <h3>Sản phẩm cùng loại</h3>
             <div class="related-products">
-                <div class="product-item">
-                    <img src="images/Royal-M139-Chuot-xuoc-bong.jpg" alt="Sản phẩm 2" class="product-image">
-                    <h3 class="product-name">Royal M139 Chuột xước bóng</h3>
-                    <p class="product-price">Giá: 200.000 đ</p>
-                    <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
-                </div>
-                <div class="product-item">
-                    <img src="images/Royal-M139-Den-mo.jpg" alt="Sản phẩm 3" class="product-image">
-                    <h3 class="product-name">Royal M139 Đen mờ</h3>
-                    <p class="product-price">Giá: 150.000 đ</p>
-                    <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
-                </div>
-                <div class="product-item">
-                    <img src="images/Royal-M139-Leopard.jpg" alt="Sản phẩm 4" class="product-image">
-                    <h3 class="product-name">Royal M139 Leopard</h3>
-                    <p class="product-price">Giá: 250.000 đ</p>
-                    <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
-                </div>
-                <div class="product-item">
-                    <img src="images/Royal-M139-V.1.jpg" alt="Sản phẩm 5" class="product-image">
-                    <h3 class="product-name">Royal M139 V.1</h3>
-                    <p class="product-price">Giá: 300.000 đ</p>
-                    <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
-                </div>
-                <div class="product-item">
-                    <div class="product-hot-label">Mua nhiều</div> 
-                    <img src="images/1-Royal M139 V.7 Vàng bóng.jpg" alt="Sản phẩm 4" class="product-image">
-                    <h3 class="product-name">Royal M139 V.7 Vàng bóng</h3>
-                    <p class="product-price">Giá: 250.000 đ</p>
-                    <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
-                </div>
+                <c:forEach var="proV" items="${lstProVariant}" varStatus="status">
+                    <c:if test="${status.index < 5}">
+                        <div class="product-item">
+                            <c:if test="${proV.newProV}">
+                                <div class="product-new-label">Mới</div>
+                            </c:if>
+                            <a href="${pageContext.request.contextPath}/detail?pvId=${proV.id}">
+                                <img src="${pageContext.request.contextPath}/${fn:escapeXml(proV.image)}" alt="${proV.name}" class="product-image">
+                            </a>
+                            <div class="select-size">
+                                <c:forEach var="productSize" items="${proV.listPSize}">
+                                    <button class="size-button" data-value="${productSize.id}">
+                                            ${productSize.size.name}
+                                    </button>
+                                </c:forEach>
+                            </div>
+                            <a href="${pageContext.request.contextPath}/detail?pvId=${proV.id}">
+                                <h3 class="product-name">${proV.name}</h3>
+                            </a>
+                            <p class="product-price">Giá: <f:formatNumber value="${proV.price}"/>${proV.price} đ</p>
+                            <form action="${pageContext.request.contextPath}/add-cart" method="POST">
+                                <input type="hidden" name="productId" value="${proV.id}">
+                                <input type="hidden" name="price" value="${proV.price}">
+                                <input type="hidden" name="sizeId" class="sizeId-${proV.id}">
+                                <input type="hidden" name="quantity" value="1" min="1">
+                                <button type="submit" class="buy-button" onclick="return validateF()">Thêm vào giỏ hàng</button>
+                            </form>
+                        </div>
+                    </c:if>
+                </c:forEach>
             </div>
 
             <!-- Sản phẩm đã xem -->

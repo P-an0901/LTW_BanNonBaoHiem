@@ -95,7 +95,8 @@
                         <th>Địa chỉ</th>
                         <th>Ngày giao dự kiến</th>
                         <th>Trạng thái</th>
-                        <th>Thao tác</th>
+                        <th>Hủy</th>
+                        <th>Chi tiết</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -110,7 +111,10 @@
                         <td>${order.estimatedDelivery}</td>
                         <td>${order.status}</td>
                         <td>
-                            <button class="btn btn-info">Xem chi tiết</button>
+                            <button class="btn btn-info">Hủy</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-info">Chi tiết</button>
                         </td>
                     </tr>
                 </c:forEach>
@@ -132,6 +136,7 @@
                         <th>Phương thức thanh toán</th>
                         <th>Địa chỉ</th>
                         <th>Trạng thái</th>
+                        <th>Ngày giao</th>
                         <th>Thao tác</th>
                     </tr>
                 </thead>
@@ -144,6 +149,7 @@
                         <td>${order.paymentMethod.name}</td>
                         <td>${order.shippingAddress}</td>
                         <td>${order.status}</td>
+                        <td>${order.deliveryDate}</td>
                         <td>
                             <button class="btn btn-info">Xem chi tiết</button>
                         </td>

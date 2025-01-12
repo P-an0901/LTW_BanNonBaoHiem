@@ -35,14 +35,14 @@
     <div class="product-list">
         <div class="filter-container">
             <h3>Lọc sản phẩm</h3>
-            <form action="/danhmuc" method="GET">
+            <form action="${pageContext.request.contextPath}/danhmuc" method="GET">
                 <div class="filter-menu">
                 <div class="filter-item">
                     <label for="helmet-brand">Thương hiệu:</label>
                     <select id="helmet-brand" name="brand" class="filter-select">
                         <option value="all" ${param.brand == 'all' ? 'selected' : ''}>Tất cả</option>
                         <c:forEach var="brand" items="${brands}">
-                            <option value="${brand.id}">${brand.name}</option>
+                            <option value="${brand.id}" ${param.brand != null && param.brand == brand.id.toString() ? 'selected' : ''}>${brand.name}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -68,57 +68,31 @@
                 </c:forEach>
                 </div>
             </div>
-            <div class="filter-item">
-                <label for="price-select">Khoảng giá:</label>
-                <select id="price-select" name="price" class="filter-select">
-                    <option value="all" ${param.price == 'all' ? 'selected' : ''}>Tất cả</option>
-                    <option value="below500" ${param.price == 'below500' ? 'selected' : ''}>Dưới 500.000 đ</option>
-                    <option value="above500" ${param.price == 'above500' ? 'selected' : ''}>Trên 500.000 đ</option>
-                    <option value="above10000" ${param.price == 'above10000' ? 'selected' : ''}>Trên 1.000.000 đ</option>
-                </select>
-            </div>
-            <div class="filter-item">
-                <label for="purchase-time-select">Mua nhiều trong: </label>
-                <select id="purchase-time-select" name="purchase_time" class="filter-select">
-                    <option value="all" ${param.purchase_time == 'all' ? 'selected' : ''}>Tất cả thời gian</option>
-                    <option value="this-month" ${param.purchase_time == 'this-month' ? 'selected' : ''}>1 tháng qua</option>
-                    <option value="3-months" ${param.purchase_time == '3-months' ? 'selected' : ''}>3 tháng qua</option>
-                    <option value="6-months" ${param.purchase_time == '6-months' ? 'selected' : ''}>6 tháng qua</option>
-                    <option value="12-months" ${param.purchase_time == '12-months' ? 'selected' : ''}>12 tháng qua</option>
-                </select>
-            </div>
-
+                    <div class="filter-item">
+                        <label for="price-select">Khoảng giá:</label>
+                        <select id="price-select" name="price" class="filter-select">
+                            <c:forEach var="entry" items="${priceMap}">
+                                <option value="${entry.key}" ${param.price == entry.key ? 'selected' : ''}>${entry.value}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label for="filter-select">Lọc theo:</label>
+                        <select id="filter-select" name="filter_type" class="filter-select">
+                            <c:forEach var="entry" items="${filterMap}">
+                                <option value="${entry.key}" ${param.filter_type == entry.key ? 'selected' : ''}>${entry.value}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
 
                     <div class="filter-item">
                         <label>Màu sắc:</label>
-                        <div class="filter-colors">
-                            <label for="color-red" style="color: red;">
-                                <input type="checkbox" id="color-red" name="colors" value="Đỏ" ${param.colors != null && param.colors.contains('Đỏ') ? 'checked' : ''}> Đỏ
-                            </label>
-
-                            <label for="color-blue" style="color: blue;">
-                                <input type="checkbox" id="color-blue" name="colors" value="Xanh" ${param.colors != null && param.colors.contains('Xanh') ? 'checked' : ''}> Xanh
-                            </label>
-
-                            <label for="color-black" style="color: black;">
-                                <input type="checkbox" id="color-black" name="colors" value="Đen" ${param.colors != null && param.colors.contains('Đen') ? 'checked' : ''}> Đen
-                            </label>
-
-                            <label for="color-white">
-                                <input type="checkbox" id="color-white" name="colors" value="Trắng" ${param.colors != null && param.colors.contains('Trắng') ? 'checked' : ''}> Trắng
-                            </label>
-
-                            <label for="color-green" style="color: green;">
-                                <input type="checkbox" id="color-green" name="colors" value="Xanh lá" ${param.colors != null && param.colors.contains('Xanh lá') ? 'checked' : ''}> Xanh lá
-                            </label>
-
-                            <label for="color-yellow" style="color: #e68027;">
-                                <input type="checkbox" id="color-yellow" name="colors" value="Vàng" ${param.colors != null && param.colors.contains('Vàng') ? 'checked' : ''}> Vàng
-                            </label>
-
-                            <label for="color-gray" style="color: gray;">
-                                <input type="checkbox" id="color-gray" name="colors" value="Xám" ${param.colors != null && param.colors.contains('Xám') ? 'checked' : ''}> Xám
-                            </label>
+                        <div class="filter-colors" name="colors">
+                            <c:forEach var="entry" items="${colorMap}">
+                                <label for="color-${entry.key}" style="color: ${entry.key == 'white' || entry.key == 'yellow' ? 'black' : entry.key};">
+                                    <input type="checkbox" id="color-${entry.key}" name="colors" value="${entry.value}"> ${entry.value}
+                                </label>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
@@ -159,7 +133,7 @@
                                     </button>
                                 </c:forEach>
                             </div>
-                            <a href="detail.jsp">
+                            <a href="${pageContext.request.contextPath}/detail?pvId=${proV.id}">
                                 <h3 class="product-name">${proV.name}</h3>
                             </a>
                             <p class="product-price">Giá: <f:formatNumber value="${proV.price}"/> đ</p>
@@ -172,17 +146,26 @@
                             </form>
                         </div>
                     </c:forEach>
-                    
                 </div>
             </div>
             <div class="pagination">
                 <div id="page-numbers">
                     <c:forEach var="i" begin="1" end="${totalPages}">
-                        <a href="${pageContext.request.contextPath}/danhmuc?category=${param.category}&page=${i}"
-                           class="${i == currentPage ? 'active' : ''}">${i}</a>
+                        <c:url var="newUrl" value="/danhmuc?">
+                            <c:forEach var="paramName" items="${pageContext.request.parameterMap}">
+                                <c:if test="${paramName.key != 'page'}">
+                                    <c:param name="${paramName.key}" value="${paramName.value[0]}" />
+                                </c:if>
+                            </c:forEach>
+                            <c:param name="page" value="${i}" />
+                        </c:url>
+                        <a href="${newUrl}" class="${i == currentPage ? 'active' : ''}">
+                                ${i}
+                        </a>
                     </c:forEach>
                 </div>
             </div>
+
         </div>
     </div>
 <!-- Load footer -->

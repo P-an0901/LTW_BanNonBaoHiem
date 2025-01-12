@@ -27,8 +27,9 @@ public class Filter implements jakarta.servlet.Filter {
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
         List<Brand> brands = brandService.getAllBrands();
-        List<Category> categories = cateService.getAllCate();
-        req.setAttribute("categories", categories);
+        List<Category> cates = cateService.getAllCate();
+        System.out.println(brands);
+        req.setAttribute("cates", cates);
         req.setAttribute("brands", brands);
 
         filterChain.doFilter(req, resp);

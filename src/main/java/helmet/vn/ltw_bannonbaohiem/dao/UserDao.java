@@ -117,4 +117,12 @@ public class UserDao {
             return rowsUpdated > 0;
         });
     }
+
+    public int countCustomer() {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT COUNT(*) FROM users WHERE role = 0")
+                        .mapTo(int.class)
+                        .one()
+        );
+    }
 }

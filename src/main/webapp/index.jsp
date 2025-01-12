@@ -96,8 +96,8 @@
 
                             </a>
                             <div class="product-price-container">
-                                <p class="product-sale-price"><span><f:formatNumber value="${proV.salePrice}"/> đ</span></p>
-                                <p class="product-price"><span><f:formatNumber value="${proV.price}"/> đ</span></p>
+                                <p class="product-sale-price"><span><f:formatNumber value="${proV.salePrice}" pattern="#,###.###"/> đ</span></p>
+                                <p class="product-price"><span><f:formatNumber value="${proV.price}" pattern="#,###.###"/> đ</span></p>
                             </div>
                             <form action="${pageContext.request.contextPath}/add-cart" method="POST">
                                 <input type="hidden" name="productId" value="${proV.id}">
@@ -139,7 +139,7 @@
                             <a href="${pageContext.request.contextPath}/detail?pvId=${proV.id}">
                                 <h3 class="product-name">${proV.name}</h3>
                             </a>
-                            <p class="product-price">Giá: <f:formatNumber value="${proV.price}"/> đ</p>
+                            <p class="product-price">Giá: <f:formatNumber value="${proV.price}" pattern="#,###.###"/> đ</p>
                             <form action="${pageContext.request.contextPath}/add-cart" method="POST">
                                 <input type="hidden" name="productId" value="${proV.id}">
                                 <input type="hidden" name="price" value="${proV.price}">
@@ -178,7 +178,7 @@
                         <a href="${pageContext.request.contextPath}/detail?pvId=${proV.id}">
                             <h3 class="product-name">${proV.name}</h3>
                         </a>
-                        <p class="product-price">Giá: <f:formatNumber value="${proV.price}"/> đ</p>
+                        <p class="product-price">Giá: <f:formatNumber value="${proV.price}" pattern="#,###.###"/> đ</p>
                         <form action="${pageContext.request.contextPath}/add-cart" method="POST">
                             <input type="hidden" name="productId" value="${proV.id}">
                             <input type="hidden" name="price" value="${proV.price}">
@@ -188,55 +188,6 @@
                         </form>
                     </div>
                     </c:forEach>
-                    <div class="product-item">
-                        <div class="product-hot-label">Mua nhiều</div> 
-                        <img src=" images/Mũ bảo hiểm Fullface Royal M141K Đen Bóng.png" alt="Sản phẩm 2" class="product-image">
-                        <div class="select-size">
-                            <button class="size-button selected" data-value="M">M</button>
-                            <button class="size-button" data-value="L">L</button>
-                            <button class="size-button" data-value="XL">XL</button>
-                        </div> 
-                        
-                        <h3 class="product-name">Fullface Royal M141K Đen Bóng</h3>
-                        <p class="product-price">Giá: 200.000 đ</p>
-                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
-                    </div>
-                    <div class="product-item">
-                        <div class="product-hot-label">Mua nhiều</div> 
-                        <img src=" images/1-Royal M125K Vàng Bóng.png" alt="Sản phẩm 3" class="product-image">
-                        <div class="select-size">
-                            <button class="size-button selected" data-value="M">M</button>
-                            <button class="size-button" data-value="L">L</button>
-                            <button class="size-button" data-value="XL">XL</button>
-                        </div> 
-                        <h3 class="product-name">Royal M125K Vàng Bóng</h3>
-                        <p class="product-price">Giá: 150.000 đ</p>
-                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
-                    </div>
-                    <div class="product-item">
-                        <div class="product-hot-label">Mua nhiều</div> 
-                        <img src=" images/1-Royal M139 V.7 Vàng bóng.jpg" alt="Sản phẩm 4" class="product-image">
-                        <div class="select-size">
-                            <button class="size-button selected" data-value="M">M</button>
-                            <button class="size-button" data-value="L">L</button>
-                            <button class="size-button" data-value="XL">XL</button>
-                        </div> 
-                        <h3 class="product-name">Royal M139 V.7 Vàng bóng</h3>
-                        <p class="product-price">Giá: 250.000 đ</p>
-                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
-                    </div>
-                    <div class="product-item">
-                        <div class="product-hot-label">Mua nhiều</div> 
-                        <img src=" images/1-Royal M139 Xám Xi Măng Bóng.png" alt="Sản phẩm 5" class="product-image">
-                        <div class="select-size">
-                            <button class="size-button selected" data-value="M">M</button>
-                            <button class="size-button" data-value="L">L</button>
-                            <button class="size-button" data-value="XL">XL</button>
-                        </div> 
-                        <h3 class="product-name">Royal M139 Xám Xi Măng Bóng</h3>
-                        <p class="product-price">Giá: 300.000 đ</p>
-                        <button class="buy-button" onclick="addToCart(this)">Thêm vào giỏ hàng</button>
-                    </div>
                 </div>
                 <div class="xem-them p-3 d-flex justify-content-end">
                     <a href="#" class="btn-xem-them d-flex align-items-center justify-content-between">

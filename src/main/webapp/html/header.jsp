@@ -21,7 +21,7 @@
     <div class="container">
       <div class="d-flex align-items-center justify-content-between" id="headerMid">
         <div class="header-logo">
-          <a href="">
+          <a href="${pageContext.request.contextPath}/">
             <img src="images/HELMET.png" alt="" class="header-logo-img">
           </a>
         </div>
