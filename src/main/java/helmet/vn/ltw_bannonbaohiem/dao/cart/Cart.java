@@ -51,20 +51,22 @@ public class Cart {
     }
 
 
-    public void update(int pvId, int sizeId, int newQuantity) {
+    public boolean update(int pvId, int sizeId, int newQuantity) {
         String key = pvId +"_" + sizeId;
         ProductSize selectedSize = pVService.getById(sizeId);
         if (data.containsKey(key)) {
             if(selectedSize.getStock() < newQuantity){
                 System.out.println("Không đủ hàng để thêm số lượng này vào giỏ!");
-                return;
+                return false;
             }
             CartProduct existingProduct = data.get(key);
             existingProduct.setQuantity(newQuantity);
             System.out.println("Đã cập nhật số lượng sản phẩm với key " + key);
         } else {
             System.out.println("Sản phẩm với key " + key + " không tồn tại trong giỏ hàng.");
+            return false;
         }
+        return true;
     }
     public double getTotalPrice(){
         double total = 0.0;

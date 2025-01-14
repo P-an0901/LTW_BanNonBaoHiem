@@ -28,8 +28,12 @@ public class UpdateCart extends HttpServlet {
         if (cart == null) {
             cart = new Cart();
         }
-        cart.update(productId, size, newQuantity);
-        session.setAttribute("cart", cart);
-        resp.sendRedirect(req.getContextPath() + "/cart");
+        boolean success = cart.update(productId, size, newQuantity);
+        if (!success) {
+            resp.sendRedirect(req.getContextPath() + "/cart");
+        } else {
+            session.setAttribute("cart", cart);
+            resp.sendRedirect(req.getContextPath() + "/cart");
+        }
     }
 }

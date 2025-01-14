@@ -20,26 +20,6 @@ public class PromotionVariantDao {
     public PromotionVariantDao() {
         this.jdbi = JdbiConnect.get();
     }
-//    public List<ProductVariantPromotion> getAll(){
-//        String sql = "SELECT * FROM product_variant_promotions;";
-//        return jdbi.withHandle(handle -> {
-//            return handle.createQuery(sql)
-//                    .map((rs, ctx) -> {
-//                int id = rs.getInt("id");
-//                int variantId = rs.getInt("variant_id");
-//                int promotionId = rs.getInt("promotion_id");
-//                LocalDateTime createdAt = rs.getObject("created_at", LocalDateTime.class);
-//
-//                ProductVariant variant = productVariantDao.getProVariantById(variantId);
-//                Promotion promotion = promotionDao.getPromotionById(promotionId);
-//
-//                // Tạo đối tượng ProductVariantPromotion
-//                ProductVariantPromotion pvp = new ProductVariantPromotion(id, variant, promotion, createdAt);
-//                return pvp;
-//            }).list();
-//
-//        });
-//    }
    public Set<Integer> listVariantIds() {
         String sql = "SELECT pvp.variantId " +
                 "FROM product_variant_promotions pvp " +

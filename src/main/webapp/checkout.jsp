@@ -185,6 +185,7 @@
               </div>
               <form action="${pageContext.request.contextPath}/thanh-toan" method="post" id="addOrderForm">
               <div class="modal-footer">
+                  <input type="hidden" name="uid" value="${sessionScope.auth.id}" />
                   <input type="hidden" name="recipientName" id="hidden-recipient-name" value="" />
                   <input type="hidden" name="address" id="hidden-address" value="" />
                   <input type="hidden" name="phone" id="hidden-phone" value="" />

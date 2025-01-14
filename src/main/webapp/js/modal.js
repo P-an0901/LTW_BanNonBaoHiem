@@ -10,6 +10,7 @@ $(document).ready(function(){
             data: { username: username, password: password },
             success: function(response) {
                 if (response.loginSuccess) {
+                    alert("Đăng nhập thành công!");
                     location.reload();
                 }
             },
@@ -50,6 +51,7 @@ $(document).ready(function(){
             },
             success: function(response) {
                 if (response.registerSuccess) {
+                    alert("Đăng ký thành công!");
                     location.reload();
                 }
             },

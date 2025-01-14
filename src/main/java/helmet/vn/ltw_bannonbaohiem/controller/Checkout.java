@@ -42,6 +42,7 @@ public class Checkout extends HttpServlet {
         HttpSession session = req.getSession();
         User u = (User) session.getAttribute("auth");
         Cart cart = (Cart) session.getAttribute("cart");
+        int id = Integer.parseInt(req.getParameter("uid"));
         String recipientName = req.getParameter("recipientName");
         String address = req.getParameter("address");
         String methodPayment = req.getParameter("paymentMethodId");
@@ -49,7 +50,7 @@ public class Checkout extends HttpServlet {
         String note = req.getParameter("note");
         LocalDate estimatedDeliveryDate = LocalDate.now().plusDays(3);
 
-        boolean order = orderService.add(u.getId(), cart, recipientName, address, Integer.parseInt(methodPayment),
+        boolean order = orderService.add(id, cart, recipientName, address, Integer.parseInt(methodPayment),
                 phone, note, estimatedDeliveryDate);
         if (order == true) {
             productVariantService.updateStock(cart);

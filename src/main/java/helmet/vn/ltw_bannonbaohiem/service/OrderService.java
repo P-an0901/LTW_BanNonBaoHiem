@@ -47,4 +47,8 @@ public class OrderService {
     public int countVariantSell() {
         return orderDao.countVariantSell();
     }
+
+    public Order getDetailOrder(int oid) {
+        return orderDao.getDetailOrder(oid);
+    }
 }

@@ -62,6 +62,15 @@ document.addEventListener("DOMContentLoaded", function () {
         "lengthChange": true,
         "pageLength": 5,
     });
+    const table8 = document.getElementById("order-table");
+    const orderDataTable = new DataTable(table8, {
+        "paging": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "lengthChange": true,
+        "pageLength": 5,
+    });
 });
     const closeButtons = document.querySelectorAll('.close');
     closeButtons.forEach(function(button) {
@@ -102,6 +111,9 @@ $(document).ready(function() {
     });
     $('#btn-add-brand').click(function () {
         $('#addBrandModal').modal('show')
+    });
+    $('#btn-add-promotion').click(function () {
+        $('#addDPromotionModal').modal('show')
     });
 });
 function openEditBrandModal(brandId) {
@@ -271,6 +283,73 @@ $('#addUserModal').submit(function(event){
             $('#signup-login').modal('show');
         }
     });
+});
+$(document).ready(function() {
+    $(".detail-btn").on("click", function() {
+        var orderId = $(this).data("order-id");
+        $.ajax({
+            url: '/LTW_BanNonBaoHiem/admin/order',
+            method: 'POST',
+            data: { orderId: orderId, action: "detailOrder" },
+            success: function(response) {
+                if (response) {
+                    console.log(response);
+
+                    $('#modal-full-name').text(response.order.recipientName);
+                    $('#modal-address').text(response.order.shippingAddress);
+                    $('#modal-phone').text(response.order.phone);
+                    $('#modal-note').text(response.order.note);
+                    $('#delivery-date').text(response.order.estimatedDelivery);
+                    $('#modal-payment-method').text(response.order.paymentMethod.name);
+                    $('#modal-totalAmount').text(response.order.totalAmount);
+
+                    var tableBody = $("#detailOrderModal table tbody");
+                    tableBody.empty();
+                    if (response.items && response.items.length > 0) {
+                        response.items.forEach(function(item) {
+                            var row = `<tr>
+                                <td></td>
+                                <td>${item.proVariant.name}</td>
+                                <td>${item.size.id}</td>
+                                <td>${item.quantity}</td>
+                                <td>${item.price} đ</td>
+                            </tr>`;
+                            tableBody.append(row);
+                        });
+                    } else {
+                        tableBody.append("<tr><td colspan='4'>Không có sản phẩm</td></tr>");
+                    }
+
+                    $('#detailOrderModal').modal('show');
+                } else {
+                    alert("Dữ liệu trả về không hợp lệ!");
+                }
+            },
+            error: function() {
+                alert("Có lỗi xảy ra trong việc lấy dữ liệu!");
+            }
+        });
+    });
+});
+
+
+
+document.getElementById('edit-product-btn').addEventListener('click', function() {
+    // Chuyển đổi các ô thông tin sản phẩm thành input để chỉnh sửa
+    document.getElementById('list-size').innerHTML = `<input type="text" value="${document.getElementById('list-size').innerHTML}">`;
+    document.getElementById('weight-value').innerHTML = `<input type="text" value="${document.getElementById('weight-value').innerHTML}">`;
+    document.getElementById('list-color').innerHTML = `<input type="text" value="${document.getElementById('list-color').innerHTML}">`;
+    document.getElementById('standards').innerHTML = `<input type="text" value="${document.getElementById('standards').innerHTML}">`;
+    document.getElementById('material-value').innerHTML = `<input type="text" value="${document.getElementById('material-value').innerHTML}">`;
+    document.getElementById('inner-lining').innerHTML = `<input type="text" value="${document.getElementById('inner-lining').innerHTML}">`;
+    document.getElementById('visor-type').innerHTML = `<input type="text" value="${document.getElementById('visor-type').innerHTML}">`;
+    document.getElementById('made-in').innerHTML = `<input type="text" value="${document.getElementById('made-in').innerHTML}">`;
+    document.getElementById('condition-value').innerHTML = `<input type="text" value="${document.getElementById('condition-value').innerHTML}">`;
+    document.getElementById('warranty-value').innerHTML = `<input type="text" value="${document.getElementById('warranty-value').innerHTML}">`;
+    document.getElementById('returns-value').innerHTML = `<input type="text" value="${document.getElementById('returns-value').innerHTML}">`;
+
+    document.getElementById('edit-product-btn').style.display = 'none';
+    document.getElementById('save-btn').style.display = 'inline-block';
 });
 
 
