@@ -38,7 +38,7 @@
               <label for="category">Danh Mục</label>
               <select class="form-control" id="editCategory" name="category">
                 <option value="">Chọn Danh Mục</option>
-                <c:forEach var="cate" items="${categories}">
+                <c:forEach var="cate" items="${cates}">
                   <option value="${cate.id}">${cate.name}</option>
                 </c:forEach>
               </select>
@@ -74,7 +74,7 @@
               <label for="category">Danh Mục</label>
               <select class="form-control" id="category" name="category">
                 <option value="">Chọn Danh Mục</option>
-                <c:forEach var="cate" items="${categories}">
+                <c:forEach var="cate" items="${cates}">
                   <option value="${cate.id}">${cate.name}</option>
                 </c:forEach>
               </select>
@@ -381,6 +381,45 @@
   </div>
 </div>
 
+<div class="modal fade" id="addDPromotionModal" tabindex="-1" role="dialog" aria-labelledby="addDiscountModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2 class="modal-title" id="addDiscountModalLabel">Thêm Khuyến Mãi</h2>
+        <form id="addDiscountForm" action="${pageContext.request.contextPath}/admin/promotion" method="POST">
+          <input type="hidden" name="action" value="addPromotion">
+          <div class="form-group">
+            <label for="name">Tên Khuyến Mãi</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Mô Tả</label>
+            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="discountPercentage">Tỷ Lệ Giảm Giá (%)</label>
+            <input type="number" class="form-control" id="discountPercentage" name="discountPercentage" min="0" max="100" required>
+          </div>
+          <div class="form-group">
+            <label for="startDate">Ngày Bắt Đầu</label>
+            <input type="datetime-local" class="form-control" id="startDate" name="startDate" required>
+          </div>
+          <div class="form-group">
+            <label for="endDate">Ngày Kết Thúc</label>
+            <input type="datetime-local" class="form-control" id="endDate" name="endDate" required>
+          </div>
+          <button type="submit" class="btn btn-addO">Lưu Khuyến Mãi</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Modal Thêm Người Dùng -->
 <div class="modal" id="addUserModal">
@@ -476,16 +515,9 @@
               </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>}</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>đ</td>
-                </tr>
               </tbody>
             </table>
-            <h6><strong>Tổng cộng:</strong><strong> Đ</strong></h6>
+            <h6  ><strong>Tổng cộng:</strong><strong><span  id="modal-totalAmount"></span> Đ</strong></h6>
         <h6><strong>Phương thức thanh toán: </strong><span id="modal-payment-method"></span></h6>
       </div>
     </div>

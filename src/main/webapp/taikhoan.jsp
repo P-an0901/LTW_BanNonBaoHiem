@@ -113,8 +113,7 @@
                         <td>
                             <button class="btn btn-info">Hủy</button>
                         </td>
-                        <td>
-                            <button class="btn btn-info">Chi tiết</button>
+                        <td><button class="detail-btn" id="btn-detail-order" data-order-id="${order.id}"> <i class="fa-solid fa-pen"></i></button></td>
                         </td>
                     </tr>
                 </c:forEach>
@@ -151,7 +150,7 @@
                         <td>${order.status}</td>
                         <td>${order.deliveryDate}</td>
                         <td>
-                            <button class="btn btn-info">Xem chi tiết</button>
+                        <td><button class="detail-btn" id="btn-detail-orders" data-order-id="${order.id}"> <i class="fa-solid fa-pen"></i></button></td>
                         </td>
                     </tr>
                 </c:forEach>
@@ -293,6 +292,40 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                 <button type="button" class="btn btn-danger" id="confirm-delete-btn">Xóa tài khoản</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="detailOrderModal" tabindex="-1" aria-labelledby="detailOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2 class="form-title">Chi tiết đơn hàng</h2>
+                <p><strong>Họ và tên:</strong> <span id="modal-full-name"></span></p>
+                <p><strong>Địa chỉ:</strong> <span id="modal-address"></span></p>
+                <p><strong>Số điện thoại:</strong> <span id="modal-phone"></span></p>
+                <p><strong>Ghi chú:</strong> <span id="modal-note"></span></p>
+                <p><strong>Ngày giao dự kiến: </strong><span id="delivery-date"></span></p>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Tên sản phẩm</th>
+                        <th>Kích cỡ</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <h6  ><strong>Tổng cộng:</strong><strong><span  id="modal-totalAmount"></span> Đ</strong></h6>
+                <h6><strong>Phương thức thanh toán: </strong><span id="modal-payment-method"></span></h6>
             </div>
         </div>
     </div>

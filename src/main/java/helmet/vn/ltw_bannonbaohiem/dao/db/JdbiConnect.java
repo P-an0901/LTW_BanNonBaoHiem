@@ -1,6 +1,8 @@
 package helmet.vn.ltw_bannonbaohiem.dao.db;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.jdbi.v3.core.Jdbi;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,6 +14,7 @@ public class JdbiConnect {
         if(jdbi==null) makeConnect();
         return jdbi;
     }
+
 
     private static void makeConnect() {
         MysqlDataSource source = new MysqlDataSource();

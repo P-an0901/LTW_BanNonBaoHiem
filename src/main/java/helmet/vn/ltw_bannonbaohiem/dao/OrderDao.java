@@ -3,9 +3,7 @@ package helmet.vn.ltw_bannonbaohiem.dao;
 import helmet.vn.ltw_bannonbaohiem.dao.cart.Cart;
 import helmet.vn.ltw_bannonbaohiem.dao.cart.CartProduct;
 import helmet.vn.ltw_bannonbaohiem.dao.db.JdbiConnect;
-import helmet.vn.ltw_bannonbaohiem.dao.model.Order;
-import helmet.vn.ltw_bannonbaohiem.dao.model.PaymentMethod;
-import helmet.vn.ltw_bannonbaohiem.dao.model.User;
+import helmet.vn.ltw_bannonbaohiem.dao.model.*;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.statement.Update;
 
@@ -13,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class OrderDao {
@@ -174,4 +173,80 @@ public class OrderDao {
                     .reduce(0, (total, quantity) -> total + quantity);
         });
     }
+
+    public Order getDetailOrder(int oid) {
+        String orderSql = "SELECT o.*, p.name AS payment_method_name FROM orders o " +
+                "JOIN payment_methods p ON o.paymentMethodId = p.id WHERE o.id = :orderId";
+
+        Order order = jdbi.withHandle(handle -> {
+            return handle.createQuery(orderSql)
+                    .bind("orderId", oid)
+                    .map((rs, ctx) -> {
+                        Order orderObj = new Order();
+                        orderObj.setId(rs.getInt("id"));
+                        orderObj.setRecipientName(rs.getString("recipientName"));
+                        orderObj.setShippingAddress(rs.getString("shippingAddress"));
+                        orderObj.setPhone(rs.getString("phone"));
+                        orderObj.setTotalAmount(rs.getDouble("totalAmount"));
+                        orderObj.setStatus(rs.getString("status"));
+                        orderObj.setNote(rs.getString("note"));
+
+                        orderObj.setEstimatedDelivery(rs.getObject("estimatedDelivery", LocalDate.class));
+                        orderObj.setDeliveryDate(rs.getObject("deliveryDate", LocalDate.class));
+
+                        orderObj.setCreatedAt(rs.getObject("createdAt", LocalDateTime.class));
+                        orderObj.setUpdatedAt(rs.getObject("updatedAt", LocalDateTime.class));
+
+                        String paymentMethodName = rs.getString("payment_method_name");
+                        PaymentMethod paymentMethod = new PaymentMethod();
+                        paymentMethod.setName(paymentMethodName);
+
+                        orderObj.setPaymentMethod(paymentMethod);
+
+                        return orderObj;
+                    })
+                    .findOne()
+                    .orElse(null);
+        });
+        if (order != null) {
+            String itemsSql = "SELECT oi.id, oi.quantity, oi.price, pv.name AS variant_name, pv.image AS variant_image," +
+                    "s.name AS size_name, s.id AS sid  " +
+                    "FROM order_items oi " +
+                    "JOIN product_variants pv ON oi.productVariantId = pv.id " +
+                    "JOIN sizes s ON oi.sizeId = s.id " +
+                    "WHERE oi.orderId = :orderId";
+
+            List<OrderItem> items = jdbi.withHandle(handle -> handle.createQuery(itemsSql)
+                    .bind("orderId", oid)
+                    .map((rs, ctx) -> {
+                        OrderItem orderItem = new OrderItem();
+                        orderItem.setId(rs.getInt("id"));
+                        orderItem.setQuantity(rs.getInt("quantity"));
+                        orderItem.setPrice(rs.getDouble("price"));
+
+                        String variantName = rs.getString("variant_name");
+                        String variantImage = rs.getString("variant_image");
+
+                        ProductVariant productVariant = new ProductVariant();
+                        productVariant.setName(variantName);
+                        productVariant.setImage(variantImage);
+
+                        String sizeName = rs.getString("size_name");
+
+                        Sizes size = new Sizes();
+                        size.setId(rs.getInt("sid"));
+                        size.setName(sizeName);
+
+                        orderItem.setProVariant(productVariant);
+                        orderItem.setSize(size);
+
+                        return orderItem;
+                    })
+                    .list());
+
+            order.setListItem(items);
+        }
+        return order;
+    }
+
 }

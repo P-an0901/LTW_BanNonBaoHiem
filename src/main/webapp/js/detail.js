@@ -85,3 +85,14 @@ document.getElementById('toggleDescription').addEventListener('click', function(
         this.textContent = 'Xem thêm';
     }
 });
+$(document).ready(function () {
+    $('#starRating i').on('click', function () {
+        const rating = $(this).data('value');
+        $('#rating').val(rating);
+        $('#starRating i').removeClass('text-warning');
+        $('#starRating i').each(function () {
+            if ($(this).data('value') <= rating) {
+                $(this).addClass('text-warning');
+            }
+        });
+    });

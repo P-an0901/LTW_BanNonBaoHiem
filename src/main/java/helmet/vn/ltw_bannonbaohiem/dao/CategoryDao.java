@@ -40,13 +40,17 @@ public class CategoryDao {
     }
     public Category getCateById(int id) {
         String sql = "SELECT * FROM categories WHERE id = ?";
-        return jdbi.withHandle(handle -> {
-            return handle.createQuery(sql)
-                    .bind(0, id)
-                    .mapTo(Category.class)
-                    .findOne()
-                    .orElse(null);
-        });
+        return jdbi.withHandle(handle -> handle.createQuery(sql)
+                .bind(0, id)
+                .map((rs, ctx) -> {
+                    Category category = new Category();
+                    category.setId(rs.getInt("id"));
+                    category.setName(rs.getString("name"));
+                    category.setImage(rs.getString("image"));
+                    return category;
+                })
+                .one()
+        );
     }
     public boolean updateCate(int id, String name, String image) {
         String sql = "UPDATE categories SET name = ?, image = ? WHERE id = ?";

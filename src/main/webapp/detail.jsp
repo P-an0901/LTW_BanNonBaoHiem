@@ -177,7 +177,7 @@
                     
                     <!-- Mô tả ngắn gọn ban đầu -->
                     <div class="short-description">
-                        <h>Nón bảo hiểm 3/4 Royal M139 mang tới sự an toàn cho bạn trên mọi cung đường.</h>5
+                        <h>${product.name} mang tới sự an toàn cho bạn trên mọi cung đường.</h>5
                         <p>
                             Royal M139 được sản xuất trên những công nghệ tiên tiến, mang đến chất lượng và sự an toàn cao nhất cho người sử dụng.
                         </p>
@@ -186,16 +186,16 @@
                     
                     <!-- Mô tả đầy đủ, có lớp phủ mờ -->
                     <div class="full-description">
-                        <p>Là sản phẩm mới nhất của Royal Helmet, thương hiệu nón bảo hiểm hàng đầu Việt Nam.
-                            Royal M139 được sản xuất trên những công nghệ tiên tiến nhất,
+                        <p>Là sản phẩm mới nhất của ${product.brand.name} Helmet, thương hiệu nón bảo hiểm hàng đầu Việt Nam.
+                            ${product.name} được sản xuất trên những công nghệ tiên tiến nhất,
                             mang đến chất lượng và sự an toàn cao nhất cho người sử dụng.
-                            mang lại cho bạn trải nghiệm dễ chịu nhưng vẫn an toàn khi đội trên mình nón bảo hiểm Royal M139.
+                            mang lại cho bạn trải nghiệm dễ chịu nhưng vẫn an toàn khi đội trên mình nón bảo hiểm ${product.name}.
                         </p>
                         <p>
-                            -Vỏ nón bảo hiểm Royal M139 được chế tạo bằng nhựa ABS nguyên sinh - loại nhựa tinh khiết chưa qua sử dụng,
+                            -Vỏ nón bảo hiểm ${product.name} được chế tạo bằng nhựa ABS nguyên sinh - loại nhựa tinh khiết chưa qua sử dụng,
                             được sử dụng cho các sản phẩm có tiêu chuẩn an toàn cao như vỏ thiết bị y tế, dược phẩm,
                             vỏ máy bay... giúp sản phẩm có độ bền cao và chịu va đập tốt.
-                            Royal M139 có trọng lượng chỉ 950g mang đến sự nhẹ nhàng,
+                            ${product.name} có trọng lượng chỉ 950g mang đến sự nhẹ nhàng,
                             thoải mái nhưng vẫn đảm bảo được sự an toàn cho người sử dụng.
                         </p>
                         <p>
@@ -286,13 +286,12 @@
         <!-- Form bình luận -->
         <div class="comment-form">
             <form action="#" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label>Đánh giá:</label>
-                    <span class="star">&#9734;</span>
-                    <span class="star">&#9734;</span>
-                    <span class="star">&#9734;</span>
-                    <span class="star">&#9734;</span>
-                    <span class="star">&#9734;</span>
+                <div id="starRating">
+                    <i class="fa fa-star" data-value="1"></i>
+                    <i class="fa fa-star" data-value="2"></i>
+                    <i class="fa fa-star" data-value="3"></i>
+                    <i class="fa fa-star" data-value="4"></i>
+                    <i class="fa fa-star" data-value="5"></i>
                 </div>
                 <div class="form-group">
                     <label for="name">Tên của bạn:</label>

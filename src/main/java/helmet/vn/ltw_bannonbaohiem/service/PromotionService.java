@@ -4,6 +4,7 @@ import helmet.vn.ltw_bannonbaohiem.dao.PromotionDao;
 import helmet.vn.ltw_bannonbaohiem.dao.PromotionVariantDao;
 import helmet.vn.ltw_bannonbaohiem.dao.model.Promotion;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -25,5 +26,9 @@ public class PromotionService {
             System.out.println("Promotion is null");
         }
         return null;
+    }
+
+    public boolean addPromotion(String name, String description, double discountPercentage, LocalDateTime startDate, LocalDateTime endDate) {
+        return promotionD.addPromotion(name, description, discountPercentage, startDate, endDate);
     }
 }

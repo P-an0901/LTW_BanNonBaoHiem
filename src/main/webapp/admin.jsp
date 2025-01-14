@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="hidden-sidebar">${tab == 'home' ? 'Trang tổng quan' :
                                 (tab == 'product' ? 'Sản Phẩm' : (tab == 'promotion' ? 'Khuyến Mãi' :
-                                (tab == 'user' ? 'Khách hàng' : (tab == 'order' ? 'Đơn hàng' : 'Thống kê'))))}</div>
+                                (tab == 'user' ? 'Người dùng' : (tab == 'order' ? 'Đơn hàng' : 'Thống kê'))))}</div>
                             </a>
                         </li>
                     </c:forEach>
@@ -122,32 +122,13 @@
             <div class="section product-all active">
                 <h1 class="section-title">Quản Lý Sản Phẩm</h1>
                 <div class="admin-control">
-                    <div class="admin-control-first">
-                        <select name="the-loai" id="the-loai">
-                            <option>Tất cả</option>
-                            <option>3/4 đầu</option>
-                            <option>Nửa đầu</option>
-                            <option>Full face</option>
-                            <option>Nón trẻ em</option>
-                            <option>Nón xe đạp</option>
-                        </select>
-                        <select name="brand">
-                            <option>Tất cả</option>
-                            <c:forEach var="brand" items="${brands}">
-                                <option>${brand.name}</option>
-                            </c:forEach>
-                        </select>
-                            <form action="brandSearch" class="form-search">
-                                <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span> 
-                                <input id="form-search-product" type="text" class="form-search-input" placeholder="Tìm kiếm tên sản phẩm..." oninput="">
-                            </form>
-                    </div>
                     <div class="admin-control-right">
-                        <button class="btn-control-large" id="btn-cancel-product"><i class="fa-solid fa-rotate-right"></i> Làm mới</button>
                         <button type="button" class="btn-control-large" id="btn-add-product"><i class="fa-solid fa-plus"></i> Thêm sản phẩm mới</button>
                         <button class="btn-control-large" id="btn-add-category"><i class="fa-solid fa-plus"></i> Thêm danh mục</button> 
                         <button type="button" class="btn-control-large" id="btn-add-brand"><i class="fa-solid fa-plus" ></i> Thêm thương hiệu</button>
-                        <button class="btn-control-large" id="btn-add-size"><i class="fa-solid fa-plus"></i> Thêm size</button> 
+                        <button type="button" class="btn-control-large" id="btn-add-product_variant" ><i class="fa-solid fa-plus"></i> Thêm biến thể</button>
+                        <button class="btn-control-large" id="btn-add-size"><i class="fa-solid fa-plus"></i> Thêm size</button>
+                        <button class="btn-control-large" id="btn-add-p-size"><i class="fa-solid fa-plus"></i> Thêm kích thước biến thể</button>
                     </div>
                 </div>
                 <ul class="tabs">
@@ -194,7 +175,15 @@
                                 <td><button class="edit-btn" onclick="openEditProModal(${product.id})">
                                     <i class="fa-solid fa-pen"></i>
                                 </button></td>
-                                <td><button class="delete-btn" data-id="${product.id}"><i class="fa-solid fa-trash"></i></button></td>
+                                <td>
+                                <form action="${pageContext.request.contextPath}/delete-tab-product" method="POST" style="display:inline;">
+                                    <input type="hidden" name="action" value="deleteProduct">
+                                    <input type="hidden" name="id" value="${product.id}" />
+                                    <button type="submit" class="delete-btn" onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm này?');">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -202,7 +191,7 @@
                 </div>
                 <div class="variant-table" id="variant-table">
                     <h4 id="variant-title">Biến thể sản phẩm</h4>
-                    <button type="button" class="btn-control-large m-2" id="btn-add-product_variant" ><i class="fa-solid fa-plus"></i> Thêm biến thể</button>
+
                     <table id="variant-content" style="width:100%">
                         <thead>
                             <tr>
@@ -213,7 +202,6 @@
                                 <th>Hình ảnh</th>
                                 <th>Màu sắc</th>
                                 <th>Giá</th>
-                                <th>Chi tiết</th>
                                 <th>Sửa</th>
                                 <th>Xóa</th>
                             </tr>
@@ -233,8 +221,6 @@
                                 <td><img src="${pageContext.request.contextPath}/${fn:escapeXml(proV.image)}" alt="${proV.name}" width="50"></td>
                                 <td>${proV.color}</td>
                                 <td><span><f:formatNumber value="${proV.price}" pattern="#,###.###"/> đ</span> </td>
-                                <td><button class="pvdetails-btn" data-id="${proV.id}"><i class="fa-solid fa-eye"></i></button></td>
-
                                 <td>
                                     <button class="edit-btn" onclick="openEditVariantModal(${proV.id})">
                                         <i class="fa-solid fa-pen"></i>
@@ -242,7 +228,7 @@
                                 </td>
                                 <td>
                                     <form action="${pageContext.request.contextPath}/delete-tab-product" method="POST" style="display:inline;">
-                                        <input type="hidden" name="action" value="deleteProduct">
+                                        <input type="hidden" name="action" value="deleteProductV">
                                         <input type="hidden" name="id" value="${proV.id}" />
                                         <button type="submit" class="delete-btn" onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm này?');">
                                             <i class="fa-solid fa-trash"></i>
@@ -257,7 +243,7 @@
 
                 <div class="p-size-table" id="p-size-table">
                     <h4 id="p-size-title">Kích thước biến thể sản phẩm</h4>
-                    <button class="btn-control-large m-2" id="btn-add-p-size"><i class="fa-solid fa-plus"></i> Thêm kích thước biến thể</button>
+
                     <table id="p-size-content" style="width:100%">
                         <thead>
                             <tr>
@@ -373,7 +359,15 @@
                         <td>${cate.id}</td>
                         <td>${cate.name}</td>
                         <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
-                        <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
+                        <td>
+                            <form action="${pageContext.request.contextPath}/delete-tab-product" method="POST" style="display:inline;">
+                                <input type="hidden" name="action" value="deleteCate">
+                                <input type="hidden" name="id" value="${cate.id}" />
+                                <button type="submit" class="delete-btn" onclick="return confirm('Bạn chắc chắn muốn xóa mục này?');">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                     </c:forEach>
                     </tbody>
@@ -520,7 +514,7 @@
                             <td>${u.createdAt}</td>
                             <td>${u.roleName}</td>
                             <td>${u.activeStatus}</td>
-                            <td><button class="detail-btn"><i class="fa-solid fa-eye"></i></button></td>
+                            <td><button class="detail-btn-user"><i class="fa-solid fa-eye"></i></button></td>
                             <td><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></td>
                             <td><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></td>
                         </tr>
@@ -537,11 +531,6 @@
             <h1 class="section-title">Quản Lý Đơn Hàng</h1>
             <div class="admin-control">
                 <div class="admin-control-left">
-                    <select name="tinh-trang" id="tinh-trang" onchange="">
-                        <option value="2">Tất cả</option>
-                        <option value="1">Đã xử lý</option>
-                        <option value="0">Chưa xử lý</option>
-                    </select>
                 </div>
                 <div class="admin-control-center">
                 </div>
@@ -552,8 +541,8 @@
                 </div>
             </div>
             <h2>Danh Sách Đơn Hàng</h2>
-            <div class="table">
-                <table>
+            <div class="tableOrder" >
+                <table id="order-table">
                     <thead>
                         <tr>
                             <th></th>
@@ -571,7 +560,7 @@
                         <tr>
                             <td><input type="checkbox" name="selectedUser" value="${o.id}"></td>
                             <td>${o.id}</td>
-                            <td>${o.user.fullName}</td>
+                            <td>${o.recipientName}</td>
                             <td>${o.createdAt}</td>
                             <td><f:formatNumber value="${o.totalAmount} " pattern="#,###.###"/> đ</td>
                             <td>
@@ -580,10 +569,13 @@
                                     <input type="hidden" name="orderId" value="${o.id}" />
                                     <select name="status" class="form-select">
                                         <c:forEach var="entry" items="${statusList}">
-                                            <option value="${entry.value}" ${entry.value == o.status ? 'selected' : ''}>
+                                            <option value="${entry.value}"
+                                                ${entry.value == o.status ? 'selected' : ''}
+                                                ${entry.value == 'Đã giao' || entry.value == 'Đã hủy' ? 'disabled' : ''}>
                                                     ${entry.value}
                                             </option>
                                         </c:forEach>
+
                                     </select>
                                     <button type="submit" class="btn btn-success">Cập nhật</button>
                                 </form>

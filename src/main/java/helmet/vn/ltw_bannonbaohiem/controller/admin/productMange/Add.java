@@ -33,7 +33,6 @@ public class Add extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("activeTab", "product");
         String action = req.getParameter("action");
-        System.out.println(action);
         switch (action) {
             case "addBrand":
                 handleAddBrand(req, resp);
@@ -98,7 +97,6 @@ public class Add extends HttpServlet {
 
         if (name != null && !name.isEmpty()) {
             productVariantService.addProductVariant(name, color, productId, price, imagePath, active);
-            System.out.println("hahaha");
             resp.sendRedirect(req.getContextPath() + "/admin/product");
 
         } else {
@@ -168,11 +166,8 @@ public class Add extends HttpServlet {
 
     private void handleAddBrand(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String brandName = req.getParameter("brandName");
-        System.out.println("bbbbb");
         Part filePart = req.getPart("brandImage");
-        System.out.println(filePart);
         String fileName = extractFileName(filePart);
-        System.out.println(fileName);
         String uploadPath = getServletContext().getRealPath("/") + File.separator + UPLOAD_DIR;
 
         File uploadDir = new File(uploadPath);
@@ -199,7 +194,6 @@ public class Add extends HttpServlet {
     }
     private String extractFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
-        System.out.println(contentDisp);
         for (String content : contentDisp.split(";")) {
             if (content.trim().startsWith("filename")) {
                 return content.substring(content.indexOf("=") + 2, content.length() - 1);
