@@ -1,0 +1,61 @@
+
+#container-user{
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    max-width: 1250px !important;
+}
+.avatar-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 30px;
+}
+
+.card-body .d-flex {
+    display: flex;
+}
+
+.card-body .d-flex div {
+    flex-grow: 1;
+}
+
+.order-details {
+    display: none;
+    overflow: hidden;
+    max-height: 0; 
+    transition: max-height 1s ease-in-out;  
+}
+
+.order-detail-content {
+    padding: 15px;
+}
+.order-detail-container {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.order-detail-content {
+    margin-bottom: 15px;
+}
+
+.order-detail-actions {
+    text-align: right;
+}
+
+.order-detail-actions .btn {
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+.order-detail-content ul {
+    padding-left: 20px;
+}
+
+.order-detail-content p {
+    margin: 5px 0;
+}
